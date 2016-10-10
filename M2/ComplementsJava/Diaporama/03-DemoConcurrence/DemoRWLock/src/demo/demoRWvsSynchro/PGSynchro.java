@@ -1,9 +1,6 @@
 
 package demo.demoRWvsSynchro;
 
-import java.awt.Color;
-import javax.swing.JLabel;
-
 
 public class PGSynchro implements PG {
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/**
+/*
  * Objectifs : Utilisation de verrous (Lock) réentrants pour protéger une table
  * à accès direct.
  * <br>
@@ -65,7 +65,7 @@ public class ReadWriteMap<K, V> {
     }
   }
 
-  /**
+  /*
    * Un put synchronisé autorisant les lectures multiples
    *
    * @param k

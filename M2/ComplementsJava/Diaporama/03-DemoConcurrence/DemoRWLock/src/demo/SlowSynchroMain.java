@@ -1,23 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package demo;
 
 import java.util.Random;
 import java.util.Scanner;
 
-/**
+/*
  *
  * @author maillot
  */
 public class SlowSynchroMain {
-    private static ReadWriteMap<String, Integer> rwm = new ReadWriteMap<>();
+    private static final ReadWriteMap<String, Integer> RWM = new ReadWriteMap<>();
     private static final Random RANDOM = new Random();
     private static final int DIM = 26;
     
-    /**
+    /*
      * Utilisation de slowPutSynchro 
      */
     public static void lanceEcrivain(final int n) {
@@ -29,14 +25,14 @@ public class SlowSynchroMain {
                 while(true) {
                     
                     int k = RANDOM.nextInt(DIM);
-                    rwm.slowPutSynchro("Code de " + 'A'+k, k);
+                    RWM.slowPutSynchro("Code de " + 'A'+k, k);
                     System.out.println("E"+n + " : a écrit");
                 }
             }
         }).start();        
     }
     
-    /**
+    /*
      * Utilisation de slowGetSynchro 
      */    
     public static void lanceLecteur(final int n) {
@@ -49,7 +45,7 @@ public class SlowSynchroMain {
                 while(true) {
                     
                     int k = RANDOM.nextInt(DIM);
-                    Integer lu = rwm.slowGetSynchro("Code de " + 'A'+k);
+                    Integer lu = RWM.slowGetSynchro("Code de " + 'A'+k);
                     System.out.print("L"+n+"("+lu+") ");
                 }
             }

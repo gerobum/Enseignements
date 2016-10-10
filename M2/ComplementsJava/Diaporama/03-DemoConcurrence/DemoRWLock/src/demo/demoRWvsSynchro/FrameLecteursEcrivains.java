@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package demo.demoRWvsSynchro;
 
 import java.awt.Color;
@@ -15,13 +12,13 @@ import javax.swing.JLabel;
  */
 public class FrameLecteursEcrivains extends JFrame {
 
-    private JLabel[] ecrivainRW, lecteurRW, ecrivainSynchro, lecteurSynchro;
-    private PGRW pgrw = new PGRW();
-    private PGSynchro pgsynchro = new PGSynchro();
-    private Color ecrivaintEteint = Color.red.darker().darker();
-    private Color lecteurEteint = Color.green.darker().darker();
-    private Color ecrivaintAllume = Color.red;
-    private Color lecteurAllume = Color.green;
+    private final JLabel[] ecrivainRW, lecteurRW, ecrivainSynchro, lecteurSynchro;
+    private final PGRW pgrw = new PGRW();
+    private final PGSynchro pgsynchro = new PGSynchro();
+    private final Color ecrivaintEteint = Color.red.darker().darker();
+    private final Color lecteurEteint = Color.green.darker().darker();
+    private final Color ecrivaintAllume = Color.red;
+    private final Color lecteurAllume = Color.green;
 
     public FrameLecteursEcrivains(int nbe, int nbl) {
 
@@ -31,10 +28,16 @@ public class FrameLecteursEcrivains extends JFrame {
         lecteurRW = new JLabel[nbl];
         lecteurSynchro = new JLabel[nbl];
 
+
+        init(nbe, nbl);
+    }
+    
+    private void init(int nbe, int nbl) {
+
         getContentPane().setLayout(new GridLayout(0, 2, 20, 5));
         getContentPane().add(new JLabel("Ecrivains RW", JLabel.CENTER));
         getContentPane().add(new JLabel("Ecrivains Synchro", JLabel.CENTER));
-
+        
         for (int i = 0; i < nbe; i++) {
 
             ecrivainRW[i] = new JLabel("()", JLabel.CENTER);
@@ -52,7 +55,7 @@ public class FrameLecteursEcrivains extends JFrame {
             getContentPane().add(ecrivainSynchro[i]);
 
         }
-
+        
         getContentPane().add(new JLabel("Lecteurs RW", JLabel.CENTER));
         getContentPane().add(new JLabel("Lecteurs Synchro", JLabel.CENTER));
 
@@ -98,7 +101,7 @@ public class FrameLecteursEcrivains extends JFrame {
         }
     }
 
-    /**
+    /*
      * public LecteursEcrivains(int nbe, int nbl) {
      *
      * ecrivainRW = new JLabel[nbe]; ecrivainSynchro = new JLabel[nbe];

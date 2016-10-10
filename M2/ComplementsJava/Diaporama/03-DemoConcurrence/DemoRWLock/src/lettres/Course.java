@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lettres;
 
 import demo.ReadWriteMap;
 import java.util.Random;
 
-/**
+/*
  *
  * @author maillot
  */
@@ -41,7 +38,7 @@ public class Course {
 
     @Override
     public void run() {
-      Integer lu = null;
+      Integer lu;
       while (!rwm.remplie(26)) {
         int k = RANDOM.nextInt(DIM);
         lu = rwm.slowGetSynchro("Code de " + 'A' + k);
@@ -73,7 +70,7 @@ public class Course {
 
     @Override
     public void run() {
-      Integer lu = null;
+      Integer lu;
       while (!syncm.remplie(26)) {
         int k = RANDOM.nextInt(DIM);
         lu = syncm.slowGetSynchro("Code de " + 'A' + k);
@@ -93,8 +90,8 @@ public class Course {
 
   public static void main(String[] args) {
 
-    new Course();
-    //lanceEcrivain(1);
+      Course course = new Course();
+      //lanceEcrivain(1);
   }
 
 }

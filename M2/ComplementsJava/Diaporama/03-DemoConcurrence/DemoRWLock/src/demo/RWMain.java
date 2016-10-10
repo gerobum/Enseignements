@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package demo;
 
@@ -13,11 +9,11 @@ import java.util.Scanner;
  * @author maillot
  */
 public class RWMain {
-    private static ReadWriteMap<String, Integer> rwm = new ReadWriteMap<>();
+    private static final ReadWriteMap<String, Integer> RWM = new ReadWriteMap<>();
     private static final Random RANDOM = new Random();
     private static final int DIM = 26;
     
-    /**
+    /*
      * Utilisation de slowPutSynchro 
      */
     public static void lanceEcrivain(final int n) {
@@ -27,14 +23,14 @@ public class RWMain {
             public void run() {
                 while(true) {              
                     int k = RANDOM.nextInt(DIM);
-                    rwm.put("Code de " + 'A'+k, k);
+                    RWM.put("Code de " + 'A'+k, k);
                     System.out.println("E"+n + " : a écrit");
                 }
             }
         }).start();        
     }
     
-    /**
+    /*
      * Utilisation de slowGetSynchro 
      */    
     public static void lanceLecteur(final int n) {
@@ -45,7 +41,7 @@ public class RWMain {
                 while(true) {
                     
                     int k = RANDOM.nextInt(DIM);
-                    Integer lu = rwm.get("Code de " + 'A'+k);
+                    Integer lu = RWM.get("Code de " + 'A'+k);
                     System.out.print("L"+n+"("+lu+") ");
                 }
             }
