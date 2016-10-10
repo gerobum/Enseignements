@@ -22,7 +22,7 @@ public class FrameConsumer extends JFrame {
     public FrameConsumer(LinkedBlockingDeque<Double> q) {
         CENTRE = new JPanel(new GridLayout(0, 1));
         SUD = new JPanel();
-        QUEUE = new LinkedBlockingDeque<>();
+        QUEUE = q;
         init();
     }
     
@@ -50,7 +50,7 @@ public class FrameConsumer extends JFrame {
     
     
     public static void main(String[] args) {
-        LinkedBlockingDeque<Double> queue = new LinkedBlockingDeque<>(2);
+        LinkedBlockingDeque<Double> queue = new LinkedBlockingDeque<>(3);
         Producer p = new Producer(queue, "Producteur", 100, -1, false);
         
         new FrameConsumer(queue);
