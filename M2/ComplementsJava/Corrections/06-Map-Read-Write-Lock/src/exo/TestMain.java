@@ -2,7 +2,6 @@ package exo;
 
 import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
 
 /*
  * Ce programme est utilisé pour comparer deux Map thread-safe :
@@ -21,7 +20,7 @@ public class TestMain {
     // Mettre en commentaire tour à tour l'une des deux lignes suivantes
     // Lancer le programme pour les deux cas et comparer le temps mis
     // par chacun.
-    private static final Map<Integer, Double> rwm = new SynchronizedMap<>(2);
+    private static final Map<Integer, Double> RWM = new SynchronizedMap<>(2);
     // private static final Map<Integer, Double> rwm = new ReadWriteMap<>(2);
     private static final Random RANDOM = new Random();
     private static final int DIM = 50;
@@ -34,11 +33,11 @@ public class TestMain {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (rwm.size() < DIM) {
+                while (RWM.size() < DIM) {
                     int k = RANDOM.nextInt(DIM);
-                    int size = rwm.size();
-                    rwm.put(k, k / 2.0);
-                    System.err.println("\n\n("+size+"), E" + n + " -> [" + k + " => " + k / 2.0+ "], (" + rwm.size() + ")\n");
+                    int size = RWM.size();
+                    RWM.put(k, k / 2.0);
+                    System.err.println("\n\n("+size+"), E" + n + " -> [" + k + " => " + k / 2.0+ "], (" + RWM.size() + ")\n");
                 }
                 System.err.println("Fin de l'écrivain n°" + n);
             }
@@ -51,10 +50,10 @@ public class TestMain {
             // Un lecteur tire au hasard une clé et affiche la clé et sa moitié.
             @Override
             public void run() {
-                while (rwm.size() < DIM) {
+                while (RWM.size() < DIM) {
                     int k = RANDOM.nextInt(DIM);
-                    Double lu = rwm.get(k);
-                    System.err.print("L"+n+ " <- [" + k + " => " + lu + "], (" + rwm.size() + ") |");
+                    Double lu = RWM.get(k);
+                    System.err.print("L"+n+ " <- [" + k + " => " + lu + "], (" + RWM.size() + ") |");
                 }
                 System.err.println("Fin du lecteur n°" + n);
             }

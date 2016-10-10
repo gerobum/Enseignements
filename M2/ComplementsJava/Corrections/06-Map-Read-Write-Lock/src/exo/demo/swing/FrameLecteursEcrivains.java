@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package exo.demo.swing;
 
 import java.awt.Color;
@@ -34,6 +30,11 @@ public class FrameLecteursEcrivains extends JFrame {
         lecteurRW = new JLabel[nbl];
         lecteurSynchro = new JLabel[nbl];
 
+        init(nbe, nbl);
+        
+    }
+    
+    private void init(int nbe, int nbl) {
         getContentPane().setLayout(new GridLayout(0, 2, 20, 5));
         final JButton erw = new JButton("Ecrivains RW");
         getContentPane().add(erw);
@@ -118,9 +119,7 @@ public class FrameLecteursEcrivains extends JFrame {
         for (JLabel lrw : lecteurRW) {
             new Lecteur(lrw, pgrw, 10*lecteurRW.length, lecteurEteint, lecteurAllume).start();
         }
-    }
-    
-    
+    }        
     
     public static void main(String[] args) {
         FrameLecteursEcrivains f = new FrameLecteursEcrivains(1, 5);

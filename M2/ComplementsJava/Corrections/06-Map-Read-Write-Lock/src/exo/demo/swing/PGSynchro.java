@@ -1,9 +1,6 @@
 
 package exo.demo.swing;
 
-import java.awt.Color;
-import javax.swing.JLabel;
-
 
 public class PGSynchro implements PG {
 
