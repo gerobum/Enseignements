@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package langues;
 
 import java.awt.GridLayout;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,16 +16,16 @@ import pendule.StopWatch;
 public class ChoixDeLangue extends JDialog {
 
     private JTextField langue, region, autre;
-    private JLabel jLlangue, jLregion, jLautre;
-    private StopWatch stopWatch;
+    private final JLabel JL_LANGUE, JL_REGION, JL_VARIANTE;
+    private final StopWatch stopWatch;
 
     @Override
     public void setLocale(Locale l) {
         super.setLocale(l);
         try {
-            jLlangue.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("LANGUE"));
-            jLregion.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("REGION"));
-            jLautre.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("AUTRE"));
+            JL_LANGUE.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("LANGUE"));
+            JL_REGION.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("REGION"));
+            JL_VARIANTE.setText(java.util.ResourceBundle.getBundle("langues/dico", l).getString("AUTRE"));
         } catch (NullPointerException ne) {
 
         }
@@ -38,16 +33,21 @@ public class ChoixDeLangue extends JDialog {
 
     public ChoixDeLangue(StopWatch stopWatch) {
         this.stopWatch = stopWatch;
+        JL_LANGUE = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("LANGUE"));
+        JL_REGION = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("REGION"));
+        JL_VARIANTE = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("AUTRE"));
+        init();
+    }
+    
+    private void init() {
+        
         getContentPane().setLayout(new GridLayout(2, 3));
         langue = new JTextField(8);
         region = new JTextField(8);
         autre = new JTextField(8);
-        jLlangue = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("LANGUE"));
-        jLregion = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("REGION"));
-        jLautre = new JLabel(java.util.ResourceBundle.getBundle("langues/dico").getString("AUTRE"));
-        getContentPane().add(jLlangue);
-        getContentPane().add(jLregion);
-        getContentPane().add(jLautre);
+        getContentPane().add(JL_LANGUE);
+        getContentPane().add(JL_REGION);
+        getContentPane().add(JL_VARIANTE);
         getContentPane().add(langue);
         getContentPane().add(region);
         getContentPane().add(autre);

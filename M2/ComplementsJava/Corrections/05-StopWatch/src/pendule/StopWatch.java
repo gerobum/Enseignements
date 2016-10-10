@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pendule;
 
 import langues.ChoixDeLangue;
@@ -9,13 +5,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Locale;
 import javax.swing.*;
 import java.util.ResourceBundle;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 /**
  *
@@ -85,20 +77,24 @@ public class StopWatch extends JFrame implements Runnable {
 
     public StopWatch() {
         super(java.util.ResourceBundle.getBundle("langues/dico").getString("WATCH"));
-        state = State.READY;
-
-        heure = 0;
-        minute = 0;
-        seconde = 0;
         start = new JButton(ResourceBundle.getBundle("langues/dico").getString("START"));
         stop = new JButton(ResourceBundle.getBundle("langues/dico").getString("STOP"));
         reset = new JButton(ResourceBundle.getBundle("langues/dico").getString("RESET"));
 
         centre = new JLabel("00:00:00", JLabel.CENTER);
+
+        init();
+    }
+    
+    private void init() {
+        state = State.READY;
+
+        heure = 0;
+        minute = 0;
+        seconde = 0;
         centre.setFont(centre.getFont().deriveFont(40F));
 
         centre.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
-
         JPanel pan = new JPanel();
         pan.setLayout(new GridLayout(1, 3));
         pan.add(start);
@@ -112,6 +108,7 @@ public class StopWatch extends JFrame implements Runnable {
         changerDeLangue = new JCheckBox(java.util.ResourceBundle.getBundle("langues/dico").getString("CHANGER DE LANGUE"));
         getContentPane().add(changerDeLangue, "North");
 
+
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -122,7 +119,7 @@ public class StopWatch extends JFrame implements Runnable {
                 choixDeLangue.setVisible(changerDeLangue.isSelected());
             }
         });
-
+        
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,7 +130,7 @@ public class StopWatch extends JFrame implements Runnable {
                 }
             }
         });
-
+        
         stop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
