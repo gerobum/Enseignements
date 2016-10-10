@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package partie1;
 
 import javax.swing.JFrame;
@@ -13,6 +8,10 @@ import javax.swing.JFrame;
  */
 public class AfficheCalendar extends JFrame {
     public AfficheCalendar() {
+        init();
+    }
+    
+    private void init() {
         getContentPane().add(new JLabelCalendar());
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -20,7 +19,7 @@ public class AfficheCalendar extends JFrame {
     }
 
     public static void main(String[] args) {
-        new AfficheCalendar();
+        AfficheCalendar afficheCalendar = new AfficheCalendar();
     }
 
 }
