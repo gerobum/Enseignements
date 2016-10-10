@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import static java.lang.Thread.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * Objectifs : Utilisation de verrous (Lock) réentrants pour protéger une table

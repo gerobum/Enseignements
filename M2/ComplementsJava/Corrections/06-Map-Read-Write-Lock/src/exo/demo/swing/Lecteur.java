@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package exo.demo.swing;
 
 import java.awt.Color;
@@ -18,7 +15,7 @@ public class Lecteur extends Thread {
     private final int nb;
     private final PG pg;
     Color eteint, allume;
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     public Lecteur(JLabel label, PG pg, int nb, Color eteint, Color allume) {
         this.label = label;
@@ -35,7 +32,7 @@ public class Lecteur extends Thread {
                 label.setBackground(eteint);
                 pg.get();
                 label.setBackground(allume);
-                Thread.sleep(random.nextInt(1000));
+                Thread.sleep(RANDOM.nextInt(1000));
             } catch (InterruptedException ex) {
             }
         }
