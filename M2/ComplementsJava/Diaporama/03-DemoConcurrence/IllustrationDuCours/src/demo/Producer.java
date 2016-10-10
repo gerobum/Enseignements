@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package demo;
 
 import java.util.Random;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/**
+/*
  *
  * @author maillot
  */
@@ -17,7 +14,7 @@ public class Producer extends Thread {
     private BlockingDeque<Double> queue;
     private String name;
     private int delta;
-    private Random random = new Random();
+    private final Random RANDOM = new Random();
     private int combien;
     private Afficheur afficheur;
 
@@ -35,6 +32,7 @@ public class Producer extends Thread {
      * augmentent de 1 en 1. <br> Si combien >=0, c'est le nombre de valeurs à
      * produire. Elles sont choisies aléatoirement dans [0,1[.
      * @param daemon Le thread de production est démon ou pas.
+     * @param afficheur
      */
     public Producer(BlockingDeque<Double> queue, String name, int delta, int combien, boolean daemon, Afficheur afficheur) {
         this.queue = queue;
@@ -92,7 +90,7 @@ public class Producer extends Thread {
         } else {
             while (true) {
                 try {
-                    Double valeurProduite = random.nextDouble();
+                    Double valeurProduite = RANDOM.nextDouble();
                     if (afficheur != null) {
                         afficheur.afficher(name, valeurProduite);
                     }

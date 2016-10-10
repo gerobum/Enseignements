@@ -1,24 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
+/*
  *
  * @author maillot
  */
 public class Ami {
 
-    public final String nom;
+    public final String NOM;
     private int num = 0;
     public ReentrantLock verrou = new ReentrantLock();
 
     public Ami(String nom) {
-        this.nom = nom;
+        this.NOM = nom;
     }
 
     public void estSaluéPar(Ami ami) {
@@ -28,7 +24,7 @@ public class Ami {
             monVerrou = verrou.tryLock();
             tonVerrou = ami.verrou.tryLock();
             if (monVerrou && tonVerrou) { // Les deux verrous étaient libres, on peut y aller
-                System.out.println(ami.nom + " salue " + nom + " (" + num++ + ")");
+                System.out.println(ami.NOM + " salue " + NOM + " (" + num++ + ")");
                 ami.estSaluéEnRetourPar(this);
             }
         } finally {
@@ -44,7 +40,7 @@ public class Ami {
     public void estSaluéEnRetourPar(Ami ami) {
         verrou.lock();
         try {
-            System.out.println(ami.nom + " répond a " + nom);
+            System.out.println(ami.NOM + " répond a " + NOM);
         } finally {
             verrou.unlock();
         }

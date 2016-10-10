@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package synchro;
 
 /**
@@ -11,19 +7,19 @@ package synchro;
  */
 public class Ami {
 
-    public final String nom;
+    public final String NOM;
     private int num = 0;
 
     public Ami(String nom) {
-        this.nom = nom;
+        this.NOM = nom;
     }
 
     public synchronized void estSaluéPar(Ami ami) {
-        System.out.println(ami.nom + " salue " + nom + " (" + num++ + ")");
+        System.out.println(ami.NOM + " salue " + NOM + " (" + num++ + ")");
         ami.estSaluéEnRetourPar(this);
     }
 
     public synchronized void estSaluéEnRetourPar(Ami ami) {
-        System.out.println(ami.nom + " répond a " + nom);
+        System.out.println(ami.NOM + " répond a " + NOM);
     }
 }

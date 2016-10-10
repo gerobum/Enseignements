@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package demo.illustrationDuCours;
 
 import demo.Afficheur;
@@ -9,7 +6,7 @@ import demo.Consumer;
 import demo.Producer;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/**
+/*
  *
  * @author maillot
  */

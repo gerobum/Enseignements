@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lock;
 
 import java.util.Random;
@@ -13,7 +9,7 @@ import java.util.Random;
  */
 public class Amitié extends Thread {
 
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
     private final Ami a, b;
 
     public Amitié(Ami a, Ami b) {
@@ -25,7 +21,7 @@ public class Amitié extends Thread {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(random.nextInt(10));
+                Thread.sleep(RANDOM.nextInt(10));
                 a.estSaluéPar(b);
             } catch (InterruptedException e) {
             }
