@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package demo;
 
 import java.util.Vector;
@@ -14,12 +11,10 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 public class Consumer extends Thread {
 
-    private BlockingDeque<Double> queue;
-    private String name;
-    private int delta;
+    private final BlockingDeque<Double> QUEUE;
+    private final String NAME;
+    private final int DELTA;
     private Afficheur afficheur;
-    Vector v;
-    ConcurrentLinkedDeque cld;
 
     public void setAfficheur(Afficheur afficheur) {
         this.afficheur = afficheur;
@@ -33,14 +28,14 @@ public class Consumer extends Thread {
      * @param afficheur Une interface pour définir la façon d'afficher les résutats.
      */
     public Consumer(BlockingDeque<Double> queue, String name, int delta, Afficheur afficheur) {
-        this.queue = queue;
-        this.name = name;
-        this.delta = delta;
+        this.QUEUE = queue;
+        this.NAME = name;
+        this.DELTA = delta;
         this.afficheur = afficheur;
     }
     
     public String getConsumerName() {
-        return name;
+        return NAME;
     }
 
 
@@ -70,12 +65,12 @@ public class Consumer extends Thread {
             try {
                 Thread toFinish = toFinishIfWaitingTooMuch(10000);
                 toFinish.start();
-                Thread.sleep(delta);
-                afficheur.afficher(name, queue.take());
+                Thread.sleep(DELTA);
+                afficheur.afficher(NAME, QUEUE.take());
                 toFinish.interrupt();
 
             } catch (InterruptedException ex) {
-                System.out.println("Fin du consommateur " + name);
+                System.out.println("Fin du consommateur " + NAME);
                 return;
             }
         }
