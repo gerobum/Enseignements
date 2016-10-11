@@ -1,8 +1,6 @@
 Rallye/.idea/vcs.xml
 Rallye/app/app.iml
 log
-**/dist/
-**/build/
 **/bin/
 **/.idea/
 **/.gradle/
@@ -11,6 +9,10 @@ log
 **/.idea
 **/.gradle
 .directory
+# Files for Netbeans
+**/dist/
+**/build/
+**/private/
 # Built application files
 *.apk
 *.ap_
@@ -51,3 +53,4 @@ captures/
 # Keystore files
 *.jks
 /M1/UML/DiagrammesDeClasses/Exercices/Demo/Emploi/nbproject/private/
+/M2/ComplementsJava/Corrections/04-CalendrierInternational/nbproject/private/
