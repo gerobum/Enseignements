@@ -1,6 +1,5 @@
 package pc;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -13,14 +12,13 @@ import static java.lang.Math.*;
  */
 public class Producteur extends Thread {
 
-  private final Random random = new Random();
+  private static final Random RANDOM = new Random();
   private final BlockingQueue<Paquet> file;
   private final int mini;
   private final int maxi;
   private final int n;
   private static int numeroOrdre = 0;
   private final int numero;
-  private final DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
 
   /**
    * Ce producteur produit n paquets (n<0 <=> n infini) et les place dans une file.
@@ -62,23 +60,15 @@ public class Producteur extends Thread {
 
   private void attendreEtProduire() throws InterruptedException {
     // Calcul de l'attente
-    sleep(random.nextInt(maxi-mini+1)+mini);
+    sleep(RANDOM.nextInt(maxi-mini+1)+mini);
     // La création du paquet doit impérativement
     // se faire avant la tentative de mise en file
     // si l'on veut observer l'éventuel temps d'attente.
-    Paquet p = new Paquet(this, new Date());
+    Paquet p = new Paquet(this);
     file.put(p);
     // La date de rangement est affectée après l'attente.
     p.setDateRangement(new Date());
   }
-
-  /**
-   * Pour terminer la consommation.
-   */
-  public void fin() {
-    interrupt();
-  }
-
   @Override
   public String toString() {
     return "P" + numero;
