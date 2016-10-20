@@ -9,7 +9,7 @@ import static java.lang.Math.*;
 
 public class Consommateur extends Thread {
 
-  private final Random random = new Random();
+  private static final Random RANDOM = new Random();
   private final BlockingQueue<Paquet> file;
   private final int mini;
   private final int maxi;
@@ -56,7 +56,7 @@ public class Consommateur extends Thread {
 
   private void attendreEtConsommer() throws InterruptedException {
     // Calcul de l'attente
-    sleep(random.nextInt(maxi-mini+1) + mini);
+    sleep(RANDOM.nextInt(maxi-mini+1) + mini);
     // La demande de paquet va se faire. 
     // Le paquet que l'on va consommer n'est pas encore connu.
     // Mais sa date l'est. Donc "l'astuce" est de mémoriser cette date
@@ -66,23 +66,16 @@ public class Consommateur extends Thread {
     Paquet p = file.take();
     // Ici, un paquet a été récupéré.
     // Il a été retiré maintenant.
-    p.setDateRetrait(new Date());
+    p.setDateConsommation(new Date());
     // Son consommateur est affecté
     p.setConsommateur(this);
     // Sa date de demande est celle faite avant le "take()"
-    p.setDateConsommation(dateDemande);
+    p.setDateDemandeConsommation(dateDemande);
     System.out.println(p);
   }
 
   @Override
   public String toString() {
     return "C" + numero;
-  }
-
-  /**
-   * Pour terminer la production.
-   */
-  public void fin() {
-    interrupt();
   }
 }
