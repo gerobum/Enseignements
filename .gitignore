@@ -6,15 +6,12 @@ log
 **/.gradle/
 **/build
 **/bin
-**/.idea
-**/.gradle
 .directory
 # Files for Netbeans
 **/dist/
 **/build/
-**/private/
-private.properties
-private.xml
+**/private.properties
+**/private.xml
 
 # Built application files
 *.apk
@@ -55,5 +52,3 @@ captures/
 
 # Keystore files
 *.jks
-/M1/UML/DiagrammesDeClasses/Exercices/Demo/Emploi/nbproject/private/
-/M2/ComplementsJava/Corrections/04-CalendrierInternational/nbproject/private/
