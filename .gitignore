@@ -8,10 +8,10 @@ log
 **/bin
 .directory
 # Files for Netbeans
-**/dist/
-**/build/
-**/private.properties
-**/private.xml
+dist/
+build/
+private.properties
+private.xml
 
 # Built application files
 *.apk
@@ -52,3 +52,8 @@ captures/
 
 # Keystore files
 *.jks
+/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-01-Horaire/nbproject/private/
+/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/nbproject/private/
+/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-03-Skippy/nbproject/private/
+/M2/ComplementsJava/Corrections/07-Squelette-CommunicationReseau-02-Echo/nbproject/private/
+/M2/ComplementsJava/Corrections/07-Squelette-CommunicationReseau-03-Skippy/nbproject/private/
