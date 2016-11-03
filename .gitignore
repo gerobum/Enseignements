@@ -11,6 +11,7 @@ log
 dist/
 build/
 private.properties
+project.properties
 private.xml
 **/dist/
 **/build/
