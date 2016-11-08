@@ -3,6 +3,7 @@ package _02_service_echo_02_client_echo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /*
@@ -36,7 +37,7 @@ public class EchoClient {
                     sout.flush();
                     System.out.println(sin.nextLine());
                 } while (!phrase.equalsIgnoreCase("FIN") && !"Sésame ! Ferme toi.".equals(phrase));
-            } catch (IOException ex) {
+            } catch (IOException | NoSuchElementException ex) {
                 System.err.println(" ---------------------------> Le serveur semble fermé !!!!!!!");
             }
         }
