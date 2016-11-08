@@ -8,7 +8,7 @@ import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 /*
- *
+ * Serveur ECHO qui admet les multiples connexions simultannées.
  * @author maillot
  */
 public class EchoServiceMultiple {
@@ -35,8 +35,9 @@ public class EchoServiceMultiple {
                 do {
                     mot = sin.nextLine();
                     sout.println(mot.toUpperCase());
-                } while (!mot.equalsIgnoreCase("FIN") && !mot.equals("Sésame ! Ferme toi."));
-                stop = mot.equals("Sésame ! Ferme toi.");
+                } while (!stop && !mot.equalsIgnoreCase("FIN") && !mot.equals("Sésame ! Ferme toi."));
+                stop = stop || mot.equals("Sésame ! Ferme toi.");
+                
             } catch (IOException ex) {
             }
         }
@@ -52,18 +53,18 @@ public class EchoServiceMultiple {
          *    de clients que voulu. Tous fonctionneront indépendemment les uns
          *    des autres.
          */
-        ServerSocket server = new ServerSocket(1414);
-        System.out.println("Service echo démarré");
-        while (!stop) {
-            // Le timeout sert à quitter régulièrement l'attente pour vérifier
-            // l'état du drapeau stop.
-            server.setSoTimeout(1000);
-            try {
-                Socket client = server.accept();
-                System.out.println("Requête acceptée");
-                new Service(client).start();
-            } catch (SocketTimeoutException s) {
-
+        try (ServerSocket server = new ServerSocket(0)) {
+            System.out.println("Service echo démarré sur le port " + server.getLocalPort());
+            while (!stop) {
+                // Le timeout sert à quitter régulièrement l'attente pour vérifier
+                // l'état du drapeau stop.
+                server.setSoTimeout(1000);
+                try {
+                    Socket client = server.accept();
+                    new Service(client).start();
+                } catch (SocketTimeoutException s) {
+                    System.out.println("Fin timeout et stop = " + stop);
+                }
             }
         }
 
