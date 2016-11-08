@@ -4,6 +4,7 @@ package plus;
  *
  * @author maillot
  */
+import plus.PanneauDeConnexion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
@@ -14,8 +15,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -28,30 +27,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-/**
- * SkippyPlus permet de mettre en relation deux machines distantes. Une fois
- * SkippyPlus lancé, et sachant qu'un autre SkippyPlus est lancé sur une autre
- * machine, pour établir une connection il faut taper
- *
- * @<adresse ip>:<numéro de port> Un message quelconque Le Skippy branché sur
- * cette machine et ce port recevra le message. Une fois la connection établie,
- * les deux Skippy peuvent communiquer normalement.
- */
-public class SkippyPlus extends JFrame implements Runnable {
-  // La zone de "chat" doit contenir plusieurs lignes.
-    // un JTextArea est donc intéressant pour ça.
+public class Skippy extends JFrame implements Runnable {
 
     private JTextArea echanges;
-    // Les messages envoyés tiennent sur une ligne.
     private JTextField envoi;
-    private final DatagramSocket in; // Pour communiquer
-    // Pour mémorisez l'adresse du correspondant
-    private final Set<Couple<InetAddress, Integer>> adressesPorts = new HashSet<>();
+    private final DatagramSocket in;
     private JScrollPane scrollZone;
-  // Ce pattern sera utilisé pour reconnaitre les demandes de connections, 
-    // c'est-à-dire des chaînes comme "@127.0.0.1:45784 Bonjour"
     private final Pattern addressPort = Pattern.compile("@([^\\s:]+):(\\d{4,5})(.*)");
-
+    private final InetAddress adresseDuServeur;
+    private final String pseudo;
+    private final int portConnexion;
+    private final int portDeconnexion;
+    private InetAddress adresseDistante;
+    private int portDistant;
 
     private final ActionListener send = new ActionListener() {
         @Override
@@ -59,24 +47,16 @@ public class SkippyPlus extends JFrame implements Runnable {
             try {
                 sendRequest();
             } catch (IOException ex) {
-                Logger.getLogger(SkippyPlus.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Skippy.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     };
 
-    /**
-     * Pour établir une communication : envoyer un message dont le format est le
-     * suivant :
-     * <adresse distante>:<port distant> message.<br>
-     * Par exemple : <br>
-     *
-     * @localhost:54789 Bonjour<br>
-     * Une fois la communication établie, il suffit d'envoyer des messages
-     * simples.
-     * @throws IOException
-     */
-    public SkippyPlus() throws IOException {
-        getContentPane().setBackground(Color.YELLOW);
+    public Skippy(InetAddress adresseDuServeur, int portConnexion) throws IOException {
+        this.pseudo = "";
+        this.adresseDuServeur = adresseDuServeur;
+        this.portConnexion = portConnexion;
+        this.portDeconnexion = portConnexion + 1;
         in = new DatagramSocket();
         makeIHM();
     }
@@ -85,11 +65,10 @@ public class SkippyPlus extends JFrame implements Runnable {
      * Méthode d'aide privée utilisée pour configurer le composant graphique
      */
     private void makeIHM() {
+        getContentPane().setBackground(Color.YELLOW);
         echanges = new JTextArea(10, 50);
-        echanges.setText("Entrez @<adresse distante>:<port distant><Un éventuel message>\n"
-                + "pour vous connecter avec quelqu'un qui a ouvert Skippy."
-                + "\nPar exemple : @127.0.0.1:54789 Bonjour\n"
-                + "\nUne fois la communication établie vous pouvez communiquer normalement.\n\n");
+        echanges.setText("Double-cliquez sur un nom dans la fenêtre à droite\n"
+                + "pour vous connecter avec quelqu'un.\n\n");
 
         echanges.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         echanges.setBackground(Color.ORANGE);
@@ -108,19 +87,20 @@ public class SkippyPlus extends JFrame implements Runnable {
         centre.add(envoi, BorderLayout.SOUTH);
 
         getContentPane().add(centre, "Center");
+        getContentPane().add(new PanneauDeConnexion(adresseDuServeur, portConnexion, portDeconnexion, in.getLocalPort(), in), "East");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
 
-        setTitle("Port #" + in.getLocalPort());
+        setTitle(pseudo + " (" + in.getLocalPort() + ")");
     }
 
     /**
      * Soumission d'une requête.
      */
     private void sendRequest() throws UnknownHostException, IOException {
-    // Cette méthode 
+        // Cette méthode 
         //    1. récupère le texte saisi dans le champs de texte envoi,
         //    2. vérifie s'il s'agit d'une demande de connection,
         //    3. le cas échéant récupère l'adresse et le port demandé,
@@ -130,8 +110,8 @@ public class SkippyPlus extends JFrame implements Runnable {
         Matcher matcher = addressPort.matcher(ligne);
         String message;
         if (matcher.matches()) {
-            adressesPorts.add(new Couple<>(InetAddress.getByName(matcher.group(1)), 
-                                         Integer.parseInt(matcher.group(2))));
+            adresseDistante = InetAddress.getByName(matcher.group(1));
+            portDistant = Integer.parseInt(matcher.group(2));
             message = matcher.group(3).trim();
         } else {
             message = ligne.trim();
@@ -144,10 +124,9 @@ public class SkippyPlus extends JFrame implements Runnable {
         byte[] tampon;
         tampon = message.getBytes();
 
-        for (Couple<InetAddress, Integer> d : adressesPorts) {
-            DatagramPacket packet = new DatagramPacket(tampon, tampon.length, d.un, d.deux);
-            in.send(packet);
-        }
+        DatagramPacket packet = new DatagramPacket(tampon, tampon.length, adresseDistante, portDistant);
+        in.send(packet);
+
         envoi.setText("");
     }
 
@@ -156,18 +135,18 @@ public class SkippyPlus extends JFrame implements Runnable {
      * et la retourne.
      *
      * Elle met également à jour l'adresse et le port distants.
+     *
      * @return @throws IOException
      */
-    private Couple<Integer, String> receive() throws IOException {
+    private String receive() throws IOException {
         byte[] tampon = new byte[256];
         DatagramPacket message = new DatagramPacket(tampon, tampon.length);
 
         in.receive(message);
-        int distantPort = message.getPort();
-        InetAddress distantAddress = message.getAddress();
-        adressesPorts.add(new Couple<>(distantAddress, distantPort));
+        portDistant = message.getPort();
+        adresseDistante = message.getAddress();
 
-        return new Couple<>(distantPort, new String(tampon).trim());
+        return new String(tampon).trim();
     }
 
     /*
@@ -177,12 +156,11 @@ public class SkippyPlus extends JFrame implements Runnable {
     public void run() {
         while (true) {
             try {
-                Couple<Integer, String> pm = receive();
-                echanges.append("#" + pm.un + " : " + pm.deux + "\n");
+                String pm = receive();
+                echanges.append("#" + pm + "\n");
                 echanges.setCaretPosition(echanges.getCaretPosition());
                 scrollZone.getViewport().setViewPosition(new Point(0, echanges.getSize().height));
             } catch (IOException ex) {
-                Logger.getLogger(SkippyPlus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -191,6 +169,6 @@ public class SkippyPlus extends JFrame implements Runnable {
      * Lancement du client
      */
     public static void main(String[] args) throws IOException {
-        new Thread(new SkippyPlus()).start();
+         new Thread(new Skippy(InetAddress.getLocalHost(), 1515)).start();
     }
 }

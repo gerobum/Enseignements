@@ -1,4 +1,4 @@
-package _03_skippy;
+package skippy;
 
 /**
  *
@@ -74,7 +74,6 @@ public class Skippy extends JFrame implements Runnable {
    * @throws IOException
    */
   public Skippy() throws IOException {
-    getContentPane().setBackground(Color.YELLOW);
     in = new DatagramSocket();
     makeIHM();
   }
@@ -83,6 +82,7 @@ public class Skippy extends JFrame implements Runnable {
    * Méthode d'aide privée utilisée pour configurer le composant graphique
    */
   private void makeIHM() {
+    getContentPane().setBackground(Color.YELLOW);
     echanges = new JTextArea(10, 50);
     echanges.setText("Entrez @<adresse distante>:<port distant><Un éventuel message>\n"
             + "pour vous connecter avec quelqu'un qui a ouvert Skippy."

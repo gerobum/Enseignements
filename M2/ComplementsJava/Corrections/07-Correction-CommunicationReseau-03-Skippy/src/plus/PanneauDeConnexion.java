@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client;
+package plus;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -33,8 +33,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import serveur.InfoDeCom;
-import serveur.ServeurDeSkippy;
+import plus.serveur.InfoDeCom;
+import plus.serveur.ServeurDeSkippy;
 
 /**
  *
@@ -44,8 +44,8 @@ public class PanneauDeConnexion extends JPanel {
 
     private final JTextField pseudo = new JTextField(20);
     private final JButton connexion = new JButton("Se connecter");
-    private final JList<String> liste = new JList<>(new DefaultListModel<String>());
-    private Map<String, InfoDeCom> pseudos = new HashMap<>();
+    private final JList<InfoDeCom> liste = new JList<>(new DefaultListModel<InfoDeCom>());
+    //private Map<String, InfoDeCom> pseudos = new HashMap<>();
     private final int portDeDiscussion;
     private final InetAddress adresseDuServeur;
     private final int portConnexion;
@@ -173,6 +173,10 @@ public class PanneauDeConnexion extends JPanel {
 
     }
 
+    private void makeIHM() {
+        
+    }
+    
     private int majListeConnectes() {
         try {
             final ServerSocket serveur = new ServerSocket(0);
