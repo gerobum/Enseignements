@@ -57,7 +57,3 @@ captures/
 
 # Keystore files
 *.jks
-/M2/ComplementsJava/Corrections/nbproject/private/
-/M2/ComplementsJava/Corrections/07-H/nbproject/private/
-/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo-OLD/nbproject/private/
-/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/nbproject/private/
