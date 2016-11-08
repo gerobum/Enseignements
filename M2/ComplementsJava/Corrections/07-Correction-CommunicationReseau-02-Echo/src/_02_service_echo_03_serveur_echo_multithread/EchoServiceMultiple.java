@@ -63,7 +63,6 @@ public class EchoServiceMultiple {
                     Socket client = server.accept();
                     new Service(client).start();
                 } catch (SocketTimeoutException s) {
-                    System.out.println("Fin timeout et stop = " + stop);
                 }
             }
         }

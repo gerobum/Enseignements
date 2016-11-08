@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package _02_service_echo_04_echo_UDP;
 
 import java.io.IOException;
@@ -17,7 +13,6 @@ public class EchoClient {
 
     // Méthode qui envoie le message en paramètre sur le port 1414 de la machine locale.
     private static String sendAndReceive(DatagramSocket ds, String message) throws UnknownHostException, IOException {
-        //01try {
         byte[] tampon = message.getBytes();
         DatagramPacket dp = new DatagramPacket(tampon, tampon.length, Inet4Address.getLocalHost(), 1414);
         ds.send(dp);
@@ -25,13 +20,10 @@ public class EchoClient {
         ds.receive(dp);
         String ligne = new String(tampon);
         return ligne.trim();
-        //01} catch (SocketTimeoutException ste) {
-        //01    return "Le serveur est peut être fermé, ça fait 2000 ms que j'attends sa réponse.";
-        //01}
     }
 
     public static void main(String[] args) throws SocketException, IOException {
-        //02try {
+        try {
             DatagramSocket ds = new DatagramSocket();
             String phrase;
 
@@ -41,8 +33,8 @@ public class EchoClient {
                 phrase = sin.nextLine();
                 System.out.println(sendAndReceive(ds, phrase));
             } while (!"fin".equalsIgnoreCase(phrase) && !"Sésame ! Ferme toi.".equals(phrase));
-        //02} catch (SocketTimeoutException ste) {
-        //02    System.err.println("Le serveur est peut être fermé, ça fait 2000 ms que j'attends sa réponse.");
-        //02}
+        } catch (SocketTimeoutException ste) {
+            System.err.println("Le serveur est peut être fermé, ça fait 2000 ms que j'attends sa réponse.");
+        }
     }
 }
