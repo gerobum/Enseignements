@@ -32,14 +32,12 @@ public class Lanceur extends JFrame implements Runnable {
     private JTextArea echanges;
     private JTextField envoi;
     private final DatagramSocket in;
-    // ???? private final Set<Couple<InetAddress, Integer>> adressesPorts = new HashSet<>();
     private JScrollPane scrollZone;
     private final Pattern addressPort = Pattern.compile("@([^\\s:]+):(\\d{4,5})(.*)");
     private final InetAddress adresseDuServeur;
     private final String pseudo;
     private final int portTraitementDemandeDeConnexion;
     private final int portTraitementDemandeDeDeconnexion;
-    private String pseudoDistant;
     private InetAddress adresseDistante;
     private int portDistant;
 
@@ -59,7 +57,6 @@ public class Lanceur extends JFrame implements Runnable {
         this.adresseDuServeur = adresseDuServeur;
         this.portTraitementDemandeDeConnexion = portConnexion;
         this.portTraitementDemandeDeDeconnexion = portConnexion + 1;
-        getContentPane().setBackground(Color.YELLOW);
         in = new DatagramSocket();
         makeIHM();
     }
@@ -68,11 +65,13 @@ public class Lanceur extends JFrame implements Runnable {
      * Méthode d'aide privée utilisée pour configurer le composant graphique
      */
     private void makeIHM() {
+        getContentPane().setBackground(Color.YELLOW);
         echanges = new JTextArea(10, 50);
-        echanges.setText("Entrez @<adresse distante>:<port distant><Un éventuel message>\n"
-                + "pour vous connecter avec quelqu'un qui a ouvert Skippy."
-                + "\nPar exemple : @127.0.0.1:54789 Bonjour\n"
-                + "\nUne fois la communication établie vous pouvez communiquer normalement.\n\n");
+        echanges.setWrapStyleWord(true);
+        echanges.setText("Se connecter en donnant un pseudo dans "
+                + "le champ de saisie en bas à droite.\n\n"
+                + "Une fois connecté, double-cliquer sur un pseudo présent dans "
+                + "la liste, le cas échéant, pour entamer une conversation avec lui.\n\n");
 
         echanges.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         echanges.setBackground(Color.ORANGE);
