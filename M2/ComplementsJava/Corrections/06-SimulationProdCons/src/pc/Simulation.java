@@ -18,7 +18,7 @@ public class Simulation {
     final Consommateur c1 = new Consommateur(file, x, y, -1);
     // Un consommateur qui consomme dans la file une infinité de paquets,
     // un toutes les x à y millisecondes.
-    x = 10; y = 50;
+    x = 100; y = 500;
     final Consommateur c2 = new Consommateur(file, x, y, -1);
     // idem    
     x = 2000; y = 2000;
