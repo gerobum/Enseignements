@@ -16,7 +16,9 @@ public:
     Fraction& operator=(const Fraction&);
     Fraction& operator++(); // pré-incrémentation
     const Fraction operator++(int); // post
-    operator double();
+    // Depuis c++11, il est possible d'ajouter le mot clé explicit
+    // qui oblige la conversion explicit
+    explicit operator double(); // depuis c++11 
     int num() const;
     int den() const;
     

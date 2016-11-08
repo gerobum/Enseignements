@@ -6,7 +6,11 @@ main() {
     // Conversion de type (affiche 0.3333)
     c = a*b;
     cout << c << endl; // 2/3
-    double d = c;
+    // Depuis c++11, si la surcharge de conversion est déclarée explicit
+    // alors il faut fait une conversion explicite comme ci-dessous
+    double d = static_cast<double>(c);
+    // en l'absence du mot clé explicit
+    // double d = c; // Ceci suffit.
     cout << ++c << endl; // 5/3
     cout << d << endl; // 2/3
     cout << c++ << endl; // 5/3
