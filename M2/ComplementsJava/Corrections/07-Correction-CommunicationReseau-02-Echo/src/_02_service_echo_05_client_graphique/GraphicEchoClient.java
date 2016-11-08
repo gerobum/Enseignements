@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
@@ -147,6 +148,7 @@ public class GraphicEchoClient extends JPanel implements ActionListener {
                 closeButton.setText("CLOSE CONNECTION");
 
                 try {
+                    port = Integer.parseInt(JOptionPane.showInputDialog("Entrez le numéro du port de ECHO"));
                     client = new Socket(host, port);
                     sin = new Scanner(client.getInputStream());
                     sout = new PrintStream(client.getOutputStream());
