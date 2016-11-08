@@ -1,6 +1,5 @@
-package pendule;
+package pendule_avec_timer;
 
-import langues.ChoixDeLangue;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,12 +7,16 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import javax.swing.*;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
+import java.util.Timer;
+
+import static pendule_avec_timer.StopWatch.State.*;
 
 /**
  *
  * @author maillot
  */
-public class StopWatch extends JFrame implements Runnable {
+public class StopWatch extends JFrame /*implements Runnable*/ {
 
     public enum State {
 
@@ -26,9 +29,11 @@ public class StopWatch extends JFrame implements Runnable {
     private int heure, minute, seconde;
     private final JButton start, stop, reset;
     private State state;
-    private Thread runner;
+    //private Thread runner;
     private JCheckBox changerDeLangue;
     private ChoixDeLangue choixDeLangue;
+    private Timer timer;
+    private TimerTask ttask;
 
     private void OneSecondMore() {
         seconde++;
@@ -49,32 +54,6 @@ public class StopWatch extends JFrame implements Runnable {
         centre.setText(String.format("%02d:%02d:%02d", heure, minute, seconde)); //NOI18N
     }
 
-    @Override
-    public void run() {
-        while (true) {
-            switch (state) {
-                case READY:
-                case BLOQUED:
-                    synchronized (this) {
-                        try {
-                            wait();
-                        } catch (InterruptedException ex) {
-                        }
-                    }
-                    break;
-
-                case ACTIVE:
-                    try {
-                        Thread.sleep(1000);
-                        OneSecondMore();
-                        print();
-                    } catch (InterruptedException ex) {
-                    }
-
-            }
-        }
-    }
-
     public StopWatch() {
         super(java.util.ResourceBundle.getBundle("langues/dico").getString("WATCH"));
         start = new JButton(ResourceBundle.getBundle("langues/dico").getString("START"));
@@ -83,11 +62,20 @@ public class StopWatch extends JFrame implements Runnable {
 
         centre = new JLabel("00:00:00", JLabel.CENTER);
 
+        ttask = new TimerTask() {
+
+            @Override
+            public void run() {
+                OneSecondMore();
+                print();
+            }
+        };
+
         init();
     }
-    
+
     private void init() {
-        state = State.READY;
+        state = READY;
 
         heure = 0;
         minute = 0;
@@ -108,7 +96,6 @@ public class StopWatch extends JFrame implements Runnable {
         changerDeLangue = new JCheckBox(java.util.ResourceBundle.getBundle("langues/dico").getString("CHANGER DE LANGUE"));
         getContentPane().add(changerDeLangue, "North");
 
-
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -119,45 +106,49 @@ public class StopWatch extends JFrame implements Runnable {
                 choixDeLangue.setVisible(changerDeLangue.isSelected());
             }
         });
-        
+
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                state = State.ACTIVE;
-                runner.interrupt(); // possible aussi
-                /*synchronized (StopWatch.this) {
-                    StopWatch.this.notify();
-                }*/
+                if (state != ACTIVE) {
+                    state = ACTIVE;
+                    timer = new Timer();
+
+                    ttask = new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            OneSecondMore();
+                            print();
+                        }
+                    };
+                    timer.schedule(ttask, 1000, 1000);
+                }
             }
         });
-        
+
         stop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (state == State.ACTIVE) {
-                    state = State.BLOQUED;
+                if (state == ACTIVE) {
+                    state = BLOQUED;
+                    timer.cancel();
                 }
-                // Pourquoi une interruption ici ?
-                runner.interrupt();
-        // Sans ça, l'appui sur STOP n'est pas immédiat
-                // L'attente (sleep) doit se terminer.
-                // L'interruption interrompt cette attente.
             }
         });
 
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (state != State.ACTIVE) {
-                    state = State.READY;
+                if (state != ACTIVE) {
+                    state = READY;
                     heure = minute = seconde = 0;
                     print();
-                    runner.interrupt();
                 }
 
             }
         });
-        runner = new Thread(this);
+        //runner = new Thread(this);
     }
 
     @Override
@@ -175,12 +166,10 @@ public class StopWatch extends JFrame implements Runnable {
         }
     }
 
-    public void start() {
-        runner.start();
-    }
-
+    /* public void start() {
+     runner.start();
+     }*/
     public static void main(String[] args) {
         StopWatch sw = new StopWatch();
-        sw.start();
     }
 }
