@@ -13,6 +13,10 @@ build/
 private.properties
 project.properties
 private.xml
+**/dist/
+**/build/
+**/private.properties
+**/private.xml
 
 # Built application files
 *.apk
