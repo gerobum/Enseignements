@@ -6,6 +6,7 @@
             <name>07-Correction-CommunicationReseau-03-Skippy</name>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="plus.dir"/>
             </source-roots>
             <test-roots/>
         </data>

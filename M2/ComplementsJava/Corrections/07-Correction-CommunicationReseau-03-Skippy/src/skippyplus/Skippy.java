@@ -1,10 +1,9 @@
-package plus;
+package skippyplus;
 
 /**
  *
  * @author maillot
  */
-import plus.PanneauDeConnexion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
