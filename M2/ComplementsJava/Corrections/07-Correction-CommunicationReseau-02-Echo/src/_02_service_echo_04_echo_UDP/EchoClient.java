@@ -22,6 +22,7 @@ public class EchoClient {
         return ligne.trim();
     }
 
+    // Le client envoie des messages au serveur tant qu'il le souhaite.
     public static void main(String[] args) throws SocketException, IOException {
         try {
             DatagramSocket ds = new DatagramSocket();

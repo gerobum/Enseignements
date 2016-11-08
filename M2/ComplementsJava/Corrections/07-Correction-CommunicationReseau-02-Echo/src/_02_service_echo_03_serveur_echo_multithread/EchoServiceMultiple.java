@@ -13,14 +13,24 @@ import java.util.Scanner;
  */
 public class EchoServiceMultiple {
 
+    // stop == true signifie l'arrêt du serveur.
     private static boolean stop = false;
 
+    /**
+     * Le serveur est multi-services. Une communication avec un client
+     * est un service.
+     */
     private static class Service extends Thread {
 
         private final Socket client;
         private Scanner sin;
         private PrintStream sout;
 
+        /**
+         * Un service est lancée quand le serveur accepte la connexion avec un
+         * client. 
+         * @param client : la socket de communication avec le client
+         */
         Service(Socket client) {
             this.client = client;
         }
@@ -29,13 +39,20 @@ public class EchoServiceMultiple {
         public void run() {
             try {
                 String mot;
-
+                // Le service est traité dans un thread. Il se termine quand le 
+                // client le décide.               
                 sin = new Scanner(client.getInputStream());
                 sout = new PrintStream(client.getOutputStream());
                 do {
                     mot = sin.nextLine();
                     sout.println(mot.toUpperCase());
                 } while (!stop && !mot.equalsIgnoreCase("FIN") && !mot.equals("Sésame ! Ferme toi."));
+                // Comme le drapeau stop ne concerne pas seulement le service
+                // mais le serveur (donc tous les services), une fois rendu vrai
+                // il doit le rester.
+                // Si le client sort par la phrase magique (Sésame ! Ferme toi.)
+                // alors le drapeau stop doit devenir ou rester vrai.
+                // sinon il doit rester en l'état.
                 stop = stop || mot.equals("Sésame ! Ferme toi.");
                 
             } catch (IOException ex) {
@@ -53,6 +70,8 @@ public class EchoServiceMultiple {
          *    de clients que voulu. Tous fonctionneront indépendemment les uns
          *    des autres.
          */
+        
+        // 
         try (ServerSocket server = new ServerSocket(0)) {
             System.out.println("Service echo démarré sur le port " + server.getLocalPort());
             while (!stop) {

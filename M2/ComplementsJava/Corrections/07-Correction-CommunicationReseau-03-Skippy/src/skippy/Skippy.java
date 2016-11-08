@@ -43,8 +43,8 @@ public class Skippy extends JFrame implements Runnable {
   // Les messages envoyés tiennent sur une ligne.
   private JTextField envoi;
   private final DatagramSocket in; // Pour communiquer
-  private InetAddress distantAddress; // Pour mémorisez l'adresse du correspondant
-  private int distantPort; // et son port.
+  private InetAddress distantAddress; // Pour mémorisez l'adresse de l'actuel
+  private int distantPort; // correspondant et son port.
   private JScrollPane scrollZone;
   // Ce pattern sera utilisé pour reconnaitre les demandes de connections, 
   // c'est-à-dire des chaînes comme "@127.0.0.1:45784 Bonjour"
@@ -122,20 +122,19 @@ public class Skippy extends JFrame implements Runnable {
     //    1. récupère le texte saisi dans le champs de texte envoi,
     //    2. vérifie s'il s'agit d'une demande de connection,
     //    3. le cas échéant récupère l'adresse et le port demandé,
-    //    3. extrait le message pour l'ajouter dans la zone d'échange,
-    //    4. construit et envoie le paquet avec le DatagramSocket in.
-    String ligne = envoi.getText();
+    //    4. extrait le message pour l'ajouter dans la zone d'échange,
+    //    5. construit et envoie le paquet avec le DatagramSocket in.
+    String ligne = envoi.getText(); // 1
     Matcher matcher = addressPort.matcher(ligne);
     String message;
-    if (matcher.matches()) {
-      distantAddress = InetAddress.getByName(matcher.group(1));
-      distantPort = Integer.parseInt(matcher.group(2));
-      message = matcher.group(3).trim();
+    if (matcher.matches()) { // 2
+      distantAddress = InetAddress.getByName(matcher.group(1)); // 3
+      distantPort = Integer.parseInt(matcher.group(2)); // 3
+      message = matcher.group(3).trim(); // 4
     } else {
-      message = ligne.trim();
+      message = ligne.trim(); // 4
     }
-    //--------
-
+    // 5
     echanges.append("Me : " + message + "\n");
     echanges.setCaretPosition(echanges.getText().length());
     // on construit le paquet a envoyer

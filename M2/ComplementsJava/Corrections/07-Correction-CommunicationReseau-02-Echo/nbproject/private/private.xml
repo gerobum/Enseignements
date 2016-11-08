@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/yvan/Developpement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/nbproject/genfiles.properties</file>
-            <file>file:/home/yvan/Developpement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/nbproject/private/private.properties</file>
-            <file>file:/home/yvan/Developpement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/nbproject/project.xml</file>
+            <file>file:/home/maillot/Développement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/src/_02_service_echo_01_serveur_echo/EchoService.java</file>
+            <file>file:/home/maillot/Développement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/src/_02_service_echo_02_client_echo/EchoClient.java</file>
+            <file>file:/home/maillot/Développement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/src/_02_service_echo_04_echo_UDP/EchoService.java</file>
+            <file>file:/home/maillot/Développement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/src/_02_service_echo_03_serveur_echo_multithread/EchoServiceMultiple.java</file>
+            <file>file:/home/maillot/Développement/GitHub/Enseignements/M2/ComplementsJava/Corrections/07-Correction-CommunicationReseau-02-Echo/src/_02_service_echo_04_echo_UDP/EchoClient.java</file>
         </group>
     </open-files>
 </project-private>

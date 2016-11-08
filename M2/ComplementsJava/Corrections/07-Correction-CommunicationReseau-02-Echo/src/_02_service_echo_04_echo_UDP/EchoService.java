@@ -24,10 +24,14 @@ public class EchoService {
         // Réception 
         byte[] tampon = new byte[256];
         DatagramPacket dp = new DatagramPacket(tampon, tampon.length);
-
+        // En attente de réception d'un paquet
         ds.receive(dp);
-        int distantPort = dp.getPort();
+        // Paquet reçu
+        
+        // Qui l'a envoyé ?
+        int distantPort = dp.getPort(); 
         InetAddress distantAddress = dp.getAddress();
+        // Quelle information contient il ?
         String message = new String(tampon);
 
         // Pour enlever les éventuels caractères zéro.
@@ -38,6 +42,8 @@ public class EchoService {
         // on construit le paquet a envoyer
         tampon = message.toUpperCase().getBytes();
 
+        // Retour à l'envoyeur (il faut bien sûr "qu'en face" l'envoyeur attende
+        // le retour avec un "receive()".
         dp = new DatagramPacket(tampon, tampon.length, distantAddress, distantPort);
         ds.send(dp);
 
