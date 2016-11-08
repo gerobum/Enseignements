@@ -157,6 +157,16 @@ public class Fichiers {
                 .distinct();
     }
 
+
+    public static void afficherTousLesFichiersDeTailleNulleTriés(Path racine) throws IOException {
+        Files.walk(racine)
+                .map(p -> p.toFile())
+                .filter(p -> p.length()==53) // En inversant ces deux lignes
+                .sorted((a, b) -> a.getName().compareTo(b.getName())) // le calcul est moins rapide. C'est logique, il
+                .map(p -> p.getName()) // vaut mieux trier après filtrage.
+                .forEach(System.out::println);
+    }
+
     public static Stream<Path> tousLesDossiers(Path racine) throws IOException {
 
         return Files.walk(racine)
@@ -209,15 +219,15 @@ public class Fichiers {
     public static void main(String[] args) throws IOException, URISyntaxException {
 
         Path racine;
-        racine = new File("/home/yvan/Dropbox/Administration").toPath();
        
-        /*JFileChooser jfc = new JFileChooser();
+       
+        JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             racine = jfc.getSelectedFile().toPath();
         } else {
             racine = new File(".").toPath();
-        }*/
+        }
         
         
         long td, tf;
@@ -230,12 +240,13 @@ public class Fichiers {
         // afficherTousLesDossiersEtFichiersCaches(racine);
         // afficherTousLesFichiersCaches(racine);
         // afficherTousLesFichiersDeTailleNulle(racine);
+        afficherTousLesFichiersDeTailleNulleTriés(racine);
         // afficherTousLesFichiersCachesDeTailleNulle(racine);
         // System.out.println("Il y a " + nombreDOctets(racine) + " octets à partir de " + racine);
         // System.out.println("Les fichiers cachés occupent " + nombreDOctetsDesFichiersCaches(racine) + " octets à partir de " + racine);
         // afficherTousLesFichiersDifferentsDefMaisDeMemeTailleEtDeMemeNom(racine, new File("/home/yvan/AutresSauvegardes/Travail/Enseignement/2012-2013/M2/ComplementsJava/sujet1.html"));
         // afficherTousLesFichiersRangésParTaille(racine);
-         afficherTousLesFichiersRangésParTailleEtParNom(racine);
+        // afficherTousLesFichiersRangésParTailleEtParNom(racine);
         //System.out.println("Il y a " + tousLesFichiersDeTailleNulle(racine).count() + " fichiers de taille nulle");
         // System.out.println("Il y a " + tousLesDossiersCaches(racine).count() + " dossiers cachés");
         // System.out.println("Il y a " + Files.walk(racine).count() + " fichiers");
