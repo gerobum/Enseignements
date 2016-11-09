@@ -8,9 +8,12 @@ log
 **/bin
 .directory
 # Files for Netbeans
-dist/
-build/
 nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
 # Built application files
 *.apk
