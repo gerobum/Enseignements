@@ -8,7 +8,8 @@ log
 **/bin
 .directory
 # Files for Netbeans
-nbproject/private/
+**/nbproject/private/
+genfiles.properties
 build/
 nbbuild/
 dist/
