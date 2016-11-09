@@ -10,15 +10,6 @@ log
 # Files for Netbeans
 dist/
 build/
-private.properties
-project.properties
-private.xml
-**/dist/
-**/build/
-**/private.properties
-**/private.xml
-build.xml
-genfiles.properties
 nbproject/private/
 
 # Built application files
