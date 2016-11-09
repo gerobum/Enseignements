@@ -19,6 +19,7 @@ private.xml
 **/private.xml
 build.xml
 genfiles.properties
+nbproject/private/
 
 # Built application files
 *.apk
