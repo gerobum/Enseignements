@@ -10,6 +10,7 @@ log
 # Files for Netbeans
 **/nbproject/private/
 genfiles.properties
+private.properties
 build/
 nbbuild/
 dist/
