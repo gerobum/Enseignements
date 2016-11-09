@@ -17,6 +17,8 @@ private.xml
 **/build/
 **/private.properties
 **/private.xml
+build.xml
+genfiles.properties
 
 # Built application files
 *.apk
