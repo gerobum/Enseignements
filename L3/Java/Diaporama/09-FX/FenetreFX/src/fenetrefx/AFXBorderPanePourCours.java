@@ -40,7 +40,6 @@ public class AFXBorderPanePourCours extends Application {
         bottom.setBorder(borderAll);
 
         left = new StackPane(new Label(" Left "));
-        left.setPrefSize(100, 400);
         left.setBorder(borderLR);
 
         right = new StackPane(new Label(" Right "));
