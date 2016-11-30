@@ -18,7 +18,7 @@ import javax.swing.JFileChooser;
  */
 public class Fichiers {
 
-    public final static Random random = new Random();
+    public final static Random RANDOM = new Random();
 
     /*
      * 1. Écrire une méthode pour afficher le chemin absolu de tous les fichiers 
@@ -26,6 +26,14 @@ public class Fichiers {
      */
     public static void afficherTousLesFichiersEtDossier(Path racine) throws IOException {
         Files.walk(racine)
+                .forEach(System.out::println);
+    }
+    /*
+     * Variante du précédent pour n'afficher que le nom
+     */
+    public static void afficherTousLesFichiersEtDossier2(Path racine) throws IOException {
+        Files.walk(racine)
+                .map(p -> p.toFile().getName())
                 .forEach(System.out::println);
     }
 
@@ -201,15 +209,15 @@ public class Fichiers {
     public static void main(String[] args) throws IOException, URISyntaxException {
 
         Path racine;
-        racine = new File("/home/yvan/AutresSauvegardes").toPath();
+        racine = new File("/home/yvan/Dropbox/Administration").toPath();
        
-        JFileChooser jfc = new JFileChooser();
+        /*JFileChooser jfc = new JFileChooser();
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             racine = jfc.getSelectedFile().toPath();
         } else {
             racine = new File(".").toPath();
-        }
+        }*/
         
         
         long td, tf;
@@ -217,6 +225,7 @@ public class Fichiers {
         td = System.currentTimeMillis();
 
         // afficherTousLesFichiersEtDossier(racine);
+        // afficherTousLesFichiersEtDossier2(racine);
         // afficherTousLesDossiers(racine);
         // afficherTousLesDossiersEtFichiersCaches(racine);
         // afficherTousLesFichiersCaches(racine);
@@ -226,7 +235,7 @@ public class Fichiers {
         // System.out.println("Les fichiers cachés occupent " + nombreDOctetsDesFichiersCaches(racine) + " octets à partir de " + racine);
         // afficherTousLesFichiersDifferentsDefMaisDeMemeTailleEtDeMemeNom(racine, new File("/home/yvan/AutresSauvegardes/Travail/Enseignement/2012-2013/M2/ComplementsJava/sujet1.html"));
         // afficherTousLesFichiersRangésParTaille(racine);
-        // afficherTousLesFichiersRangésParTailleEtParNom(racine);
+         afficherTousLesFichiersRangésParTailleEtParNom(racine);
         //System.out.println("Il y a " + tousLesFichiersDeTailleNulle(racine).count() + " fichiers de taille nulle");
         // System.out.println("Il y a " + tousLesDossiersCaches(racine).count() + " dossiers cachés");
         // System.out.println("Il y a " + Files.walk(racine).count() + " fichiers");
