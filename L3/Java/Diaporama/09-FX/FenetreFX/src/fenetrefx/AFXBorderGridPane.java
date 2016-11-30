@@ -114,7 +114,9 @@ public class AFXBorderGridPane extends Application {
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
+
         primaryStage.setTitle("Un GridPane au centre d'un BorderPane");
+
         primaryStage.show();
     }
 
