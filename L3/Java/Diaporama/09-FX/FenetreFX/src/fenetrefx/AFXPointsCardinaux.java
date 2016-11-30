@@ -4,23 +4,16 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javax.sound.sampled.AudioSystem;
 
 /**
  *
@@ -55,16 +48,19 @@ public class AFXPointsCardinaux extends Application {
         left.setOnAction(action);
         right.setOnAction(action);
 
+
         BorderPane pane = new BorderPane();
         pane.setTop(new StackPane(top));
         pane.setCenter(new StackPane(center));
+
         pane.setBottom(new StackPane(bottom));
         pane.setLeft(new StackPane(left));
         pane.setRight(new StackPane(right));
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Cliquez moi");
+
+        primaryStage.setTitle("Cliquez sur un bouton");
         primaryStage.show();
     }
 
