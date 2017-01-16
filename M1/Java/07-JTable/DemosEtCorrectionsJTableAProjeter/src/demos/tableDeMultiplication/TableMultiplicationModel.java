@@ -15,7 +15,7 @@ import javax.swing.table.TableModel;
  * @author yvan
  */
 public class TableMultiplicationModel extends AbstractTableModel {
-  private int nbLignes, nbColonnes;
+  private final int nbLignes, nbColonnes;
 
   public TableMultiplicationModel(int l, int c) {
     nbLignes = l; nbColonnes = c;
@@ -31,6 +31,11 @@ public class TableMultiplicationModel extends AbstractTableModel {
     return nbColonnes;
   }
 
+    @Override
+    public String getColumnName(int column) {
+        return "x" + (column+1);
+    }
+  
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
     return (rowIndex+1)*(columnIndex+1);

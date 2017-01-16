@@ -39,6 +39,6 @@ public class Table extends JFrame {
 
 
     public static void main(String[] args) {
-      new Table(10, 10);
+      new Table(12, 15);
     }
 }

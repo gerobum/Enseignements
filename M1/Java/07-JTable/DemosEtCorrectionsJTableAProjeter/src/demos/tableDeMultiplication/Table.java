@@ -1,5 +1,6 @@
 package demos.tableDeMultiplication;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Vector;
 import javax.swing.JFrame;
