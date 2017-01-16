@@ -21,6 +21,7 @@ public class LancementBoutonsClignotants extends JFrame {
         getContentPane().add(new exercices.boutons.derivation.BoutonClignotant("Bling Bling !!!", new Color(255, 0, 0), new Color(100, 0, 0)), "South");
 
         getContentPane().add(new exercices.boutons.interruption.BoutonClignotantAvecArretEtDepart("Stop and go", Color.YELLOW, Color.YELLOW.darker().darker()));
+        getContentPane().add(new exercices.boutons.inline.BoutonClignotant("Ca pique les yeux !!!"), "South");
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
