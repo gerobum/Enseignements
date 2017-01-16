@@ -1,16 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package demonstration.join;
 
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package demonstration._03_join;
 
 /**
  * Illustre la méthode de synchronisation join(). Le programme principal attend 
  * la fin du thread t avant de continuer.
+ * 
  * @author maillot
  */
 public class TestJoin {
@@ -59,7 +53,7 @@ public class TestJoin {
         Thread t = creation(10);
         t.start();
         // Attendre la fin de thread
-        t.join();
+        //t.join();
         System.out.println("R.I.P ");       
     }
     
