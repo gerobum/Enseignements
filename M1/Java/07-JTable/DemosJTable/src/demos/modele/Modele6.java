@@ -1,48 +1,58 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package demos.modele;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Maillot
  */
-public class Modele6 extends DefaultTableModel {
-    private String[] columnNames = {"Integer", "Boolean", "String"};
-    private Object donnée[][] = {{1, true, "Vrai"}};
-    public Modele6() {
-        setDataVector(donnée, columnNames);
-    }
+public class Modele6 extends AbstractTableModel {
+
+    private final String[] columnNames = {"Integer", "Boolean", "String"};
+    private final Class<?>[] types = {Integer.class, Boolean.class, String.class};
+    private Boolean coche = false;
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        if (column == 1) return true;
-        else return false;
+        return column == 1;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return donnée[0][columnIndex].getClass();
+        return types[columnIndex];
     }
 
     @Override
     public void setValueAt(Object aValue, int row, int column) {
-        super.setValueAt(aValue, row, column);
-        if ((Boolean) aValue) {
-            super.setValueAt(1, row, 0);
-            super.setValueAt("Vrai", row, 2);
-        } else {
-            super.setValueAt(0, row, 0);
-            super.setValueAt("Faux", row, 2);
-        }
+        coche = (Boolean) aValue;
+        fireTableRowsUpdated(row, row);
     }
 
+    @Override
+    public String getColumnName(int column) {
+        return columnNames[column];
+    }
+
+    @Override
+    public int getRowCount() {
+        return 1;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 3;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+                return coche ? 1 : 0;
+            case 2:
+                return coche ? "Vrai" : "Faux";
+            default:
+                return coche;
+        }
+    }
 
 }

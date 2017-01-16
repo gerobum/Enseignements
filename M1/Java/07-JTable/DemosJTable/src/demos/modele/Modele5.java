@@ -1,44 +1,46 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package demos.modele;
 
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Maillot
  */
-public class Modele5 extends DefaultTableModel {
+public class Modele5 extends AbstractTableModel {
 
-    private Object[] columnTypes = {1, 1.0, true, ""};
-    private Vector<Vector> donnee;
+    private final Object[][] data;
+    private final String[] titles;
+    private final Class<?>[] types;
 
-    public Modele5(Vector<Vector> donnee, Vector columnNames, Object[] columnTypes) {
-        this.donnee = donnee;
-        setDataVector(donnee, columnNames);
+    public Modele5(Object[][] data, String[] titles, Class<?>[] types) {
+        this.data = data;
+        this.titles = titles;
+        this.types = types;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return columnTypes[columnIndex].getClass();
+        return types[columnIndex].getClass();
     }
 
     @Override
     public void setValueAt(Object aValue, int row, int column) {
-        super.setValueAt(aValue, row, column);
-        donnee.get(row).set(column, aValue);
-        System.out.println("set " + row + ", " +  column + " : " + aValue);
+        System.out.println("set " + row + ", " + column + " : " + aValue);
     }
 
     @Override
     public Object getValueAt(int row, int column) {
-        System.out.println("get " + row + ", " +  column + " = " + super.getValueAt(row, column));
-        return super.getValueAt(row, column);
+        return data[row][column];
     }
 
+    @Override
+    public int getRowCount() {
+        return data.length;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return titles.length;
+    }
 
 }
