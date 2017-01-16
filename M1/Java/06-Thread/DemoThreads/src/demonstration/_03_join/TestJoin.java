@@ -53,7 +53,7 @@ public class TestJoin {
         Thread t = creation(10);
         t.start();
         // Attendre la fin de thread
-        //t.join();
+        t.join();
         System.out.println("R.I.P ");       
     }
     
