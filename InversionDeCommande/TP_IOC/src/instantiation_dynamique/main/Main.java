@@ -2,7 +2,6 @@ package instantiation_dynamique.main;
 
 import instantiation_dynamique.interfaces.IA;
 import instantiation_dynamique.interfaces.IB;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 /**
