@@ -11,6 +11,7 @@ log
 **/nbproject/private/
 genfiles.properties
 private.properties
+project.properties
 build/
 nbbuild/
 dist/
