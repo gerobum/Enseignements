@@ -1,21 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package geometrie.non_mutable;
 
 public class Triangle {
-  private Point[] point = new Point[3];
 
-  public Triangle(Point a, Point b, Point c) { 
-    point[0] = a;
-    point[1] = b;
-    point[2] = c;
-  }
-  public Point getPoint(int i) {
-    return point[i%point.length];
-  }
-  public void setPoint(int i, Point p) {
-    point[i%point.length] = p;
-  }
+    private final Point[] POINT = new Point[3];
+
+    public Triangle(Point a, Point b, Point c) {
+        POINT[0] = a;
+        POINT[1] = b;
+        POINT[2] = c;
+    }
+
+    public Point getPoint(int i) {
+        return POINT[i];
+    }
+
+    public void setPoint(int i, Point p) {
+        POINT[i] = p;
+    }
+
+    public void translate(double dx, double dy) {
+        for (int i = 0; i < POINT.length; ++i) {
+            POINT[i] = POINT[i].translate(dx, dy);
+        }
+    }
 }
