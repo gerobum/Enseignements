@@ -13,12 +13,12 @@ public class Premier {
     /*
      Cette classe possède deux attributs de classe, privés et constants qui sont des tableaux : */
 
-    private static final boolean[] est_premier = new boolean[Short.MAX_VALUE];
+    private static final boolean[] EST_PREMIER = new boolean[Short.MAX_VALUE];
     /*
      Ce tableau sera utilisé pour savoir si un nombre est premier. Le booléen à l’indice p dans
      est_premier est vrai si et seulement si p est premier. Par exemple est_premier[12] est false
      alors que est_premier[97] est true.*/
-    private static final short[] premier;
+    private static final short[] PREMIER;
     /* Ce tableau contient les premiers nombres premiers inférieurs à Short.MAX_VALUE.
      */
 
@@ -27,30 +27,30 @@ public class Premier {
     // C'est aussi possible en appliquant l'algorithme du crible d'Eratostene.
     // Mais il faut le faire dans un bloc d'initialisation statique
     static {
-        for (int i = 2; i < est_premier.length; ++i) {
-            est_premier[i] = true;
+        for (int i = 2; i < EST_PREMIER.length; ++i) {
+            EST_PREMIER[i] = true;
         }
         {
             int i = 2;
 
-            while (i * i < est_premier.length) {
-                for (int j = i * i; j < est_premier.length; j += i) {
-                    est_premier[j] = false;
+            while (i * i < EST_PREMIER.length) {
+                for (int j = i * i; j < EST_PREMIER.length; j += i) {
+                    EST_PREMIER[j] = false;
                 }
                 i++;
             }
         }
         int nbpremiers = 0;
-        for (int i = 0; i < est_premier.length; ++i) {
-            if (est_premier[i]) {
+        for (int i = 0; i < EST_PREMIER.length; ++i) {
+            if (EST_PREMIER[i]) {
                 nbpremiers++;
             }
         }
-        premier = new short[nbpremiers];
+        PREMIER = new short[nbpremiers];
         int k = 0;
-        for (short i = 0; i < est_premier.length; ++i) {
-            if (est_premier[i]) {
-                premier[k++] = i;
+        for (short i = 0; i < EST_PREMIER.length; ++i) {
+            if (EST_PREMIER[i]) {
+                PREMIER[k++] = i;
             }
         }
     }
@@ -59,15 +59,15 @@ public class Premier {
         if (p < 0) {
             return false;
         }
-        return est_premier[p];
+        return EST_PREMIER[p];
     }
 
     public static int premier(short p) {
-        return premier[p];
+        return PREMIER[p];
     }
 
     public static int nbPremiers() {
-        return premier.length;
+        return PREMIER.length;
     }
 
 }

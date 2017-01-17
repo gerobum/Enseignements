@@ -18,12 +18,11 @@ package exo2;
 public class PourVoirLeRM {
 
     // Pour compter le nombre d'instances créées, un attribut de classe est nécessaire
-
     private static int nbInstances;
     // Pour identifier une instance, un attribut d'instance est nécessaire
     private final int numero;
     // Pour alourdir les objets, plus grand sera le tableau et plus précose sera la destruction
-    private final double[] lest = new double[1000];
+    private final double[] lest = new double[10000];
 
     public PourVoirLeRM() {
         // Incrémentation de nbInstances puis affectation de numero
@@ -37,7 +36,7 @@ public class PourVoirLeRM {
     protected void finalize() throws Throwable {
         System.err.println("Destruction de l'instance numéro " + numero);
         // Pour fermer l'application à la première destruction
-        System.exit(numero);
+        System.exit(0);
     }
 
 }

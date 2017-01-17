@@ -31,15 +31,15 @@ public final class Point {
         this(0, 0);
     }
 
-    public Point(double roux, double toux, boolean polaire) {
+    public Point(double roux, double touy, boolean polaire) {
         if (polaire) {
             rho = roux;
-            theta = toux;
+            theta = touy;
             x = rho * cos(theta);
             y = rho * sin(theta);
         } else {
             x = roux;
-            y = toux;
+            y = touy;
             rho = sqrt(x * x + y * y);
             theta = atan2(y, x);
         }

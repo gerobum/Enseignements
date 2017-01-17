@@ -28,8 +28,8 @@ public class TestPolygone {
         
         System.out.println("-----------------");
         
-        carre.translater(20, 20);
-        triangle.translater(10000, 10000);
+        carre.translater(10, 10);
+        triangle.translater(100, 100);
         
         
         carre.afficher();

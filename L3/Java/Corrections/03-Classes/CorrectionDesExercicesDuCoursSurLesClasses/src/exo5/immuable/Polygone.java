@@ -5,8 +5,6 @@
 4. Une méthode pour lui appliquer une translation.
 5. Une méthode pour lui appliquer une rotation par rapport à l’origine.
 6. Une méthode pour l’afficher sur la sortie standard.
-
-
  */
 package exo5.immuable;
 
