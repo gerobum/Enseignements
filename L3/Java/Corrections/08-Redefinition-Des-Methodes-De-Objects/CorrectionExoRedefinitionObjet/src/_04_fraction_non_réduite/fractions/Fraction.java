@@ -8,6 +8,28 @@ public final class Fraction implements Cloneable {
 
     private int numérateur;
     private int dénominateur;
+    
+    public Fraction(int numérateur, int dénominateur) throws DénominateurNul {
+        if (dénominateur == 0) {
+            throw new DénominateurNul();
+        }
+        if (dénominateur < 0) {
+            this.numérateur = -numérateur;
+            this.dénominateur = -dénominateur;
+        } else {
+            this.numérateur = numérateur;
+            this.dénominateur = dénominateur;
+        }
+    }
+
+    public Fraction(int numérateur) {
+        this.numérateur = numérateur;
+        this.dénominateur = 1;
+    }
+
+    public Fraction() {
+        this(1);
+    }
 
     public int getNumérateur() {
         return numérateur;
@@ -65,7 +87,7 @@ public final class Fraction implements Cloneable {
         try {
             return (Fraction) super.clone();
         } catch (CloneNotSupportedException ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }
 
@@ -103,33 +125,11 @@ public final class Fraction implements Cloneable {
      return (a * b) / pgcd(a, b);
      } */
 
-    public Fraction(int numérateur, int dénominateur) throws DénominateurNul {
-        if (dénominateur == 0) {
-            throw new DénominateurNul();
-        }
-        if (dénominateur < 0) {
-            this.numérateur = -numérateur;
-            this.dénominateur = -dénominateur;
-        } else {
-            this.numérateur = numérateur;
-            this.dénominateur = dénominateur;
-        }
-    }
-
-    public Fraction(int numérateur) {
-        this.numérateur = numérateur;
-        this.dénominateur = 1;
-    }
-
-    public Fraction() {
-        this(1);
-    }
-
     public Fraction opposé() {
         try {
             return new Fraction(-numérateur, dénominateur);
         } catch (DénominateurNul ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }
 

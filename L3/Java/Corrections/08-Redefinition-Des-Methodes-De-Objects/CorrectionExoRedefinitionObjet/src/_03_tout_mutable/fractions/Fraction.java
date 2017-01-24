@@ -45,7 +45,7 @@ public final class Fraction implements Cloneable {
         try { 
             return (Fraction) super.clone();
         } catch (CloneNotSupportedException ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }    
 
@@ -83,7 +83,6 @@ public final class Fraction implements Cloneable {
         return this.numérateur == other.numérateur && this.dénominateur == other.dénominateur;
     }
 
-    // #### Le ne faut pas redéfinir clone() car la classe est immuable
     /* ####  Plus besoin de cette méthode, toString est là pour ça
      public void affiche() {
      if (numérateur == 0 || dénominateur == 1) {
@@ -134,7 +133,7 @@ public final class Fraction implements Cloneable {
         try {
             return new Fraction(-numérateur, dénominateur);
         } catch (DénominateurNul ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }
 

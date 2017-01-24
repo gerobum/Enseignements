@@ -24,7 +24,7 @@ public class Test {
             } while (den == 0);
             return new Fraction(10 - random.nextInt(21), den);
         } catch (DénominateurNul ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }
 

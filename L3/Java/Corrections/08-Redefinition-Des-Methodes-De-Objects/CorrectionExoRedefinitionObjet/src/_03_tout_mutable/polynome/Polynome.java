@@ -26,7 +26,7 @@ public class Polynome implements Cloneable {
             np.a = a.clone();
             return np;
         } catch (CloneNotSupportedException ex) {
-            throw new InternalError();
+            throw new IllegalStateException();
         }
     }
 
