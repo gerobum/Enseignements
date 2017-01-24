@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mediateur;
 
 import java.awt.Font;
-import java.util.Scanner;
 import javax.swing.*;
 
 /**
@@ -14,11 +9,11 @@ import javax.swing.*;
  */
 public class Mediateur {
 
-    private JLabel fonteExemple;
-    private JComboBox comboBoxFamille;
-    private JRadioButton normal, bold, demibold, roman, italique, oblique;
-    private JSpinner spinnerSize;
-    private JCheckBox condense;
+    private final JLabel fonteExemple;
+    private final JComboBox comboBoxFamille;
+    private final JRadioButton normal, bold, demibold, roman, italique, oblique;
+    private final JSpinner spinnerSize;
+    private final JCheckBox condense;
 
     public Mediateur(JLabel fonteExemple, JComboBox comboBoxFamille, JRadioButton normal, JRadioButton bold, JRadioButton demibold, JRadioButton roman, JRadioButton italique, JRadioButton oblique, JSpinner spinnerSize, JCheckBox condense) {
         this.fonteExemple = fonteExemple;

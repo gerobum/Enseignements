@@ -5,8 +5,6 @@
 package mediateur;
 
 import java.util.GregorianCalendar;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,19 +20,19 @@ import javax.swing.JTextField;
  */
 public class MediateurFomulaire {
 
-    private JFrame frame;
-    private JButton boutonOK;
-    private JButton boutonAnnuler;
-    private ButtonGroup groupeGenre;
-    private JRadioButton radioButtonMasculin;
-    private JRadioButton radioButtonFeminin;
-    private JLabel labelNomDeJeuneFille;
-    private JComboBox listCivilite;
-    private JTextField textFieldAge;
-    private JTextField textFieldDateDeNaissance;
-    private JTextField textFieldNom;
-    private JTextField textFieldNomDeJeuneFille;
-    private JTextField textFieldPrenom;
+    private final JFrame frame;
+    private final JButton boutonOK;
+    private final JButton boutonAnnuler;
+    private final ButtonGroup groupeGenre;
+    private final JRadioButton radioButtonMasculin;
+    private final JRadioButton radioButtonFeminin;
+    private final JLabel labelNomDeJeuneFille;
+    private final JComboBox listCivilite;
+    private final JTextField textFieldAge;
+    private final JTextField textFieldDateDeNaissance;
+    private final JTextField textFieldNom;
+    private final JTextField textFieldNomDeJeuneFille;
+    private final JTextField textFieldPrenom;
     private GregorianCalendar gc;
 
     public MediateurFomulaire(
