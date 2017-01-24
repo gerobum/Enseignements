@@ -1,4 +1,3 @@
-
 package exo2;
 
 import java.awt.event.ActionEvent;
@@ -11,23 +10,37 @@ import javax.swing.JFrame;
  * @author yvan
  */
 public class BoutonVolupteux extends JFrame {
+
     private JButton bouton;
-    
+
     public BoutonVolupteux() {
+        miseEnPlaceDesComposants();
+        miseEnPlacesDesEcouteurs();
+        miseEnPlaceUI();
+
+    }
+
+    private void miseEnPlaceDesComposants() {
         bouton = new JButton("Cliquez moi !");
         getContentPane().add(bouton);
-        bouton.addActionListener(new ActionListener() {
+    }
 
+    private void miseEnPlacesDesEcouteurs() {
+        bouton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bouton.setText(bouton.getText()+" Encore !");
+                bouton.setText(bouton.getText() + " Encore !");
                 pack();
             }
         });
+    }
+
+    private void miseEnPlaceUI() {
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
+
     public static void main(String[] args) {
         new BoutonVolupteux();
     }

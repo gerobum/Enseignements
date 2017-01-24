@@ -1,4 +1,3 @@
-
 package exo1;
 
 import java.awt.Dimension;
@@ -8,35 +7,27 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-/**
- *
- * @author yvan
- */
 public class PointsCardinaux extends JFrame {
+
     private JButton nord, sud, est, ouest;
     private JLabel centre;
+
     public PointsCardinaux() {
         super("Les points cardinaux");
-        
-        créationDesComposants();
+
         miseEnPlaceDesComposants();
         miseEnPlacesDesEcouteurs();
-        
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        pack();
+        miseEnPlaceUI();
+
     }
 
-    private void créationDesComposants() {
+    private void miseEnPlaceDesComposants() {
         nord = new JButton("Nord");
         sud = new JButton("Sud");
         est = new JButton("Est");
         ouest = new JButton("Ouest");
         centre = new JLabel("Centre", JLabel.CENTER);
         centre.setPreferredSize(new Dimension(300, 300));
-    }
-
-    private void miseEnPlaceDesComposants() {
         getContentPane().add(nord, "North");
         getContentPane().add(sud, "South");
         getContentPane().add(est, "East");
@@ -56,8 +47,16 @@ public class PointsCardinaux extends JFrame {
         ouest.addActionListener(clic);
         sud.addActionListener(clic);
     }
-    
+
+    private void miseEnPlaceUI() {
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        pack();
+    }
+
     public static void main(String[] args) {
         new PointsCardinaux();
     }
+
 }
