@@ -59,7 +59,7 @@ public final class Fraction {
         try {
             return new Fraction(-numérateur, dénominateur);
         } catch (DénominateurNul ex) {
-            throw new SituationImpossible();
+            throw new SituationImpossible();// IllegalStateException
         }
     }
     
