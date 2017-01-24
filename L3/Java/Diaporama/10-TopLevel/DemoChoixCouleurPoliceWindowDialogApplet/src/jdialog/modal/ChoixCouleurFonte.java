@@ -15,7 +15,7 @@ import javax.swing.*;
  */
 public class ChoixCouleurFonte extends JFrame {
 
-    private JLabel message = new JLabel("<html>Vous avez demandé la police ?<br><br>Veuillez patienter</html>", JLabel.CENTER);
+    private final JLabel message = new JLabel("<html>Vous avez demandé la police ?<br><br>Veuillez patienter</html>", JLabel.CENTER);
     private ChoixDeCouleurs dialogueCouleur;
     private ChoixDeFontes dialogueFonte;
     private JMenuItem itemCouleur;
@@ -23,14 +23,10 @@ public class ChoixCouleurFonte extends JFrame {
 
     public ChoixCouleurFonte() {
         super("Choix de la couleur et de la fonte");
-        dialogueCouleur = new ChoixDeCouleurs();
-        dialogueFonte = new ChoixDeFontes();
         miseEnPlaceDuMenu();
-        miseEnPage();
+        miseEnPlaceDesComposants();
         miseEnPlaceDesEcouteurs();
-        setVisible(true);
-        pack();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        miseEnPlaceUI();
     }
 
     private void miseEnPlaceDuMenu() {
@@ -42,15 +38,16 @@ public class ChoixCouleurFonte extends JFrame {
         getJMenuBar().getMenu(0).add(itemPolice);
     }
 
-    private void miseEnPage() {
+    private void miseEnPlaceDesComposants() {
         getContentPane().add(message);
         setPreferredSize(new Dimension(324, 200));
 
+        dialogueCouleur = new ChoixDeCouleurs(getContentPane().getBackground());
+        dialogueFonte = new ChoixDeFontes(message.getFont());
     }
 
     private void miseEnPlaceDesEcouteurs() {
         itemCouleur.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("avant");
@@ -65,16 +62,20 @@ public class ChoixCouleurFonte extends JFrame {
             }
         });
         itemPolice.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialogueFonte.setVisible(true);
                 message.setText("<html>Vous avez demandé la police ?<br><br>Veuillez patienter</html>");
                 message.setFont(dialogueFonte.policeChoisie());
-                ChoixCouleurFonte.this.invalidate();
                 pack();
             }
         });
+    }
+
+    private void miseEnPlaceUI() {
+        setVisible(true);
+        pack();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**

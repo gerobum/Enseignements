@@ -1,7 +1,6 @@
 /*
  * ChoixDeCouleurs.java
  */
-
 package japplet;
 
 import java.awt.Color;
@@ -14,27 +13,21 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class ChoixDeCouleurs extends JApplet {
+
     private JPanel centre, sud;
     private JSlider rouge, vert, bleu;
-    
+
     //public ChoixDeCouleurs() {
     @Override
     public void init() {
         //super("Choisir une couleur");
-        miseEnPage();
+        miseEnPlaceDesComposants();
         miseEnPlaceDesEcouteurs();
-        
-        
-        setVisible(true);
-        //pack();
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);  
-        
+        miseEnPlaceUI();
     }
 
-    
-    
     // Organiser les composants 
-    private void miseEnPage() {
+    private void miseEnPlaceDesComposants() {
 
         centre = new JPanel();
 
@@ -45,13 +38,12 @@ public class ChoixDeCouleurs extends JApplet {
         sud = new JPanel();
 
         rouge = new JSlider(0, 255, 0);
-        vert = new JSlider(0, 225, 0);
+        vert = new JSlider(0, 255, 0);
         bleu = new JSlider(0, 255, 0);
 
         rouge.setBackground(Color.RED);
         vert.setBackground(Color.GREEN);
         bleu.setBackground(Color.BLUE);
-        
 
         getContentPane().add(centre, "Center");
         getContentPane().add(sud, "South");
@@ -60,7 +52,7 @@ public class ChoixDeCouleurs extends JApplet {
 
         sud.add(rouge);
         sud.add(vert);
-        sud.add(bleu);  
+        sud.add(bleu);
     }
 
     private void miseEnPlaceDesEcouteurs() {
@@ -68,17 +60,21 @@ public class ChoixDeCouleurs extends JApplet {
             @Override
             public void stateChanged(ChangeEvent e) {
                 centre.setBackground(new Color(
-                        ChoixDeCouleurs.this.rouge.getValue(), 
-                        ChoixDeCouleurs.this.vert.getValue(), 
-                        ChoixDeCouleurs.this.bleu.getValue()));            
+                        ChoixDeCouleurs.this.rouge.getValue(),
+                        ChoixDeCouleurs.this.vert.getValue(),
+                        ChoixDeCouleurs.this.bleu.getValue()));
             }
         };
-        
+
         rouge.addChangeListener(action);
         vert.addChangeListener(action);
-        bleu.addChangeListener(action);       
+        bleu.addChangeListener(action);
     }
-    
+
+    private void miseEnPlaceUI() {
+        //setVisible(true);
+        //pack();
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);  
+    }
+
 }
-
-

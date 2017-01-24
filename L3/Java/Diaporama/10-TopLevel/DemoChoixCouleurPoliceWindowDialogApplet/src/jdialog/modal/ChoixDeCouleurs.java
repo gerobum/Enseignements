@@ -22,38 +22,28 @@ public class ChoixDeCouleurs extends JDialog {
         return couleurChoisie;
     }
 
-    public ChoixDeCouleurs() {
-        miseEnPage();
+    public ChoixDeCouleurs(Color color) {
+        couleurChoisie = color;
+        miseEnPlaceDesComposants();
         miseEnPlaceDesEcouteurs();
-
-        //setVisible(true);
-        // setModal(true); Obsolète
-        setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-        pack();
-
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
-
+        miseEnPlaceUI();
     }
 
-    private void miseEnPage() {
+    private void miseEnPlaceDesComposants() {
 
         centre = new JPanel();
-
-        centre.setBackground(Color.BLACK);
-
+        centre.setBackground(couleurChoisie);
         centre.setPreferredSize(new Dimension(200, 200));
 
         sud = new JPanel();
 
-        rouge = new JSlider(0, 255, 0);
-        vert = new JSlider(0, 225, 0);
-        bleu = new JSlider(0, 255, 0);
+        rouge = new JSlider(0, 255, couleurChoisie.getRed());
+        vert = new JSlider(0, 255, couleurChoisie.getGreen());
+        bleu = new JSlider(0, 255, couleurChoisie.getBlue());
 
         rouge.setBackground(Color.RED);
         vert.setBackground(Color.GREEN);
         bleu.setBackground(Color.BLUE);
-
-        couleurChoisie = new Color(0, 0, 0);
 
         getContentPane().add(centre, "Center");
         getContentPane().add(sud, "South");
@@ -78,6 +68,15 @@ public class ChoixDeCouleurs extends JDialog {
         rouge.addChangeListener(action);
         vert.addChangeListener(action);
         bleu.addChangeListener(action);
+    }
+
+    private void miseEnPlaceUI() {
+        //setVisible(true);
+        //setModal(true); Obsolète
+        setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
+        pack();
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
 }

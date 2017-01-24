@@ -1,12 +1,3 @@
-/*
- * ChoixDeFontes.java
- *
- * Created on 4 f�vrier 2008, 08:49
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package jdialog.nonmodal;
 
 import java.awt.Color;
@@ -17,58 +8,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- *
- * @author Yvan
- */
 public class ChoixDeFontes extends JDialog {
- 
-    private JPanel sud = new JPanel();
-    private JPanel est = new JPanel();
-    private JLabel message;
 
-    private JComboBox listePolices = new JComboBox(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-    private JCheckBox gras = new JCheckBox("Gras");
-    private JCheckBox italique = new JCheckBox("Italique");
-    private JTextField taille = new JTextField("20"); 
-    
-    
+    private JPanel sud;
+    private JPanel est;
+    private final JLabel message;
+
+    private JComboBox listePolices;
+    private JCheckBox gras;
+    private JCheckBox italique;
+    private JTextField taille;
+
     public ChoixDeFontes(JLabel message) {
         this.message = message;
-        
-        miseEnPage();
-        placerLesEcouteurs(); 
-                
-        pack();
-        
-        setDefaultCloseOperation(HIDE_ON_CLOSE); 
+
+        miseEnPlaceDesComposants();
+        miseEnPlaceDesEcouteurs();
+        miseEnPlaceUI();
     }
 
-    
-    private void miseEnPage() {
-        
-        listePolices.setSelectedItem(0);
+    private void miseEnPlaceDesComposants() {
+        sud = new JPanel();
+        est = new JPanel();
+        listePolices = new JComboBox(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+
+        listePolices.setSelectedItem(message.getFont().getFamily());
         sud.add(listePolices);
-        
-        
-        
+
+        gras = new JCheckBox("Gras", message.getFont().isBold());
+        italique = new JCheckBox("Italique", message.getFont().isItalic());
+        taille = new JTextField(message.getFont().getSize()+"");
+
         est.setLayout(new GridLayout(0, 1));
         est.add(gras);
         est.add(italique);
         est.add(new JLabel("Taille", JLabel.CENTER));
         est.add(taille);
-        
-        getContentPane().setBackground(Color.WHITE);
-        
-        getContentPane().add(est, "Center");
-        
-        String nomFonte = (String)listePolices.getSelectedObjects()[0];
-        
-        Font fonte = new Font(nomFonte, Font.PLAIN, 20);
 
-        getContentPane().add(sud, "South");       
-    }    
-    private void placerLesEcouteurs() {
+        getContentPane().setBackground(Color.WHITE);
+
+        getContentPane().add(est, "Center");
+        getContentPane().add(sud, "South");
+    }
+
+    private void miseEnPlaceDesEcouteurs() {
         ActionListener action = new ActionListener() {
 
             @Override
@@ -77,7 +60,7 @@ public class ChoixDeFontes extends JDialog {
                 int taille = 20;
                 try {
                     taille = Integer.parseInt(ChoixDeFontes.this.taille.getText());
-                } catch(NumberFormatException n) {
+                } catch (NumberFormatException n) {
                     ChoixDeFontes.this.taille.setText("20");
                 }
                 if (taille < 1) {
@@ -87,14 +70,14 @@ public class ChoixDeFontes extends JDialog {
                     taille = 200;
                     ChoixDeFontes.this.taille.setText("200");
                 }
-                    
-                
+
                 int style = Font.PLAIN;
                 if (ChoixDeFontes.this.gras.isSelected()) {
                     style = Font.BOLD;
                 }
-                if (ChoixDeFontes.this.italique.isSelected())
+                if (ChoixDeFontes.this.italique.isSelected()) {
                     style = style | Font.ITALIC;
+                }
 
                 message.setFont(new Font(nomFonte, style, taille));
             }
@@ -103,9 +86,13 @@ public class ChoixDeFontes extends JDialog {
         listePolices.addActionListener(action);
         gras.addActionListener(action);
         italique.addActionListener(action);
-        
+
         taille.addActionListener(action);
     }
 
-    
+    private void miseEnPlaceUI() {
+        pack();
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
+    }
+
 }

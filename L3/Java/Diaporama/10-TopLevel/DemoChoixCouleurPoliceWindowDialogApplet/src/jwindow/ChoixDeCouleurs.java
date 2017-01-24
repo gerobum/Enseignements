@@ -1,12 +1,3 @@
-/*
- * ChoixDeCouleurs.java
- *
- * Created on 3 février 2008, 21:51
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package jwindow;
 
 import java.awt.Color;
@@ -19,30 +10,25 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * La même chose que la classe ChoixDeCouleurs du paquetage jframe, mais cette 
+ * La même chose que la classe ChoixDeCouleurs du paquetage jframe, mais cette
  * fois à l'intérieur d'un JWindow plutôt qu'un JFrame
  */
 public class ChoixDeCouleurs extends JWindow {
+
     private JPanel centre, sud;
     private JSlider rouge, vert, bleu;
-    
+
     public ChoixDeCouleurs() {
         // Il n'y a pas de titre dans un JWindow donc impossible de conserver ceci :
         // super("Choisir une couleur");
 
-        miseEnPage();
+        miseEnPlaceDesComposants();
         miseEnPlaceDesEcouteurs();
-        
-        
-        setVisible(true);
-
-        pack();
-        // Il n'y a pas non plus de bouton pour quitter la fenêtre
-        // setDefaultCloseOperation(EXIT_ON_CLOSE);          
-        
+        miseEnPlaceUI();
     }
+
     // Organiser les composants 
-    private void miseEnPage() {
+    private void miseEnPlaceDesComposants() {
         // Création du panneau qui montre la couleur
         centre = new JPanel();
         // Au départ les sliders seront les trois à zéro. 
@@ -54,13 +40,13 @@ public class ChoixDeCouleurs extends JWindow {
         sud = new JPanel();
         // Création de trois sliders, variant de 0 à 255 et dont le curseur est positonné à 0
         rouge = new JSlider(0, 255, 0);
-        vert = new JSlider(0, 225, 0);
+        vert = new JSlider(0, 255, 0);
         bleu = new JSlider(0, 255, 0);
         // Modifiaction de leur couleur de fond en correspondance avec les composantes qu'ils représentent
         rouge.setBackground(Color.RED);
         vert.setBackground(Color.GREEN);
         bleu.setBackground(Color.BLUE);
-        
+
         // Placement des panneaux 
         getContentPane().add(centre, "Center");
         getContentPane().add(sud, "South");
@@ -69,8 +55,9 @@ public class ChoixDeCouleurs extends JWindow {
         // Placement des sliders dans le panneau "sud"
         sud.add(rouge);
         sud.add(vert);
-        sud.add(bleu);  
+        sud.add(bleu);
     }
+
     // Rendre les sliders sensibles aux événements provoquées par le déplacement des curseurs des sliders.
     private void miseEnPlaceDesEcouteurs() {
         // Déclaration d'une instance de ChangeListener
@@ -85,21 +72,25 @@ public class ChoixDeCouleurs extends JWindow {
                 centre.setBackground(new Color(
                         // Remarquez ici la syntaxe ChoixDeCouleurs.this qui permet d'atteindre
                         // l'objet dans lequel celui-ci est imbriqué. 
-                        ChoixDeCouleurs.this.rouge.getValue(), 
-                        ChoixDeCouleurs.this.vert.getValue(), 
-                        ChoixDeCouleurs.this.bleu.getValue()));            
+                        ChoixDeCouleurs.this.rouge.getValue(),
+                        ChoixDeCouleurs.this.vert.getValue(),
+                        ChoixDeCouleurs.this.bleu.getValue()));
             }
         };
-        
+
         rouge.addChangeListener(action);
         vert.addChangeListener(action);
-        bleu.addChangeListener(action);       
+        bleu.addChangeListener(action);
     }
-    
+
+    private void miseEnPlaceUI() {
+        setVisible(true);
+        pack();
+        // Il n'y a pas non plus de bouton pour quitter la fenêtre
+        // setDefaultCloseOperation(EXIT_ON_CLOSE);          
+    }
+
     public static void main(String[] args) {
         new ChoixDeCouleurs();
     }
-    
 }
-
-

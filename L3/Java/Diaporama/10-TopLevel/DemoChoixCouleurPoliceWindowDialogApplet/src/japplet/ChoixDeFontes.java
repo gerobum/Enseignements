@@ -15,23 +15,23 @@ import javax.swing.*;
  * @author Yvan
  */
 public class ChoixDeFontes extends JApplet { 
-    private JLabel centre = new JLabel();
-    private JPanel sud = new JPanel();
-    private JPanel est = new JPanel();
+    private final JLabel centre = new JLabel();
+    private final JPanel sud = new JPanel();
+    private final JPanel est = new JPanel();
 
-    private JComboBox listePolices = new JComboBox(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-    private JCheckBox gras = new JCheckBox("Gras");
-    private JCheckBox italique = new JCheckBox("Italique");
-    private JTextField taille = new JTextField("20");
+    private final JComboBox listePolices = new JComboBox(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+    private final JCheckBox gras = new JCheckBox("Gras");
+    private final JCheckBox italique = new JCheckBox("Italique");
+    private final JTextField taille = new JTextField("20");
     
 
     public ChoixDeFontes() {
         //super("Choisir une police de caractères");
-        miseEnPage();
-        placerLesEcouteurs();                
+        miseEnPlaceDesComposants();
+        miseEnPlaceDesEcouteurs();                
     }
 
-    private void miseEnPage() {
+    private void miseEnPlaceDesComposants() {
 
         listePolices.setSelectedItem(0);
         sud.add(listePolices);
@@ -54,12 +54,9 @@ public class ChoixDeFontes extends JApplet {
         centre.setFont(fonte);
         centre.setPreferredSize(new Dimension(getFontMetrics(fonte).stringWidth(nomFonte), getFontMetrics(fonte).getHeight()));
         getContentPane().add(centre, "Center");
-        getContentPane().add(sud, "South");
-        setVisible(true);
-        //pack();
-        //setDefaultCloseOperation(EXIT_ON_CLOSE);        
+        getContentPane().add(sud, "South");      
     }    
-    private void placerLesEcouteurs() {
+    private void miseEnPlaceDesEcouteurs() {
         ActionListener action = new ActionListener() {
 
             @Override
@@ -92,8 +89,7 @@ public class ChoixDeFontes extends JApplet {
                 centre.setFont(fonte)    ;
                 centre.setPreferredSize(new Dimension(metrique.stringWidth(nomFonte), metrique.getHeight()));
                 centre.setText(nomFonte);
-                //pack();
-                
+                //pack();                
             }
         };
 
