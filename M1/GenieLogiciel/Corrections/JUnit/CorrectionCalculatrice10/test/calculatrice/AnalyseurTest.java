@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package calculatrice;
 
 import java.util.Random;
@@ -18,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class AnalyseurTest {
 
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -37,7 +34,7 @@ public class AnalyseurTest {
     }
 
     private static String genererUneExpressionValide(int pmax, int nmax, int nemax) {
-        int n = random.nextInt(pmax);
+        int n = RANDOM.nextInt(pmax);
         StringBuilder sb = new StringBuilder();
         sb.append(genererUneExpressionSansParentheseValide(nmax, nemax));
 
@@ -51,7 +48,7 @@ public class AnalyseurTest {
         }
 
         StringBuilder sx = new StringBuilder();
-        if (random.nextBoolean()) {
+        if (RANDOM.nextBoolean()) {
             sx.append('(').append(genererDesEspaces(1));
             sx.append(sb);
             sx.append(genererDesEspaces(1)).append(')');
@@ -64,15 +61,15 @@ public class AnalyseurTest {
 
     private static String genererUnOperateur() {
         StringBuilder sb = new StringBuilder();
-        if (random.nextBoolean()) {
-            if (random.nextBoolean()) {
+        if (RANDOM.nextBoolean()) {
+            if (RANDOM.nextBoolean()) {
                 sb.append('+');
             } else {
                 sb.append('-');
             }
         } else {
 
-            if (random.nextBoolean()) {
+            if (RANDOM.nextBoolean()) {
                 sb.append('*');
             } else {
                 sb.append('/');
@@ -82,7 +79,7 @@ public class AnalyseurTest {
     }
 
     private static String genererUneParenthese() {
-        if (random.nextBoolean()) {
+        if (RANDOM.nextBoolean()) {
             return "(";
         } else {
             return ")";
@@ -92,7 +89,7 @@ public class AnalyseurTest {
     private static String genererUneExpressionInvalide() {
         StringBuilder sb = new StringBuilder(genererUneExpressionValide(2, 4, 0));
 
-        int x = random.nextInt(sb.length() + 1);
+        int x = RANDOM.nextInt(sb.length() + 1);
 
         return sb.insert(x, genererUneParenthese()).toString();
     }
@@ -102,7 +99,7 @@ public class AnalyseurTest {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-        int n = random.nextInt(nmax);
+        int n = RANDOM.nextInt(nmax);
         for (int j = 0; j < n; j++) {
             sb.append(' ');
         }
@@ -110,7 +107,7 @@ public class AnalyseurTest {
     }
 
     private static String genererUneExpressionSansParentheseValide(int nmax, int nemax) {
-        int n = random.nextInt(5);
+        int n = RANDOM.nextInt(5);
         StringBuilder sb = new StringBuilder();
         sb.append(genererUnNombreAVirguleValide(nmax));
 
@@ -151,8 +148,8 @@ public class AnalyseurTest {
     private static String genererUnNombreAVirguleInvalide(int nmax) {
         StringBuilder sb = new StringBuilder();
         do {
-            if (random.nextBoolean()) {
-                int x = random.nextInt(3);
+            if (RANDOM.nextBoolean()) {
+                int x = RANDOM.nextInt(3);
                 if (x == 0) {
                     sb.append('+');
                 } else if (x == 1) {
@@ -163,12 +160,12 @@ public class AnalyseurTest {
 
             char c;
             do {
-                c = (char) random.nextInt();
+                c = (char) RANDOM.nextInt();
             } while (c == ',' || c == '0' || c == '1' || c == '2' || c == '3'
                     || c == '4' || c == '5' || c == '6' || c == '7'
                     || c == '8' || c == '9');
             sb.append(c);
-            if (random.nextBoolean()) {
+            if (RANDOM.nextBoolean()) {
                 sb.append(genererUnNaturelInvalide(nmax / 2));
             }
         } while ("".equals(sb.toString()));
@@ -178,8 +175,8 @@ public class AnalyseurTest {
     private static String genererUnNombreAVirguleValide(int nmax) {
         StringBuilder sb = new StringBuilder();
         do {
-            if (random.nextBoolean()) {
-                int x = random.nextInt(3);
+            if (RANDOM.nextBoolean()) {
+                int x = RANDOM.nextInt(3);
                 if (x == 0) {
                     sb.append('+');
                 } else if (x == 1) {
@@ -187,10 +184,10 @@ public class AnalyseurTest {
                 }
                 sb.append(genererUnNaturelValide(nmax / 2));
             }
-            if (random.nextBoolean()) {
+            if (RANDOM.nextBoolean()) {
                 sb.append(',');
             }
-            if (random.nextBoolean()) {
+            if (RANDOM.nextBoolean()) {
                 sb.append(genererUnNaturelValide(nmax / 2));
             }
         } while ("".equals(sb.toString()));
@@ -198,29 +195,29 @@ public class AnalyseurTest {
     }
 
     private static String genererUnNaturelValide(int nmax) {
-        int n = random.nextInt(nmax) + 1;
+        int n = RANDOM.nextInt(nmax) + 1;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            sb.append((char) (random.nextInt(10) + '0'));
+            sb.append((char) (RANDOM.nextInt(10) + '0'));
         }
         return sb.toString();
     }
 
     private static String genererUnNaturelInvalide(int nmax) {
-        int n1 = random.nextInt(nmax) / 2 + 1;
-        int n2 = random.nextInt(nmax) / 2 + 1;
+        int n1 = RANDOM.nextInt(nmax) / 2 + 1;
+        int n2 = RANDOM.nextInt(nmax) / 2 + 1;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n1; i++) {
-            sb.append((char) (random.nextInt(10) + '0'));
+            sb.append((char) (RANDOM.nextInt(10) + '0'));
         }
         char c;
         do {
-            c = (char) random.nextInt();
+            c = (char) RANDOM.nextInt();
         } while (c == '0' || c == '1' || c == '2' || c == '3' || c == '4'
                 || c == '5' || c == '6' || c == '7' || c == '8' || c == '9');
         sb.append(c);
         for (int i = 0; i < n2; i++) {
-            sb.append((char) (random.nextInt(10) + '0'));
+            sb.append((char) (RANDOM.nextInt(10) + '0'));
         }
         return sb.toString();
     }
@@ -601,8 +598,8 @@ public class AnalyseurTest {
         int c;
         for (int i = 0; i < 1000000; ++i) {
 
-            a = random.nextInt(Integer.MAX_VALUE) / 2;
-            b = random.nextInt(Integer.MAX_VALUE) / 2;
+            a = RANDOM.nextInt(Integer.MAX_VALUE) / 2;
+            b = RANDOM.nextInt(Integer.MAX_VALUE) / 2;
             c = a + b;
             
   
@@ -632,8 +629,8 @@ public class AnalyseurTest {
         int c;
         for (int i = 0; i < 1000000; ++i) {
 
-            a = random.nextInt()/2;
-            b = random.nextInt()/2;
+            a = RANDOM.nextInt()/2;
+            b = RANDOM.nextInt()/2;
             c = a + b;
             
   
@@ -662,8 +659,8 @@ public class AnalyseurTest {
      
         for (int i = 0; i < 1000000; ++i) {
 
-            char a = (char)('0'+random.nextInt(10));
-            int b = random.nextInt(Integer.MAX_VALUE)/10;
+            char a = (char)('0'+RANDOM.nextInt(10));
+            int b = RANDOM.nextInt(Integer.MAX_VALUE)/10;
             int c = (a-'0') * b;
             
             
@@ -672,7 +669,7 @@ public class AnalyseurTest {
         }   
         
         for(int i = 0; i < 100; ++i) {
-            char a = (char)('0'+random.nextInt(10));
+            char a = (char)('0'+RANDOM.nextInt(10));
             String b = genererUnNaturelValide(100);
             String c = "0";
             for(int j = 0; j < (a-'0'); ++j) {
@@ -683,15 +680,15 @@ public class AnalyseurTest {
     }   
 
     @Test
-    public void testMultiplicationDeNaturelse() {
+    public void testMultiplicationDeNaturels() {
         System.out.println("Test MultiplicationDeNaturels");
         
         int rc = (int) Math.sqrt(Integer.MAX_VALUE);
      
         for (int i = 0; i < 1000000; ++i) {
 
-            int a = random.nextInt(rc);
-            int b = random.nextInt(rc);
+            int a = RANDOM.nextInt(rc);
+            int b = RANDOM.nextInt(rc);
             int c = a * b;
             
             
@@ -708,7 +705,6 @@ public class AnalyseurTest {
                 a = b;
                 b = x;
             }
-            System.err.println(a+"*"+b);
             String cb = b;
             while(!"0".equals(cb)) {
                 c = Analyseur.additionDeRelatifs(c, a);

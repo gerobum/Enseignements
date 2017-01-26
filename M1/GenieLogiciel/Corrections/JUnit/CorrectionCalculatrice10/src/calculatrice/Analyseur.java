@@ -15,9 +15,6 @@ public class Analyseur {
 
     public static boolean estUnChiffre(char c) {
         return c >= '0' && c <= '9';
-        //  return Character.isDigit(c);
-        //Pattern p = Pattern.compile("\\d");
-        //return p.matcher(c+"").matches();
     }
 
     public static boolean estUnNaturel(String mot) {
@@ -279,56 +276,5 @@ public class Analyseur {
         }
 
         return c;
-    }
-
-    public static void main(String[] args) {
-
-        String[] names = {"Elena", "Thomas", "Hamilton", "Suzie", "Phil",
-            "Matt", "Alex", "Emma", "John", "James", "Jane", "Emily",
-            "Daniel", "Neda", "Aaron", "Kate"};
-        int[] times = {341, 273, 278, 329, 445, 402, 388, 275, 243, 334, 412,
-            393, 299, 343, 317, 265};
-
-        for (int i = 0; i < times.length; i++) {
-
-            System.out.println(names[i] + "..." + times[i]);
-
-        }
-
-        double max = times[0];
-        double mix = times[0];
-        for (int x = 0; x < times.length; x++) {
-            if (times[x] > max) {
-                max = times[x];
-
-            }
-            if (times[x] < mix) {
-                mix = times[x];
-
-            }
-
-        }
-        System.out.println("The Fastest Runner is  " + max);
-        System.out.println("The Slowest Raccer is " + mix);
-        
-        // If there are at least 2 values in times
-        int i1 = 0; // index of the largest
-        int i2 = 1; // index of the 2nd largest 
-        if (times[i1] < times[i2]) {// then swap
-            int x = i1;
-            i1 = i2;
-            i2 = x;
-        }
-        for(int i = 2; i < times.length; ++i) {
-            if (times[i] > times[i1]) {
-                i2 = i1;
-                i1 = i;
-            } else if (times[i] > times[i2]) {
-                i2 = i;
-            }
-        }
-        System.out.println("The first is " + names[i1] + " with a time of " + times[i1]);
-        System.out.println("The second is " + names[i2] + " with a time of " + times[i2]);
-
     }
 }
