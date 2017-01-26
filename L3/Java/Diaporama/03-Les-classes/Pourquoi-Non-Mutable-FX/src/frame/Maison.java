@@ -3,8 +3,7 @@ package frame;
 
 
 import geometrie.Ecran;
-import geometrie.mutable.Triangle;
-import geometrie.mutable.Carre;
+import geometrie.mutable.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
