@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 public class DeviseJTextField extends JTextField implements Observateur {
     protected String devise;
     protected double valeurPour1Euro;
-    protected Euro<Double> sujet;
-    public DeviseJTextField(String devise, double valeurPour1Euro, Euro<Double> sujet) {
+    protected Euro sujet;
+    public DeviseJTextField(String devise, double valeurPour1Euro, Euro sujet) {
         super(30);
         this.devise = devise;
         this.valeurPour1Euro = valeurPour1Euro;

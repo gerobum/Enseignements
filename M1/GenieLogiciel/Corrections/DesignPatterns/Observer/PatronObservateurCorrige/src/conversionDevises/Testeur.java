@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class Testeur extends JFrame {
     // ####
-    private Euro<Double> euro = new Euro<>(1.0);
+    private Euro euro = new Euro(1.0);
     private JButton ajout = new JButton("Ajouter une devise");
     private DialogueAjout dialogue = new DialogueAjout();
     private GridBagConstraints cst = new GridBagConstraints();
@@ -28,7 +28,6 @@ public class Testeur extends JFrame {
         
         cst.fill = GridBagConstraints.BOTH;
         ajout.setFont(new Font("Georgia", Font.BOLD, 25));
-        int y = 0;
         
         centre.setLayout(new GridBagLayout());        
         
@@ -60,10 +59,7 @@ public class Testeur extends JFrame {
                 }
             }
         });
-        
-
-        
-        
+                      
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

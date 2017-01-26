@@ -5,26 +5,26 @@ package conversionDevises;
  * que l'on affichera dans la devise choisie.
  * @author Yvan
  */
-public class Euro<T> extends Observé<T> {
-    private T valeur;
+public class Euro extends Observé<Double> {
+    private Double valeur;
 
-    public Euro(T valeur) {
+    public Euro(Double valeur) {
         this.valeur = valeur;
     }
     /**
-     * La méthode redéfinie transforme le type de retour que l'on sait
-     * etre un Double. Elle est également rendue publique.
+     * Donne la valeur de l'observé (le sujet)
+     * @return Une valeur en €
      */
     @Override
-    public T getValeur() {
+    public Double getValeur() {
         return valeur;
     }
     /**
-     * La méthode redéfinie reste protégée (protected) pour obliger la mise à
-     * jour de valeur de type Double grâce à la méthode suivante. 
+     * Mettre à jour la valeur en €
+     * @param valeur en €
      */
     @Override
-    public void setValeur(T valeur) {
+    public void setValeur(Double valeur) {
         this.valeur = valeur;
         notifier();
     } 

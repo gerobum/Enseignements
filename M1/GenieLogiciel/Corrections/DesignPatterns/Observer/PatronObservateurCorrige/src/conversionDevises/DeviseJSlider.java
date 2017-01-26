@@ -19,7 +19,7 @@ public class DeviseJSlider extends JSlider implements Observateur {
 
     protected String devise;
     protected double valeurPour1Euro;
-    protected Euro<Double> sujet;
+    protected Euro sujet;
 
     /**
      * Constructeur
@@ -28,7 +28,7 @@ public class DeviseJSlider extends JSlider implements Observateur {
      * @param valeurPour1Euro
      * @param sujet
      */
-    public DeviseJSlider(String devise, double valeurPour1Euro, Euro<Double> sujet) {
+    public DeviseJSlider(String devise, double valeurPour1Euro, Euro sujet) {
         super(0, 1000);
         this.devise = devise;
         this.valeurPour1Euro = valeurPour1Euro;

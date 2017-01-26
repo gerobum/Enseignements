@@ -12,14 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class DialogueAjout extends JDialog {
-    private JButton ok = new JButton("Ok");
-    private JButton annuler = new JButton("Annuler");
+    private final JButton ok = new JButton("Ok");
+    private final JButton annuler = new JButton("Annuler");
     private JTextField devise = new JTextField();
     private JTextField prixPour1Euro = new JTextField();
-    private JCheckBox choixSlider = new JCheckBox("Sous forme de slider", false);
-    private JPanel centre = new JPanel();
-    private JPanel sud = new JPanel();
+    private final JCheckBox choixSlider = new JCheckBox("Sous forme de slider", false);
+    private final JPanel centre = new JPanel();
+    private final JPanel sud = new JPanel();
     private boolean reponse = false;
+    
     public DialogueAjout() {
         setModal(true);
         centre.setLayout(new GridLayout(3, 2));
