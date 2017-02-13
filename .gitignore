@@ -56,3 +56,5 @@ captures/
 
 # Keystore files
 *.jks
+/M2/ComplementsJava/Corrections/05-StopWatch/nbproject/private/
+/L3/Java/Corrections/08-Redefinition-Des-Methodes-De-Objects/CorrectionExoRedefinitionObjet/nbproject/private/

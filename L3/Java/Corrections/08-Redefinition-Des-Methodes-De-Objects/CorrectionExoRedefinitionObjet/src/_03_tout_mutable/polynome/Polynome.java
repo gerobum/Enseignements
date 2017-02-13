@@ -24,6 +24,9 @@ public class Polynome implements Cloneable {
         try {
             Polynome np = (Polynome) super.clone();
             np.a = a.clone();
+            for(int i = 0; i < a.length; ++i) {
+                np.a[i] = a[i].clone();
+            }
             return np;
         } catch (CloneNotSupportedException ex) {
             throw new IllegalStateException();
