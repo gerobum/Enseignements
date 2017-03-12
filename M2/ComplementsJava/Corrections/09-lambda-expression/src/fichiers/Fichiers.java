@@ -231,8 +231,11 @@ public class Fichiers {
         t = System.currentTimeMillis();
         dc.count = R.ints(0, 2000)
                 .limit(20000000)
+                //.sorted()
+                .filter(p -> p < 2)
+                //.sorted()
                 .filter(p -> p % 2 == 0)
-                .filter(p -> p < 4)
+                //.limit(3)
                 //.sorted()
                 .count();
         
