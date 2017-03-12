@@ -215,10 +215,35 @@ public class Fichiers {
                     System.out.println(p.toFile().length() + " -> " + p.toFile().getName() + " : " + p);
                 });
     }
+    
+    public static class DC {
+     
+        public long duree;
+        public long count;   
+    }
+    
+    public static Random R = new Random();
+    
+    public static DC CompteLesZeros() {
+        DC dc = new DC();
+        long t;
+        
+        t = System.currentTimeMillis();
+        dc.count = R.ints(0, 2000)
+                .limit(20000000)
+                .filter(p -> p % 2 == 0)
+                .filter(p -> p < 4)
+                //.sorted()
+                .count();
+        
+        dc.duree = System.currentTimeMillis() - t;
+        
+        return dc;
+    }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        Path racine;
+        /*Path racine;
        
        
         JFileChooser jfc = new JFileChooser();
@@ -227,7 +252,7 @@ public class Fichiers {
             racine = jfc.getSelectedFile().toPath();
         } else {
             racine = new File(".").toPath();
-        }
+        }*/
         
         
         long td, tf;
@@ -240,7 +265,7 @@ public class Fichiers {
         // afficherTousLesDossiersEtFichiersCaches(racine);
         // afficherTousLesFichiersCaches(racine);
         // afficherTousLesFichiersDeTailleNulle(racine);
-        afficherTousLesFichiersDeTailleNulleTriés(racine);
+        //afficherTousLesFichiersDeTailleNulleTriés(racine);
         // afficherTousLesFichiersCachesDeTailleNulle(racine);
         // System.out.println("Il y a " + nombreDOctets(racine) + " octets à partir de " + racine);
         // System.out.println("Les fichiers cachés occupent " + nombreDOctetsDesFichiersCaches(racine) + " octets à partir de " + racine);
@@ -255,8 +280,24 @@ public class Fichiers {
         //afficherTousLesDossiersDontLaTailleDesFichiersDirectementContenusEstSuperieureAl(racine, 1);
         // afficherTousLesFichiersRangésParTailleEtParNom(racine);
         
+        
+        DC dc;
+        double dm = 0;
+        double cm = 0;
+        int n = 20;
+        for(int i = n; i > 0; --i) {
+            dc = CompteLesZeros();
+            dm += dc.duree;
+            cm += dc.count;
+            System.out.println(i+"");
+        }
+        System.out.println("Durée moyenne : " + dm/n);
+        System.out.println("Nb : " + cm/n);
+        
+        
+        
         tf= System.currentTimeMillis();
         
-        System.out.println("Durée " + (tf-td) + " ms");
+        //System.out.println("Durée " + (tf-td) + " ms");
     }
 }
