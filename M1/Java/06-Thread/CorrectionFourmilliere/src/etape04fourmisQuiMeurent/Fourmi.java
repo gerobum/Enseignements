@@ -2,219 +2,219 @@ package etape04fourmisQuiMeurent;
 
 import java.awt.Color;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+// Les commentaires précédés de ###04 indiquent une modification à apporter
+// pour réaliser la quatrième partie de l'exo : faire qu'une fourmi ait une
+// durée de vie limitée.
 
 public class Fourmi extends Thread {
 
-  private static Random random = new Random();
-  private int pasx, pasy;
-  private Color couleur;
-  private Terrain terrain;
-  private int x, y;
-  // pour s'endormir
-  private boolean bloque = false;
-  //####04 pour la fourmi meure
-  private boolean enVie = true;
+    private static Random random = new Random();
+    private int pasx, pasy;
+    private Color couleur;
+    private Terrain terrain;
+    private int x, y;
+    private boolean stop = false;
+    //###04 
+    private boolean enVie = true;
 
-  /**
-   * Créer une fourmi "quelque part" sur le terrain.
-   *
-   * @param terrain : terrain partagé par toutes les fourmis
-   * @see public Fourmi(Terrain terrain, int x, int y)
-   */
-  public Fourmi(Terrain terrain) {
-    this(terrain, random.nextInt(terrain.getMaxX()), random.nextInt(terrain.getMaxY()));
-  }
-
-  /**
-   * Créer une fourmi à une position donnée (x, y) sur le terrain. Un couleur
-   * est attribuée au hasard. La fourmi est "lancée" et son endormissement est
-   * programmé.
-   *
-   * @param terrain : terrain partagé par toutes les fourmis
-   * @param x : absisse où apparait la fourmi
-   * @param y : ordonnée où apparait la fourmi
-   */
-  public Fourmi(Terrain terrain, int x, int y) {
-    this.terrain = terrain;
-    this.x = x;
-    this.y = y;
-    terrain.set(x, y, this);
-    pasx = random.nextInt(3) - 1;
-    pasy = random.nextInt(3) - 1;
-    couleur = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-    terrain.repaint();
-    // Pour s'endormir
-    new Thread(new Runnable() {
-      public void run() {
-        try {
-          int nbs = 10 + random.nextInt(10);
-          Thread.sleep(nbs * 1000);
-          bloque = true;
-        } catch (InterruptedException ex) {
-          Logger.getLogger(Fourmi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-      }
-    }).start();
-
-    //####04 pour que la fourmi meure
-    new Thread(new Runnable() {
-      public void run() {
-        try {
-          Thread.sleep((20000 + random.nextInt(40000)));
-          enVie = false;
-          //####04 pour que la fourmi meure
-          reveil();
-        } catch (InterruptedException ex) {
-          ex.printStackTrace();
-        }
-      }
-    }).start();
-
-    start();
-  }
-
-  /**
-   * Pour connaître la couleur de la fourmi
-   *
-   * @return la couleur de la fourmi
-   */
-  public Color getCouleur() {
-    return couleur;
-  }
-
-  public void meurs() {
-    enVie = false;
-    reveil();
-  }
-
-  public synchronized void reveil() {
-    if (bloque) {
-      notify();
-      // Pour s'endormir
-      bloque = false;
-      new Thread(new Runnable() {
-        public void run() {
-          try {
-            int nbs = 10 + random.nextInt(10);
-            Thread.sleep(nbs * 1000);
-            bloque = true;
-          } catch (InterruptedException ex) {
-            Logger.getLogger(Fourmi.class.getName()).log(Level.SEVERE, null, ex);
-          }
-
-        }
-      }).start();
+    /**
+     * Créer une fourmi "quelque part" sur le terrain.
+     *
+     * @param terrain : terrain partagé par toutes les fourmis
+     * @see public Fourmi(Terrain terrain, int x, int y)
+     */
+    public Fourmi(Terrain terrain) {
+        this(terrain, random.nextInt(terrain.getMaxX()), random.nextInt(terrain.getMaxY()));
     }
-  }
 
-  @Override
-  public void run() {
-    //####04 pour la fourmi meure
-    while (enVie) {
-      try {
-        avance();
-        while (bloque) {
-          synchronized (this) {
-            wait();
-          }
-        }
-      } catch (InterruptedException ex) {
-        Logger.getLogger(Fourmi.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
-    terrain.set(x, y, null);
-    terrain.repaint();
-  }
-
-  /**
-   * Avance d'un pas (ou non) sur le terrain. Un pas représente une case parmi
-   * les neuf cases voisines si elle n'est pas occupée par une autre fourmi.
-   * C'est à dire que si la fourmi se trouve sur la case 5 représentée
-   * ci-dessous, ses cases voisines sont toutes celles de 1 à 9, y compris la 5.
-   * +-+-+-+ |1|2|3| +-+-+-+ |4|5|6| +-+-+-+ |7|8|9| +-+-+-+ Cependant, pour
-   * simpuler un déplacement, une fourmi a une chance sur deux de changer de
-   * direction. Une fourmi
-   */
-  private void avance() {
-    int xa = x;
-    int ya = y;
-    if (random.nextBoolean()) { // Une change sur deux de changer de sens e moins que la fourmi ne soit arretee
-      pasx = random.nextInt(3) - 1;
-      pasy = random.nextInt(3) - 1;
-      while (pasx == 0 && pasy == 0) {
+    /**
+     * Créer une fourmi à une position donnée (x, y) sur le terrain. Un couleur
+     * est attribuée au hasard. La fourmi est "lancée" et son endormissement est
+     * programmé.
+     *
+     * @param terrain : terrain partagé par toutes les fourmis
+     * @param x : absisse où apparait la fourmi
+     * @param y : ordonnée où apparait la fourmi
+     */
+    public Fourmi(Terrain terrain, int x, int y) {
+        this.terrain = terrain;
+        this.x = x;
+        this.y = y;
+        terrain.set(x, y, this);
         pasx = random.nextInt(3) - 1;
         pasy = random.nextInt(3) - 1;
-      }
+        couleur = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        terrain.repaint();
+        // Pour s'endormir
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    int nbs = 10 + random.nextInt(10);
+                    Thread.sleep(nbs * 1000);
+                    stop = true;
+                } catch (InterruptedException ex) {
+                }
+
+            }
+        }.start();
+
+        //###04 Réglage de la durée de vie d'une fourmi
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep((20000 + random.nextInt(40000)));
+                    enVie = false;
+                    //###04 pour que la fourmi meure
+                    reveil();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }.start();
+
+        start();
     }
 
-    x += pasx;
-    y += pasy;
-
-    if (x >= terrain.getMaxX()) {
-      x = 0;
-    }
-    if (x < 0) {
-      x = terrain.getMaxX() - 1;
-    }
-
-    if (y >= terrain.getMaxY()) {
-      y = 0;
-    }
-    if (y < 0) {
-      y = terrain.getMaxY() - 1;
+    /**
+     * Pour connaître la couleur de la fourmi
+     *
+     * @return la couleur de la fourmi
+     */
+    public Color getCouleur() {
+        return couleur;
     }
 
-    Fourmi voisin = terrain.get(x, y);
-    if (voisin == null) {
-      terrain.set(xa, ya, null);
-      terrain.set(x, y, this);
-
-    } else {
-      if (voisin != this) {
-        voisin.reveil();
-        x = xa;
-        y = ya;
-      }
+    // ###04 C'est cruel...
+    public void meurs() {
+        enVie = false;
+        reveil();
     }
 
-    terrain.repaint(x * terrain.getTailleFourmiX(), y * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
-    terrain.repaint(xa * terrain.getTailleFourmiX(), ya * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
-    reveillerTousLesVoisins(x, y);
+    public synchronized void reveil() {
+        if (stop) {
+            notify();
+            // Pour s'endormir
+            stop = false;
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        int nbs = 10 + random.nextInt(10);
+                        Thread.sleep(nbs * 1000);
+                        stop = true;
+                    } catch (InterruptedException ex) {
+                    }
 
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException ex) {
-    }
-  }
-
-  private void reveillerTousLesVoisins(int x, int y) {
-    int xn;
-    int yn;
-    for (int i = -1; i <= 1; i++) {
-      for (int j = -1; j <= 1; j++) {
-        if (i != 0 || j != 0) {
-          xn = x + i;
-          yn = y + j;
-          if (xn < 0) {
-            xn = terrain.getMaxX() - 1;
-          } else if (xn >= terrain.getMaxX()) {
-            xn = 0;
-          }
-          if (yn < 0) {
-            yn = terrain.getMaxY() - 1;
-          } else if (yn >= terrain.getMaxY()) {
-            yn = 0;
-          }
-
-          Fourmi fourmi = terrain.get(xn, yn);
-          if (fourmi != null) {
-            fourmi.reveil();
-          }
+                }
+            }.start();
         }
-      }
     }
-  }
+
+    @Override
+    public void run() {
+        //###04 La vie d'une fourmi est celle du thread qui l'anime.
+        while (enVie) {
+            try {
+                avance();
+                while (stop) {
+                    synchronized (this) {
+                        wait();
+                    }
+                }
+            } catch (InterruptedException ex) {
+            }
+        }
+        //###04 Fin de vie, elle disparait du terrain.
+        terrain.set(x, y, null);
+        terrain.repaint();
+    }
+
+    /**
+     * Avance d'un pas (ou non) sur le terrain. Un pas représente une case parmi
+     * les neuf cases voisines si elle n'est pas occupée par une autre fourmi.
+     * C'est à dire que si la fourmi se trouve sur la case 5 représentée
+     * ci-dessous, ses cases voisines sont toutes celles de 1 à 9, y compris la
+     * 5. +-+-+-+ |1|2|3| +-+-+-+ |4|5|6| +-+-+-+ |7|8|9| +-+-+-+ Cependant,
+     * pour simpuler un déplacement, une fourmi a une chance sur deux de changer
+     * de direction. Une fourmi
+     */
+    private void avance() {
+        int xa = x;
+        int ya = y;
+        if (random.nextBoolean()) { // Une change sur deux de changer de sens e moins que la fourmi ne soit arretee
+            pasx = random.nextInt(3) - 1;
+            pasy = random.nextInt(3) - 1;
+            while (pasx == 0 && pasy == 0) {
+                pasx = random.nextInt(3) - 1;
+                pasy = random.nextInt(3) - 1;
+            }
+        }
+
+        x += pasx;
+        y += pasy;
+
+        if (x >= terrain.getMaxX()) {
+            x = 0;
+        }
+        if (x < 0) {
+            x = terrain.getMaxX() - 1;
+        }
+
+        if (y >= terrain.getMaxY()) {
+            y = 0;
+        }
+        if (y < 0) {
+            y = terrain.getMaxY() - 1;
+        }
+
+        Fourmi voisin = terrain.get(x, y);
+        if (voisin == null) {
+            terrain.set(xa, ya, null);
+            terrain.set(x, y, this);
+
+        } else if (voisin != this) {
+            voisin.reveil();
+            x = xa;
+            y = ya;
+        }
+
+        terrain.repaint(x * terrain.getTailleFourmiX(), y * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
+        terrain.repaint(xa * terrain.getTailleFourmiX(), ya * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
+        reveillerTousLesVoisins(x, y);
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+        }
+    }
+
+    private void reveillerTousLesVoisins(int x, int y) {
+        int xn;
+        int yn;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i != 0 || j != 0) {
+                    xn = x + i;
+                    yn = y + j;
+                    if (xn < 0) {
+                        xn = terrain.getMaxX() - 1;
+                    } else if (xn >= terrain.getMaxX()) {
+                        xn = 0;
+                    }
+                    if (yn < 0) {
+                        yn = terrain.getMaxY() - 1;
+                    } else if (yn >= terrain.getMaxY()) {
+                        yn = 0;
+                    }
+
+                    Fourmi fourmi = terrain.get(xn, yn);
+                    if (fourmi != null) {
+                        fourmi.reveil();
+                    }
+                }
+            }
+        }
+    }
 }
