@@ -15,32 +15,22 @@ public class Ex2b extends JFrame {
   public Ex2b() {
     super("Table IDBS");
     String[] columnNames = {"Integer", "Double", "Boolean", "String"};
-    //Object[][] rowData = new Object[10][4];
 
-    Vector<Vector<Object>> rowData;
-    rowData = new Vector<>();
-    Vector<Object> v = new Vector<>();
-    v.add(1);
-    v.add(1.0);
-    v.add(true);
-    v.add("Un");
-    rowData.add(v);
-    
-    Vector<String> vs = new Vector<>();
-    vs.add("Integer");
-    vs.add("Double");
-    vs.add("Boolean");
-    vs.add("String");
-   
+    Object[][] rowData = new Object[2][4];
+    rowData[0][0] = 1;
+    rowData[0][1] = 1.0;
+    rowData[0][2] = true;
+    rowData[0][3] = "Un";
+    rowData[1][0] = 2;
+    rowData[1][1] = 2.0;
+    rowData[1][2] = false;
+    rowData[1][3] = "Deux";
 
-    JTable table = new JTable(rowData, vs);v = new Vector<>();
-    v = new Vector<>();
-    v.add(2);
-    v.add(2.0);
-    v.add(false);
-    v.add("Deux");
     
-    rowData.add(v);
+    String[] titles = {"Integer", "Double", "Boolean", "String"};
+
+    JTable table = new JTable(rowData, titles);
+
 
     JScrollPane scrollPane = new JScrollPane(table);
     //table.setFillsViewportHeight(true);
