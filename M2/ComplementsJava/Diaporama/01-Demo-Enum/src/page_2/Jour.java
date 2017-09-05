@@ -1,6 +1,6 @@
 package page_2;
 
-enum Etats {
+enum Jour {
 // déclaration des constantes énumérées
     LUNDI, MARDI, MERCREDI, JEUDI, VENDREDI, SAMEDI, DIMANCHE;
 // définition d’une constante
