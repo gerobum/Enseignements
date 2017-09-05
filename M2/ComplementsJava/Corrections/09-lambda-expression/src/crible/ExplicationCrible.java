@@ -14,7 +14,7 @@ public class ExplicationCrible {
     }
 
     public static void crible(int n) {
-        IntStream s = IntStream.range(2, n+1);
+        IntStream s = IntStream.rangeClosed(2, n);
         int rn = (int) Math.sqrt(n)+1;
         for (int i = 2; i <= rn; ++i) {
             s = enleveMultiple(s, i);
@@ -50,6 +50,7 @@ public class ExplicationCrible {
     }
 
     public static void main(String[] args) {
-        crible(100);
+        //crible(100);
+        affichageDe2a25sansLesMultiplesDe2sauf2();
     }
 }
