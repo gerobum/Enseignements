@@ -9,11 +9,17 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -33,7 +39,16 @@ public class PointsCardinaux extends Application {
         right = new Button("Right");
         left = new Button("Left");
         center = new Label();
-
+        
+        top.setPrefWidth(Double.MAX_VALUE);
+        bottom.setPrefWidth(Double.MAX_VALUE);
+        right.setPrefHeight(Double.MAX_VALUE);
+        left.setPrefHeight(Double.MAX_VALUE);
+        
+        center.setBackground(new Background(
+                new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)
+        ));
+        center.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
         EventHandler<ActionEvent> action = event -> {
             Button b = (Button) event.getSource();
             center.setText(b.getText());
@@ -44,23 +59,13 @@ public class PointsCardinaux extends Application {
         right.setOnAction(action);
         left.setOnAction(action);
 
-        top.setOnAction(event -> {
-            Button b = (Button) event.getSource();
-            Scanner sc = new Scanner(b.getText());
-            try {
-                int n = sc.nextInt();
-                b.setText((n + 1) + " fois");
-            } catch (Exception a) {
-                b.setText("0 fois");
-            }
-        });
-
-        BorderPane root = new BorderPane();
-        root.setTop(top);
-        root.setBottom(bottom);
-        root.setLeft(left);
-        root.setRight(right);
-        root.setCenter(center);
+        BorderPane border = new BorderPane();
+        border.setTop(top);
+        border.setBottom(bottom);
+        border.setLeft(left);
+        border.setRight(right);
+        border.setCenter(center);
+        Pane root = new StackPane(border);
 
         Scene scene = new Scene(root, 300, 250);
 

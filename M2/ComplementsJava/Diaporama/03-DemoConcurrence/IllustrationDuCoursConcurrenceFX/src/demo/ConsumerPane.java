@@ -22,7 +22,7 @@ public class ConsumerPane extends GridPane {
         progressBar = new ProgressBar();
         progressBar.progressProperty().bind(consumer.progressProperty());
         progressBar.setPrefWidth(500);
-        progressBar.setStyle("-fx-background-color: red;");
+        //progressBar.setStyle("-fx-background-color: red;");
         
         addRow(0, new Label(consumer.getConsumerName()), progressBar);
         new Thread(consumer).start();
