@@ -5,10 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ExoIntrospection {
@@ -53,11 +53,7 @@ public class ExoIntrospection {
     }
 
     private static ArrayList<Method> getMethods(Class<?> c, Predicate<Method> p) {
-        ArrayList<Method> a = new ArrayList<>();
-        Stream.of(c.getDeclaredMethods()).filter(m -> p.test(m)).forEach(m -> {
-            a.add(m);
-        });
-        return a;
+        return (ArrayList<Method>) Stream.of(c.getDeclaredMethods()).filter(m -> p.test(m)).collect(Collectors.toList());
     }
 
     public static boolean estStatiqueAvecParamTypeSimple(Method m) {
