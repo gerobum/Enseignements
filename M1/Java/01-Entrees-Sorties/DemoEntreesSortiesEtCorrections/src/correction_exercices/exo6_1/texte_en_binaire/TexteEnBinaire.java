@@ -1,5 +1,5 @@
 
-package correction_exercices.exo5_1.texte_en_binaire;
+package correction_exercices.exo6_1.texte_en_binaire;
 
 import java.io.DataOutputStream;
 import java.io.File;
