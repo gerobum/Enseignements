@@ -1,0 +1,24 @@
+/* 
+ * File:   TableauDynamique.h
+ * Author: maillot
+ */
+
+#ifndef TABLEAU_DYNAMIQUE_H
+#define	TABLEAU_DYNAMIQUE_H
+// Une classe pour engendrer des tableaux dynamiques
+class TableauDynamique { 
+public : // Son interface
+    int dimension() const; // Connaître sa dimension
+    double& operator[](int i); // Lire et écrire les valeurs de ses éléments.
+    void ajouter(double v); // Ajouter v à la fin du tableau.  
+    // D'autres méthodes pourraient être ajoutées
+    // comme supprimer une valeur, en insérer une ou plusieurs...
+    TableauDynamique(); // Crée une table vide 
+    ~TableauDynamique(); // Le destructeur
+private : // La structure de données :
+    double* d_table; // un tableau dynamique
+    int d_n;
+};
+
+#endif	/* TABLEAU_DYNAMIQUE_H */
+

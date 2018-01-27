@@ -16,14 +16,11 @@ public : // Son interface
     TableauDynamique(); // Crée une table vide 
     ~TableauDynamique(); // Le destructeur
 private : // La structure de données :
-    /*const int MAX_ELTS = 1000;
-    double d_table[MAX_ELTS]; // un tableau dynamique
-    int d_n; // et un entier pour la longueur*/
     double* d_table; // un tableau dynamique
     int d_n; // sa dimension effective
     int d_capacite; // sa capacité
-    const int CI = 2; // la capacité initiale
-    const double CM = 1.5; // un coefficient multiplicateur
+    const int CI{2}; // la capacité initiale
+    const double CM{1.5}; // un coefficient multiplicateur
 };
 
 #endif	/* TABLEAU_DYNAMIQUE_H */
