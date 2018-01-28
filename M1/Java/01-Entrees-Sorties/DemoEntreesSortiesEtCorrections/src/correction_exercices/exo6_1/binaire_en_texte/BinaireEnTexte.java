@@ -1,4 +1,4 @@
-package correction_exercices.exo5_1.binaire_en_texte;
+package correction_exercices.exo6_1.binaire_en_texte;
 
 import java.io.DataInputStream;
 import java.io.EOFException;

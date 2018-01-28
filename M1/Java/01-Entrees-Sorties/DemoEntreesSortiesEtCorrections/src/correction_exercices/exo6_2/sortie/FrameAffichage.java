@@ -1,4 +1,4 @@
-package correction_exercices.exo5_2.sortie;
+package correction_exercices.exo6_2.sortie;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

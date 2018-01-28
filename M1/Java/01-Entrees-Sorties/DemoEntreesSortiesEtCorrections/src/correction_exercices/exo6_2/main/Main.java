@@ -1,5 +1,5 @@
 
-package correction_exercices.exo5_2.main;
+package correction_exercices.exo6_2.main;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -7,8 +7,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
-import correction_exercices.exo5_2.entree.FrameSaisie;
-import correction_exercices.exo5_2.sortie.FrameAffichage;
+import correction_exercices.exo6_2.entree.FrameSaisie;
+import correction_exercices.exo6_2.sortie.FrameAffichage;
 
 /**
  *
