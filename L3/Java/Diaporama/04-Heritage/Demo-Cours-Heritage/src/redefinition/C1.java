@@ -31,8 +31,15 @@ public class C1 extends C0 {
         return null;
     }
 
-    public T1 f3() {
+    @Override
+    public final T1 f3() {
         return null;
     }
 
+}
+
+class C2 extends C1 {
+    public void f1() {
+        super.f1();
+    }
 }

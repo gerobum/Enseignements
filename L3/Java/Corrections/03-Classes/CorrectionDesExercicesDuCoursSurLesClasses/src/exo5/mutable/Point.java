@@ -15,19 +15,22 @@ package exo5.mutable;
 import static java.lang.Math.*;
 
 /**
- *
+ * Classe Point pour modéliser des points du plan cartésien.
+ * 
  * @author yvan
  */
 public class Point {
+   
     private double x, y;
     private double rho, theta;
     
     private void c2p() {
         rho = sqrt(x*x+y*y);
-        theta = atan2(y, x);
+        theta = atan2(y, x);        
     }
     
     private void p2c() {
+        theta = theta % (2*PI);
         x = rho*cos(theta);
         y = rho*sin(theta);
     }

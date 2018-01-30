@@ -8,7 +8,7 @@ package exo2;
 public class Test {
     public static void main(String[] args) {
         while(true) {
-            // L'application sera stoppé à la destruction, reste à savoir quand ?
+            // L'application sera stoppée à la destruction, reste à savoir quand ?
             new PourVoirLeRM();
         }
     }

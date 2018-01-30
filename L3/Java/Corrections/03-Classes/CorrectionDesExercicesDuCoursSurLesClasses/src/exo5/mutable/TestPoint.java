@@ -10,12 +10,13 @@ public class TestPoint {
 
     public static void main(String[] args) {
         Point p11 = new Point(1, 1);
+        p11.afficher();
         p11.afficher(true);
-        p11.afficher(false);
         for (int i = 0; i < 8; i++) {
+            System.out.println();
             p11.tourner(PI/4);
+            p11.afficher();
             p11.afficher(true);
-            p11.afficher(false);
         }
     }
 }

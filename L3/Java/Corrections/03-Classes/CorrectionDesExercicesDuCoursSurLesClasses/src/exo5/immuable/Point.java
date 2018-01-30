@@ -50,7 +50,7 @@ public final class Point {
     }
 
     public Point tourner(double dtheta) {
-        return new Point(rho, theta+dtheta, true);
+        return new Point(rho, (theta+dtheta)%(2*PI), true);
     }
 
     public void afficher(boolean polaire) {
