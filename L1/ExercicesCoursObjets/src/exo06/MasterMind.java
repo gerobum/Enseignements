@@ -15,49 +15,64 @@ import java.util.Scanner;
 public class MasterMind {
 
     public static void main(String[] args) {
-        char[] aDeviner, proposition;
-        boolean trouvé = false;
-        boolean auBout = false;
-        for (int i = 0; i < 20; ++i) {
-            aDeviner = aDeviner(4, 4);
-        }
-        aDeviner = aDeviner(4, 4);
-        while (!trouvé && !auBout) {
-            proposition = saisirProposition(4, 4);
-            compare(proposition, aDeviner);
+        Scanner in = new Scanner(System.in);
+        String aDeviner, proposition, resultat = "";
+        int np, nc, nb;
+        String[][] propositions;
+        int n;        
+        
+        System.out.print("En combien de coups : ");
+        np = in.nextInt();
+        System.out.print("Combien de couleurs : ");
+        nc = in.nextInt();
+        System.out.print("Taille d'une proposition : ");
+        nb = in.nextInt();
+        
+        propositions = propositions(np, nb);
+
+        n = 0; // Numéro de la proposition
+        aDeviner = aDeviner(nc, nb);
+        System.out.println(aDeviner);
+        while (n < propositions.length  && !"4BP 0MP".equals(resultat)) {
+            affichage(propositions);
+            proposition = saisirProposition(nc, nb);
+            resultat = compare(proposition, aDeviner);
+            propositions[n][0] = proposition;
+            propositions[n][1] = resultat;
+            ++n;
         }
     }
 
-    private static char[] aDeviner(int nc, int n) {
+    private static String aDeviner(int nc, int nb) {
         Random random = new Random();
-        char[] tc = new char[n];
+        char[] tc = new char[nb];
         for (int i = 0; i < tc.length; ++i) {
             tc[i] = unCar(random.nextInt(nc));
         }
-        return tc;
+        return new String(tc);
     }
 
     private static char unCar(int i) {
         return (char) ('A' + i);
     }
 
-    private static char[] saisirProposition(int nc, int n) {
-        System.out.println("Entrez 4 caractères entre A et " + unCar(n - 1));
+    private static String saisirProposition(int nc, int nb) {
+        System.out.println("Entrez " + nb + " caractères entre A et " + unCar(nc - 1));
         Scanner in = new Scanner(System.in);
         String proposition = in.next();
-        while (!estValide(proposition, nc, n)) {
-            System.out.println("Entrez " + nc + " caractères entre A et " + unCar(n - 1));
+        while (!estValide(proposition, nc, nb)) {
+            System.out.println("Entrez " + nb + " caractères entre A et " + unCar(nc - 1));
             proposition = in.next();
         }
-        return proposition.toCharArray();
+        return proposition;
     }
 
-    private static boolean estValide(String proposition, int nc, int n) {
-        if (proposition.length() != nc) {
+    private static boolean estValide(String proposition, int nc, int nb) {
+        if (proposition.length() != nb) {
             return false;
         } else {
             for (int i = 0; i < proposition.length(); ++i) {
-                if (proposition.charAt(i) < 'A' || proposition.charAt(i) >= ('A' + n)) {
+                if (proposition.charAt(i) < 'A' || proposition.charAt(i) >= ('A' + nc)) {
                     return false;
                 }
             }
@@ -65,25 +80,54 @@ public class MasterMind {
         }
     }
 
-    private static String compare(char[] proposition, char[] aDeviner) {
+    private static String compare(String proposition, String aDeviner) {
         int nbp = 0;
         int nmp = 0;
-        for (int i = 0; i < proposition.length; ++i) {
-            if (proposition[i] == aDeviner[i]) {
+        char[] tabProposition = proposition.toCharArray();
+        char[] tabADeviner  = aDeviner.toCharArray();
+        for (int i = 0; i < tabProposition.length; ++i) {
+            if (tabProposition[i] == tabADeviner[i]) {
                 nbp++;
-                aDeviner[i] = '-';
-                proposition[i] = '+';
+                tabADeviner[i] = '-';
+                tabProposition[i] = '+';
             }
         }
-        String sp = new String(proposition);
-        for (char c : proposition) {
-            int i = sp.indexOf(c);
-            if (i >= 0) {
+        
+        for (int i = 0; i < tabProposition.length; ++i) {
+            int j = indexDe(tabProposition[i], tabADeviner);
+            if (j >= 0) {
+                tabADeviner[j] = '-';
                 nmp++;
-                aDeviner[i] = '-';
             }
         }
-        return String.format("NBP:%d - NMP:%d", nbp, nmp);
+        return String.format("%dBP %dMP", nbp, nmp);
+    }
+
+    private static void affichage(String[][] propositions) {
+        for(int l = 0; l < propositions.length; ++l) {
+            System.out.println(propositions[l][0] + " - " + propositions[l][1]);
+        }
+    }
+
+    private static String[][] propositions(int np, int nb) {
+        char[] tc = new char[nb];
+        for(int i = 0; i < nb; ++i) {
+            tc[i] = '.';
+        }
+        String s = new String(tc);
+        String[][] propositions = new String[np][2];
+        for (int i = 0; i < np; ++i) {
+            propositions[i][0] = s;
+            propositions[i][1] = ".BP .MP";
+        }
+        return propositions;
+    }
+
+    private static int indexDe(char c, char[] aDeviner) {
+        int i = aDeviner.length-1;
+        while(i >= 0 && c != aDeviner[i])
+            --i;
+        return i;
     }
 
 }
