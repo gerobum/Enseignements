@@ -88,6 +88,8 @@ public class Main {
         }
 
         Map<Ami, Date> anniv_sync = Collections.synchronizedMap(anniv);
+        
+        
 
     }
 

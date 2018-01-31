@@ -1,4 +1,4 @@
-package exo01;
+package part1.exo01;
 
 /**
  *

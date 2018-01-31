@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exo06;
+package part2.exo06;
 
 import java.util.Random;
 import java.util.Scanner;

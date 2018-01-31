@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class TexteEnBinaire {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        
+        System.out.println(1/0.0);
         try(Scanner in = new Scanner(new File("doubleentexte"));
             DataOutputStream out = new DataOutputStream(new FileOutputStream(new File("doubleenbinaire"))))
             {

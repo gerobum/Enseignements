@@ -1,5 +1,5 @@
 
-package exo04;
+package part1.exo04;
 
 import java.util.Random;
 
