@@ -13,7 +13,6 @@ import java.util.Scanner;
  * @author yvan
  */
 public class MasterMind {
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String aDeviner, proposition, resultat = "";
@@ -28,11 +27,10 @@ public class MasterMind {
         System.out.print("Taille d'une proposition : ");
         nb = in.nextInt();
         
-        propositions = propositions(np, nb);
+        propositions = initPropositions(np, nb);
 
         n = 0; // Numéro de la proposition
         aDeviner = aDeviner(nc, nb);
-        System.out.println(aDeviner);
         while (n < propositions.length  && !"4BP 0MP".equals(resultat)) {
             affichage(propositions);
             proposition = saisirProposition(nc, nb);
@@ -40,6 +38,12 @@ public class MasterMind {
             propositions[n][0] = proposition;
             propositions[n][1] = resultat;
             ++n;
+        }   
+        if (n < propositions.length) {
+            System.out.println("Gagné");
+        } else {
+            System.out.println("Perdu");
+            System.out.println("La solution était " + aDeviner);
         }
     }
 
@@ -109,7 +113,7 @@ public class MasterMind {
         }
     }
 
-    private static String[][] propositions(int np, int nb) {
+    private static String[][] initPropositions(int np, int nb) {
         char[] tc = new char[nb];
         for(int i = 0; i < nb; ++i) {
             tc[i] = '.';
