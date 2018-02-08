@@ -11,8 +11,8 @@ public class TestRandom {
     public static void main(String[] args) {
         Random random = new Random();
 
-        testBoolean(random, 1000000);
-        testInt(random, 1000000, 6);
+        testBoolean(random, 1_000_000);
+        testInt(random, 1_000_000, 6);
     }
 
     private static void testInt(Random random, int nt, int nb) {
