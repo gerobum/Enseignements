@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package geom;
 
 /**
  *
- * @author yvan
+ * @author p0500591
  */
 public class Vecteur {
     private double x, y;
@@ -16,13 +12,16 @@ public class Vecteur {
         this.x = x;
         this.y = y;
     }
-        
+    
+    public Vecteur() {
+        this(0, 0);
+    }
+    
     public Vecteur(Point a, Point b) {
         this(b.getX() - a.getX(), b.getY() - a.getY());
     }
     
-    public double det(Vecteur v) {
-        return x * v.y - v.x * y;
+    public double determinant(Vecteur v) {
+        return this.x*v.y - v.x*this.y;
     }
-    
 }

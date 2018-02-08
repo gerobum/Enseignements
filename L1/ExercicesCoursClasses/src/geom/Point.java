@@ -5,31 +5,26 @@
  */
 package geom;
 
-import static java.lang.Math.PI;
-import static java.lang.Math.atan2;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.sqrt;
-
 /**
  *
- * @author yvan
+ * @author p0500591
  */
 public class Point {
-    private double x, y, rho, theta;
-    
-        
+
+    private double x, y;
+    private double rho, theta;
+
     private void c2p() {
-        rho = sqrt(x*x+y*y);
-        theta = atan2(y, x);        
+        rho = Math.sqrt(x * x + y * y);
+        theta = Math.atan2(y, x);
     }
-    
+
     private void p2c() {
-        theta = theta % (2*PI);
-        x = rho*cos(theta);
-        y = rho*sin(theta);
+        theta = theta % 2 * Math.PI;
+        x = rho * Math.cos(theta);
+        y = rho * Math.sin(theta);
     }
-    
+
     public Point(double rhooux, double thetaouy, boolean polaire) {
         if (polaire) {
             rho = rhooux;
@@ -41,13 +36,13 @@ public class Point {
             c2p();
         }
     }
-    
+
     public Point(double x, double y) {
         this(x, y, false);
     }
-    
+
     public Point() {
-        this(0, 0, false);
+        this(0, 0);
     }
 
     public double getX() {
@@ -56,6 +51,7 @@ public class Point {
 
     public void setX(double x) {
         this.x = x;
+        c2p();
     }
 
     public double getY() {
@@ -64,6 +60,7 @@ public class Point {
 
     public void setY(double y) {
         this.y = y;
+        c2p();
     }
 
     public double getRho() {
@@ -72,6 +69,7 @@ public class Point {
 
     public void setRho(double rho) {
         this.rho = rho;
+        p2c();
     }
 
     public double getTheta() {
@@ -80,6 +78,19 @@ public class Point {
 
     public void setTheta(double theta) {
         this.theta = theta;
+        p2c();
+    }
+    
+    public void afficher(boolean polaire) {
+        if (polaire) {
+            System.out.println("["+rho+ ":"+theta+"]");
+        } else {
+            System.out.println("("+x+ ", "+y+")");
+        }
+    }
+    
+    public void afficher() {
+        afficher(false);
     }
     
     public void translater(double dx, double dy) {
@@ -93,13 +104,10 @@ public class Point {
         p2c();
     }
     
-    public void afficher() {
-        System.out.println("("+x+", "+y+")");
-    }
-    
-    public boolean aGauche(Point a, Point b) {
+    public boolean estAGauche(Point a, Point b) {
         Vecteur ap = new Vecteur(a, this);
         Vecteur ab = new Vecteur(a, b);
-        return ap.det(ab) < 0;
+        
+        return ap.determinant(ab)<0;
     }
 }
