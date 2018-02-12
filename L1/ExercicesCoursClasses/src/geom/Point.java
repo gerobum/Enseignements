@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package geom;
 
-/**
- *
- * @author p0500591
- */
 public class Point {
 
     private double x, y;
@@ -104,7 +95,7 @@ public class Point {
         p2c();
     }
     
-    public boolean estAGauche(Point a, Point b) {
+    public boolean aGauche(Point a, Point b) {
         Vecteur ap = new Vecteur(a, this);
         Vecteur ab = new Vecteur(a, b);
         

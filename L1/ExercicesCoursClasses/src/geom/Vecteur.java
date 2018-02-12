@@ -1,10 +1,7 @@
 
 package geom;
 
-/**
- *
- * @author p0500591
- */
+
 public class Vecteur {
     private double x, y;
 
