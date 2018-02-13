@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package geom;
 
-/**
- *
- * @author p0500591
- */
 public class Polygone {
 
     private Point[] points;
@@ -48,5 +39,14 @@ public class Polygone {
         for (int i = 0; i < points.length; ++i) {
             points[i].afficher();
         }
+    }
+    
+    public boolean entoure(Point p) {
+        boolean pos = p.aGauche(points[points.length-1], points[0]);
+        int i = 1;
+        while(i < points.length && pos == p.aGauche(points[i-1], points[i])) {
+            i++;
+        }
+        return i == points.length;
     }
 }
