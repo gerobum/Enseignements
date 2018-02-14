@@ -36,8 +36,8 @@ public enum Mois {
     Mois(String nom, int n) {
         this.nom = nom;
         nbJours = n;
-    }
-
+            }
+    
     public int nbJours() {
         return nbJours;
     }
@@ -50,7 +50,7 @@ public enum Mois {
     public int numéro() {
         return ordinal() + 1;
     }
-    
+
     private static int anneeEnCours = -1;
 
     public static void setAnneeEnCours(int anneeEnCours) {
