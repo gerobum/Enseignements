@@ -85,6 +85,9 @@ public class MoisTest {
     assertEquals(num++, m.numéro());
 
     m = Mois.FEVRIER;
+    
+    Mois.setAnneeEnCours(2000);
+    assertEquals(29, m.nbJours());
 
     Mois.setAnneeEnCours(2012);
     assertEquals(29, m.nbJours());
