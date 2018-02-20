@@ -15,11 +15,30 @@ import java.util.ResourceBundle;
  */
 public class StopWatch extends JFrame implements Runnable {
 
-    public enum State {
+    private enum State {
 
         READY, // pret à démarrer
-        ACTIVE, // en train de décompter
-        BLOQUED     // bloqué
+        ACTIVE {
+            @Override
+            void sync(StopWatch monitor) {
+                try {
+                    Thread.sleep(1000);
+                    monitor.OneSecondMore();
+                    monitor.print();
+                } catch (InterruptedException ex) {
+                }
+            }
+        }, // en train de décompter
+        BLOQUED;     // bloqué
+
+        void sync(StopWatch monitor) {
+            synchronized (monitor) {
+                try {
+                    monitor.wait();
+                } catch (InterruptedException ex) {
+                }
+            }
+        }
     }
 
     private final JLabel centre;
@@ -72,6 +91,7 @@ public class StopWatch extends JFrame implements Runnable {
                     }
 
             }
+            //state.sync(this);
         }
     }
 
@@ -85,7 +105,7 @@ public class StopWatch extends JFrame implements Runnable {
 
         init();
     }
-    
+
     private void init() {
         state = State.READY;
 
@@ -108,7 +128,6 @@ public class StopWatch extends JFrame implements Runnable {
         changerDeLangue = new JCheckBox(java.util.ResourceBundle.getBundle("langues/dico").getString("CHANGER DE LANGUE"));
         getContentPane().add(changerDeLangue, "North");
 
-
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
@@ -119,7 +138,7 @@ public class StopWatch extends JFrame implements Runnable {
                 choixDeLangue.setVisible(changerDeLangue.isSelected());
             }
         });
-        
+
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,7 +149,7 @@ public class StopWatch extends JFrame implements Runnable {
                 }*/
             }
         });
-        
+
         stop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,7 +158,7 @@ public class StopWatch extends JFrame implements Runnable {
                 }
                 // Pourquoi une interruption ici ?
                 runner.interrupt();
-        // Sans ça, l'appui sur STOP n'est pas immédiat
+                // Sans ça, l'appui sur STOP n'est pas immédiat
                 // L'attente (sleep) doit se terminer.
                 // L'interruption interrompt cette attente.
             }
