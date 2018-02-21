@@ -2,14 +2,14 @@ package exemplepatronDecorateur;
 
 public class Decorateur extends Composant {
 
-  protected Composant composant;
+    protected Composant composant;
 
-  public Decorateur(Composant composant) {
-    this.composant = composant;
-  }
+    public Decorateur(Composant composant) {
+        this.composant = composant;
+    }
 
-  @Override
-  public String toString() {
-    return composant.toString();
-  }
+    @Override
+    public String toString() {
+        return composant.toString();
+    }
 }

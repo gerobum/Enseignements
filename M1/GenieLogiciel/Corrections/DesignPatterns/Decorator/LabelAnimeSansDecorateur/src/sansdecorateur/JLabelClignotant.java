@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sansdecorateur;
 
 import java.awt.Color;
@@ -26,7 +25,7 @@ public class JLabelClignotant extends JLabel {
             @Override
             public void run() {
                 Color couleur = getForeground();
-                while(true) {
+                while (true) {
                     if (getForeground() == couleur) {
                         setForeground(getBackground());
                         try {
@@ -41,9 +40,9 @@ public class JLabelClignotant extends JLabel {
                         } catch (InterruptedException ex) {
                             Logger.getLogger(JLabelClignotant.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
+
                     }
-                    
+
                 }
             }
         }).start();
