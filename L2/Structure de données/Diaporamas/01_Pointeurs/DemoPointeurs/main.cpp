@@ -11,12 +11,18 @@
 
 using namespace std;
 
+class Pilon {
+public:
+    Pilon(int x) {};
+};
+
 /*
  * 
  */
 int main(int argc, char** argv) {
     {
-        int a = 10;
+        Pilon* p = new Pilon{5};
+        /*int a = 10;
         int& c = a;
         double b{2.5};
         cout << c << endl; //10
@@ -25,7 +31,7 @@ int main(int argc, char** argv) {
         int *pa = &a;
         double *p;
         p = new double{5};
-        p = &b;
+        p = &b;*/
         // Hélas, cette zone ne pourra plus être libérée
         // delete p;
         // Trois fois hélas, ce "delete" provoque un plantage
