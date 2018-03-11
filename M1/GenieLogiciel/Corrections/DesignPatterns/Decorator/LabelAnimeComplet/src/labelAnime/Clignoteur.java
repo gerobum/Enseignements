@@ -3,7 +3,7 @@ package labelAnime;
 import java.awt.Color;
 
 public class Clignoteur extends Decorateur {
-    public Clignoteur(AnimateurAbstrait composant) {
+    public Clignoteur(Animateur composant) {
         super(composant);
     }
     

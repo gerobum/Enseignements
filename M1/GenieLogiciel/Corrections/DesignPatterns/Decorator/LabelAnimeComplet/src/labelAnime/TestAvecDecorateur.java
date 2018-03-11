@@ -63,13 +63,13 @@ public class TestAvecDecorateur extends JFrame {
     }
     
     private void animation() {        
-        new Clignoteur(new AnimateurConcret(clignote)).animer();    
-        new Tourneur(new AnimateurConcret(tourne)).animer();
-        new Clignoteur(new Tourneur(new AnimateurConcret(tourneEtClignote))).animer();
-        new Vague(new ArcEnCiel(new AnimateurConcret(vagueArcEnCiel))).animer();
-        new ArcEnCiel(new AnimateurConcret(arcEnCiel)).animer();
-        new Vague(new AnimateurConcret(vague)).animer();
-        new Tourneur(new Tourneur(new Clignoteur(new ArcEnCiel(new Vague(new AnimateurConcret(agité)))))).animer();
+        new Clignoteur(new Porteur(clignote)).animer();    
+        new Tourneur(new Porteur(tourne)).animer();
+        new Clignoteur(new Tourneur(new Porteur(tourneEtClignote))).animer();
+        new Vague(new ArcEnCiel(new Porteur(vagueArcEnCiel))).animer();
+        new ArcEnCiel(new Porteur(arcEnCiel)).animer();
+        new Vague(new Porteur(vague)).animer();
+        new Tourneur(new Tourneur(new Clignoteur(new ArcEnCiel(new Vague(new Porteur(agité)))))).animer();
     }
     
     public static void main(String[] args) {

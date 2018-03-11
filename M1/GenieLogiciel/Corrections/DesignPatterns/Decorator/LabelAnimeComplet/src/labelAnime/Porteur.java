@@ -3,9 +3,9 @@ package labelAnime;
 import javax.swing.JLabel;
 
 
-public class AnimateurConcret extends AnimateurAbstrait {
+public class Porteur extends Animateur {
     private final JLabel label;
-    public AnimateurConcret(JLabel label) {
+    public Porteur(JLabel label) {
         this.label = label;
     }
 

@@ -2,10 +2,10 @@ package labelAnime;
 
 import javax.swing.JLabel;
 
-public class Decorateur extends AnimateurAbstrait {
-    private AnimateurAbstrait composant;
+public class Decorateur extends Animateur {
+    private Animateur composant;
     
-    public Decorateur(AnimateurAbstrait composant) {
+    public Decorateur(Animateur composant) {
         this.composant = composant;
     }
 

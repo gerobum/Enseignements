@@ -3,7 +3,7 @@ package labelAnime;
 import java.awt.Color;
 
 public class ArcEnCiel extends Decorateur {
-    public ArcEnCiel(AnimateurAbstrait composant) {
+    public ArcEnCiel(Animateur composant) {
         super(composant);
         //faireLArcEnCiel();
     } 

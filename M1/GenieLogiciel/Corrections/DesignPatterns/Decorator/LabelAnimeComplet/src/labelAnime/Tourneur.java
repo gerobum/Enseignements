@@ -1,7 +1,7 @@
 package labelAnime;
 
 public class Tourneur extends Decorateur {
-    public Tourneur(AnimateurAbstrait composant) {
+    public Tourneur(Animateur composant) {
         super(composant);
         //faireTourner();
     }

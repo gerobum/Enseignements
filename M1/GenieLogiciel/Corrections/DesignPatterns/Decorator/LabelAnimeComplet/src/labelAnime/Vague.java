@@ -2,7 +2,7 @@ package labelAnime;
 
 public class Vague extends Decorateur {
 
-  public Vague(AnimateurAbstrait composant) {
+  public Vague(Animateur composant) {
     super(composant);
     //faireVaguer();
   }

@@ -39,9 +39,9 @@ public class TestAvecDecorateurSimple extends JFrame {
     }
 
     private void animation() {
-        new Clignoteur(new AnimateurConcret(clignote)).animer();
-        new Tourneur(new AnimateurConcret(tourne)).animer();
-        new Clignoteur(new Tourneur(new AnimateurConcret(tourneEtClignote))).animer();
+        new Clignoteur(new Porteur(clignote)).animer();
+        new Tourneur(new Porteur(tourne)).animer();
+        new Clignoteur(new Tourneur(new Porteur(tourneEtClignote))).animer();
 
     }
 
