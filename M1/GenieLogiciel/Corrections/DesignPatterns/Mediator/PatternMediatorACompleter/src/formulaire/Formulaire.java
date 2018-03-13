@@ -53,7 +53,11 @@ public class Formulaire extends javax.swing.JFrame {
         labelAge = new javax.swing.JLabel();
         textFieldAge = new javax.swing.JTextField();
         labelDateDeNaissance = new javax.swing.JLabel();
-        textFieldDateDeNaissance = new javax.swing.JTextField();
+        textFieldJourDeNaissance = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        textFieldMoisDeNaissance = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        textFieldAnneeDeNaissance = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,7 +90,28 @@ public class Formulaire extends javax.swing.JFrame {
 
         labelDateDeNaissance.setText("Date de naissance");
 
-        textFieldDateDeNaissance.setColumns(10);
+        textFieldJourDeNaissance.setColumns(2);
+        textFieldJourDeNaissance.setToolTipText("jj");
+        textFieldJourDeNaissance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldJourDeNaissanceActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("/");
+
+        textFieldMoisDeNaissance.setColumns(2);
+        textFieldMoisDeNaissance.setToolTipText("mm");
+        textFieldMoisDeNaissance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldMoisDeNaissanceActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("/");
+
+        textFieldAnneeDeNaissance.setColumns(4);
+        textFieldAnneeDeNaissance.setToolTipText("aaaa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,9 +142,17 @@ public class Formulaire extends javax.swing.JFrame {
                                     .addComponent(textFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textFieldDateDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelDateDeNaissance))
-                                .addGap(3, 3, 3))))
+                                    .addComponent(labelDateDeNaissance)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(textFieldJourDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel1)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(textFieldMoisDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(jLabel2)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(textFieldAnneeDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(boutonOK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -153,7 +186,11 @@ public class Formulaire extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldDateDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldJourDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(textFieldMoisDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(textFieldAnneeDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boutonAnnuler)
@@ -163,6 +200,14 @@ public class Formulaire extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void textFieldJourDeNaissanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldJourDeNaissanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldJourDeNaissanceActionPerformed
+
+    private void textFieldMoisDeNaissanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldMoisDeNaissanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldMoisDeNaissanceActionPerformed
 
     /**
     * @param args the command line arguments
@@ -179,6 +224,8 @@ public class Formulaire extends javax.swing.JFrame {
     private javax.swing.JButton boutonAnnuler;
     private javax.swing.JButton boutonOK;
     private javax.swing.ButtonGroup groupeGenre;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelAge;
     private javax.swing.JLabel labelDateDeNaissance;
     private javax.swing.JLabel labelNom;
@@ -188,7 +235,9 @@ public class Formulaire extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioButtonFemimin;
     private javax.swing.JRadioButton radioButtonMasculin;
     private javax.swing.JTextField textFieldAge;
-    private javax.swing.JTextField textFieldDateDeNaissance;
+    private javax.swing.JTextField textFieldAnneeDeNaissance;
+    private javax.swing.JTextField textFieldJourDeNaissance;
+    private javax.swing.JTextField textFieldMoisDeNaissance;
     private javax.swing.JTextField textFieldNom;
     private javax.swing.JTextField textFieldNomDeJeuneFille;
     private javax.swing.JTextField textFieldPrenom;
