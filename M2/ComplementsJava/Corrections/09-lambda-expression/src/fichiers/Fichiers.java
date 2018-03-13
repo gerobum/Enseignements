@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedList;
-import java.util.Random;
 import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 
@@ -17,8 +15,6 @@ import javax.swing.JFileChooser;
  * arborescence de fichiers ou leurs propriétés.
  */
 public class Fichiers {
-
-    public final static Random RANDOM = new Random();
 
     /*
      * 1. Écrire une méthode pour afficher le chemin absolu de tous les fichiers 
@@ -161,7 +157,7 @@ public class Fichiers {
     public static void afficherTousLesFichiersDeTailleNulleTriés(Path racine) throws IOException {
         Files.walk(racine)
                 .map(p -> p.toFile())
-                .filter(p -> p.length()==53) // En inversant ces deux lignes
+                .filter(p -> p.length()==0) // En inversant ces deux lignes
                 .sorted((a, b) -> a.getName().compareTo(b.getName())) // le calcul est moins rapide. C'est logique, il
                 .map(p -> p.getName()) // vaut mieux trier après filtrage.
                 .forEach(System.out::println);
@@ -208,45 +204,20 @@ public class Fichiers {
                         return a.toFile().getName().compareTo(b.toFile().getName());
                     }
                 })
-                /*.sorted((a,b) -> {
-                 return a.toFile().getName().compareTo(b.toFile().getName());
-                 })*/
+                /*.sorted((a,b) -> (int) (a.toFile().length()-b.toFile().length() == 0 ? 
+                        a.toFile().getName().compareTo(a.toFile().getName()) :
+                        a.toFile().length()-b.toFile().length()))*/
                 .forEach(p -> {
-                    System.out.println(p.toFile().length() + " -> " + p.toFile().getName() + " : " + p);
+                    System.out.println(p.toFile().length() + " -> " + p.toFile().getName()/* + " : " + p*/);
                 });
     }
     
-    public static class DC {
-     
-        public long duree;
-        public long count;   
-    }
     
-    public static Random R = new Random();
     
-    public static DC CompteLesZeros() {
-        DC dc = new DC();
-        long t;
-        
-        t = System.currentTimeMillis();
-        dc.count = R.ints(0, 2000)
-                .limit(20000000)
-                //.sorted()
-                .filter(p -> p < 2)
-                //.sorted()
-                .filter(p -> p % 2 == 0)
-                //.limit(3)
-                //.sorted()
-                .count();
-        
-        dc.duree = System.currentTimeMillis() - t;
-        
-        return dc;
-    }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        /*Path racine;
+        Path racine;
        
        
         JFileChooser jfc = new JFileChooser();
@@ -255,12 +226,8 @@ public class Fichiers {
             racine = jfc.getSelectedFile().toPath();
         } else {
             racine = new File(".").toPath();
-        }*/
+        }
         
-        
-        long td, tf;
-        
-        td = System.currentTimeMillis();
 
         // afficherTousLesFichiersEtDossier(racine);
         // afficherTousLesFichiersEtDossier2(racine);
@@ -271,8 +238,14 @@ public class Fichiers {
         //afficherTousLesFichiersDeTailleNulleTriés(racine);
         // afficherTousLesFichiersCachesDeTailleNulle(racine);
         // System.out.println("Il y a " + nombreDOctets(racine) + " octets à partir de " + racine);
-        // System.out.println("Les fichiers cachés occupent " + nombreDOctetsDesFichiersCaches(racine) + " octets à partir de " + racine);
-        // afficherTousLesFichiersDifferentsDefMaisDeMemeTailleEtDeMemeNom(racine, new File("/home/yvan/AutresSauvegardes/Travail/Enseignement/2012-2013/M2/ComplementsJava/sujet1.html"));
+        // System.out.println("Les fichiers cachés occupent " + nombreDOctetsDesFichiersCaches(racine) + " octets à partir de " + racine); 
+//        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//        File file = null;
+//        if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//            file = jfc.getSelectedFile();
+//        } 
+//        
+//        afficherTousLesFichiersDifferentsDefMaisDeMemeTailleEtDeMemeNom(racine, file);
         // afficherTousLesFichiersRangésParTaille(racine);
         // afficherTousLesFichiersRangésParTailleEtParNom(racine);
         //System.out.println("Il y a " + tousLesFichiersDeTailleNulle(racine).count() + " fichiers de taille nulle");
@@ -281,26 +254,6 @@ public class Fichiers {
         // System.out.println("Il y a " + Files.walk(racine).distinct().count() + " fichiers distincts");
         //tousLesFichiersCachésTriés(racine).forEach(System.out::println);
         //afficherTousLesDossiersDontLaTailleDesFichiersDirectementContenusEstSuperieureAl(racine, 1);
-        // afficherTousLesFichiersRangésParTailleEtParNom(racine);
-        
-        
-        DC dc;
-        double dm = 0;
-        double cm = 0;
-        int n = 20;
-        for(int i = n; i > 0; --i) {
-            dc = CompteLesZeros();
-            dm += dc.duree;
-            cm += dc.count;
-            System.out.println(i+"");
-        }
-        System.out.println("Durée moyenne : " + dm/n);
-        System.out.println("Nb : " + cm/n);
-        
-        
-        
-        tf= System.currentTimeMillis();
-        
-        //System.out.println("Durée " + (tf-td) + " ms");
+        afficherTousLesFichiersRangésParTailleEtParNom(racine);
     }
 }
