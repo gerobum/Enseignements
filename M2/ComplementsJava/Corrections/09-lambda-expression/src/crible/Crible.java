@@ -30,10 +30,10 @@ public class Crible {
         }
     }
     
-    private static void afficherLesNombresPremiersAvant(int n) {
-        int rn = (int) Math.sqrt(n);
-                         
-        filter(IntStream.range(2, n).filter(p->p == 2 || p%2!=0), 3, n).forEach(p -> {System.out.print(p +" ");} );
+    private static void afficherLesNombresPremiersAvant(int n) {               
+        filter(IntStream.range(2, n).
+                filter(p->p == 2 || p%2!=0), 3, n).
+                forEach(p -> {System.out.print(p +" ");} );
     }
     
     
@@ -50,8 +50,8 @@ public class Crible {
 
     public static void main(String[] args) throws NoSuchMethodException {
     
-        //crible(10000);
-        afficherLesNombresPremiersAvant(10000);
+        crible(1_000_000);
+        //afficherLesNombresPremiersAvant(10000);
         
         System.out.println();
     }
