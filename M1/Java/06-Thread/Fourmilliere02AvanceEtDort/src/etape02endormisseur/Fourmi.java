@@ -43,8 +43,8 @@ public class Fourmi extends Thread {
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    int nbs = 5 + random.nextInt(5);
-                    Thread.sleep(nbs * 1000);
+                    int nbs = 5000 + random.nextInt(5001);
+                    Thread.sleep(nbs);
                     bloque = true;
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
@@ -73,7 +73,6 @@ public class Fourmi extends Thread {
                 while(bloque) 
                     wait();
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
             }
         }
     }
