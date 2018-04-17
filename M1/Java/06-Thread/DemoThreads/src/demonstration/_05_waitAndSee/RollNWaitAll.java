@@ -69,13 +69,13 @@ public class RollNWaitAll extends JFrame {
                 while (true) {
                     label.setText(RANDOM.nextInt(10) + "");
                     try {
+                        Thread.sleep(10);
                         // L'attente se fait dans un "while", car le Thread peut être réveillé à tort.
                         while (!cb.isSelected()) {
                             synchronized (RollNWaitAll.this) {
                                 RollNWaitAll.this.wait();
                             }
                         }
-                        Thread.sleep(10);
                     } catch (InterruptedException ex) {}
                 }
             }

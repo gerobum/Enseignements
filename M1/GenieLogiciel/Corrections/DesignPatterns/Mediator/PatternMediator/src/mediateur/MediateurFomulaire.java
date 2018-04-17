@@ -149,6 +149,5 @@ public class MediateurFomulaire {
                 && !"".equals(textFieldAge.getText().trim())
                 && !"".equals(textFieldDateDeNaissance.getText().trim())
         );
-
     }
 }

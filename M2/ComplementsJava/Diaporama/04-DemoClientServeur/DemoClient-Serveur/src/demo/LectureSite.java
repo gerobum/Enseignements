@@ -5,9 +5,7 @@
  */
 package demo;
 
-import com.sun.xml.internal.stream.XMLInputFactoryImpl;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,30 +25,17 @@ public class LectureSite {
 
   public static void main(String[] args) throws MalformedURLException, IOException, XMLStreamException {
     URL url = new URL("http://www.uha.fr");
-    /*URLConnection hc = url.openConnection();
+    URLConnection hc = url.openConnection();
     hc.connect();
     Scanner sc = new Scanner(hc.getInputStream());
     
     while (sc.hasNext()) {
       String ligne = sc.nextLine();
-      //System.out.println(ligne);
-      Matcher m = Pattern.compile(".*href=\"(http[^\"]*)\".*").matcher(ligne);
+      System.out.println(ligne);
+      /*Matcher m = Pattern.compile(".*href=\"(http[^\"]*)\".*").matcher(ligne);
       while (m.find()) {
         System.out.println(m.group(1));
-      }
-    }
-
-    **/
-    HttpURLConnection http = (HttpURLConnection) url.openConnection();
-    http.connect();
-    XMLStreamReader xml = XMLInputFactory.newFactory().createXMLStreamReader(http.getInputStream());
-    
-    
-    
-    
-    while (xml.hasNext()) {
-      String ligne = xml.next()+"";
-      System.err.println(ligne);
+      }*/
     }
   }
 }
