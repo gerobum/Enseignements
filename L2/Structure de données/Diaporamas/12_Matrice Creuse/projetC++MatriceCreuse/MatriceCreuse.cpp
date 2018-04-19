@@ -12,30 +12,30 @@
 using namespace std;
 
 MatriceCreuse::MatriceCreuse() :
-d_valeur(0),
-d_ligne(0),
-d_colonne(0),
-d_nv(0),
-d_nl(0),
-d_nc(0) {
+d_valeur{0},
+d_ligne{0},
+d_colonne{0},
+d_nv{0},
+d_nl{0},
+d_nc{0} {
 }
 
 MatriceCreuse::MatriceCreuse(int nl, int nc) :
-d_valeur(0),
-d_ligne(0),
-d_colonne(0),
-d_nv(0),
-d_nl(nl),
-d_nc(nc) {
+d_valeur{0},
+d_ligne{0},
+d_colonne{0},
+d_nv{0},
+d_nl{nl},
+d_nc{nc} {
 }
 
 MatriceCreuse::MatriceCreuse(const MatriceCreuse& m) :
-d_valeur(new double[m.d_nv]),
-d_ligne(new int[m.d_nv]),
-d_colonne(new int[m.d_nv]),
-d_nv(m.d_nv),
-d_nl(m.d_nl),
-d_nc(m.d_nc) {
+d_valeur{new double[m.d_nv]},
+d_ligne{new int[m.d_nv]},
+d_colonne{new int[m.d_nv]},
+d_nv{m.d_nv},
+d_nl{m.d_nl},
+d_nc{m.d_nc} {
     for (int i = 0; i < d_nv; ++i) {
         d_valeur[i] = m.d_valeur[i];
         d_ligne[i] = m.d_ligne[i];
