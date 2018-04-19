@@ -21,7 +21,7 @@ public class Main {
         Couple<Bidon> cb = new Couple<>(b1, b2);
         
         // Si on enlève les commentaires, la ligne suivante ne compile pas.
-        //System.out.println(max(cb));
+        System.out.println(Couple.maxOK(cb));
         // C'est parce que la méthode max n'a pas été correctement écrite.
         // Celle qui convient est maxOK.
         

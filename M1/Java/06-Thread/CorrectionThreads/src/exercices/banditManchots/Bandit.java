@@ -31,7 +31,7 @@ public class Bandit extends JFrame {
         // L'erreur qui est souvent faite est celle là :
         // On se doute qu'il faut utiliser join() pour attendre
         // la fin des trois threads pour relever le levier.
-        lance.addActionListener(new ActionListener() {
+        /*lance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -66,43 +66,43 @@ public class Bandit extends JFrame {
                 }
 
             }
-        });
+        });*/
 
-//        lance.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                /* L'action lancée par "l'abaissement du levier". */
-//                final Thread t1, t2, t3;
-//                
-//                lance.setEnabled(false);// Le levier doit rester baissé
-//                
-//                t1 = roule(n1); // Récupération de trois threads qui feront "tourner"
-//                t2 = roule(n2); // les "roues"
-//                t3 = roule(n3);
-//                t1.start(); // Le lancement des trois threads
-//                t2.start(); // pour faire "tourner les roues".
-//                t3.start();
-//
-//                // Et enfin, un quatrième thread pour relever le levier au bout moment.
-//                // C'est-à-dire quand la dernière roue à tourner s'arrête.
-//                new Thread() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            // L'outil de synchronisation join() est bien utile pour faire ça.
-//                            t1.join();
-//                            t2.join();
-//                            t3.join();
-//                            
-//                            // Le levier redevient utilisable
-//                            lance.setEnabled(true);
-//                            
-//                        } catch (InterruptedException ex) {
-//                        }
-//                    }
-//                }.start();
-//            }
-//        });
+        lance.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /* L'action lancée par "l'abaissement du levier". */
+                final Thread t1, t2, t3;
+                
+                lance.setEnabled(false);// Le levier doit rester baissé
+                
+                t1 = roule(n1); // Récupération de trois threads qui feront "tourner"
+                t2 = roule(n2); // les "roues"
+                t3 = roule(n3);
+                t1.start(); // Le lancement des trois threads
+                t2.start(); // pour faire "tourner les roues".
+                t3.start();
+
+                // Et enfin, un quatrième thread pour relever le levier au bout moment.
+                // C'est-à-dire quand la dernière roue à tourner s'arrête.
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            // L'outil de synchronisation join() est bien utile pour faire ça.
+                            t1.join();
+                            t2.join();
+                            t3.join();
+                            
+                            // Le levier redevient utilisable
+                            lance.setEnabled(true);
+                            
+                        } catch (InterruptedException ex) {
+                        }
+                    }
+                }.start();
+            }
+        });
     }
 
     /**

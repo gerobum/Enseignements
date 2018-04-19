@@ -3,13 +3,16 @@ package fourmi;
 
 import java.awt.Color;
 import java.util.Random;
-public class Fourmi {
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class Fourmi extends Thread {
 
     private static Random random = new Random();
     private int pasx, pasy;
     private Color couleur;
     private Terrain terrain;
     private int x, y;
+    private boolean stop = false;
 
     /**
      * Créer une fourmi "quelque part" sur le terrain.
@@ -39,6 +42,36 @@ public class Fourmi {
         pasy = random.nextInt(3) - 1;
         couleur = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
         terrain.repaint();
+        start();
+        endormeur();
+    }
+    
+    private void endormeur() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    int duree = random.nextInt(10000)+10000;
+                    Thread.sleep(duree);
+                    stop = true;
+                } catch (InterruptedException ex) {
+                    
+                }
+            }
+        }.start();
+    }
+    
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                while(stop)
+                    synchronized(this) {wait();}
+                avance();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Fourmi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
