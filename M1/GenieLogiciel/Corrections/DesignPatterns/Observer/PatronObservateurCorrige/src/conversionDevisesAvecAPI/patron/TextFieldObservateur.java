@@ -1,4 +1,4 @@
-package conversionDevisesAvecAPI;
+package conversionDevisesAvecAPI.patron;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,11 +11,11 @@ import javax.swing.JTextField;
  *
  * @author Yvan
  */
-public class DeviseJTextField extends JTextField implements Observer {
-    private double valeurPour1Euro;
+public class TextFieldObservateur extends JTextField implements Observer {
+    private final double valeurPour1Euro;
     private double valeur;
-    private Euro sujet;
-    public DeviseJTextField(String devise, double valeurPour1Euro, Euro sujet) {
+    private final Euro sujet;
+    public TextFieldObservateur(String devise, double valeurPour1Euro, Euro sujet) {
         super(30);
         this.valeurPour1Euro = valeurPour1Euro;
         this.sujet = sujet;
@@ -25,7 +25,7 @@ public class DeviseJTextField extends JTextField implements Observer {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                DeviseJTextField source = (DeviseJTextField) e.getSource();
+                TextFieldObservateur source = (TextFieldObservateur) e.getSource();
                 try {
                     double v = Double.parseDouble(source.getText());
                     source.setValeur(v);

@@ -5,6 +5,9 @@
  */
 package conversionDevisesAvecAPI;
 
+import conversionDevisesAvecAPI.patron.Euro;
+import conversionDevisesAvecAPI.patron.TextFieldObservateur;
+import conversionDevisesAvecAPI.patron.SliderObservateur;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -139,7 +142,7 @@ public class Testeur extends JFrame {
             cst.gridy++;
             cst.weightx = 6.0;
             
-            final DeviseJSlider ds = new DeviseJSlider(nomDevise, valeurDevise, euro);
+            final SliderObservateur ds = new SliderObservateur(nomDevise, valeurDevise, euro);
             
             
             panneau.add(ds);
@@ -162,7 +165,7 @@ public class Testeur extends JFrame {
             cst.gridx = 0;
             cst.weightx = 6.0;     
             
-            final DeviseJTextField ds = new DeviseJTextField(nomDevise, valeurDevise, euro);
+            final TextFieldObservateur ds = new TextFieldObservateur(nomDevise, valeurDevise, euro);
          
             panneau.add(ds);
             

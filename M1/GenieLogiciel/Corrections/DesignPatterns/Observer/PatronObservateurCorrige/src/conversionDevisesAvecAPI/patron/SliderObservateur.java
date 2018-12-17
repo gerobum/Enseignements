@@ -1,4 +1,4 @@
-package conversionDevisesAvecAPI;
+package conversionDevisesAvecAPI.patron;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,13 +6,13 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class DeviseJSlider extends JSlider implements Observer {
+public class SliderObservateur extends JSlider implements Observer {
 
   private final double valeurPour1Euro;
   private double valeur;
   private final Euro sujet;
 
-  public DeviseJSlider(String devise, double valeurPour1Euro, Euro sujet) {
+  public SliderObservateur(String devise, double valeurPour1Euro, Euro sujet) {
     super(0, 1000, 0);
     this.valeurPour1Euro = valeurPour1Euro;
     // Le double lien entre l'observeur et l'observé est fait 
@@ -23,7 +23,7 @@ public class DeviseJSlider extends JSlider implements Observer {
     addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
-        DeviseJSlider source = (DeviseJSlider) e.getSource();
+        SliderObservateur source = (SliderObservateur) e.getSource();
         if (source.getValueIsAdjusting()) {
           source.setValeur(getValue());
         }

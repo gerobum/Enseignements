@@ -1,5 +1,8 @@
-package conversionDevises;
+package conversionDevises.patron;
 
+import conversionDevises.patron.Euro;
+import conversionDevises.patron.Observé;
+import conversionDevises.patron.Observateur;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,14 +12,15 @@ import javax.swing.JTextField;
  *
  * @author Yvan
  */
-public class DeviseJTextField extends JTextField implements Observateur {
-    protected String devise;
-    protected double valeurPour1Euro;
-    protected Euro sujet;
-    public DeviseJTextField(String devise, double valeurPour1Euro, Euro sujet) {
+public class TextFieldObservateur extends JTextField implements Observateur {
+    private final String devise;
+    private final double valeurPour1€;
+    private Euro sujet;
+    
+    public TextFieldObservateur(String devise, double valeurPour1€, Euro sujet) {
         super(30);
         this.devise = devise;
-        this.valeurPour1Euro = valeurPour1Euro;
+        this.valeurPour1€ = valeurPour1€;
         this.sujet = sujet;
         sujet.ajoute(this);
         setFont(new Font("Georgia", Font.BOLD, 25));
@@ -24,9 +28,9 @@ public class DeviseJTextField extends JTextField implements Observateur {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                DeviseJTextField source = (DeviseJTextField) e.getSource();
+                TextFieldObservateur source = (TextFieldObservateur) e.getSource();
                 try {
-                    double valeur = Double.parseDouble(source.getText());
+                    double valeur = Double.parseDouble(source.getText().replace("€", ""));
                     
                     source.setValeur(valeur);
                 } catch (NumberFormatException ne) {
@@ -42,11 +46,11 @@ public class DeviseJTextField extends JTextField implements Observateur {
 
     @Override
     public void update() {
-        setText(""+sujet.getValeur()*valeurPour1Euro);
+        setText(sujet.getValeur()*valeurPour1€+"€");
     }
 
     private void setValeur(double valeur) {
-        sujet.setValeur(valeur/valeurPour1Euro);
+        sujet.setValeur(valeur/valeurPour1€);
     }
     
 }

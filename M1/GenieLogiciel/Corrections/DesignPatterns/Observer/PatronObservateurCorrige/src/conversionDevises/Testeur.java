@@ -1,6 +1,9 @@
 
 package conversionDevises;
 
+import conversionDevises.patron.TextFieldObservateur;
+import conversionDevises.patron.SliderObservateur;
+import conversionDevises.patron.Euro;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,13 +47,13 @@ public class Testeur extends JFrame {
                         cst.gridy++;
                         cst.weightx = 6.0;
                         // #### 
-                        centre.add(new DeviseJSlider(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst);                                                
+                        centre.add(new SliderObservateur(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst);                                                
                     } else {
                         cst.gridy++;
                         cst.gridx = 0;
                         cst.weightx = 6.0;
                         // #### 
-                        centre.add(new DeviseJTextField(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst); 
+                        centre.add(new TextFieldObservateur(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst); 
                         cst.gridx = 1;
                         cst.weightx = 1.0;
                         centre.add(new JLabel(dialogue.getDevise()), cst);                                                
@@ -137,13 +140,13 @@ public class Testeur extends JFrame {
                 cst.gridy++;
                 cst.gridx = 0;
                 cst.weightx = 6.0;
-                centre.add(new DeviseJSlider(nomDevise, valeurDevise, euro), cst);                        
+                centre.add(new SliderObservateur(nomDevise, valeurDevise, euro), cst);                        
 
             } else {
                 cst.gridy++;
                 cst.gridx = 0;
                 cst.weightx = 6.0;
-                centre.add(new DeviseJTextField(nomDevise, valeurDevise, euro), cst); 
+                centre.add(new TextFieldObservateur(nomDevise, valeurDevise, euro), cst); 
                 cst.gridx = 1;
                 cst.weightx = 1.0;
                 centre.add(new JLabel(nomDevise), cst);                                                
