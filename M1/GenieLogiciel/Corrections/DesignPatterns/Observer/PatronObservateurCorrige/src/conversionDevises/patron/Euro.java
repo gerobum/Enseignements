@@ -1,4 +1,4 @@
-package conversionDevises;
+package conversionDevises.patron;
 
 /**
  * L'Observé est un Euro. La valeur que l'on considère est une valeur "double"
@@ -6,26 +6,24 @@ package conversionDevises;
  * @author Yvan
  */
 public class Euro extends Observé<Double> {
-    private Double valeur;
+    private Double valeurEn€;
 
     public Euro(Double valeur) {
-        this.valeur = valeur;
+        this.valeurEn€ = valeur;
     }
     /**
      * Donne la valeur de l'observé (le sujet)
      * @return Une valeur en €
      */
-    @Override
     public Double getValeur() {
-        return valeur;
+        return valeurEn€;
     }
     /**
      * Mettre à jour la valeur en €
-     * @param valeur en €
+     * @param valeurEn€ en €
      */
-    @Override
-    public void setValeur(Double valeur) {
-        this.valeur = valeur;
+    public void setValeur(Double valeurEn€) {
+        this.valeurEn€ = valeurEn€;
         notifier();
     } 
 

@@ -1,4 +1,4 @@
-package conversionDevises;
+package conversionDevises.patron;
 
 /**
  * Pour permettre "l'héritage multiple". L'observateur abstrait est une 

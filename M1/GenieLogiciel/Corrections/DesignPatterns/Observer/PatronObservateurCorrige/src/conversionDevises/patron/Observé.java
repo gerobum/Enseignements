@@ -1,6 +1,6 @@
 
 
-package conversionDevises;
+package conversionDevises.patron;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,7 +45,4 @@ public abstract class Observé<T> {
             o.update();
         }
     }  
-   
-    protected abstract Object getValeur();
-    protected abstract void setValeur(T o);
 }

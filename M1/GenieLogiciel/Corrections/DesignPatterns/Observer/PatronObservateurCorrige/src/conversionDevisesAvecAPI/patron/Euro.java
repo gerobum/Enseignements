@@ -1,4 +1,4 @@
-package conversionDevisesAvecAPI;
+package conversionDevisesAvecAPI.patron;
 
 import java.util.Observable;
 
