@@ -58,3 +58,7 @@ captures/
 *.jks
 /M2/ComplementsJava/Corrections/05-StopWatch/nbproject/private/
 /L3/Java/Corrections/08-Redefinition-Des-Methodes-De-Objects/CorrectionExoRedefinitionObjet/nbproject/private/
+/M2/test/target/
+/M2/uneApplicationWeb/target/
+/M2/uneAutreApplicationWeb/target/
+/M2/uneApplicationWebPasOK/target/
