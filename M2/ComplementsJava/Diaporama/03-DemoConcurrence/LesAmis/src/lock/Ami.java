@@ -38,12 +38,12 @@ public class Ami {
     }
 
     public void estSaluéEnRetourPar(Ami ami) {
-        verrou.lock();
-        try {
+        //verrou.lock();
+        //try {
             System.out.println(ami.NOM + " répond a " + NOM);
-        } finally {
-            verrou.unlock();
-        }
+        //} finally {
+        //    verrou.unlock();
+        //}
     }
 
 }

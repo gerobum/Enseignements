@@ -50,7 +50,7 @@ public class Crible {
 
     public static void main(String[] args) throws NoSuchMethodException {
     
-        crible(1_000_000);
+        crible(10_000_000);
         //afficherLesNombresPremiersAvant(10000);
         
         System.out.println();

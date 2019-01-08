@@ -1,7 +1,6 @@
 package crible;
 
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  *
@@ -17,10 +16,16 @@ public class ExplicationCrible {
         IntStream s = IntStream.rangeClosed(2, n);
         int rn = (int) Math.sqrt(n)+1;
         for (int i = 2; i <= rn; ++i) {
-            s = enleveMultiple(s, i);
+            s = enleveMultiple(s, i)/*.peek(x -> {
+                System.out.print("{"+x+"}");
+            })*/;
         }
-        s.forEach(p -> System.out.print(p + " "));
-        System.out.println();
+        //s.forEach(p -> System.out.println(p + " "));
+        //s.count();
+        int limit = n;
+        long topDepart = System.nanoTime();
+        System.out.println("Il y a " + s.count() + " nombres premiers avant " + limit);
+        System.out.println("Le calcul a pris " + ((System.nanoTime() - topDepart)/1_000_000.0) + " ms");
     }
 
     public static void affichageDe2a25sansLesMultiplesDe5() {
@@ -50,7 +55,11 @@ public class ExplicationCrible {
     }
 
     public static void main(String[] args) {
-        //crible(100);
-        affichageDe2a25sansLesMultiplesDe2sauf2();
+        //affichageDe2a25();
+        //affichageDe2a25sansLesMultiplesDe2sauf2();
+        //affichageDe2a25sansLesMultiplesDe3();
+        //affichageDe2a25sansLesMultiplesDe5();
+        
+        crible(1_000_000);
     }
 }

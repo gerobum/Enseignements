@@ -71,7 +71,7 @@ public class StopWatch extends JFrame implements Runnable {
     @Override
     public void run() {
         while (true) {
-            switch (state) {
+            /* #### (1) switch (state) {
                 case READY:
                 case BLOQUED:
                     synchronized (this) {
@@ -90,8 +90,8 @@ public class StopWatch extends JFrame implements Runnable {
                     } catch (InterruptedException ex) {
                     }
 
-            }
-            //state.sync(this);
+            } #### (1)*/
+            /* #### (2) */state.sync(this);/* #### (2) */
         }
     }
 
