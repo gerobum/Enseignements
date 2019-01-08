@@ -14,10 +14,11 @@ import javax.swing.*;
 public class Testeur extends JFrame {
     // #### Le sujet observé peut être déclaré ici
     private final JButton ajout = new JButton("Ajouter une devise");
-    private DialogueAjout dialogue = new DialogueAjout();
-    private GridBagConstraints cst = new GridBagConstraints();
-    private JPanel centre = new JPanel();    
+    private final DialogueAjout dialogue = new DialogueAjout();
+    private final JPanel centre = new JPanel();    
 
+    private GridBagConstraints cst = new GridBagConstraints();
+    
     public Testeur() {
         super("Ajouter ou supprimer des devises");        
         
@@ -58,16 +59,13 @@ public class Testeur extends JFrame {
                     pack();
                 }
             }
-        });
-        
+        });  
         
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
     }
-    
-
     
     public static void main(String[] args) {
         new Testeur();

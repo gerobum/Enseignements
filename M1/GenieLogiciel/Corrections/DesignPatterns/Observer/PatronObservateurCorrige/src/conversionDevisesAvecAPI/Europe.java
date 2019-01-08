@@ -15,7 +15,7 @@ public class Europe {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Testeur(true);
+        new Testeur("europe.devises");
     }
 
 }

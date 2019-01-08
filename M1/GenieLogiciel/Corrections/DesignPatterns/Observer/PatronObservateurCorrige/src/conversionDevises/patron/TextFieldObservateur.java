@@ -1,8 +1,5 @@
 package conversionDevises.patron;
 
-import conversionDevises.patron.Euro;
-import conversionDevises.patron.Observé;
-import conversionDevises.patron.Observateur;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,14 +27,14 @@ public class TextFieldObservateur extends JTextField implements Observateur {
             public void actionPerformed(ActionEvent e) {
                 TextFieldObservateur source = (TextFieldObservateur) e.getSource();
                 try {
-                    double valeur = Double.parseDouble(source.getText().replace("€", ""));
+                    double valeur = Double.parseDouble(source.getText());
                     
                     source.setValeur(valeur);
                 } catch (NumberFormatException ne) {
                 }
             }
         });
- 
+        update();
     }
     @Override
     public void setSujet(Observé sujet) {
@@ -46,7 +43,7 @@ public class TextFieldObservateur extends JTextField implements Observateur {
 
     @Override
     public void update() {
-        setText(sujet.getValeur()*valeurPour1€+"€");
+        setText(sujet.getValeur()*valeurPour1€+"");
     }
 
     private void setValeur(double valeur) {

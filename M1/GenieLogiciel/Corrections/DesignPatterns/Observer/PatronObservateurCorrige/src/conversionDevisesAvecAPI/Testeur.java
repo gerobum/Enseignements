@@ -1,5 +1,5 @@
 /**
-    Les classes Sujet et Observateur que nous avons écrites existent en fait
+ * Les classes Sujet et Observateur que nous avons écrites existent en fait
  * déjà dans l'API Java. Il s'agit de l'interface Observer (qui est notre Observateur)
  * et la classe Observable (qui est notre Sujet abstrait)
  */
@@ -14,8 +14,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,18 +28,23 @@ import javax.swing.JPanel;
 public class Testeur extends JFrame {
 
     private Euro euro = new Euro();
-    private JButton ajout = new JButton("Ajouter une devise");
-    private DialogueAjout dialogue = new DialogueAjout();
+    private final JButton ajout = new JButton("Ajouter une devise");
+    private final DialogueAjout dialogue = new DialogueAjout();
+    private final JPanel centre = new JPanel();
+    
+    private final Font font = new Font("Georgia", Font.BOLD, 25);
     private GridBagConstraints cst = new GridBagConstraints();
-    private JPanel centre = new JPanel();
-    private int nLignes = 0;
 
     public Testeur() {
-        super("Ajouter ou supprimer des devises");
+        this(null);
+    }
 
+    public Testeur(String nomFichier) {
+
+        super("Ajouter ou supprimer des devises");
+        
         cst.fill = GridBagConstraints.BOTH;
-        ajout.setFont(new Font("Georgia", Font.BOLD, 25));
-        int y = 0;
+        ajout.setFont(font);
 
         centre.setLayout(new GridBagLayout());
 
@@ -49,86 +56,58 @@ public class Testeur extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dialogue.setVisible(true);
                 if (dialogue.isOk()) {
-                    ajoutDUneDevise(dialogue.getSousFormeDeSlider(), dialogue.getDevise(), dialogue.getPrixPour1Euro());
+                    if (dialogue.getSousFormeDeSlider()) {
+                        cst.gridx = 0;
+                        cst.gridy++;
+                        cst.weightx = 6.0;
+                        // #### 
+                        centre.add(new SliderObservateur(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst);
+                    } else {
+                        cst.gridy++;
+                        cst.gridx = 0;
+                        cst.weightx = 6.0;
+                        // #### 
+                        centre.add(new TextFieldObservateur(dialogue.getDevise(), dialogue.getPrixPour1Euro(), euro), cst);
+                        cst.gridx = 1;
+                        cst.weightx = 1.0;
+                        JLabel label = new JLabel(dialogue.getDevise());
+                        label.setFont(font);
+                        centre.add(label, cst);
+                    }
                     pack();
                 }
             }
         });
 
-
-
-
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        if (nomFichier != null) {
+            lireFichierDeDevises(nomFichier);
+
+            pack();
+        }
     }
 
-    public Testeur(boolean europe) {
-        this();
-        if (europe) {
-            /*
-            EUR - Euro  	--------  	DEM - Mark allemand  	1.95583
-            FRF - Franc français 	6.55957 	NLG - Florin hollandais 	2.20371
-            BEF/LUF - Franc belge 	40.3399 	FIM - Mark finlandais 	5.94573
-            ITL - Lire italienne 	1936.27 	ATS - Schilling autrichien 	13.7603
-            ESP - Peseta espagnole 	166.386 	IEP - Livre irlandaise 	0.787564
-            PTE - Escudo portugais 	200.482 	GRD - Drachme grec 	340.750
-             */
-            String nom;
-            double valeur;
-            ajoutDUneDevise(false, "€", 1);
-            ajoutDUneDevise(true, "€", 1);
-            ajoutDUneDevise(false, "Franc français", 6.55957);
-            ajoutDUneDevise(true, "Franc français", 6.55957);
-            nom = "Franc belge";
-            valeur = 40.3399;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
+    private void lireFichierDeDevises(String nomFichier) {
+        try {
+            Scanner in = new Scanner(conversionDevises.Testeur.class.getResourceAsStream(nomFichier));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                if (!line.trim().startsWith("#")) {
+                    Scanner sin = new Scanner(line);
+                    sin.useDelimiter(";\\s*");
+                    String nom = sin.next();
+                    double taux = sin.nextDouble();
+                    ajoutDUneDevise(false, nom, taux);
+                    ajoutDUneDevise(true, nom, taux);
+                }
 
-            ajoutDUneDevise(false, "Lire italienne", 1936.27);
-            ajoutDUneDevise(true, "Lire italienne", 1936.27);
-            nom = "Peseta espagnole";
-            valeur = 166.386;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Escudo portugais";
-            valeur = 200.482;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Mark allemand";
-            valeur = 1.95583;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Florin hollandais";
-            valeur = 2.20371;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Mark finlandais";
-            valeur = 5.94573;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Schilling autrichien";
-            valeur = 13.7603;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Livre irlandaise";
-            valeur = 0.787564;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
-
-            nom = "Drachme grec";
-            valeur = 340.750;
-            ajoutDUneDevise(false, nom, valeur);
-            ajoutDUneDevise(true, nom, valeur);
+            }
+        } catch (Exception e) {
+            System.err.println(nomFichier + " n'existe pas.");
         }
-        pack();
     }
 
     private void ajoutDUneDevise(boolean sousFormeDeSlider, String nomDevise, double valeurDevise) {
@@ -141,12 +120,11 @@ public class Testeur extends JFrame {
             cst.gridx = 0;
             cst.gridy++;
             cst.weightx = 6.0;
-            
+
             final SliderObservateur ds = new SliderObservateur(nomDevise, valeurDevise, euro);
-            
-            
+
             panneau.add(ds);
-            
+
             fin.addActionListener(new ActionListener() {
 
                 @Override
@@ -156,19 +134,18 @@ public class Testeur extends JFrame {
                     centre.validate();
                 }
             });
-            
-            
-            centre.add(panneau, cst); 
+
+            centre.add(panneau, cst);
 
         } else {
             cst.gridy++;
             cst.gridx = 0;
-            cst.weightx = 6.0;     
-            
+            cst.weightx = 6.0;
+
             final TextFieldObservateur ds = new TextFieldObservateur(nomDevise, valeurDevise, euro);
-         
+
             panneau.add(ds);
-            
+
             fin.addActionListener(new ActionListener() {
 
                 @Override
@@ -178,12 +155,12 @@ public class Testeur extends JFrame {
                     centre.validate();
                 }
             });
-            
+
             centre.add(panneau, cst);
-            
+
             cst.gridx = 1;
             cst.weightx = 1.0;
-            
+
             centre.add(new JLabel(nomDevise), cst);
         }
     }

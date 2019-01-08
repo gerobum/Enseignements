@@ -1,6 +1,6 @@
 package conversionDevises;
 
-public class Europe {
+public class EuroDollar {
 
     /*
             EUR - Euro  	--------  	DEM - Mark allemand  	1.95583
@@ -11,7 +11,7 @@ public class Europe {
             PTE - Escudo portugais 	200.482 	GRD - Drachme grec 	340.750
      */
     public static void main(String[] args) {
-        new Testeur("europe.devises");
+        new Testeur("euro-dollar-2018-12-22.devises");
     }
 
 }

@@ -32,11 +32,12 @@ public class SliderObservateur extends JSlider implements Observateur {
      * @param sujet
      */
     public SliderObservateur(String devise, double valeurPour1€, Euro sujet) {
-        super(0, 1000);
+        super(0, 5000);
         this.devise = devise;
         this.valeurPour1€ = valeurPour1€;
         this.sujet = sujet;
         sujet.ajoute(this);
+        
 
         addChangeListener(new ChangeListener() {
 
@@ -49,6 +50,7 @@ public class SliderObservateur extends JSlider implements Observateur {
             }
         });
 
+        update();
     }
 
     @Override
