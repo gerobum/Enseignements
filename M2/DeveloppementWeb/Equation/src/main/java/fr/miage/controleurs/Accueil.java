@@ -18,15 +18,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author yvan
  */
   
-@WebServlet(urlPatterns = {"/accueil"})
+//@WebServlet(urlPatterns = {"/equation"})
 public class Accueil extends HttpServlet {    
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     // Récupération de l'éventuel paramètre       
-    //request.getRequestDispatcher("accueil.jsp").forward(request, response); 
+    request.getRequestDispatcher("/WEB-INF/index.html").forward(request, response); 
     
-    response.sendRedirect("accueil.jsp?"+request.getQueryString());
+    //response.sendRedirect("accueil.jsp?"+request.getQueryString());
     //String nom = request.getParameter("nom");
     //nom = nom==null?"":nom;
     // -----------------------------------

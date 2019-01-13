@@ -28,7 +28,7 @@
                     <div class="panel-heading"><h4>Saisie d'une équation du second degré</h4></div>
                     <div class="panel-body">
 
-                        <form method="post" action="/uneApplicationWeb/equation">
+                        <form method="post" action="/equation/2d">
                             <p>
                                 <label for="a">a :</label><!-- < %=modele.getA()% > au lieu de 1 (2) -->
                                 <input type="number" name="a" placeholder="un nombre différent de 0" step="any" value="<%=modele.getA()%>" />

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yvan
  */
-@WebServlet(name = "ControleurEquation", urlPatterns = {"/equation"})
+@WebServlet(name = "ControleurEquation", urlPatterns = {"/2d"})
 public class ControleurEquation extends HttpServlet {
     
     
@@ -35,7 +35,7 @@ public class ControleurEquation extends HttpServlet {
             IEquation equation = new EquationImpl(1, 0, 0); // #### (2)
             ModeleEquation modele = new ModeleEquation(equation.getA(), equation.getB(), equation.getC(), equation.toString());
             request.setAttribute("modele", modele); // #### (2)
-            request.getRequestDispatcher("equation.jsp").forward(request, response); // #### (1)
+            request.getRequestDispatcher("/WEB-INF/equation.jsp").forward(request, response); // #### (1)
         } catch (CoefANul ex) {  // #### (2) 
             // Ici, on est sur qu'il n'y aura pas d'exception car a=1.0 #### (2) 
         } // #### (2)
@@ -52,12 +52,12 @@ public class ControleurEquation extends HttpServlet {
             IEquation equation = new EquationImpl(Double.parseDouble(request.getParameter("a")), Double.parseDouble(request.getParameter("b")), Double.parseDouble(request.getParameter("c"))); // #### (2)
             ModeleEquation modele = new ModeleEquation(equation.getA(), equation.getB(), equation.getC(), equation.toString()); // #### (2)
             request.setAttribute("modele", modele); // #### (2)
-            request.getRequestDispatcher("equation.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/equation.jsp").forward(request, response);
         } catch (CoefANul ex) {
             // #### (3) Il faut gérer l'exception.ModeleEquation modele = new ModeleEquation(equation.getA(), equation.getB(), equation.getC(), equation.toString()); // #### (2)
             ModeleEquation modele = new ModeleEquation(0.0, Double.parseDouble(request.getParameter("b")), Double.parseDouble(request.getParameter("c")), "Le coefficient a ne doit pas être nul"); // #### (2)
             request.setAttribute("modele", modele); // #### (2)
-            request.getRequestDispatcher("equation.jsp").forward(request, response);            
+            request.getRequestDispatcher("/WEB-INF/equation.jsp").forward(request, response);            
         }
     }
 }

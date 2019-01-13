@@ -4,12 +4,4 @@
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
     <display-name>Une application Web</display-name>
-    <servlet>
-        <servlet-name>Controleur</servlet-name>
-        <servlet-class>fr.miage.controleurs.ControleurPrincipal</servlet-class>        
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Controleur</servlet-name>
-        <url-pattern>/controleur-principal</url-pattern>
-    </servlet-mapping>
 </web-app>
