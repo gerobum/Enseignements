@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FlotsDeDonnees {
-
     public static void main(String[] args) throws FileNotFoundException, IOException {
         try (DataOutputStream out = new DataOutputStream(new FileOutputStream("data"))) {
             for (double x = -0.5; x <= 0.5; x += 0.1) {
@@ -24,7 +23,7 @@ public class FlotsDeDonnees {
             System.out.println(in.markSupported());
             try {
                 while (true) {
-                    System.out.printf("%x\n", in.readLong());
+                    System.out.printf("%016X\n", in.readLong());
                 }
             } catch (EOFException e) {
             }
