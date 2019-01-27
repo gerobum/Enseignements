@@ -23,10 +23,12 @@ class C0 {
 
 public class C1 extends C0 {
 
+    @Override
     public void f1() {
         System.out.println("Dans C1");
     }
 
+    @Override
     protected T0 f2() {
         return null;
     }
@@ -39,6 +41,7 @@ public class C1 extends C0 {
 }
 
 class C2 extends C1 {
+    @Override
     public void f1() {
         super.f1();
     }

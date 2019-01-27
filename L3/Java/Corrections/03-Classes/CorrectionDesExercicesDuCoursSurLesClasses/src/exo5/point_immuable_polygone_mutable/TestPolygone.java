@@ -2,10 +2,10 @@
 Écrire une méthode principal main qui
 1. crée deux polygones qui se partageant un côté,
 2. les affiche,
-3. leur applique à chacun une translation différente,
+3. leur applique à chacun la même translation,
 4. les affiche.
  */
-package exo5.immuable;
+package exo5.point_immuable_polygone_mutable;
 
 /**
  *
@@ -28,8 +28,8 @@ public class TestPolygone {
         
         System.out.println("-----------------");
         
-        carre.translater(10, 10);
-        triangle.translater(100, 100);
+        carre.translation(100, 100);
+        triangle.translation(100, 100);
         
         
         carre.afficher();

@@ -13,7 +13,7 @@ public class AutoCompteur {
     private static int nbInstances;
 
     public AutoCompteur() {
-        ++nbInstances;
+        System.out.println(++nbInstances);
     }
 
     // Un getter de classe pour accéder à un attribut de classe.

@@ -30,7 +30,8 @@ public class Premier {
         for (int i = 2; i < EST_PREMIER.length; ++i) {
             EST_PREMIER[i] = true;
         }
-        {
+        {   // JCe bloc ne sert qu'à isoler la variable i
+            // et pouvoir la réutiliser par la suite
             int i = 2;
 
             while (i * i < EST_PREMIER.length) {

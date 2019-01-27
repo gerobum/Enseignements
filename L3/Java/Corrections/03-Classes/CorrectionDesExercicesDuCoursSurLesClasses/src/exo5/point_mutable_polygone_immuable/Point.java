@@ -1,16 +1,7 @@
 /*
-Écrire une classe Point avec :
-1. des attributs x et y de type double, pour les coordonnées cartésiennes.
-2. Des attributs rho et theta de type double, pour les coordonnées polaires.
-3. La possibilité de le construire par défaut (0,0).
-4. La possibilité de le construire en donnant les coordonnées cartésiennes.
-5. La possibilité de le construire en donnant les coordonnées polaires.
-6. Tous les setters et tous les getters.
-7. Une méthode pour lui appliquer une translation.
-8. Une méthode pour lui appliquer une rotation par rapport à l’origine.
-9. Une méthode pour l’afficher sur la sortie standard.
+Simple copie de Point mutable (rien à changer)
  */
-package exo5.mutable;
+package exo5.point_mutable_polygone_immuable;
 
 import static java.lang.Math.*;
 
@@ -91,13 +82,13 @@ public class Point {
         p2c();
     }
     
-    public void translater(double dx, double dy) {
+    public void translation(double dx, double dy) {
         x += dx;
         y += dy;
         c2p();
     }
     
-    public void tourner(double dtheta) {
+    public void rotation(double dtheta) {
         theta += dtheta;
         p2c();
     }

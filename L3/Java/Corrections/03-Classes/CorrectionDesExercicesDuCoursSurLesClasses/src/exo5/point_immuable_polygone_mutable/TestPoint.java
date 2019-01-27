@@ -1,5 +1,5 @@
 
-package exo5.immuable;
+package exo5.point_immuable_polygone_mutable;
 
 import static java.lang.Math.*;
 
@@ -15,7 +15,7 @@ public class TestPoint {
         p11.afficher(true);
         for (int i = 0; i < 8; i++) {
             System.out.println();
-            p11= p11.tourner(PI/4);
+            p11= p11.rotation(PI/4);
             p11.afficher();
             p11.afficher(true);
         }
