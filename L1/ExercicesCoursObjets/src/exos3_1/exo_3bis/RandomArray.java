@@ -1,5 +1,5 @@
 
-package part1.exo03;
+package exos3_1.exo_3bis;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package part1.exo05;
+package exos3_2;
 
 import java.util.Scanner;
 
