@@ -110,6 +110,57 @@ static int imini(int[] t, int p) {
     return imini;
 }
 
+static void échange(int[] t, int a, int b) {
+    int x = t[a];
+    t[a] = t[b];
+    t[b] = x;
+}
+
+static void tri(int[] t) {
+    for(int i = 0; i < t.length-1; ++i) {
+        int im = imini(t, i);
+        échange(t, i, im);
+    }
+}
+
+static void testTri() { 
+    int[] t = new int[10];
+    for(int i = 0; i < 5; ++i) {
+        remplissageAuHasard(t);
+        System.out.print("avant : "); affichage(t);
+        tri(t);
+        System.out.print("après : "); affichage(t);
+        if (estTrié(t)) {
+            System.out.println("(Trié)");
+        } else {
+            System.out.println("[Pas trié]");
+            System.exit(0);
+        }
+    }
+}
+
+static void afficher3PlusPetit(int[] t) {
+    int im;
+    im = imini(t, 0);
+    System.out.println("Voilà pour le premier : " + t[im]);
+    échange(t, 0, im);
+    im = imini(t, 1);
+    System.out.println("Voilà pour le second  : " + t[im]);
+    échange(t, 1, im);
+    im = imini(t, 2);
+    System.out.println("Et enfin le troisième : " + t[im]);
+    System.out.print("Affichons le tableau pour voir : ");
+    affichage(t);
+}
+
+static boolean estTrié(int[] t) {
+    for(int i = 0; i < t.length-1; ++i) {
+        if (t[i] > t[i+1])
+            return false;
+    }
+    return true;
+}
+
     public static void main(String[] argv) {
         /*int t[] = {5, 1, 4, 2, 3};
         for (int i = 0; i < t.length; ++i) {
@@ -119,6 +170,16 @@ static int imini(int[] t, int p) {
         }*/
         testMini();
         testiMini();
+        
+        int t[] = {5, 1, 4, 2, 3};
+        
+        //afficher3PlusPetit(t);
+        //System.out.print("avant : ");affichage(t);
+        //tri(t);
+        //System.out.print("après : ");affichage(t);
+        
+        testTri();
+        
     }
 
 
