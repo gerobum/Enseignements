@@ -54,7 +54,7 @@ public final class Fraction {
             System.out.println(numérateur + "/" + dénominateur);
         }
     }
-    
+
     public Fraction opposé() {
         try {
             return new Fraction(-numérateur, dénominateur);
@@ -62,7 +62,7 @@ public final class Fraction {
             throw new SituationImpossible();// IllegalStateException
         }
     }
-    
+
     public Fraction inverse() throws InversionFractionNulle {
         try {
             return new Fraction(dénominateur, numérateur);
@@ -70,28 +70,28 @@ public final class Fraction {
             throw new InversionFractionNulle();
         }
     }
-    
+
     public Fraction plus(Fraction f) {
         int ppcm = ppcm(dénominateur, f.dénominateur);
         try {
-            return new Fraction(numérateur*ppcm/dénominateur+f.numérateur*ppcm/f.dénominateur, ppcm);
+            return new Fraction(numérateur * ppcm / dénominateur + f.numérateur * ppcm / f.dénominateur, ppcm);
         } catch (DénominateurNul ex) {
             throw new SituationImpossible();
         }
     }
-    
+
     public Fraction fois(Fraction f) {
         try {
-            return new Fraction(numérateur*f.numérateur, dénominateur*f.dénominateur);
+            return new Fraction(numérateur * f.numérateur, dénominateur * f.dénominateur);
         } catch (DénominateurNul ex) {
             throw new SituationImpossible();
         }
     }
-    
+
     public Fraction moins(Fraction f) {
         return plus(f.opposé());
     }
-    
+
     public Fraction diviséPar(Fraction f) throws DivisionParUneFractionNulle {
         try {
             return fois(f.inverse());

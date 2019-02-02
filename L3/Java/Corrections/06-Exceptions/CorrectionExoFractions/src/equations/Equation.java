@@ -5,6 +5,7 @@
  */
 package equations;
 
+import exceptions.PasUneEquationDuPremierDegré;
 import exceptions.DivisionParUneFractionNulle;
 import fractions.Fraction;
 
@@ -18,7 +19,7 @@ import fractions.Fraction;
  *    2. l'ensemble des solutions est Q    => getNbSolutions() rend -1 (par convention)
  * @author yvan
  */
-public class Equation {
+public final class Equation {
 
     private Fraction x = null;
     private int nbSolutions;
@@ -29,17 +30,18 @@ public class Equation {
      * @param b une fraction de type Fraction
      * @param c une fraction de type Fraction
      */
-    public Equation(Fraction a, Fraction b, Fraction c) {
-        try {
+    public Equation(Fraction a, Fraction b, Fraction c) throws DivisionParUneFractionNulle /* throws PasUneEquationDuPremierDegré */ {
+        //try {
             x = c.moins(b).diviséPar(a);
             nbSolutions = 1;
-        } catch (DivisionParUneFractionNulle ex) {
+        /*} catch (DivisionParUneFractionNulle ex) {
             if (b.numérateur == c.numérateur && b.dénominateur == c.dénominateur) {
                 nbSolutions = -1;
             } else {
                 nbSolutions = 0;
             }
-        }
+            //throw new PasUneEquationDuPremierDegré();
+        }*/
     }
 
     public Fraction getX() {

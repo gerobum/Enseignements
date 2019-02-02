@@ -102,7 +102,7 @@ public final class Polygone {
     Nous avons eu quelques difficultés à écrire les méthodes translations et 
     rotations qui se sont révélées pas très naturelles.
     
-    Mais en plus, l'apparent anodine getSommet(int) se révèle un piège.
+    Mais en plus, l'apparemment anodine getSommet(int) se révèle un piège.
     En effet, en retourne sommets[i], on retourne la référence d'un Point
     qui, lui, est mutable. Rien n'empêche un utilisateur d'écrire
     
@@ -125,13 +125,13 @@ public final class Polygone {
     /* 
     Et ce n'est pas fini, car le constructeur lui-même est piégeux. Comme on lui
     envoie des points mutables, on ne sait pas du tout ce que l'utilisateur en fera.
-    Il peut très les utiliser dans son programme pour autre chose et être amené
+    Il peut très bien les utiliser dans son programme pour autre chose et être amené
     à un moment ou un autre de les modifier. Pourquoi s'en priverait-il ? Ils 
     sont mutables.
     */
     public Polygone(Point a, Point b, Point c, Point... lp) {
         sommets = new Point[3+lp.length];
-        // Il ne faut pas copier a, mais une copie de a
+        // Il ne faut pas enregistrer a, mais une copie de a
         sommets[0] = new Point(a.getX(), a.getY());
         // Et c'est la même pour les autres.
         sommets[1] = new Point(b.getX(), b.getY());
