@@ -32,6 +32,7 @@
                     <p>
                         <label for="pseudo">Pseudo : </label>
                         <input type="text" id="pseudo" name="pseudo" value="${form.pseudo}"/>
+                        <c:if test="${form.pseudo==''}"><label for="pseudo">Pseudo absent</label></c:if>
                     </p>
                     <p>
                         <label for="age">Age : </label>

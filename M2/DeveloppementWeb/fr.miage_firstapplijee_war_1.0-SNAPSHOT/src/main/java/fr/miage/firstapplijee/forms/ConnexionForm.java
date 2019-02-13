@@ -1,5 +1,6 @@
 package fr.miage.firstapplijee.forms;
 
+import fr.miage.firstapplijee.metier.Personne;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -9,33 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 public class ConnexionForm {
 
     private String pseudo;
-    private int age;
+    private String age;
     private boolean connecte;
     private String message;
     private String code;
+    private boolean pseudoAbsent;
+    private boolean ageErronne;
+    private Personne personne;
+
+    public boolean isPseudoAbsent() {
+        return pseudoAbsent;
+    }
+
+    public void setPseudoAbsent(boolean pseudoAbsent) {
+        this.pseudoAbsent = pseudoAbsent;
+    }
 
     public ConnexionForm() {
-        this.pseudo = "";
-        this.age = -1;
-        this.connecte = false;
-        this.message = "Entre ton pseudo, ton âge et le code secret.";
     }
 
-    public ConnexionForm(String pseudo, int age, boolean connecte, String message) {
-        this.pseudo = pseudo;
-        this.age = age;
-        this.connecte = connecte;
-        this.message = message;
-    }
-
-    public ConnexionForm(String pseudo, int age, boolean connecte, String message, String code) {
-        this.pseudo = pseudo;
-        this.age = age;
-        this.connecte = connecte;
-        this.message = message;
-        this.code = code;
-    }
-    
     public String getPseudo() {
         return pseudo;
     }
@@ -44,12 +37,20 @@ public class ConnexionForm {
         this.pseudo = pseudo;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
     }
 
     public boolean isConnecte() {
@@ -75,36 +76,46 @@ public class ConnexionForm {
     public void setCode(String code) {
         this.code = code;
     }
-    
-    
 
     public static void handle(HttpServletRequest request) {
-        String pseudo;
-        pseudo = request.getParameter("pseudo");
+
+        ConnexionForm form = new ConnexionForm();
+        form.pseudo = request.getParameter("pseudo");
         int age;
         try {
-            age = Integer.parseInt(request.getParameter("age"));
+            form.age = request.getParameter("age");
+            age = Integer.parseInt(form.age);
+            form.ageErronne = false;
         } catch (NumberFormatException ex) {
+            form.ageErronne = true;
             age = -1;
         }
         String code = request.getParameter("code");
         boolean connecte = false;
-        String message;
-
-        if (age < 0 || age > 150) {
-            message = "Âge incorrect ! Corrigez et tapez le code secret";
-        } else if (age < 10) {
-            message = "Vous êtes trop jeune.";
-        } else if (pseudo == null || pseudo.isEmpty()) {
-            message = "Pseudo incorrect ! Corrigez et tapez le code secret";
+        
+        if (form.pseudo == null || form.pseudo.isEmpty()) {
+            form.message = "Pseudo incorrect ! Corrigez et tapez le code secret";
         } else if ("Vive Java".equals(code)) {
             connecte = true;
-            message = "Vous êtes connecté";
+            form.message = "Vous êtes connecté";
         } else {
-            message = "Code incorrect ! Retapez-le";
+            form.message = "Code incorrect ! Retapez-le";
         }
+         
+        
+        if (form.ageErronne) {
+            form.message = "Âge erronné";
+        } else {
+            if (age < 0 || age > 150) {
+                form.message = "Âge incorrect ! Corrigez et tapez le code secret";
+            } else if (age < 10) {
+                form.message = "Vous êtes trop jeune.";
+            }
+        } 
 
-        request.getSession().setAttribute("form", new ConnexionForm(pseudo, age, connecte, message, code));
+        form.connecte = connecte;
+
+        request.getSession().setAttribute("form", form);
     }
 
 }
