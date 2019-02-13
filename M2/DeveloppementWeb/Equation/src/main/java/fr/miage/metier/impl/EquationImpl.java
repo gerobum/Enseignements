@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fr.miage.metier.impl;
 
 import fr.miage.metier.CoefANul;
@@ -18,7 +14,6 @@ public class EquationImpl implements IEquation {
     public final double b;
     public final double c;
     public final int nbRacines;
-    private double delta;
     public final Double x1;
     public final Double x2;
 
@@ -28,7 +23,7 @@ public class EquationImpl implements IEquation {
         this.b = b;
         this.c = c;
         
-        delta = b*b-4*a*c;
+        double delta = b*b-4*a*c;
         Double x1, x2;
         if (delta < 0) {
             this.nbRacines = 0;
@@ -46,8 +41,6 @@ public class EquationImpl implements IEquation {
         this.x2 = x2;
     }
     
-    
-
     @Override
     public int getNbRacines() {
         return nbRacines;

@@ -33,11 +33,7 @@
                                 <label for="a">a :</label><!-- < %=modele.getA()% > au lieu de 1 (2) -->
                                 <input type="number" name="a" placeholder="un nombre différent de 0" step="any" value="<%=modele.getA()%>" />
                                 <!-- (4) Pour tenir compte de cet impératif -->
-                                <%
-                                    if(modele.getA()==0) {
-                                        out.print("<label for=\"a\">doit être différent de 0</label>");
-                                    }
-                                %>
+                 
                                 <!-- (4) Mais il faut faire attention, on ne fait plus comme ça -->
                             </p>
                             <p>
