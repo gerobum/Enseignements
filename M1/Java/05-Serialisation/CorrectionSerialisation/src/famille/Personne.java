@@ -2,8 +2,7 @@
 package famille;
 
 import java.io.*;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 /**
  * @author Yvan
@@ -14,14 +13,14 @@ public class Personne implements Serializable {
     public final String nom;
     public final String prenom;
     private int numeroDeSecu;
-    private Date naissance;
+    private LocalDate naissance;
     private transient int age; 
     private static int population = 0;
     public final boolean monsieur;
     private Personne parent;
     private Personne enfant;
 
-    public Personne(String prenom, String nom, Date naissance, boolean monsieur) {
+    public Personne(String prenom, String nom, LocalDate naissance, boolean monsieur) {
         this.nom = nom;
         this.prenom = prenom;
         this.naissance = naissance;
@@ -36,17 +35,12 @@ public class Personne implements Serializable {
     }
 
     public Personne(String prenom, String nom, int jourNaissance, int moisNaissance, int anneeNaissance, boolean monsieur) {
-        this(prenom, nom, new GregorianCalendar(anneeNaissance, moisNaissance, jourNaissance).getTime(), monsieur);
+        this(prenom, nom, LocalDate.of(anneeNaissance, moisNaissance, jourNaissance), monsieur);
     }
 
     public final void calculerAge() {
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(naissance);
-        int annee_naissance = gc.get(GregorianCalendar.YEAR);
-        gc.setTime(new Date());
-        int annee_aujourdhui = gc.get(GregorianCalendar.YEAR);
 
-        age = annee_aujourdhui - annee_naissance;
+        age = LocalDate.now().getYear()-naissance.getYear();
     }
 
     @Override
@@ -107,8 +101,8 @@ public class Personne implements Serializable {
         return population;
     }
 
-    // Enlever ces commentaires pour que ça fonctionne complètement.
-    /*private void writeObject(ObjectOutputStream out) throws IOException {
+    // Sans ces deux méthodes, l'âge et la population ne sont pas restitués
+    private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
         out.writeInt(population);
     }
@@ -116,6 +110,6 @@ public class Personne implements Serializable {
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         calculerAge();
-        population = in.readInt(); // Ou mieux (population++;)
-    }*/
+        population++;
+    }
 }

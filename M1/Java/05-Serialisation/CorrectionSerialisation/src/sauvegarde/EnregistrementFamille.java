@@ -7,10 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-/**
- *
- * @author maillot
- */
 public class EnregistrementFamille {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         Personne jean_phillipe = new Personne("Jean-phillipe", "Hervitmonslip", 10, 11, 1902, true);
@@ -23,7 +19,6 @@ public class EnregistrementFamille {
         alain.setEnfant(alex);
         alex.setEnfant(nicole);
         nicole.setEnfant(gerard);
-
 
         System.out.println(alex.genealogie());
 
