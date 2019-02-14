@@ -81,6 +81,7 @@ public class ConnexionForm {
 
         ConnexionForm form = new ConnexionForm();
         form.pseudo = request.getParameter("pseudo");
+        form.connecte = false;
         int age;
         try {
             form.age = request.getParameter("age");
@@ -91,29 +92,28 @@ public class ConnexionForm {
             age = -1;
         }
         String code = request.getParameter("code");
-        boolean connecte = false;
-        
-        if (form.pseudo == null || form.pseudo.isEmpty()) {
-            form.message = "Pseudo incorrect ! Corrigez et tapez le code secret";
-        } else if ("Vive Java".equals(code)) {
-            connecte = true;
-            form.message = "Vous êtes connecté";
-        } else {
-            form.message = "Code incorrect ! Retapez-le";
-        }
-         
-        
+
         if (form.ageErronne) {
             form.message = "Âge erronné";
+            form.connecte = false;
         } else {
             if (age < 0 || age > 150) {
                 form.message = "Âge incorrect ! Corrigez et tapez le code secret";
             } else if (age < 10) {
                 form.message = "Vous êtes trop jeune.";
+            } else {
+                if (form.pseudo == null || form.pseudo.isEmpty()) {
+                    form.message = "Pseudo incorrect ! Corrigez et tapez le code secret";
+                    form.connecte = false;
+                } else if ("Vive Java".equals(code)) {
+                    form.connecte = true;
+                    form.message = "Vous êtes connecté";
+                } else {
+                    form.message = "Code incorrect ! Retapez-le";
+                    form.connecte = false;
+                }
             }
-        } 
-
-        form.connecte = connecte;
+        }
 
         request.getSession().setAttribute("form", form);
     }
