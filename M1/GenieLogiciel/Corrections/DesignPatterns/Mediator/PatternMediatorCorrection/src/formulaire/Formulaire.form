@@ -29,7 +29,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="listCivilite" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -72,8 +72,12 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="boutonReFaire" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="boutonToutDefaire" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="boutonRefaire" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="boutonToutRefaire" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="boutonOK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -124,7 +128,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="boutonAnnuler" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="boutonOK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="boutonReFaire" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boutonToutRefaire" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boutonRefaire" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boutonToutDefaire" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -244,13 +250,23 @@
         <Property name="toolTipText" type="java.lang.String" value="aaaa"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="boutonReFaire">
+    <Component class="javax.swing.JButton" name="boutonToutRefaire">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&gt;|"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonToutRefaireActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="boutonRefaire">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonReFaireActionPerformed"/>
-      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="boutonToutDefaire">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="|&lt;"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

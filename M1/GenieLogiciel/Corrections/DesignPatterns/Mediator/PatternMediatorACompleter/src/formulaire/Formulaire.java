@@ -11,6 +11,10 @@
 
 package formulaire;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author yvan
@@ -24,8 +28,6 @@ public class Formulaire extends javax.swing.JFrame {
         
         groupeGenre.add(radioButtonFemimin);
         groupeGenre.add(radioButtonMasculin);
-
-
 
     }
 
@@ -242,5 +244,6 @@ public class Formulaire extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldNomDeJeuneFille;
     private javax.swing.JTextField textFieldPrenom;
     // End of variables declaration//GEN-END:variables
+
 
 }

@@ -1,20 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
- /*
- * Formulaire.java
- *
- * Created on 20 mars 2011, 11:52:49
- */
 package formulaire;
 
 import commande.Command;
 import commande.SetTextCommand;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FocusTraversalPolicy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -58,7 +45,9 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
         textFieldMoisDeNaissance = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         textFieldAnneeDeNaissance = new javax.swing.JTextField();
-        boutonReFaire = new javax.swing.JButton();
+        boutonToutRefaire = new javax.swing.JButton();
+        boutonRefaire = new javax.swing.JButton();
+        boutonToutDefaire = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,12 +103,16 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
         textFieldAnneeDeNaissance.setColumns(4);
         textFieldAnneeDeNaissance.setToolTipText("aaaa");
 
-        boutonReFaire.setText(">");
-        boutonReFaire.addActionListener(new java.awt.event.ActionListener() {
+        boutonToutRefaire.setText(">|");
+        boutonToutRefaire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonReFaireActionPerformed(evt);
+                boutonToutRefaireActionPerformed(evt);
             }
         });
+
+        boutonRefaire.setText(">");
+
+        boutonToutDefaire.setText("|<");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +120,7 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(listCivilite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
@@ -161,8 +154,12 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
                                         .addComponent(jLabel2)
                                         .addGap(4, 4, 4)
                                         .addComponent(textFieldAnneeDeNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(boutonReFaire)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(boutonToutDefaire)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boutonRefaire)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(boutonToutRefaire)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(boutonOK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -205,7 +202,9 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boutonAnnuler)
                     .addComponent(boutonOK)
-                    .addComponent(boutonReFaire))
+                    .addComponent(boutonToutRefaire)
+                    .addComponent(boutonRefaire)
+                    .addComponent(boutonToutDefaire))
                 .addContainerGap())
         );
 
@@ -220,15 +219,16 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldMoisDeNaissanceActionPerformed
 
-    private void boutonReFaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonReFaireActionPerformed
+    private void boutonToutRefaireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonToutRefaireActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_boutonReFaireActionPerformed
+    }//GEN-LAST:event_boutonToutRefaireActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Formulaire().setVisible(true);
             }
@@ -238,7 +238,9 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boutonAnnuler;
     private javax.swing.JButton boutonOK;
-    private javax.swing.JButton boutonReFaire;
+    private javax.swing.JButton boutonRefaire;
+    private javax.swing.JButton boutonToutDefaire;
+    private javax.swing.JButton boutonToutRefaire;
     private javax.swing.ButtonGroup groupeGenre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -260,6 +262,7 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
     // End of variables declaration//GEN-END:variables
 
     private ArrayList<Command> commandes = new ArrayList<>();
+    private Iterator<Command> commandIterator = null;
 
     /**
      * Creates new form Formulaire
@@ -269,6 +272,9 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
 
         groupeGenre.add(radioButtonFemimin);
         groupeGenre.add(radioButtonMasculin);
+
+        boutonRefaire.setEnabled(false);
+        boutonToutRefaire.setEnabled(false);
 
         radioButtonMasculin.addActionListener(this);
         radioButtonFemimin.addActionListener(this);
@@ -288,88 +294,122 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
         textFieldNomDeJeuneFille.addFocusListener(this);
         textFieldPrenom.addFocusListener(this);
         listCivilite.addActionListener(this);
-        boutonReFaire.addActionListener(new ActionListener() {
+        boutonToutRefaire.addActionListener(this);
+        boutonRefaire.addActionListener(this);
+        boutonToutDefaire.addActionListener(this);
+
+    }
+
+    private void radioButtonMasculinActionPerformed() {
+        textFieldNomDeJeuneFille.setText("");
+        textFieldNomDeJeuneFille.setVisible(false);
+        labelNomDeJeuneFille.setVisible(false);
+        listCivilite.removeActionListener(Formulaire.this);
+        listCivilite.setSelectedIndex(3);
+        listCivilite.addActionListener(Formulaire.this);
+        commandes.add(new Command() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Iterator<Command> i = commandes.iterator();
-                while (i.hasNext()) {
-                    i.next().execute();
-                }
-                /*for(int i = 0; i < commandes.size(); ++i) {
-                    commandes.get(i).execute();
-                }*/
+            public void execute() {
+                radioButtonMasculin.setSelected(true);
             }
         });
+    }
 
+    private void radioButtonFemininActionPerformed() {
+        textFieldNomDeJeuneFille.setVisible(true);
+        labelNomDeJeuneFille.setVisible(true);
+        listCivilite.removeActionListener(Formulaire.this);
+        listCivilite.setSelectedIndex(0);
+        listCivilite.addActionListener(Formulaire.this);
+        commandes.add(new Command() {
+            @Override
+            public void execute() {
+                radioButtonMasculinActionPerformed();
+            }
+        });
+    }
+
+    private void boutonAnnulerActionPerformed() {
+        textFieldNomDeJeuneFille.setVisible(true);
+        labelNomDeJeuneFille.setVisible(true);
+        listCivilite.removeActionListener(Formulaire.this);
+        listCivilite.setSelectedIndex(0);
+        listCivilite.addActionListener(Formulaire.this);
+        boutonOK.setEnabled(false);
+        textFieldAge.setText("");
+        textFieldAnneeDeNaissance.setText("");
+        textFieldJourDeNaissance.setText("");
+        textFieldMoisDeNaissance.setText("");
+        textFieldNom.setText("");
+        textFieldNomDeJeuneFille.setText("");
+        textFieldPrenom.setText("");
+        groupeGenre.clearSelection();
+        commandIterator = commandes.iterator();
+        boutonToutRefaire.setEnabled(true);
+        boutonRefaire.setEnabled(true);
+    }
+
+    private void boutonToutRefaireActionPerformed() {
+        Iterator<Command> i = commandes.iterator();
+        while (i.hasNext()) {
+            i.next().execute();
+        }
+        boutonRefaire.setEnabled(false);
+        boutonToutRefaire.setEnabled(false);
+    }
+
+    private void boutonRefaireActionPerformed() {
+        if (commandIterator.hasNext()) {
+            commandIterator.next().execute();
+        } else {
+            boutonRefaire.setEnabled(false);
+            boutonToutRefaire.setEnabled(false);
+        }
+    }
+
+    private void listCiviliteActionPerformed() {
+        switch (listCivilite.getSelectedIndex()) {
+            case 1:
+                textFieldNomDeJeuneFille.setVisible(false);
+                labelNomDeJeuneFille.setVisible(false);
+                textFieldNomDeJeuneFille.setText("");
+                radioButtonFemimin.setSelected(true);
+                break;
+            case 2:
+                textFieldNomDeJeuneFille.setVisible(true);
+                labelNomDeJeuneFille.setVisible(true);
+                textFieldNomDeJeuneFille.setText("");
+                radioButtonFemimin.setSelected(true);
+                break;
+            case 3:
+                textFieldNomDeJeuneFille.setVisible(false);
+                labelNomDeJeuneFille.setVisible(false);
+                textFieldNomDeJeuneFille.setText("");
+                radioButtonMasculin.setSelected(true);
+                break;
+        }
+        commandes.add(new SelectCivility(listCivilite.getSelectedIndex()));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == radioButtonMasculin) {
-            textFieldNomDeJeuneFille.setText("");
-            textFieldNomDeJeuneFille.setVisible(false);
-            labelNomDeJeuneFille.setVisible(false);
-            listCivilite.removeActionListener(Formulaire.this);
-            listCivilite.setSelectedIndex(3);
-            listCivilite.addActionListener(Formulaire.this);
-            commandes.add(new Command() {
-                @Override
-                public void execute() {
-                    radioButtonMasculin.setSelected(true);
-                }
-            });
+            radioButtonMasculinActionPerformed();
         } else if (e.getSource() == radioButtonFemimin) {
-            textFieldNomDeJeuneFille.setVisible(true);
-            labelNomDeJeuneFille.setVisible(true);
-            listCivilite.removeActionListener(Formulaire.this);
-            listCivilite.setSelectedIndex(0);
-            listCivilite.addActionListener(Formulaire.this);
-            commandes.add(new Command() {
-                @Override
-                public void execute() {
-                    radioButtonMasculin.setSelected(true);
-                }
-            });
+            radioButtonFemininActionPerformed();
         } else if (e.getSource() == boutonAnnuler) {
-            textFieldNomDeJeuneFille.setVisible(true);
-            labelNomDeJeuneFille.setVisible(true);
-            listCivilite.removeActionListener(Formulaire.this);
-            listCivilite.setSelectedIndex(0);
-            listCivilite.addActionListener(Formulaire.this);
-            boutonOK.setEnabled(false);
-            textFieldAge.setText("");
-            textFieldAnneeDeNaissance.setText("");
-            textFieldJourDeNaissance.setText("");
-            textFieldMoisDeNaissance.setText("");
-            textFieldNom.setText("");
-            textFieldNomDeJeuneFille.setText("");
-            textFieldPrenom.setText("");
-            groupeGenre.clearSelection();
+            boutonAnnulerActionPerformed();
         } else if (e.getSource() instanceof JTextField) {
             JTextField jtf = (JTextField) e.getSource();
             commandes.add(new SetTextCommand(jtf, jtf.getText()));
         } else if (e.getSource() == listCivilite) {
-            switch (listCivilite.getSelectedIndex()) {
-                case 1:
-                    textFieldNomDeJeuneFille.setVisible(false);
-                    labelNomDeJeuneFille.setVisible(false);
-                    textFieldNomDeJeuneFille.setText("");
-                    radioButtonFemimin.setSelected(true);
-                    break;
-                case 2:
-                    textFieldNomDeJeuneFille.setVisible(true);
-                    labelNomDeJeuneFille.setVisible(true);
-                    textFieldNomDeJeuneFille.setText("");
-                    radioButtonFemimin.setSelected(true);
-                    break;
-                case 3:
-                    textFieldNomDeJeuneFille.setVisible(false);
-                    labelNomDeJeuneFille.setVisible(false);
-                    textFieldNomDeJeuneFille.setText("");
-                    radioButtonMasculin.setSelected(true);
-                    break;
-            }
-            commandes.add(new SelectCivility(listCivilite.getSelectedIndex()));
+            listCiviliteActionPerformed();
+        } else if (e.getSource() == boutonToutDefaire) {
+            boutonAnnulerActionPerformed();
+        } else if (e.getSource() == boutonToutRefaire) {
+            boutonToutRefaireActionPerformed();
+        } else if (e.getSource() == boutonRefaire) {
+            boutonRefaireActionPerformed();
         }
     }
 
@@ -395,7 +435,7 @@ public class Formulaire extends javax.swing.JFrame implements ActionListener, Fo
 
         @Override
         public void execute() {
-            
+
             listCivilite.removeActionListener(Formulaire.this);
             listCivilite.setSelectedIndex(pos);
             switch (pos) {

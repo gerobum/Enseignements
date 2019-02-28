@@ -17,7 +17,7 @@ public class EquationTest {
     private static final double EPSILON = 1e-7;
     
     private int getCoef(final int LIM) {
-        // La probabilité d'avoir un discriminant nul est d'autant plus faible
+        // La probabilitÃ© d'avoir un discriminant nul est d'autant plus faible
         // que la plage est grande. Si vous augmentez trop cette plage, 
         return LIM - RANDOM.nextInt(2*LIM+1);
     }
@@ -26,14 +26,14 @@ public class EquationTest {
     public void testSomeMethod() {
         int a = 0, b, c;
         int a0 = 0, n0 = 0, n1 = 0, n2 = 0;
-        // La probabilité d'avoir un discriminant nul est faible.
+        // La probabilitÃ© d'avoir un discriminant nul est faible.
         for (int i = 0; i < 1000000 || a0 < 10 || n0 < 10 || n1 < 5 || n2 < 10; i++) {
             try {
                 a = getCoef(1000);
                 b = getCoef(1000);
                 c = getCoef(1000);
                 Equation e = new Equation(a, b, c);
-                assertTrue("a devrait ?tre différent de 0", a != 0);
+                assertTrue("a devrait Ãªtre diffÃ©rent de 0", a != 0);
                 switch (e.nbRacines) {
                     case 1:
                         assertEquals(e.toString() + " x1 : " + e.x1, 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
@@ -43,7 +43,7 @@ public class EquationTest {
                         assertEquals(e.toString() + " x1 : " + e.x1, 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
                         assertEquals(e.toString() + " x2 : " + e.x2, 0, a * e.x2 * e.x2 + b * e.x2 + c, EPSILON);
                         ++n2;
-                        break;
+                        break; 
                     default:
                         assertTrue(b * b - 4 * a * c < 0.0);
                         ++n0;
@@ -62,7 +62,7 @@ public class EquationTest {
         n0 = 0; 
         n1 = 0; 
         n2 = 0;
-        // La probabilité d'avoir un discriminant nul est d'autant plus faible
+        // La probabilitÃ© d'avoir un discriminant nul est d'autant plus faible
         // que la plage des coefficients est grande. Elle est quasiment nulle
         // pour des coefficients entre -10000 et 10000.
         // Pour pouvoir tester dans cette plage, je relance les tests sans imposer
@@ -73,7 +73,7 @@ public class EquationTest {
                 b = getCoef(10000);
                 c = getCoef(10000);
                 Equation e = new Equation(a, b, c);
-                assertTrue("a devrait ?tre différent de 0", a != 0);
+                assertTrue("a devrait Ãªtre diffÃ©rent de 0", a != 0);
                 switch (e.nbRacines) {
                     case 1:
                         assertEquals(e.toString() + " x1 : " + e.x1, 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
@@ -97,9 +97,9 @@ public class EquationTest {
 
         System.out.println(a0 + ", " + n0 + ", " + n1 + ", " + n2);
         
-        // Grâce ? ces tests, je peux (? peu pr?s) garantir que mon programme 
-        // résoud ? 1e-7 pr?s les racines réelles d'une équation du second degré
-        // dont les coefficients a, b, c dans [-10000,10000].
+        // GrÃ¢ce Ã¢ ces tests, je peux (Ã  peu prÃ¨s) garantir que mon programme 
+        // rÃ©soud Ã  1e-7 prÃ¨s les racines rÃ©elles d'une Ã©quation du second degrÃ©
+        // dont les coefficients a, b, c sont dans [-10000,10000].
         
     }
 }
