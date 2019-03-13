@@ -1,7 +1,7 @@
 
 package fr.miage.firstapplijee.web;
 
-import fr.miage.firstapplijee.forms.Nom;
+import fr.miage.firstapplijee.modèle.Nom;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

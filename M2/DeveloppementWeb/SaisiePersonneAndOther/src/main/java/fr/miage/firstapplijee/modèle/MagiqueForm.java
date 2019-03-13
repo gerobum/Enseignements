@@ -1,5 +1,5 @@
 
-package fr.miage.firstapplijee.forms;
+package fr.miage.firstapplijee.modèle;
 
 import java.io.Serializable;
 import javax.servlet.http.Cookie;

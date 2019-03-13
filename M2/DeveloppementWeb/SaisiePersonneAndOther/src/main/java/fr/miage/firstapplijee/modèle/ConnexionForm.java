@@ -1,4 +1,4 @@
-package fr.miage.firstapplijee.forms;
+package fr.miage.firstapplijee.modèle;
 
 import javax.servlet.http.HttpServletRequest;
 

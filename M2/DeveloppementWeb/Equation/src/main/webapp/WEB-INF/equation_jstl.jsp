@@ -10,7 +10,6 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     </head>
     <body>
-        <h1>JSLT</h1>
         <div class="container">
             <div class="col-md-6 col-xs-12 col-md-offset-3">
                 <div class="panel panel-primary">
@@ -46,8 +45,10 @@
                 <div class="panel panel-success">
                     <div class="panel-heading"><h4>Solution</h4></div>
                     <div class="panel-body">
-                        <p>${modele.resultat}</p>
-                        <p></p>
+                    <c:forEach var="message" items="${modele.messages}">
+                        <p>${message}</p>
+                    </c:forEach>
+                        
                     </div>
                 </div>
             </div> 

@@ -27,8 +27,8 @@
     <body>
         <c:choose>  
             <c:when test="${form.connecte}">
-                <%-- <h3>Bienvenue ${form.pseudo}</h3> --%>
-                <h3>Bienvenue ${thepseudo}</h3>
+                <h3>Bienvenue ${form.pseudo}</h3>
+                <%-- <h3>Bienvenue ${thepseudo}</h3> --%>
             </c:when>
             <c:otherwise>
                 <h3>
@@ -41,8 +41,8 @@
                 <form method="post">
                     <p>
                         <label for="pseudo">Pseudo : </label>
-                        <input type="text" name="pseudo" value="${ thepseudo }" />
-                        <%-- <input type="text" name="pseudo" value="${ form.pseudo }" /> --%>
+                        <%-- <input type="text" name="pseudo" value="${ thepseudo }" /> --%>
+                        <input type="text" name="pseudo" value="${ form.pseudo }" />
                     </p>
                     <p>
                         <label for="magique">Phrase magique : </label>

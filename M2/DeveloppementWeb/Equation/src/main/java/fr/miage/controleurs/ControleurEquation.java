@@ -1,7 +1,7 @@
 
 package fr.miage.controleurs;
 
-import fr.miage.ModeleEquation;
+import fr.miage.modele.ModeleEquation;
 import fr.miage.metier.CoefANul;
 import fr.miage.metier.IEquation;
 import fr.miage.metier.impl.EquationImpl;

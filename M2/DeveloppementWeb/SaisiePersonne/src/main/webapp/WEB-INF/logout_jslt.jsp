@@ -12,8 +12,8 @@
     </head>
     <body>
         <c:choose>
-            <c:when test="${sessionScope.form.connecte}">
-                <h1>Bonjour ${sform.login}${empty sform.resultat ? "" : ": ".concat(sform.resultat)}</h1>
+            <c:when test="${form.connecte}">
+                <h1>Bonjour</h1>
                 <form method="post">
                     <input type="submit" value="Se déconnecter">
                 </form>

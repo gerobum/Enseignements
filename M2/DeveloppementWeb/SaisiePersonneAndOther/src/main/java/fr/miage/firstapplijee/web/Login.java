@@ -1,6 +1,6 @@
 package fr.miage.firstapplijee.web;
 
-import fr.miage.firstapplijee.forms.ConnexionForm;
+import fr.miage.firstapplijee.modèle.ConnexionForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
