@@ -190,6 +190,9 @@ public class Main {
         
         
     }
+/* Écrire programme qui définit un carré et approxime par simulation la 
+    probabilité qu’un point tiré au hasard dans le cercle circonscrit au carré 
+    soit aussi dans le carré.*/
 
     public static void tirageDansCercleCirconscritAuCarre1001m100m1OK() {
         Fenetre f = new Fenetre(-10, -10, 10, 10);
@@ -265,6 +268,36 @@ public class Main {
         System.out.println("OK : PI = " + 2.0 * (nbDans+nbHors) / nbDans);
     }
     
+    public static void tirageDansCarre11m11m1m11m1CercleCirconscritAuNOK() {
+        Fenetre f = new Fenetre(-0.6, -0.6, 0.6, 0.6);
+
+        Random random = new Random();
+
+        Point a = new Point(-0.6, -0.6);
+        Point b = new Point(0.6, -0.6);
+        Point c = new Point(0.6, 0.6);
+        Point[] d = {new Point(-0.6, 0.6)};
+
+        Point p;
+
+        int nbDans = 0;
+
+        for (int i = 0; i < NB_TIRAGES; ++i) {
+            p = new Point(random.nextDouble()-0.5, random.nextDouble()-0.5);
+            if (p.getRho() < 0.5) {
+                ++nbDans;
+                f.set(p, Color.BLACK);
+            } else {
+                f.set(p, Color.RED);
+            }
+        }
+        System.out.println("Carre " + nbDans * 1.0 / (NB_TIRAGES));
+        System.out.println("Carre, PI : " + 4.0 * nbDans / (NB_TIRAGES));
+        
+        
+    }
+
+    
     public static void tirageDansCercleCirconscritAuCarre11m11m1m11m1NOK() {
         Fenetre f = new Fenetre(-15, -15, 15, 15);
 
@@ -306,6 +339,7 @@ public class Main {
         tirageDansCercleCirconscritAuCarre1001m100m1NOK();
         //tirageDansCercleCirconscritAuCarre11m11m1m11m1OK();
         tirageDansCercleCirconscritAuCarre11m11m1m11m1NOK();
+        tirageDansCarre11m11m1m11m1CercleCirconscritAuNOK();
 
     }
 }
