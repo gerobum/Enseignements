@@ -25,7 +25,7 @@ public class Fenetre extends JFrame {
         getContentPane().add(carre);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        // setVisible(true);
         pack();
     }
     

@@ -6,6 +6,7 @@ import geom.Vecteur;
 import graphic.Carre;
 import graphic.Fenetre;
 import java.awt.Color;
+import static java.lang.Math.PI;
 import java.util.Random;
 
 public class Main {
@@ -154,15 +155,18 @@ public class Main {
     }
     
     
-    private static Random R = new Random();
-    private static int NB_TIRAGES = 100_000;
-    private static int NB1 = 5000;
-    private static int NB2 = 500;
+    private static final Random R = new Random();
+    private static final int NB_TIRAGES = 1_000_000;
+    private static final double C = 1;
+    
+/* Écrire programme qui définit un carré et approxime par simulation la 
+    probabilité qu’un point tiré au hasard dans le cercle circonscrit au carré 
+    soit aussi dans le carré.*/
     
     public static void tirageDansCercleCirconscritAuCarre1001m100m1NOK() {
         Fenetre f = new Fenetre(-10, -10, 10, 10);
+        // f.setVisible(true);
 
-        Random random = new Random();
         Point a = new Point(10, 0);
         Point b = new Point(0, 10);
         Point c = new Point(-10, 0);
@@ -177,7 +181,7 @@ public class Main {
         int nbDans = 0;
         
         for (int i = 0; i < NB_TIRAGES; ++i) {
-            p = new Point(R2 * random.nextDouble(), 2 * Math.PI * random.nextDouble(), true);
+            p = new Point(R2 * R.nextDouble(), 2 * Math.PI * R.nextDouble(), true);
             if (carré.contientEnSonInterieur(p)) {
                 ++nbDans;
                 f.set(p, Color.BLACK);
@@ -185,57 +189,18 @@ public class Main {
                 f.set(p, Color.RED);
             }
         }
-        System.out.println("NOK " + nbDans * 1.0 / NB_TIRAGES);
-        System.out.println("NOK, PI : " + 2.0 * NB_TIRAGES / nbDans);
+        double prob = nbDans * 1.0 / NB_TIRAGES;
+        
+        System.out.println("(NOK) Proba de tirer dans le carré : " + prob*100 + "%");
+        System.out.println("(NOK) " + 2.0 * 1.0/prob + " devrait être proche de PI");
         
         
     }
-/* Écrire programme qui définit un carré et approxime par simulation la 
-    probabilité qu’un point tiré au hasard dans le cercle circonscrit au carré 
-    soit aussi dans le carré.*/
-
-    public static void tirageDansCercleCirconscritAuCarre1001m100m1OK() {
-        Fenetre f = new Fenetre(-10, -10, 10, 10);
-
-        Random random = new Random();
-        Point a = new Point(10, 0);
-        Point b = new Point(0, 10);
-        Point c = new Point(-10, 0);
-        Point[] d = {new Point(0, -10)};
-
-        double R2 = a.getRho();
-
-        Point p;
-
-        Polygone carré = new Polygone(a, b, c, d);
-
-        int nbDans = 0;
-        int nbHors = 0;
-
-        for (int i = 0; i < NB1; ++i) {
-            double rayon = R2 * random.nextDouble();
-            int n = (int) (NB2*rayon/R2);
-            for (int j = 0; j < n; j++) {
-                p = new Point(rayon, 2 * Math.PI * random.nextDouble(), true);
-                if (carré.contientEnSonInterieur(p)) {
-                    nbDans++;
-                    f.set(p, Color.BLACK);
-                } else {
-                    f.set(p, Color.RED);
-                    nbHors++;
-                }
-            }
-        }
-
-        System.out.println("OK " + nbDans * 1.0 / (nbDans + nbHors));
-        System.out.println("OK, PI : " + 2.0 * (nbDans + nbHors) / nbDans);
- 
-    }
-
-    public static void tirageDansCercleCirconscritAuCarre11m11m1m11m1OK() {
+    
+    public static void tirageDansCercleCirconscritAuCarre11m11m1m11m1NOK() {
         Fenetre f = new Fenetre(-15, -15, 15, 15);
+        // f.setVisible(true);
 
-        Random random = new Random();
         Point a = new Point(-10, -10);
         Point b = new Point(10, -10);
         Point c = new Point(10, 10);
@@ -248,42 +213,112 @@ public class Main {
         Polygone carré = new Polygone(a, b, c, d);
 
         int nbDans = 0;
-        int nbHors = 0;
 
-        for (int i = 0; i < NB1; ++i) {
-            double rayon = R2 * random.nextDouble();
-            int n = (int) (NB2*rayon/R2);
+        for (int i = 0; i < NB_TIRAGES; ++i) {
+            p = new Point(R2 * R.nextDouble(), 2 * Math.PI * R.nextDouble(), true);
+            if (carré.contientEnSonInterieur(p)) {
+                ++nbDans;
+                f.set(p, Color.BLACK);
+            } else {
+                f.set(p, Color.RED);
+            }
+        }
+        double prob = nbDans * 1.0 / NB_TIRAGES;
+        
+        System.out.println("(NOK) Proba de tirer dans le carré : " + prob*100 + "%");
+        System.out.println("(NOK) " + 2.0 * 1.0/prob + " devrait être proche de PI");  
+        
+    }
+
+    public static void tirageDansCercleCirconscritAuCarre1001m100m1OK() {
+        Fenetre f = new Fenetre(-10, -10, 10, 10);
+        f.setVisible(true);
+
+        Point a = new Point(10, 0);
+        Point b = new Point(0, 10);
+        Point c = new Point(-10, 0);
+        Point[] d = {new Point(0, -10)};
+
+        double R2 = a.getRho();
+
+        Point p;
+
+        Polygone carré = new Polygone(a, b, c, d);
+
+        int nbDans = 0;
+        int nbTotal = 0;
+
+        while(nbTotal < NB_TIRAGES) {
+            double rayon = R2 * R.nextDouble();
+            int n = (int) (C*PI*rayon);
             for (int j = 0; j < n; j++) {
-                p = new Point(rayon, 2 * Math.PI * random.nextDouble(), true);
+                nbTotal++;
+                p = new Point(rayon, 2 * Math.PI * R.nextDouble(), true);
                 if (carré.contientEnSonInterieur(p)) {
                     nbDans++;
                     f.set(p, Color.BLACK);
                 } else {
-                    nbHors++;
                     f.set(p, Color.RED);
                 }
             }
         }
-        System.out.println("OK " + nbDans * 1.0 / (nbDans+nbHors));
-        System.out.println("OK : PI = " + 2.0 * (nbDans+nbHors) / nbDans);
+
+        double prob = nbDans * 1.0 / NB_TIRAGES;
+        
+        System.out.println("(OK) Proba de tirer dans le carré : " + prob*100 + "%");
+        System.out.println("(OK) " + 2.0 * 1.0/prob + " devrait être proche de PI");
+ 
     }
+
+    public static void tirageDansCercleCirconscritAuCarre11m11m1m11m1OK() {
+        Fenetre f = new Fenetre(-15, -15, 15, 15);
+        f.setVisible(true);
+
+        Point a = new Point(-10, -10);
+        Point b = new Point(10, -10);
+        Point c = new Point(10, 10);
+        Point[] d = {new Point(-10, 10)};
+
+        double R2 = a.getRho();
+
+        Point p;
+
+        Polygone carré = new Polygone(a, b, c, d);
+
+        int nbDans = 0;
+        int nbTotal = 0;
+
+        while(nbTotal < NB_TIRAGES) {
+            double rayon = R2 * R.nextDouble();
+            int n = (int) (C*PI*rayon);
+            for (int j = 0; j < n; j++) {
+                nbTotal++;
+                p = new Point(rayon, 2 * Math.PI * R.nextDouble(), true);
+                if (carré.contientEnSonInterieur(p)) {
+                    nbDans++;
+                    f.set(p, Color.BLACK);
+                } else {
+                    f.set(p, Color.RED);
+                }
+            }
+        }
+        double prob = nbDans * 1.0 / nbTotal;
+        
+        System.out.println("(OK) Proba de tirer dans le carré : " + prob*100 + "%");
+        System.out.println("(OK) " + 2.0 * 1.0/prob + " devrait être proche de PI");
+    } 
     
-    public static void tirageDansCarre11m11m1m11m1CercleCirconscritAuNOK() {
+    public static void tirageDansCarre() {
         Fenetre f = new Fenetre(-0.6, -0.6, 0.6, 0.6);
+        f.setVisible(true);
 
-        Random random = new Random();
-
-        Point a = new Point(-0.6, -0.6);
-        Point b = new Point(0.6, -0.6);
-        Point c = new Point(0.6, 0.6);
-        Point[] d = {new Point(-0.6, 0.6)};
 
         Point p;
 
         int nbDans = 0;
 
         for (int i = 0; i < NB_TIRAGES; ++i) {
-            p = new Point(random.nextDouble()-0.5, random.nextDouble()-0.5);
+            p = new Point(R.nextDouble()-0.5, R.nextDouble()-0.5);
             if (p.getRho() < 0.5) {
                 ++nbDans;
                 f.set(p, Color.BLACK);
@@ -291,55 +326,30 @@ public class Main {
                 f.set(p, Color.RED);
             }
         }
-        System.out.println("Carre " + nbDans * 1.0 / (NB_TIRAGES));
-        System.out.println("Carre, PI : " + 4.0 * nbDans / (NB_TIRAGES));
         
+        double prob = nbDans * 1.0 / NB_TIRAGES;
+        
+        System.out.println("(OK) Proba de tirer dans le cercle : " + prob*100 + "%");
+        System.out.println("(OK) " + 4*prob + " devrait être proche de PI");
         
     }
-
     
-    public static void tirageDansCercleCirconscritAuCarre11m11m1m11m1NOK() {
-        Fenetre f = new Fenetre(-15, -15, 15, 15);
-
-        Random random = new Random();
-        Point a = new Point(-10, -10);
-        Point b = new Point(10, -10);
-        Point c = new Point(10, 10);
-        Point[] d = {new Point(-10, 10)};
-
-        double R2 = a.getRho();
-
-        Point p;
-
-        Polygone carré = new Polygone(a, b, c, d);
-
-        int nbDans = 0;
-
-        for (int i = 0; i < NB_TIRAGES; ++i) {
-            p = new Point(R2 * random.nextDouble(), 2 * Math.PI * random.nextDouble(), true);
-            if (carré.contientEnSonInterieur(p)) {
-                ++nbDans;
-                f.set(p, Color.BLACK);
-            } else {
-                f.set(p, Color.RED);
-            }
-        }
-        System.out.println("NOK " + nbDans * 1.0 / NB_TIRAGES);
-        System.out.println("NOK, PI : " + 2.0 * NB_TIRAGES / nbDans);
-        
-        
-    }
-
     public static void main(String[] args) {
 
         testAGauche();
         testConvexe();
 
-        //tirageDansCercleCirconscritAuCarre1001m100m1OK();
+        System.out.println("------------------------");
         tirageDansCercleCirconscritAuCarre1001m100m1NOK();
-        //tirageDansCercleCirconscritAuCarre11m11m1m11m1OK();
+        System.out.println("------------------------");
         tirageDansCercleCirconscritAuCarre11m11m1m11m1NOK();
-        tirageDansCarre11m11m1m11m1CercleCirconscritAuNOK();
+        System.out.println("------------------------");
+//        tirageDansCercleCirconscritAuCarre11m11m1m11m1OK();
+//        System.out.println("------------------------");
+//        tirageDansCercleCirconscritAuCarre1001m100m1OK();
+//        System.out.println("------------------------");
+//        tirageDansCarre();
+//        System.out.println("------------------------");
 
     }
 }
