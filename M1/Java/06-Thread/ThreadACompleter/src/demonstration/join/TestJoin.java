@@ -1,12 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package demonstration.join;
 
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package demonstration.join;
 
 /**
  * Illustre la méthode de synchronisation join(). Le programme principal attend 
@@ -24,9 +17,6 @@ public class TestJoin {
         return new Thread() {
 
             @Override
-            /**
-             * 
-             */
             public void run() {
                 try {
                     Thread t = new Thread(new Runnable() {
@@ -59,7 +49,7 @@ public class TestJoin {
         Thread t = creation(10);
         t.start();
         // Attendre la fin de thread
-        //t.join();
+        t.join();
         System.out.println("R.I.P ");       
     }
     

@@ -79,13 +79,16 @@ public class BoutonClignotantAvecArretEtDepart extends JButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Une interruption est envoyée si le clic est fait alors que shift est 
-                // enfoncé
-                if ((e.getModifiers() ^ InputEvent.BUTTON1_MASK) == InputEvent.SHIFT_MASK) {
+                // Une interruption est envoyée si le clic est fait alors que 
+                // ALT est enfoncé
+                // https://docs.oracle.com/javase/8/docs/api/constant-values.html#java.awt.event.InputEvent.BUTTON1_DOWN_MASK
+                if ((e.getModifiers() & InputEvent.ALT_GRAPH_MASK) == InputEvent.ALT_GRAPH_MASK) {
+                    
+                    System.out.println("Bouton ALT enfoncé");
                     clignoteur.interrupt();
                     removeActionListener(this);
                 } else {
-                    // Sinon, un clic "normal" inverse le booleén stop
+                    // Sinon, un clic "normal" inverse le booléen stop
                     // et réveille le thread en attente.
                     synchronized (clignoteur) {
                         stop = !stop;

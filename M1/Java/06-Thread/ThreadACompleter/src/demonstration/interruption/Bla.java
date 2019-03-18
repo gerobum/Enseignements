@@ -49,7 +49,7 @@ public class Bla {
 
     class Bavard extends TresBavard {
 
-        private int duree;
+        private final int duree;
 
         public Bavard(int duree, String mot) {
             super(mot);

@@ -10,7 +10,6 @@ public class Fourmi {
     private Color couleur;
     private Terrain terrain;
     private int x, y;
-    private boolean stop = false;
 
     /**
      * Créer une fourmi "quelque part" sur le terrain.

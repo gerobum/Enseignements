@@ -3,9 +3,17 @@ package exercices.boutons.derivation;
 import java.awt.Color;
 import javax.swing.JButton;
 
+/**
+ * Clignotement du bouton par "dérivation de Thread"
+ */
 public class BoutonClignotant extends JButton {    
     private final Color on, off;    
 
+    /*
+    Comme BoutonClignotant hérite déjà de JButton, si l'on tient
+    nécessairement à utiliser l'héritage, il faut utiliser une autre classe
+    qui sera le clignoteur. Pourquoi pas une classe interne.
+    */
     private class Clignoteur extends Thread {
         @Override
         public void run() {

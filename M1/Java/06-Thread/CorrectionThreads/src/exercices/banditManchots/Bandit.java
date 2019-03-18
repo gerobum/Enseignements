@@ -28,7 +28,7 @@ public class Bandit extends JFrame {
         lance.setPressedIcon(new ImageIcon(Bandit.class.getResource("poigneeBaissee.png")));
         lance.setDisabledIcon(new ImageIcon(Bandit.class.getResource("poigneeBaissee.png")));
 
-        // L'erreur qui est souvent faite est celle là :
+        // L'erreur qui est souvent faite est celle-là :
         // On se doute qu'il faut utiliser join() pour attendre
         // la fin des trois threads pour relever le levier.
         /*lance.addActionListener(new ActionListener() {
@@ -68,10 +68,12 @@ public class Bandit extends JFrame {
             }
         });*/
 
+        // Pour que ça marche bien, il faut commenter le code précédent
+        // et décommenter le code suivant.
         lance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /* L'action lancée par "l'abaissement du levier". */
+                // L'action lancée par "l'abaissement du levier". 
                 final Thread t1, t2, t3;
                 
                 lance.setEnabled(false);// Le levier doit rester baissé

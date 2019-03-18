@@ -10,10 +10,6 @@ public class LancementBoutonsClignotants extends JFrame {
         initUI();
     }
 
-    public static void main(String[] args) {
-        new LancementBoutonsClignotants();
-    }
-
     private void initUI() {
         getContentPane().setLayout(new GridLayout(0, 1));
         getContentPane().add(new exercices.boutons.implementation.BoutonClignotant("Bling Bling !!!", new Color(0, 255, 0), new Color(0, 100, 0)));
@@ -25,5 +21,9 @@ public class LancementBoutonsClignotants extends JFrame {
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new LancementBoutonsClignotants();
     }
 }
