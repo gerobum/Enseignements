@@ -1,31 +1,23 @@
 package crible;
 
+import chrono.Chrono;
 import java.util.stream.IntStream;
 
-/**
- *
- * @author yvan
- */
 public class ExplicationCrible {
 
     public static IntStream enleveMultiple(IntStream s, int m) {
         return s.filter(p -> p == m || p % m != 0);
     }
 
-    public static void crible(int n) {
+    public static IntStream crible(int n) {
         IntStream s = IntStream.rangeClosed(2, n);
-        int rn = (int) Math.sqrt(n)+1;
+        int rn = (int) Math.sqrt(n) + 1;
         for (int i = 2; i <= rn; ++i) {
             s = enleveMultiple(s, i)/*.peek(x -> {
                 System.out.print("{"+x+"}");
             })*/;
         }
-        //s.forEach(p -> System.out.println(p + " "));
-        //s.count();
-        int limit = n;
-        long topDepart = System.nanoTime();
-        System.out.println("Il y a " + s.count() + " nombres premiers avant " + limit);
-        System.out.println("Le calcul a pris " + ((System.nanoTime() - topDepart)/1_000_000.0) + " ms");
+        return s;
     }
 
     public static void affichageDe2a25sansLesMultiplesDe5() {
@@ -59,7 +51,18 @@ public class ExplicationCrible {
         //affichageDe2a25sansLesMultiplesDe2sauf2();
         //affichageDe2a25sansLesMultiplesDe3();
         //affichageDe2a25sansLesMultiplesDe5();
-        
-        crible(1_000_000);
+
+        int n = 1;
+        Chrono.premierJalon();
+        while (n < 10_000_000) {
+            n *= 10;
+            IntStream pnp = crible(n);
+            Chrono.affichageDureeDepuisDernierJalon("Le pré-filtrage a pris");
+            System.out.println("Il y a " + pnp.count() + " nombres premiers avant " + n);
+            Chrono.affichageDureeDepuisDernierJalon("Le décompte des nombres premiers a pris");
+            System.out.println("-----------------------------------");
+        }
+
+        //crible();
     }
 }
