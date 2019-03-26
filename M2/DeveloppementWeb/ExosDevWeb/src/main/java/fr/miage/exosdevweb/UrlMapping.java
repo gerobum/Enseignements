@@ -30,7 +30,7 @@ public class UrlMapping {
     @GetMapping("/datetime")
     @ResponseBody
     public String datetime() {
-        logger.info("Requête datetime");
+        log.info("Requête datetime");
         return "<h1>Bonjour</h1>"
                 + "<p>Nous sommes le " + LocalDate.now().
                         format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")) + "</p >"

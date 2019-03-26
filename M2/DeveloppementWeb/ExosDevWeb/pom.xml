@@ -33,15 +33,15 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-        <dependency>
+        <dependency> <!-- 5.1 -->
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
-        <dependency>
+        <dependency><!-- 5.1 -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
+        <dependency><!-- 5.1 -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -49,12 +49,12 @@
 
     </dependencies>
     <repositories>
-        <repository>
+        <repository><!-- 5.1 -->
             <id>spring-releases</id>
             <name>Spring Releases</name>
             <url>https://repo.spring.io/libs-release</url>
         </repository>
-        <repository>
+        <repository><!-- 5.1 -->
             <id>org.jboss.repository.releases</id>
             <name>JBoss Maven Release Repository</name>
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
@@ -68,7 +68,7 @@
             </plugin>
         </plugins>
     </build>
-    <pluginRepositories>
+    <pluginRepositories><!-- 5.1 -->
         <pluginRepository>
             <id>spring-releases</id>
             <name>Spring Releases</name>

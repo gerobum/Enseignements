@@ -18,23 +18,20 @@ import javax.validation.constraints.Size;
  *
  * @author yvan
  */
-@Entity
+@Entity // 5.1
 public class Person implements Serializable {
     @NotNull // 4
     @Size(min = 2) // 4
-    @Column
     private String nom;
     @NotNull // 4
     @Min(18) // 4
-    @Column
     private Integer age;
     
-    @Id
-    @GeneratedValue
-    @Column
+    @Id // 5.1
+    @GeneratedValue // 5.1
     private Long id;
 
-    public Person() {
+    public Person() { // 5.1
         this("", null);
     }
 
@@ -43,20 +40,25 @@ public class Person implements Serializable {
         this.age = age;
     }
 
-    public String getNom() {
+    public String getNom() { // 5.1
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(String nom) { // 5.1
         this.nom = nom;
     }
 
-    public Integer getAge() {
+    public Integer getAge() { // 5.1
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Integer age) { // 5.1
         this.age = age;
+    }
+    
+    @Override // 5.1
+    public String toString() {
+        return nom + "("+age+" ans)";
     }
     
     
