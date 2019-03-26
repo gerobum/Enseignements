@@ -21,10 +21,11 @@ import javax.validation.constraints.Size;
 @Entity // 5.1
 public class Person implements Serializable {
     @NotNull // 4
-    @Size(min = 2) // 4
+    @NotNull(message = "Le nom est nécessaire")
+    @Size(min = 2, message = "Le nom doit contenir au moins deux lettres") // 4
     private String nom;
-    @NotNull // 4
-    @Min(18) // 4
+    @NotNull(message = "L'âge est nécessaire") // 4
+    @Min(value = 18, message = "Vous devez être majeur") // 4
     private Integer age;
     
     @Id // 5.1

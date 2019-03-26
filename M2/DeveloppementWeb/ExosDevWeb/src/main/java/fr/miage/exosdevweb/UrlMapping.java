@@ -1,6 +1,7 @@
 package fr.miage.exosdevweb;
 
 import fr.miage.exosdevweb.dao.PersonDAO;
+import fr.miage.exosdevweb.models.FilterModel;
 import fr.miage.exosdevweb.models.Person;
 import fr.miage.exosdevweb.models.PrettyDateTimeModel;
 import java.time.LocalDate;
@@ -19,10 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 @Controller
 public class UrlMapping {
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
     
     @Autowired
     private PersonDAO dao;
@@ -30,7 +33,7 @@ public class UrlMapping {
     @GetMapping("/datetime")
     @ResponseBody
     public String datetime() {
-        log.info("Requête datetime");
+        LOG.info("Requête datetime");
         return "<h1>Bonjour</h1>"
                 + "<p>Nous sommes le " + LocalDate.now().
                         format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")) + "</p >"
@@ -82,7 +85,7 @@ public class UrlMapping {
         return "result";  
     }
     
-    @GetMapping("/list")
+    @GetMapping({"/list", "/"})
     public String list(Model model) {
         List<Person> list = dao.findAll();
         model.addAttribute("list", list);        
@@ -96,9 +99,26 @@ public class UrlMapping {
     }
     
     @PostMapping("/add")
-    public String added(@ModelAttribute Person person, Model model) {
+    public String added(@Valid@ModelAttribute Person person, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "inscrire";
+        }
         dao.save(person);
         return "redirect:/list";
+    }
+    
+    @GetMapping("/filter")
+    public String filter(Model model) {
+        model.addAttribute("filter", new FilterModel());        
+        return "filter";
+    }
+    
+    @PostMapping("/filter")
+    public String filtered(@ModelAttribute FilterModel filter, Model model) {
+
+        List<Person> list = dao.findByNomLikeAndAgeBetween(filter.getNom(), filter.getMin(), filter.getMax());
+        model.addAttribute("list", list);        
+        return "list";
     }
 
 }
