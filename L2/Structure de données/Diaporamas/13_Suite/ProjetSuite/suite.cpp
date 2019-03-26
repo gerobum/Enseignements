@@ -9,17 +9,17 @@
 
 // Le constructeur par défaut crée une liste vide
 
-suite::suite() : d_tete(0) {
+suite::suite() : d_tete(nullptr) {
 }
 
 // Le constructeur par recopie
 
-suite::suite(const suite& orig) : d_tete(0) {
-  if (orig.d_tete != 0) {
+suite::suite(const suite& orig) : d_tete(nullptr) {
+  if (orig.d_tete != nullptr) {
     d_tete = new element(orig.d_tete->d_info);
     element* crt = d_tete;
     element* ocrt = orig.d_tete->d_suivant;
-    while (ocrt != 0) {
+    while (ocrt != nullptr) {
       crt->d_suivant = new element(ocrt->d_info);
       crt = crt->d_suivant;
       ocrt = ocrt->d_suivant;
@@ -39,13 +39,13 @@ suite::~suite() {
 
 void suite::inserer(string valeur, int position) {
   // cas d'insertion en tête ou dans une liste vide
-  if (position <= 0 || d_tete == 0) {
+  if (position <= 0 || d_tete == nullptr) {
     d_tete = new element(valeur, d_tete);
   } else {
     element* crt = d_tete;
     // Recherche de la position, à moins que la liste
     // ne soit trop courte.
-    while (position > 1 && crt->d_suivant != 0) {
+    while (position > 1 && crt->d_suivant != nullptr) {
       crt = crt->d_suivant;
       --position;
     }
@@ -81,23 +81,23 @@ ostream& operator<<(ostream& os, const suite& s) {
 void suite::retirer(int position) {
   // Rien à faire dans une suite vide,
   // ni si la position est négative.
-  if (d_tete != 0 || position >= 0) {
+  if (d_tete != nullptr || position >= 0) {
     if (position == 0) { // Cas de l'insertion en tête
       element* as = d_tete;
       d_tete = d_tete->d_suivant;
       // Pour éviter la desctruction du reste de la liste.
-      as->d_suivant = 0;
+      as->d_suivant = nullptr;
       delete as;
     } else { // Recherche de la position.
       element* crt = d_tete;
-      while (position > 1 && crt->d_suivant != 0) {
+      while (position > 1 && crt->d_suivant != nullptr) {
         crt = crt->d_suivant;
         --position;
       }
-      if (crt->d_suivant != 0) { // La position existe
+      if (crt->d_suivant != nullptr) { // La position existe
         element* as = crt->d_suivant;
         crt->d_suivant = as->d_suivant;
-        as->d_suivant = 0;
+        as->d_suivant = nullptr;
         delete as;
       } // Sinon, sortie de liste.
     }
@@ -134,13 +134,13 @@ suite::iterateur_constant suite::premier_constant() const {
 }
 
 bool suite::iterateur_constant::fin() const {
-  return d_crt == 0;
+  return d_crt == nullptr;
 }
 string suite::iterateur_constant::operator *() const {
   return d_crt->d_info;
 }
 suite::iterateur_constant& suite::iterateur_constant::operator++() {
-  if (d_crt != 0)
+  if (d_crt != nullptr)
     d_crt = d_crt->d_suivant;
   return *this;
 }
@@ -149,7 +149,7 @@ suite::iterateur suite::premier() {
   return suite::iterateur(d_tete);
 }
 bool suite::iterateur::fin() const {
-  return d_crt == 0;
+  return d_crt == nullptr;
 }
 string suite::iterateur::operator *() const {
   return d_crt->d_info;
@@ -158,7 +158,7 @@ string& suite::iterateur::operator *() {
   return d_crt->d_info;
 }
 suite::iterateur& suite::iterateur::operator++() {
-  if (d_crt != 0)
+  if (d_crt != nullptr)
     d_crt = d_crt->d_suivant;
   return *this;
 }
