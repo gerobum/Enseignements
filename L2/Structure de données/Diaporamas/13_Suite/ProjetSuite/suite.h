@@ -46,7 +46,7 @@ private:
       delete d_suivant;
     }*/
 
-    element(string info, element* suivant = 0) :
+    element(string info, element* suivant = nullptr) :
     d_info(info), d_suivant(suivant) {
     }
   };

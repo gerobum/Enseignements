@@ -12,21 +12,23 @@
 using namespace std;
 
 MatriceCreuse::MatriceCreuse() :
-d_valeur{0},
-d_ligne{0},
-d_colonne{0},
+d_valeur{nullptr},
+d_ligne{nullptr},
+d_colonne{nullptr},
 d_nv{0},
 d_nl{0},
-d_nc{0} {
+d_nc{0}
+{
 }
 
 MatriceCreuse::MatriceCreuse(int nl, int nc) :
-d_valeur{0},
-d_ligne{0},
-d_colonne{0},
+d_valeur{nullptr},
+d_ligne{nullptr},
+d_colonne{nullptr},
 d_nv{0},
 d_nl{nl},
-d_nc{nc} {
+d_nc{nc}
+{
 }
 
 MatriceCreuse::MatriceCreuse(const MatriceCreuse& m) :
@@ -35,7 +37,8 @@ d_ligne{new int[m.d_nv]},
 d_colonne{new int[m.d_nv]},
 d_nv{m.d_nv},
 d_nl{m.d_nl},
-d_nc{m.d_nc} {
+d_nc{m.d_nc}
+{
     for (int i = 0; i < d_nv; ++i) {
         d_valeur[i] = m.d_valeur[i];
         d_ligne[i] = m.d_ligne[i];
@@ -76,6 +79,9 @@ double MatriceCreuse::operator()(int l, int c) const {
     return d_valeur[p];
 }
 
+/*
+ * Créer une nouvelle case dans 
+ */
 int MatriceCreuse::inserer(int l, int c) {
     int p = position(l, c);
     if (p < 0) {
