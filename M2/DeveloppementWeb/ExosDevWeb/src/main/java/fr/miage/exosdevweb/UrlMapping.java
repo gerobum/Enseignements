@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,10 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UrlMapping {
+    
+    private final Logger logger = LoggerFactory.getLogger(UrlMapping.class);
 
     @GetMapping("/datetime")
     @ResponseBody
     public String datetime() {
+        logger.info("Requête datetime");
         return "<h1>Bonjour</h1>"
                 + "<p>Nous sommes le " + LocalDate.now().
                         format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")) + "</p >"
