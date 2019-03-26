@@ -1,10 +1,7 @@
 
-package fr.miage.controleurs;
+package fr.miage.controleurs.livre;
 
 import fr.miage.modele.ModeleEquation;
-import fr.miage.metier.CoefANul;
-import fr.miage.metier.IEquation;
-import fr.miage.metier.impl.EquationImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "ControleurEquation", urlPatterns = {"/2d"})
-public class ControleurEquation extends HttpServlet {
+@WebServlet(name = "ControleurLivre", urlPatterns = {"/recherche"})
+public class ControleurLivre extends HttpServlet {
     
     
     
@@ -22,7 +19,7 @@ public class ControleurEquation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {   
             request.setAttribute("modele", new ModeleEquation());
-            request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response); // #### (1)
+            request.getRequestDispatcher("/WEB-INF/recherchelivre.jsp").forward(request, response); // #### (1)
     }
     
         
@@ -42,7 +39,7 @@ public class ControleurEquation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.setAttribute("modele", ModeleEquation.handle(request));
-            request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/recherchelivre.jsp").forward(request, response);
     }
     
     /*@Override

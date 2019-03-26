@@ -49,7 +49,7 @@ public class Crible {
 
     public static void main(String[] args) throws NoSuchMethodException {
         IntStream pnp;
-
+        
         int n = 1;
         Chrono.premierJalon();
         while (n < 10_000_000) {

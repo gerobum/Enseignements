@@ -22,7 +22,7 @@ public class ControleurEquation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {   
             request.setAttribute("modele", new ModeleEquation());
-            request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response); // #### (1)
+            request.getRequestDispatcher("/WEB-INF/eq.jsp").forward(request, response); // #### (1)
     }
     
         
@@ -42,7 +42,7 @@ public class ControleurEquation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.setAttribute("modele", ModeleEquation.handle(request));
-            request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/eq.jsp").forward(request, response);
     }
     
     /*@Override
