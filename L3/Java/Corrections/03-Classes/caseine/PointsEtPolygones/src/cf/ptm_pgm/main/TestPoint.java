@@ -1,3 +1,7 @@
+/**
+ * @author Yvan Maillot (yvan.maillot@uha.fr)
+ */
+
 package cf.ptm_pgm.main;
 
 import cf.ptm_pgm.geometrie.Point;

@@ -1,6 +1,8 @@
+/**
+ * @author Yvan Maillot (yvan.maillot@uha.fr)
+ */
 
 
-// Author : Yvan Maillot (yvan.maillot@uha.fr)
 
 /*
 Une classe Polygone qui possède

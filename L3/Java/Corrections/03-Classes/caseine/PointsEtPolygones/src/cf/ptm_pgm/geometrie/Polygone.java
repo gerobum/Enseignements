@@ -1,3 +1,7 @@
+/**
+ * @author Yvan Maillot (yvan.maillot@uha.fr)
+ */
+
 /*
 Écrire une classe (mutable) Polygone avec:
 
@@ -12,15 +16,19 @@
  */
 package cf.ptm_pgm.geometrie;
 
+import checker.ToCheck;
+
 /**
  *
  * @author yvan
  */
+@ToCheck("Revoir la classe Polygone")
 public class Polygone {
 
-    
+    @ToCheck("Revoir l'attribut sommets")
     private Point[] sommets;
 
+    @ToCheck
     public Polygone(Point a, Point b, Point c, Point... lp) {
         sommets = new Point[3 + lp.length];
 
@@ -33,30 +41,37 @@ public class Polygone {
             sommets[k++] = p;
         }
     }
+    @ToCheck
     public int nbSommets() {
         return sommets.length;
     }
 
+    @ToCheck
     public Point getSommet(int i) {
         return sommets[i];
     }
 
+    @ToCheck
     public void setSommet(int i, Point p) {
         sommets[i] = p;
     }
 
+    @ToCheck
     public void translation(double dx, double dy) {
         for (Point p : sommets) {
             p.translation(dx, dy);
         }
     }
 
+    @ToCheck
     public void rotation(double dtheta) {
         for (Point p : sommets) {
             p.rotation(dtheta);
         }
     }
 
+    @ToCheck
+    @Override
     public String toString() {
         String r = "";
         for (Point p : sommets) {
@@ -64,6 +79,7 @@ public class Polygone {
         }
         return r;
     }
+    @ToCheck//("La méthode pour afficher soit en \\\"polaire\\\" soit en \\\"cartésien\\\"")
     public void afficher(boolean polaire) {
         for (Point p : sommets) {
             p.afficher(polaire);
@@ -71,7 +87,13 @@ public class Polygone {
         System.out.println();
     }
 
+    @ToCheck//("La méthode afficher en cartésien (par défaut)")
     public void afficher() {
         afficher(false);
+    }
+    
+    public static void main(String[] args) throws NoSuchMethodException {
+        System.out.println(Polygone.class.getConstructor().getModifiers());
+        System.out.println(Polygone.class.getConstructor(Point.class, Point.class, Point.class, Point[].class).getModifiers());
     }
 }

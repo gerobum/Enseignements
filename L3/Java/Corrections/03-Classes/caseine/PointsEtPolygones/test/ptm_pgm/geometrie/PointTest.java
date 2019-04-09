@@ -3,7 +3,7 @@
  */
 
 
-package cf.ptm_pgm.geometrie;
+package ptm_pgm.geometrie;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
@@ -17,6 +17,7 @@ import java.lang.reflect.Modifier;
 import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import cf.ptm_pgm.geometrie.Point;
 
 /**
  *
@@ -26,34 +27,44 @@ public class PointTest {
 
     private static final Random R = new Random();
 
-    private static double getRandomValue() {
-        int n = 500 - R.nextInt(1001);
-        return n * R.nextDouble();
+    @Test
+    public void checkAttributPresence() {
+        System.out.println("Vérification des attributs");
+        attributPresence("x");
+        attributPresence("y");
+        attributPresence("rho");
+        attributPresence("theta");
     }
-
-    private static void attributPresence(String nom) {
+    
+    
+    private static void defaultConstructorPresence() {
         try {
-            Field coordonnee = Point.class.getDeclaredField(nom);
-            assertTrue(String.format("%s doit être un double", nom),
-                    coordonnee.getType().equals(double.class)
-                    || coordonnee.getType().equals(Double.class)
+            Constructor c = Point.class.getConstructor();
+            assertTrue("Vérifiez les modificateurs d'accès du constructeur par défaut",
+                    Modifier.isPublic(c.getModifiers())
             );
 
-            assertTrue(String.format("Revoir les modificateurs de %s", nom),
-                    !Modifier.isStatic(coordonnee.getModifiers())
-                    && Modifier.isPrivate(coordonnee.getModifiers())
-            );
-        } catch (NoSuchFieldException | SecurityException ex) {
-            fail("Vérifiez d'avoir un attribut nommé " + nom);
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Vérifiez d'avoir le constructeur par defaut");
         }
     }
 
-    public static Point newInstance(double x, double y) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    private static void xyConstructorPresence() {
+        try {
+            Constructor c = Point.class.getConstructor(double.class, double.class);
+            assertTrue("Vérifiez les modificateurs d'accès du constructeur Point(x, y)",
+                    Modifier.isPublic(c.getModifiers())
+            );
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Vérifiez d'avoir le constructeur Point(double x, double y)");
+        }
+    }
 
-        Constructor<?> c = Point.class.getDeclaredConstructor(double.class, double.class);
-        c.setAccessible(true);
-        return (Point) c.newInstance(x, y);
-
+    @Test
+    public void checkConstructorsPresence() {
+        System.out.println("Vérification de la présence des constructeurs");
+        defaultConstructorPresence();
+        xyConstructorPresence();
     }
 
     private static void getterPresence(String nom) {
@@ -110,35 +121,6 @@ public class PointTest {
         }
     }
 
-    private static void defaultConstructorPresence() {
-        try {
-            Constructor c = Point.class.getConstructor();
-            assertTrue("Vérifiez les modificateurs d'accès du constructeur par défaut",
-                    Modifier.isPublic(c.getModifiers())
-            );
-
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez d'avoir le constructeur par defaut");
-        }
-    }
-
-    private static void xyConstructorPresence() {
-        try {
-            Constructor c = Point.class.getConstructor(double.class, double.class);
-            assertTrue("Vérifiez les modificateurs d'accès du constructeur Point(x, y)",
-                    Modifier.isPublic(c.getModifiers())
-            );
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez d'avoir le constructeur Point(double x, double y)");
-        }
-    }
-
-    @Test
-    public void checkConstructorsPresence() {
-        System.out.println("Vérification de la présence des constructeurs");
-        defaultConstructorPresence();
-        xyConstructorPresence();
-    }
 
     @Test
     public void checkGettersPresence() {
@@ -158,14 +140,6 @@ public class PointTest {
         setterPresence("theta");
     }
 
-    @Test
-    public void checkAttributPresence() {
-        System.out.println("Vérification des attributs");
-        attributPresence("x");
-        attributPresence("y");
-        attributPresence("rho");
-        attributPresence("theta");
-    }
 
     @Test
     public void testDefaultConstructor() {
@@ -384,5 +358,36 @@ public class PointTest {
         } catch (InstantiationException | IllegalAccessException ex) {
             fail("La rotation s'est mal passée");
         }
+    }
+    
+    
+    private static double getRandomValue() {
+        int n = 500 - R.nextInt(1001);
+        return n * R.nextDouble();
+    }
+
+    private static void attributPresence(String nom) {
+        try {
+            Field coordonnee = Point.class.getDeclaredField(nom);
+            assertTrue(String.format("%s doit être un double", nom),
+                    coordonnee.getType().equals(double.class)
+                    || coordonnee.getType().equals(Double.class)
+            );
+
+            assertTrue(String.format("Revoir les modificateurs de %s", nom),
+                    !Modifier.isStatic(coordonnee.getModifiers())
+                    && Modifier.isPrivate(coordonnee.getModifiers())
+            );
+        } catch (NoSuchFieldException | SecurityException ex) {
+            fail("Vérifiez d'avoir un attribut nommé " + nom);
+        }
+    }
+
+    public static Point newInstance(double x, double y) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+        Constructor<?> c = Point.class.getDeclaredConstructor(double.class, double.class);
+        c.setAccessible(true);
+        return (Point) c.newInstance(x, y);
+
     }
 }

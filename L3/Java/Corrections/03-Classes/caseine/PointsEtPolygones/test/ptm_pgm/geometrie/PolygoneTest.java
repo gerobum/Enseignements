@@ -3,7 +3,7 @@
  */
 
 
-package cf.ptm_pgm.geometrie;
+package ptm_pgm.geometrie;
 
 import caseinedev.IntrospectionUtilities;
 import java.lang.reflect.Constructor;
@@ -11,10 +11,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import cf.ptm_pgm.geometrie.Point;
+import cf.ptm_pgm.geometrie.Polygone;
 
 /**
  *
@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 public class PolygoneTest {
 
     private static final Random R = new Random();
-    //private static Class<?> tpoints = Point[].class;
 
     private static double getRandomValue() {
         int n = 500 - R.nextInt(1001);
@@ -34,6 +33,12 @@ public class PolygoneTest {
         Constructor<?> c = Point.class.getConstructor();
         c.setAccessible(true);
         return PointTest.newInstance(getRandomValue(), getRandomValue());
+    }
+    
+    public static Polygone newInstance(Point p0, Point p1, Point p2, Point[] tp) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Constructor<?> c = Polygone.class.getDeclaredConstructor(Point.class, Point.class, Point.class, Point[].class);
+        c.setAccessible(true);
+        return (Polygone) c.newInstance(p0, p1, p2, tp);
     }
 
     /**
@@ -49,7 +54,7 @@ public class PolygoneTest {
         try {
             return IntrospectionUtilities.getFromMethod(p.getClass(), p, methodName, pv);
         } catch (InvocationTargetException | IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez la présence de la méthode getSommet demandée");
+            fail("");
             return null;
         }
     }
@@ -67,7 +72,7 @@ public class PolygoneTest {
         try {
             return IntrospectionUtilities.getFromMethodTA(p.getClass(), p, methodName, pv);
         } catch (InvocationTargetException | IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez la présence de la méthode getSommet demandée");
+            fail("");
             return null;
         }
     }
@@ -91,265 +96,20 @@ public class PolygoneTest {
             Point[] cp = new Point[sommets.length];
             int i = 0;
             for (Point pi : sommets) {
-                cp[i++] = new Point(PointTest.get("x", pi), PointTest.get("y", pi));
+                cp[i++] = PointTest.newInstance(PointTest.get("x", pi), PointTest.get("y", pi));
             }
             return cp;
         } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
             fail(String.format("Attribut sommets absent"));
             return null;
+        } catch (NoSuchMethodException | InstantiationException | InvocationTargetException ex) {
+            fail();
+            return null;
         }
     }
+    
+    // Fin des méthodes utilitaires
 
-    /*static void set(String nom, double v, Point p) {
-        try {
-            Field fnom = Point.class.getDeclaredField(nom);
-            fnom.setAccessible(true);
-            fnom.setDouble(p, v);
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
-            fail(String.format("Attribut %s absent", nom));
-        }
-    }*/
-    /**
-     * Test of nbSommets method, of class Polygone.
-     */
-    @Test
-    public void testNbSommets() {
-        System.out.println("nbSommets");
-        try {
-            for (int i = 0; i < 100; ++i) {
-                Point[] tp = new Point[R.nextInt(5)];
-                for (int j = 0; i < tp.length; ++i) {
-                    tp[j] = getRandomPoint();
-                }
-                Polygone p = new Polygone(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
-
-                assertTrue("revoir nbSommet()", 3 + tp.length == (int) getFromMethod(p, "nbSommets"));
-
-            }
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
-            fail("Revoir les constructeurs de la classe Point");
-        }
-    }
-
-    /**
-     * Test of getSommet method, of class Polygone.
-     */
-    @Test
-    public void testGetSommet() {
-        System.out.println("getSommet");
-        try {
-            for (int i = 0; i < 100; ++i) {
-                Point[] tp = new Point[R.nextInt(5)];
-                for (int j = 0; j < tp.length; ++j) {
-                    tp[j] = getRandomPoint();
-                }
-                Polygone p = new Polygone(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
-                for (int j = 0; j < (int) getFromMethod(p, "nbSommets"); ++j) {
-                    Point p1 = (Point) getFromMethodTA(p, "getSommet", int.class, j);
-                    Point p2 = getSommets(p)[j];
-                    try {
-                        assertTrue("revoir getSommet() ",
-                                PointTest.get("x", p1) == PointTest.get("x", p2)
-                                && PointTest.get("y", p1) == PointTest.get("y", p2)
-                        );
-                    } catch (NullPointerException ex) {
-                        fail("revoir getSommet() ");
-                    }
-                }
-            }
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
-            fail("Revoir les constructeurs de la classe Point");
-        }
-    }
-
-    /**
-     * Test of setSommet method, of class Polygone.
-     */
-    @Test
-    public void testSetSommet() {
-        System.out.println("setSommet");
-
-        try {
-            for (int i = 0; i < 100; ++i) {
-                Point[] tp = new Point[R.nextInt(5)];
-                for (int j = 0; j < tp.length; ++j) {
-                    tp[j] = getRandomPoint();
-                }
-                Polygone p = new Polygone(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
-                for (int j = 0; j < p.nbSommets(); ++j) {
-                    Point p1 = getRandomPoint();
-                    getFromMethodTA(p, "setSommet", int.class, j, Point.class, p1);
-                    Point p2 = getSommets(p)[j];
-                    try {
-                        assertTrue("revoir getSommet() ",
-                                PointTest.get("x", p1) == PointTest.get("x", p2)
-                                && PointTest.get("y", p1) == PointTest.get("y", p2)
-                        );
-                    } catch (NullPointerException ex) {
-                        fail("revoir getSommet() ");
-                    }
-                }
-            }
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
-            fail("Revoir les constructeurs de la classe Point");
-        }
-    }
-
-    /**
-     * Test of translation method, of class Polygone.
-     */
-    @Test
-    public void testTranslation() {
-        System.out.println("translation");
-        try {
-            for (int i = 0; i < 100; ++i) {
-                Point[] tp = new Point[R.nextInt(5)];
-                for (int j = 0; j < tp.length; ++j) {
-                    tp[j] = getRandomPoint();
-                }
-                Polygone p = new Polygone(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
-                double dx = getRandomValue();
-                double dy = getRandomValue();
-                Point[] sommetsAvant = getCopyOfSommets(p);
-                getFromMethodTA(p, "translation", double.class, dx, double.class, dy);
-                for (int j = 0; j < p.nbSommets(); ++j) {
-
-                    Point p1 = sommetsAvant[j];
-                    Point p2 = getSommets(p)[j];
-                    try {
-                        assertTrue("revoir translation() " + j,
-                                PointTest.get("x", p1) + dx == PointTest.get("x", p2)
-                                && PointTest.get("y", p1) + dy == PointTest.get("y", p2)
-                        );
-                    } catch (NullPointerException ex) {
-                        fail("revoir translation() ");
-                    }
-                }
-            }
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
-            fail("Revoir les constructeurs de la classe Point");
-        }
-    }
-
-    /**
-     * Test of rotation method, of class Polygone.
-     */
-    @Test
-    public void testRotation() {
-        System.out.println("rotation");
-        try {
-
-            for (int i = 0; i < 100; ++i) {
-                Point[] tp = new Point[R.nextInt(5)];
-                for (int j = 0; j < tp.length; ++j) {
-                    tp[j] = getRandomPoint();
-                }
-                Polygone p = new Polygone(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
-                double dtheta = getRandomValue();
-                Point[] sommetsAvant = getCopyOfSommets(p);
-                getFromMethodTA(p, "rotation", double.class, dtheta);
-                for (int j = 0; j < p.nbSommets(); ++j) {
-
-                    Point p1 = sommetsAvant[j];
-                    Point p2 = getSommets(p)[j];
-                    try {
-                        assertTrue("revoir rotation() " + j,
-                                PointTest.get("theta", p1) != PointTest.get("theta", p2)
-                                && PointTest.get("rho", p1) == PointTest.get("rho", p2)
-                        );
-                    } catch (NullPointerException ex) {
-                        fail("revoir rotation() " + ex);
-                    }
-                }
-            }
-        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
-            fail("Revoir les constructeurs de la classe Point");
-        }
-
-    }
-
-    /**
-     * Test of afficher method, of class Polygone.
-     */
-    @Test
-    public void testAfficher_boolean() {
-    }
-
-    /**
-     * Test of afficher method, of class Polygone.
-     */
-    @Test
-    public void testAfficher_0args() {
-    }
-
-    /*
-    private static void getterPresence(String nom) {
-        nom = "get" + nom.substring(0, 1).toUpperCase() + nom.substring(1);
-        try {
-            Method getter = Point.class.getDeclaredMethod(nom);
-
-            assertTrue("Vérifiez la visibilité de " + nom,
-                    Modifier.isPublic(getter.getModifiers())
-                    && !Modifier.isStatic(getter.getModifiers())
-            );
-
-            assertTrue("Vérifiez le retour de " + nom,
-                    getter.getReturnType().equals(double.class)
-                    || getter.getReturnType().equals(Double.class)
-            );
-
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez d'avoir un getter nommé " + nom
-                    + " et dont la signature est correcte.");
-        }
-    }
-
-    private static void setterPresence(String nom) {
-        nom = "set" + nom.substring(0, 1).toUpperCase() + nom.substring(1);
-        Method setter = null;
-        try {
-            setter = Point.class.getDeclaredMethod(nom, double.class);
-
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez d'avoir un setter nommé " + nom
-                    + " et dont la signature est correcte.");
-        }
-        if (setter == null) {
-            try {
-                setter = Point.class.getDeclaredMethod(nom, Double.class);
-
-            } catch (NoSuchMethodException | SecurityException ex) {
-                fail("Vérifiez d'avoir un setter nommé " + nom
-                        + " et dont la signature est correcte.");
-            }
-        }
-
-        if (setter != null) {
-
-            assertTrue("Vérifiez la visibilité de " + nom,
-                    Modifier.isPublic(setter.getModifiers())
-                    && !Modifier.isStatic(setter.getModifiers())
-            );
-
-            assertTrue("Vérifiez le retour de " + nom,
-                    setter.getReturnType().equals(void.class)
-            );
-        }
-    }
-
-    private static void defaultConstructorPresence() {
-        try {
-            Constructor c = Point.class.getConstructor();
-            assertTrue("Vérifiez les modificateurs d'accès du constructeur par défaut",
-                    Modifier.isPublic(c.getModifiers())
-            );
-
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Vérifiez d'avoir le constructeur par defaut");
-        }
-    }
-
-     */
     @Test
     public void checkClassPolygone() {
         System.out.println("check class Polygone");
@@ -358,13 +118,14 @@ public class PolygoneTest {
     }
 
     @Test
-    public void checkConstructorPolygone() {
-        System.out.println("Le constructeur par défaut");
+    public void checkFieldsommets() {
+        System.out.println("Check attribut sommets");
         try {
-            Constructor c = Polygone.class.getDeclaredConstructor();
-            assertTrue("", c.getModifiers() == 1);
-        } catch (NoSuchMethodException | SecurityException ex) {
-            fail("Le constructeur par défaut");
+            Field f = Polygone.class.getDeclaredField("sommets");
+            assertTrue("Revoir l'attribut sommets", f.getModifiers() == 2);
+            assertTrue("Revoir l'attribut sommets", f.getType().equals(Point[].class));
+        } catch (NoSuchFieldException | SecurityException ex) {
+            fail("Revoir l'attribut sommets");
         }
     }
 
@@ -381,18 +142,6 @@ public class PolygoneTest {
             assertTrue("", c.getModifiers() == 129);
         } catch (NoSuchMethodException | SecurityException ex) {
             fail("");
-        }
-    }
-
-    @Test
-    public void checkFieldsommets() {
-        System.out.println("Check attribut sommets");
-        try {
-            Field f = Polygone.class.getDeclaredField("sommets");
-            assertTrue("Revoir l'attribut sommets", f.getModifiers() == 2);
-            assertTrue("Revoir l'attribut sommets", f.getType().equals(Point[].class));
-        } catch (NoSuchFieldException | SecurityException ex) {
-            fail("Revoir l'attribut sommets");
         }
     }
 
@@ -488,6 +237,261 @@ public class PolygoneTest {
             fail("Revoir La méthode afficher en cartésien (par défaut)");
         }
     }
+
+    @Test
+    public void checkMethodtoString() {
+        System.out.println("public java.lang.String cf.ptm_pgm.geometrie.Polygone.toString()");
+        try {
+            Method c = Polygone.class.getDeclaredMethod("toString"
+            );
+            assertTrue("Revoir public java.lang.String cf.ptm_pgm.geometrie.Polygone.toString() (Modificateurs)", c.getModifiers() == 1);
+            assertTrue("Revoir public java.lang.String cf.ptm_pgm.geometrie.Polygone.toString() (Retour)", c.getReturnType().equals(String.class));
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Revoir public java.lang.String cf.ptm_pgm.geometrie.Polygone.toString()");
+        }
+    }
+
+    
+    
+    
+    @Test
+    public void testNbSommets() {
+        System.out.println("nbSommets");
+        try {
+            for (int i = 0; i < 100; ++i) {
+                Point[] tp = new Point[R.nextInt(5)];
+                for (int j = 0; i < tp.length; ++i) {
+                    tp[j] = getRandomPoint();
+                }
+                Polygone p = newInstance(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
+
+                assertTrue("revoir nbSommet()", 3 + tp.length == (int) getFromMethod(p, "nbSommets"));
+
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
+            fail("");
+        }
+    }
+
+    /**
+     * Test of getSommet method, of class Polygone.
+     */
+    @Test
+    public void testGetSommet() {
+        System.out.println("getSommet");
+        try {
+            for (int i = 0; i < 100; ++i) {
+                Point[] tp = new Point[R.nextInt(5)];
+                for (int j = 0; j < tp.length; ++j) {
+                    tp[j] = getRandomPoint();
+                }
+                Polygone p = newInstance(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
+                for (int j = 0; j < (int) getFromMethod(p, "nbSommets"); ++j) {
+                    Point p1 = (Point) getFromMethodTA(p, "getSommet", int.class, j);
+                    Point p2 = getSommets(p)[j];
+                    try {
+                        assertTrue("revoir getSommet() ",
+                                PointTest.get("x", p1) == PointTest.get("x", p2)
+                                && PointTest.get("y", p1) == PointTest.get("y", p2)
+                        );
+                    } catch (NullPointerException ex) {
+                        fail("revoir getSommet() ");
+                    }
+                }
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
+            fail("");
+        }
+    }
+
+    /**
+     * Test of setSommet method, of class Polygone.
+     */
+    @Test
+    public void testSetSommet() {
+        System.out.println("setSommet");
+
+        try {
+            for (int i = 0; i < 100; ++i) {
+                Point[] tp = new Point[R.nextInt(5)];
+                for (int j = 0; j < tp.length; ++j) {
+                    tp[j] = getRandomPoint();
+                }
+                Polygone p = newInstance(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
+                for (int j = 0; j < (int)getFromMethod(p, "nbSommets"); ++j) {
+                    Point p1 = getRandomPoint();
+                    getFromMethodTA(p, "setSommet", int.class, j, Point.class, p1);
+                    Point p2 = getSommets(p)[j];
+                    try {
+                        assertTrue("revoir getSommet() ",
+                                PointTest.get("x", p1) == PointTest.get("x", p2)
+                                && PointTest.get("y", p1) == PointTest.get("y", p2)
+                        );
+                    } catch (NullPointerException ex) {
+                        fail("revoir getSommet() ");
+                    }
+                }
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
+            fail("");
+        }
+    }
+
+    /**
+     * Test of translation method, of class Polygone.
+     */
+    @Test
+    public void testTranslation() {
+        System.out.println("translation");
+        try {
+            for (int i = 0; i < 100; ++i) {
+                Point[] tp = new Point[R.nextInt(5)];
+                for (int j = 0; j < tp.length; ++j) {
+                    tp[j] = getRandomPoint();
+                }
+                Polygone p = newInstance(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
+                double dx = getRandomValue();
+                double dy = getRandomValue();
+                Point[] sommetsAvant = getCopyOfSommets(p);
+                getFromMethodTA(p, "translation", double.class, dx, double.class, dy);
+                for (int j = 0; j < (int) getFromMethod(p, "nbSommets"); ++j) {
+
+                    Point p1 = sommetsAvant[j];
+                    Point p2 = getSommets(p)[j];
+                    try {
+                        assertTrue("revoir translation() " + j,
+                                PointTest.get("x", p1) + dx == PointTest.get("x", p2)
+                                && PointTest.get("y", p1) + dy == PointTest.get("y", p2)
+                        );
+                    } catch (NullPointerException ex) {
+                        fail("revoir translation() ");
+                    }
+                }
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
+            fail("");
+        }
+    }
+
+    /**
+     * Test of rotation method, of class Polygone.
+     */
+    @Test
+    public void testRotation() {
+        System.out.println("rotation");
+        try {
+
+            for (int i = 0; i < 100; ++i) {
+                Point[] tp = new Point[R.nextInt(5)];
+                for (int j = 0; j < tp.length; ++j) {
+                    tp[j] = getRandomPoint();
+                }
+                Polygone p = newInstance(getRandomPoint(), getRandomPoint(), getRandomPoint(), tp);
+                double dtheta = getRandomValue();
+                Point[] sommetsAvant = getCopyOfSommets(p);
+                getFromMethodTA(p, "rotation", double.class, dtheta);
+                for (int j = 0; j < (int) getFromMethod(p, "nbSommets"); ++j) {
+
+                    Point p1 = sommetsAvant[j];
+                    Point p2 = getSommets(p)[j];
+                    try {
+                        assertTrue("revoir rotation() " + j,
+                                PointTest.get("theta", p1) != PointTest.get("theta", p2)
+                                && PointTest.get("rho", p1) == PointTest.get("rho", p2)
+                        );
+                    } catch (NullPointerException ex) {
+                        fail("revoir rotation() " + ex);
+                    }
+                }
+            }
+        } catch (IllegalAccessException | NoSuchMethodException | InstantiationException | IllegalArgumentException | InvocationTargetException ex) {
+            fail("");
+        }
+
+    }
+
+    /**
+     * Test of afficher method, of class Polygone.
+     */
+    @Test
+    public void testAfficher_boolean() {
+    }
+
+    /**
+     * Test of afficher method, of class Polygone.
+     */
+    @Test
+    public void testAfficher_0args() {
+    }
+
+    /*
+    private static void getterPresence(String nom) {
+        nom = "get" + nom.substring(0, 1).toUpperCase() + nom.substring(1);
+        try {
+            Method getter = Point.class.getDeclaredMethod(nom);
+
+            assertTrue("Vérifiez la visibilité de " + nom,
+                    Modifier.isPublic(getter.getModifiers())
+                    && !Modifier.isStatic(getter.getModifiers())
+            );
+
+            assertTrue("Vérifiez le retour de " + nom,
+                    getter.getReturnType().equals(double.class)
+                    || getter.getReturnType().equals(Double.class)
+            );
+
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Vérifiez d'avoir un getter nommé " + nom
+                    + " et dont la signature est correcte.");
+        }
+    }
+
+    private static void setterPresence(String nom) {
+        nom = "set" + nom.substring(0, 1).toUpperCase() + nom.substring(1);
+        Method setter = null;
+        try {
+            setter = Point.class.getDeclaredMethod(nom, double.class);
+
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Vérifiez d'avoir un setter nommé " + nom
+                    + " et dont la signature est correcte.");
+        }
+        if (setter == null) {
+            try {
+                setter = Point.class.getDeclaredMethod(nom, Double.class);
+
+            } catch (NoSuchMethodException | SecurityException ex) {
+                fail("Vérifiez d'avoir un setter nommé " + nom
+                        + " et dont la signature est correcte.");
+            }
+        }
+
+        if (setter != null) {
+
+            assertTrue("Vérifiez la visibilité de " + nom,
+                    Modifier.isPublic(setter.getModifiers())
+                    && !Modifier.isStatic(setter.getModifiers())
+            );
+
+            assertTrue("Vérifiez le retour de " + nom,
+                    setter.getReturnType().equals(void.class)
+            );
+        }
+    }
+
+    private static void defaultConstructorPresence() {
+        try {
+            Constructor c = Point.class.getConstructor();
+            assertTrue("Vérifiez les modificateurs d'accès du constructeur par défaut",
+                    Modifier.isPublic(c.getModifiers())
+            );
+
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Vérifiez d'avoir le constructeur par defaut");
+        }
+    }
+
+     */
 
     /*
     @Test

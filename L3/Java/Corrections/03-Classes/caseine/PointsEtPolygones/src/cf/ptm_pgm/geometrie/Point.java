@@ -1,3 +1,7 @@
+/**
+ * @author Yvan Maillot (yvan.maillot@uha.fr)
+ */
+
 /*
 Écrire une classe Point avec :
 1. des attributs x et y de type double, pour les coordonnées cartésiennes.
@@ -30,6 +34,7 @@ TRES TRES IMPORTANT : les responsabilités de cette classe sont
 */
 package cf.ptm_pgm.geometrie;
 
+import checker.ToCheck;
 import static java.lang.Math.*;
 
 /**
@@ -42,6 +47,7 @@ public class Point {
     private double x, y;
     private double rho, theta;
     
+    @ToCheck("pfromc")   
     private void pfromc() {
         rho = sqrt(x*x+y*y);
         theta = atan2(y, x); 
@@ -50,6 +56,7 @@ public class Point {
             theta += 2*PI;       
     }
     
+    @ToCheck("cfromp")
     private void cfromp() {
         if (rho < 0) {
             rho = -rho;

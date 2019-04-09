@@ -5,8 +5,6 @@ qu'elle manipule des points immuables.
  */
 package cf.pti_pgm.geometrie;
 
-import cf.pti_pgm.geometrie.Point;
-
 /**
  *
  * @author yvan

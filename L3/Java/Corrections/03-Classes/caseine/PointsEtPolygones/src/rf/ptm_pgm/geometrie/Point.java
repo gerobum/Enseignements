@@ -1,3 +1,7 @@
+/**
+ * @author Yvan Maillot (yvan.maillot@uha.fr)
+ */
+
 package rf.ptm_pgm.geometrie;
 
 
