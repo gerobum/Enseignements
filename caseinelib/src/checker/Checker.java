@@ -7,12 +7,16 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Formatter;
 import tags.CheckModifier;
+import tags.GetterToCheck;
+import tags.SetterToCheck;
+import tags.ToCompare;
+import tests.A;
 
 /**
  *
  * @author yvan
  */
-    @ToCheck("Class")
+@ToCheck("Class")
 public class Checker {
 
     @ToCheck("Attribut")
@@ -46,29 +50,34 @@ public class Checker {
         checkConstructors();
         // --- Méthodes 
         checkMethods();
+        // --- Setters 
+        checkSetters();
+        // --- Getters 
+        //checkGetters();
 
     }
 
-
     public void checkClass(ToCheck toCheck) {
         f("\n@Test\n");
-        f("public void checkClass%s() {\n", C.getSimpleName());
+        f("public void p%02d00_checkClass%s() {\n", toCheck.priority(), C.getSimpleName());
         f("   System.out.println(\"check class %s\");\n", C.getSimpleName());
         f("   assertTrue(\"%s\", %s.class.getSuperclass().equals(%s.class));\n",
                 toCheck.value() + " (Héritage)",
                 C.getSimpleName(),
                 C.getSuperclass().getSimpleName());
+        f("   Class<?> x = %s.class;\n", C.getSimpleName());
         checkModifiers(toCheck.value(), C.getModifiers(), toCheck.modifiers());
         /*f("   assertTrue(\"%s\", %s.class.getModifiers() == %s);\n",
                 toCheck.value() + " (Modificateurs)",
                 C.getSimpleName(),
                 C.getModifiers()
         );*/
-        
+
         f("}\n");
     }
 
     private void checkConstructor(Constructor<?> c, ToCheck toCheck) {
+        String msg = toCheck.value().isEmpty() ? "Constructeur de " + c.getName() : toCheck.value();
         f("\n@Test\n");
         StringBuilder sb = Arrays.stream(c.getParameterTypes())
                 .map(x -> x.getSimpleName().replaceAll("\\[\\]", "Array"))
@@ -76,8 +85,8 @@ public class Checker {
                         StringBuilder::new,
                         StringBuilder::append,
                         StringBuilder::append);
-        f("public void checkConstructor%s%s() {\n", C.getSimpleName(), sb.toString());
-        f("   System.out.println(\"%s\");\n", toCheck.value());
+        f("public void p%02d00_checkConstructor%s%s() {\n", toCheck.priority(), C.getSimpleName(), sb.toString());
+        f("   System.out.println(\"Présence %s\");\n", msg);
         f("   try {\n");
         f("        Constructor x = %s.class.getDeclaredConstructor(\n", C.getSimpleName());
         if (c.getParameterCount() > 0) {
@@ -89,12 +98,17 @@ public class Checker {
         }
         f("\n        );\n");
         //f("        assertTrue(\"\", c.getModifiers() == %d);\n", c.getModifiers());
-                checkModifiers(toCheck.value(), c.getModifiers(), toCheck.modifiers());
+        checkModifiers(toCheck.value(), c.getModifiers(), toCheck.modifiers());
 
         f("   } catch (NoSuchMethodException | SecurityException ex) {\n");
-        f("        fail(\"%s\");\n", toCheck.value());
+        f("        fail(\"%s\");\n", msg);
         f("   }\n");
         f("}\n");
+        
+        ToCompare toCompare = c.getAnnotation(ToCompare.class);
+        if (toCompare != null) {
+            compareConstructor(c, toCheck, toCompare);
+        }
     }
 
     public void checkConstructors() {
@@ -104,6 +118,38 @@ public class Checker {
                 .forEach((c) -> {
                     checkConstructor(c, c.getAnnotation(ToCheck.class));
                 });
+    }
+    
+    
+
+    private void compareConstructor(Constructor<?> c, ToCheck toCheck, ToCompare toCompare) {
+        String msg = toCheck.value().isEmpty() ? "Constructeur de " + c.getName() : toCheck.value();
+        f("\n@Test\n");
+        StringBuilder sb = Arrays.stream(c.getParameterTypes())
+                .map(x -> x.getSimpleName().replaceAll("\\[\\]", "Array"))
+                .collect(
+                        StringBuilder::new,
+                        StringBuilder::append,
+                        StringBuilder::append);
+        f("public void p%02d00_testConstructor%s%s() {\n", toCompare.priority(), C.getSimpleName(), sb.toString());
+        f("   System.out.println(\"Test %s\");\n", msg);
+        f("   try {\n");
+        f("        Constructor x = %s.class.getDeclaredConstructor(\n", C.getSimpleName());
+        if (c.getParameterCount() > 0) {
+            Class<?>[] tparam = c.getParameterTypes();
+            f("           %s.class", tparam[0].getSimpleName());
+            for (int i = 1; i < tparam.length; ++i) {
+                f(",\n           %s.class", tparam[i].getSimpleName());
+            }
+        }
+        f("\n        );\n");
+        //f("        assertTrue(\"\", c.getModifiers() == %d);\n", c.getModifiers());
+        checkModifiers(toCheck.value(), c.getModifiers(), toCheck.modifiers());
+
+        f("   } catch (NoSuchMethodException | SecurityException ex) {\n");
+        f("        fail(\"%s\");\n", msg);
+        f("   }\n");
+        f("}\n");
     }
 
     public void checkMethods() {
@@ -130,12 +176,10 @@ public class Checker {
     private void checkField(Field f, ToCheck toCheck) {
         f("\n@Test\n");
 
-        f("public void checkField%s() {\n", f.getName());
+        f("public void p%02d00_checkField%s() {\n", toCheck.priority(), f.getName());
         f("   System.out.println(\"Check attribut %s\");\n", f.getName());
         f("   try {\n");
         f("        Field x = %s.class.getDeclaredField(\"%s\");\n", C.getSimpleName(), f.getName());
-        //f("        assertTrue(\"%s\", f.getModifiers() == %d);\n", msg, f.getModifiers());
-        
         checkModifiers(toCheck.value(), f.getModifiers(), toCheck.modifiers());
         f("        assertTrue(\"%s\", x.getType().equals(%s.class));\n", toCheck.value(), f.getType().getSimpleName());
         f("   } catch (NoSuchFieldException | SecurityException ex) {\n");
@@ -143,30 +187,130 @@ public class Checker {
         f("   }\n");
         f("}\n");
     }
-    
-    /**
-     * Affiche (grâce à f) tous les tests relatives aux modificateurs.
-     * @param msg
-     * @param modifier
-     * @param modifiers 
-     */
-    private void checkModifiers(String msg, long modifier, CheckModifier[] modifiers) {
-        //f("        assertTrue(\"Revoir %s (Modificateurs)\", c.getModifiers() == %d);\n", msg, m.getModifiers());
-        //StringBuilder sb = new StringBuilder();
-        //if (modifiersToCompare.checkIsABSTRACT())
-        //    f("        assertTrue(\"Revoir %s (Modificateurs)\", Modifier.isAbstract(%d) == Modifier.isAbstract(x.getModifiers()));\n", msg, modifier);
-        for(CheckModifier cm : modifiers) 
-            f("        " + cm.toString(), msg, modifier);
-        //return sb.toString();
+
+    public void checkSetters() {
+        SB.append('\n');
+
+        Arrays.stream(C.getDeclaredFields())
+                .filter(x -> x.getAnnotation(SetterToCheck.class) != null)
+                .forEach(f -> {
+                    checkSetter(f, f.getAnnotation(SetterToCheck.class));
+                });
+
+    }
+
+    private void checkSetter(Field f, SetterToCheck toCheck) {
+        f("\n@Test\n");
+        f("public void p%03d00_checkSetter%s() {\n", toCheck.priority(), f.getName());
+        f("   System.out.println(\"Check setter %s\");\n", f.getName());
+        f("   try {\n");
+        f("        Method x = %s.class.getDeclaredMethod(\"set%s\", %s.class);\n",
+                C.getSimpleName(),
+                initial(f.getName()),
+                f.getType().getName());
+        f("        assertTrue(\"Revoir set%s\", x.getReturnType().equals(void.class));\n",
+                initial(f.getName()));
+        f("        Object o = IntrospectionUtilities.randomValue(%s.class);\n",
+                C.getSimpleName());
+        f("        for(int i = 0; i < 100; ++i) {\n");
+        f("            %1$s v = (%1$s) IntrospectionUtilities.randomValue(%1$s.class);\n",
+                       f.getType().getName());
+        f("            IntrospectionUtilities.getFromMethodTA(\n");
+        f("                 %s.class,\n", C.getSimpleName());
+        f("                 o,\n");
+        f("                 \"set%s\",\n", initial(f.getName()));
+        f("                 %s.class,\n", f.getType().getName());
+        f("                 v\n");
+        f("            );\n");
+        f("            assertTrue(\"Revoir set%s\", ", initial(f.getName()));
+        f("                                        IntrospectionUtilities.getAttribut(\n");
+        f("                                           %s.class, \n", C.getSimpleName());
+        f("                                           o, \n");
+        f("                                           \"%s\"\n", f.getName());
+        f("                                        ).equals(v));\n");
+        f("        }\n");
+        f("   } catch (SecurityException | NoSuchMethodException | NoSuchFieldException ex) {\n");
+        f("        fail(\"Revoir set%s\");\n", initial(f.getName()));
+        f("   } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {\n");
+        f("        fail(\"Il manque un constructeur pour tester set%s\");\n", initial(f.getName()));
+        f("   }\n");
+        f("}\n");
     }
     
-    private void checkSimpleSetter() {
-        
+    
+
+    public void checkGetters() {
+        SB.append('\n');
+
+        Arrays.stream(C.getDeclaredFields())
+                .filter(x -> x.getAnnotation(SetterToCheck.class) != null)
+                .forEach(f -> {
+                    checkGetter(f, f.getAnnotation(GetterToCheck.class));
+                });
+
+    }
+    
+    
+    private void checkGetter(Field f, GetterToCheck toCheck) {
+        f("\n@Test\n");
+        f("public void p%03d00_checkGetter%s() {\n", toCheck.priority(), f.getName());
+        f("   System.out.println(\"Check getter %s\");\n", f.getName());
+        f("   try {\n");
+        f("        Method x = %s.class.getDeclaredMethod(\"get%s\");\n",
+                C.getSimpleName(),
+                initial(f.getName()));
+        f("        assertTrue(\"Revoir get%s\", x.getReturnType().equals(%s.class));\n",
+                initial(f.getName()),
+                f.getType().getName());
+        f("        Object o = IntrospectionUtilities.randomValue(%s.class);\n",
+                C.getSimpleName());
+        f("        for(int i = 0; i < 100; ++i) {\n");
+        f("            %1$s v = (%1$s) IntrospectionUtilities.randomValue(%1$s.class);\n",
+                            f.getType().getName());
+        f("            IntrospectionUtilities.getFromMethodTA(\n");
+        f("                 %s.class,\n", C.getSimpleName());
+        f("                 o,\n");
+        f("                 \"set%s\",\n", initial(f.getName()));
+        f("                 %s.class,\n", f.getType().getName());
+        f("                 v\n");
+        f("            );\n");
+        f("            assertTrue(\"Revoir set%s\", ", initial(f.getName()));
+        f("                                        IntrospectionUtilities.getAttribut(\n");
+        f("                                           %s.class, \n", C.getSimpleName());
+        f("                                           o, \n");
+        f("                                           \"%s\"\n", f.getName());
+        f("                                        ).equals(v));\n");
+        f("        }\n");
+        f("   } catch (SecurityException | NoSuchMethodException | NoSuchFieldException ex) {\n");
+        f("        fail(\"Revoir set%s\");\n", initial(f.getName()));
+        f("   } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {\n");
+        f("        fail(\"Il manque un constructeur pour tester set%s\");\n", initial(f.getName()));
+        f("   }\n");
+        f("}\n");
+    }
+    
+  
+
+    /**
+     * Affiche (grâce à f) tous les tests relatives aux modificateurs.
+     *
+     * @param msg
+     * @param modifier
+     * @param modifiers
+     */
+    private void checkModifiers(String msg, long modifier, CheckModifier[] modifiers) {
+        for (CheckModifier cm : modifiers) {
+            f("        " + cm.toString(), msg, modifier);
+        }
+    }
+
+    private void checkSetter(Field f) {
+
     }
 
     private void checkMethod(Method m, ToCheck toCheck) {
         String msg = toCheck.value();
-        msg = msg.isEmpty() ? m.toString() : msg;
+        msg = msg.isEmpty() ? m.getName() : msg;
         f("\n@Test\n");
         StringBuilder sb = Arrays.stream(m.getParameterTypes())
                 .map(x -> x.getSimpleName().replaceAll("\\[\\]", "Array"))
@@ -174,7 +318,7 @@ public class Checker {
                         StringBuilder::new,
                         StringBuilder::append,
                         StringBuilder::append);
-        f("public void checkMethod%s%s() {\n", m.getName(), sb.toString());
+        f("public void p%02d00_checkMethod%s%s() {\n", toCheck.priority(), m.getName(), sb.toString());
         f("   System.out.println(\"%s\");\n", msg);
         f("   try {\n");
         f("        Method x = %s.class.getDeclaredMethod(\"%s\"\n", C.getSimpleName(), m.getName());
@@ -199,9 +343,9 @@ public class Checker {
     public String toString() {
         return SB.toString();
     }
-    
-    
+
     public static class M1 {
+
         int a;
         private int b;
 
@@ -209,10 +353,11 @@ public class Checker {
         public String toString() {
             return "M1{" + "a=" + a + ", b=" + b + '}';
         }
-        
+
     }
-    
+
     public static class M2 {
+
         private M1 a = new M1();
 
         final M1 b = new M1();
@@ -223,25 +368,26 @@ public class Checker {
         public String toString() {
             return "M2{" + "a=" + a + ", b=" + b + ", c=" + c + '}';
         }
-        
-        
+
     }
-    
-   
-    
+
     public static class I1 {
+
         private int c;
     }
-    
+
     public static class I2 {
+
         final int d = 0;
     }
-    
+
     public static class I3 {
+
         final I2 e = new I2();
     }
-    
+
     public static class M4 {
+
         private int f;
 
         public int getF() {
@@ -251,19 +397,15 @@ public class Checker {
         public void setF(int f) {
             this.f = f;
         }
-        
+
     }
+
+    private String initial(String name) {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
+
     public static void main(String[] args) {
-        //System.out.println("OK");
-        Checker checker = new Checker(Checker.class);
-        System.out.println(checker);
-        //CheckModifier cm;
-        
-        for(CheckModifier cm : CheckModifier.values()) {
-            System.out.println(cm);
-        }
-        
-        System.out.println(CheckModifier.isFinal.name());
-        
+        Checker chk = new Checker(A.class);
+        System.out.println(chk);
     }
 }

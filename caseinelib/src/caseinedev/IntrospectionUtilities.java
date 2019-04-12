@@ -298,8 +298,7 @@ public class IntrospectionUtilities {
         return values;
     }
 
-    public static Object
-            randomValue(Class<?> c) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
+    public static Object randomValue(Class<?> c) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
         if (c == void.class) {
             return null;
 
