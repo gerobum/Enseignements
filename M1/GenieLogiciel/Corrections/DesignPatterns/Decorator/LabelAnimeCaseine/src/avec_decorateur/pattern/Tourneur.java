@@ -1,30 +1,15 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
-public class Tourneur extends Decorateur {
-    public Tourneur(Animateur composant) {
-        super(composant);
-        //faireTourner();
-    }
-    @Override
+// TODO établir une généralisation si nécessaire
+public class Tourneur {
+    
+    // TODO déclarer un constructeur adapté
+    
     public void animer() {
-        super.animer();
-        faireTourner();
-    }  
+        // TODO redéfinir correctement cette méthode
+    }      
+    
     private void faireTourner() {
-        new Thread(new Runnable() {
-
-            public void run() {
-                while(true) {
-                    synchronized(getJLabel()) {
-                        getJLabel().setText(getJLabel().getText().substring(1)+getJLabel().getText().substring(0, 1));
-                     }
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException ex) { 
-                        }   
-
-                }
-            }
-        }).start();       
+        // TODO faire tourner (défiler) le JLabel. S'inspirer de sans_decorateur.JLabelTournant
     }
 }

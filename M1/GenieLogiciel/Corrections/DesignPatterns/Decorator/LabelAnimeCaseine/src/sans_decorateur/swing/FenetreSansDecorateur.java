@@ -1,17 +1,17 @@
-package testeur;
+package sans_decorateur.swing;
 
 import java.awt.Font;
-import sansdecorateur.JLabelClignotant;
-import sansdecorateur.JLabelTournant;
+import sans_decorateur.JLabelClignotant;
+import sans_decorateur.JLabelTournant;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import sansdecorateur.JLabelClignotantTournant;
+import sans_decorateur.JLabelClignotantTournant;
 
-public class TestSansDecorateur extends JFrame {
+public class FenetreSansDecorateur extends JFrame {
 
-    public TestSansDecorateur() {
-        super("Test");
+    public FenetreSansDecorateur(String message) {
+        super(message);
         setUI();
     }
 
@@ -34,9 +34,5 @@ public class TestSansDecorateur extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         pack();
-    }
-
-    public static void main(String[] args) {
-        new TestSansDecorateur();
     }
 }

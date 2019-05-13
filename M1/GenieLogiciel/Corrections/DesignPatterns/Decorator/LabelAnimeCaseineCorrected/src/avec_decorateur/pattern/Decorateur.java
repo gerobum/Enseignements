@@ -1,11 +1,14 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
 import javax.swing.JLabel;
 
 public class Decorateur extends Animateur {
-    private Animateur composant;
-    
+
+    // TODO déclarer un ou des attributs si nécessaire
+    private final Animateur composant;
+
     public Decorateur(Animateur composant) {
+        // TODO redéfinir correctement ce constructeur
         this.composant = composant;
     }
 
@@ -14,9 +17,8 @@ public class Decorateur extends Animateur {
         composant.animer();
     }
 
-  @Override
-  public JLabel getJLabel() {
-    return composant.getJLabel();
-  }
-
+    @Override
+    public JLabel getJLabel() {
+        return composant.getJLabel();
+    }
 }

@@ -1,40 +1,16 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
-import java.awt.Color;
+// TODO établir une généralisation si nécessaire
+public class Clignoteur {
 
-public class Clignoteur extends Decorateur {
-    public Clignoteur(Animateur composant) {
-        super(composant);
-    }
+    // TODO déclarer un constructeur adapté
     
-    @Override
     public void animer() {
-        super.animer();
-        faireClignoter();
+        // TODO redéfinir correctement cette méthode
     }  
+    
     private void faireClignoter() {
-        new Thread(new Runnable() {
-
-            public void run() {
-                Color couleur = getJLabel().getForeground();
-                while(true) {
-                        if (getJLabel().getForeground() == couleur) {
-                            getJLabel().setForeground(getJLabel().getBackground());
-                            try {
-                                Thread.sleep(200);
-                            } catch (InterruptedException ex) {
-                            }
-                        } else {
-                            getJLabel().setForeground(couleur);
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException ex) {
-                            }
-
-                        }
-                    }
-            }
-        }).start();        
+        // TODO faire clignoter le JLabel. S'inspirer de sans_decorateur.JLabelClignotant
     }
 
 }

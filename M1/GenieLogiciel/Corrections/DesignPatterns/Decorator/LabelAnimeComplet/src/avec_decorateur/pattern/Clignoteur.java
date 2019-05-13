@@ -1,4 +1,4 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
 import java.awt.Color;
 

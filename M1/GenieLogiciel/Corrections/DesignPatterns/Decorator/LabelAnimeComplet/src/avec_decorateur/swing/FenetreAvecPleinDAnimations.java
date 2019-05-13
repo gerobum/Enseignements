@@ -1,12 +1,17 @@
-package labelAnime;
+package avec_decorateur.swing;
 
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+import avec_decorateur.pattern.ArcEnCiel;
+import avec_decorateur.pattern.Clignoteur;
+import avec_decorateur.pattern.Porteur;
+import avec_decorateur.pattern.Tourneur;
+import avec_decorateur.pattern.Vague;
 
-public class TestAvecDecorateur extends JFrame {
+public class FenetreAvecPleinDAnimations extends JFrame {
         private JLabel tourne ;
         private JLabel clignote;
         private JLabel tourneEtClignote;
@@ -16,8 +21,9 @@ public class TestAvecDecorateur extends JFrame {
         private JLabel calme;
         private JLabel agité;
 
-    public TestAvecDecorateur() {
-        super("Test");        setUI();
+    public FenetreAvecPleinDAnimations(String titre) {
+        super(titre);        
+        setUI();
         animation();
     }
     
@@ -41,9 +47,7 @@ public class TestAvecDecorateur extends JFrame {
         vagueArcEnCiel.setFont(font);
         calme.setFont(font);
         agité.setFont(font);
-        
-
-              
+                      
         getContentPane().setLayout(new GridLayout(0, 1));
         
         getContentPane().add(tourne);
@@ -70,16 +74,5 @@ public class TestAvecDecorateur extends JFrame {
         new ArcEnCiel(new Porteur(arcEnCiel)).animer();
         new Vague(new Porteur(vague)).animer();
         new Tourneur(new Tourneur(new Clignoteur(new ArcEnCiel(new Vague(new Porteur(agité)))))).animer();
-    }
-    
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TestAvecDecorateur();
-            }
-        });
-
-        
     }
 }

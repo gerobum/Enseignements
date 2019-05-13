@@ -1,4 +1,4 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
 public class Tourneur extends Decorateur {
     public Tourneur(Animateur composant) {

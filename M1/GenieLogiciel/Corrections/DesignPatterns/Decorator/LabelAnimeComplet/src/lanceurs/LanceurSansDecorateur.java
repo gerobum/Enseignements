@@ -1,17 +1,19 @@
-package testeur;
+package lanceurs;
 
 import java.awt.Font;
-import sansdecorateur.JLabelClignotant;
-import sansdecorateur.JLabelTournant;
+import sans_decorateur.JLabelClignotant;
+import sans_decorateur.JLabelTournant;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import sansdecorateur.JLabelClignotantTournant;
+import javax.swing.SwingUtilities;
+import sans_decorateur.JLabelClignotantTournant;
+import sans_decorateur.swing.FenetreSansDecorateur;
 
-public class TestSansDecorateur extends JFrame {
+public class LanceurSansDecorateur extends JFrame {
 
-    public TestSansDecorateur() {
-        super("Test");
+    public LanceurSansDecorateur() {
+        super("Démo");
         setUI();
     }
 
@@ -37,6 +39,11 @@ public class TestSansDecorateur extends JFrame {
     }
 
     public static void main(String[] args) {
-        new TestSansDecorateur();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new FenetreSansDecorateur("Démonstration");
+            }
+        });
     }
 }

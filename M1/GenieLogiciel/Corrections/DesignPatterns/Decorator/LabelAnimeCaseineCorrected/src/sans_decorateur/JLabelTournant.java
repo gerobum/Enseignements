@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package sansdecorateur;
 
-import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package sans_decorateur;
+
 import javax.swing.JLabel;
 
 /**
@@ -21,17 +15,16 @@ public class JLabelTournant extends JLabel {
 
     public JLabelTournant(String string, int alignement) {
         super(string, alignement);
+        // Le thread qui fait tourner
         new Thread(new Runnable() {
-
+            @Override
             public void run() {
                 while (true) {
                     setText(getText().substring(1) + getText().substring(0, 1));
                     try {
                         Thread.sleep(200);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(JLabelTournant.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {                        
                     }
-
                 }
             }
         }).start();

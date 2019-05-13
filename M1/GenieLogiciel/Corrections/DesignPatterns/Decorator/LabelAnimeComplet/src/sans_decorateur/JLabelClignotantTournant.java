@@ -1,19 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package sansdecorateur;
+package sans_decorateur;
 
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Yvan
- */
 public class JLabelClignotantTournant extends JLabel {
 
     public JLabelClignotantTournant(String string) {

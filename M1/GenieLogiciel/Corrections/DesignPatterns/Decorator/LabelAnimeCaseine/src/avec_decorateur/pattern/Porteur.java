@@ -1,20 +1,13 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
-import javax.swing.JLabel;
+/**
+Classe "Porteur" car elle porte le JLabel à animer
+*/
+public class Porteur {
 
+    // TODO déclarer un ou des attributs si nécesaire
 
-public class Porteur extends Animateur {
-    private final JLabel label;
-    public Porteur(JLabel label) {
-        this.label = label;
-    }
+    
+    // TODO écrire un constructeur qui définit le JLabel à animer
 
-    @Override
-    public void animer() {       
-    }
-
-  @Override
-  public JLabel getJLabel() {
-    return label;
-  }
 }

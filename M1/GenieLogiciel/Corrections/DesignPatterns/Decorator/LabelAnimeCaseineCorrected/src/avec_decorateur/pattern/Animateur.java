@@ -1,5 +1,4 @@
-package labelAnime;
-
+package avec_decorateur.pattern;
 
 import javax.swing.JLabel;
 

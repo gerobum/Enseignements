@@ -1,16 +1,18 @@
-package labelAnime;
+package avec_decorateur.swing;
 
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import avec_decorateur.pattern.Clignoteur;
+import avec_decorateur.pattern.Porteur;
+import avec_decorateur.pattern.Tourneur;
 
-public class TestAvecDecorateurSimple extends JFrame {
+public class FenetreAvecTroisAnimations extends JFrame {
     private JLabel tourne, clignote, tourneEtClignote;
 
-    public TestAvecDecorateurSimple() {
-        super("Test");
+    public FenetreAvecTroisAnimations(String message) {
+        super(message);
         setUI();
         animation();
     }
@@ -39,19 +41,12 @@ public class TestAvecDecorateurSimple extends JFrame {
     }
 
     private void animation() {
+        // TODO faire clignoter le JLabel clignote
         new Clignoteur(new Porteur(clignote)).animer();
+        // TODO faire tourner le JLabel tourne
         new Tourneur(new Porteur(tourne)).animer();
+        // TODO faire tourner et clignoter le JLabel tourneEtClignote
         new Clignoteur(new Tourneur(new Porteur(tourneEtClignote))).animer();
-
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TestAvecDecorateurSimple();
-            }
-        });
 
     }
 }

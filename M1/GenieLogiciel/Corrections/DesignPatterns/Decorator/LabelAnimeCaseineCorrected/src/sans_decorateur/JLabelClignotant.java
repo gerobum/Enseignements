@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package sansdecorateur;
+
+package sans_decorateur;
 
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -21,28 +16,23 @@ public class JLabelClignotant extends JLabel {
 
     public JLabelClignotant(String string, int alignement) {
         super(string, alignement);
+        
+        // Le thread qui fait clignoter
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Color couleur = getForeground();
-                while (true) {
-                    if (getForeground() == couleur) {
-                        setForeground(getBackground());
-                        try {
+                try {
+                    Color couleur = getForeground();
+                    while (true) {
+                        if (getForeground() == couleur) {
+                            setForeground(getBackground());
                             Thread.sleep(200);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(JLabelClignotant.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        setForeground(couleur);
-                        try {
+                        } else {
+                            setForeground(couleur);
                             Thread.sleep(500);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(JLabelClignotant.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
                     }
-
+                } catch (InterruptedException ex) {                   
                 }
             }
         }).start();

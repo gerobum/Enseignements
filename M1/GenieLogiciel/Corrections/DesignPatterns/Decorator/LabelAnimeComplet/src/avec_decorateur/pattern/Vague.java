@@ -1,4 +1,4 @@
-package labelAnime;
+package avec_decorateur.pattern;
 
 public class Vague extends Decorateur {
 
