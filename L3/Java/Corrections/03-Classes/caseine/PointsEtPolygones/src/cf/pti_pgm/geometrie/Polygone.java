@@ -1,6 +1,9 @@
 /*
-Copier la classe Polygone mutable du paquetage point_mutable_polygone_mutable 
-dans un paquetage appelé point_immuable_polygone_mutable et la modifier pour 
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
+ */
+
+/*
+Copier la classe Polygone mutable de l'exercice précédent et la modifier pour 
 qu'elle manipule des points immuables.
  */
 package cf.pti_pgm.geometrie;

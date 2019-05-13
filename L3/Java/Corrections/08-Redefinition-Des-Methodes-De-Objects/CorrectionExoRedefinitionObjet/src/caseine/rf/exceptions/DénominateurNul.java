@@ -1,4 +1,7 @@
-package exceptions;
+package caseine.rf.exceptions;
+
+import caseine.cf.exceptions.*;
+import exceptions.*;
 
 /**
  *

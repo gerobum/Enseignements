@@ -34,8 +34,8 @@ TRES TRES IMPORTANT : les responsabilités de cette classe sont
 */
 package cf.ptm_pgm.geometrie;
 
-import checker.ToCheck;
 import static java.lang.Math.*;
+import tags.ToCheck;
 
 /**
  * Classe Point pour modéliser des points du plan cartésien.

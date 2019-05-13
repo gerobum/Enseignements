@@ -1,141 +1,102 @@
-/**
- * @author Yvan Maillot (yvan.maillot@uha.fr)
+/*
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
  */
 
-/*
-Écrire une classe Point avec :
-1. des attributs x et y de type double, pour les coordonnées cartésiennes.
-2. Des attributs rho et theta de type double, pour les coordonnées polaires.
-3. La possibilité de le construire par défaut (0,0).
-4. La possibilité de le construire en donnant les coordonnées cartésiennes.
-5. La possibilité de le construire en donnant les coordonnées polaires.
-6. Tous les setters et tous les getters.
-7. Une méthode pour lui appliquer une translation.
-8. Une méthode pour lui appliquer une rotation par rapport à l’origine.
-9. Une méthode pour l’afficher sur la sortie standard.
- 
-*/
+ /*
+ Copier la classe Point mutable de l'exercice précédent et la rendre immuable.
+ */
+package cf.geometrie;
 
-/*
-TRES TRES IMPORTANT : les responsabilités de cette classe sont
-
-1. de garantir l'intégrité de ses données et en particulier que les coordonnées 
-   cartésiennes et polaires soient TOUJOURS cohérentes les unes envers les autres.
-
-2. d'avoir un theta dans [0,2*PI]
-
-3. d'avoir un rho positif (comme il n'est pas d'empêcher la construction d'un
-   point avec un rho négatif, ou de mettre rho à jour avec un valeur négative,
-   nous devons définir une interprétation d'un rho négatif.
-
-   Nous considérerons que le point de coordonées polaires [-rho:theta] est égal
-   au point de coordonnées polaires [rho:(theta+PI)%2*PI]
-
-*/
-package cf.ptm_pgm.geometrie;
-
-import checker.ToCheck;
 import static java.lang.Math.*;
+import tags.ToCheck;
 
 /**
- * Classe Point pour modéliser des points du plan cartésien.
- * 
+ *
  * @author yvan
  */
-public class Point {
-   
-    private double x, y;
-    private double rho, theta;
-    
-    @ToCheck("pfromc")   
-    private void pfromc() {
-        rho = sqrt(x*x+y*y);
-        theta = atan2(y, x); 
-        theta %= (2*PI);
-        if (theta < 0)
-            theta += 2*PI;       
-    }
-    
-    @ToCheck("cfromp")
-    private void cfromp() {
-        if (rho < 0) {
-            rho = -rho;
-            theta += PI;
-        }
-        theta %= (2*PI);
-        if (theta < 0)
-            theta += 2*PI;
-        x = rho*cos(theta);
-        y = rho*sin(theta);
-    }
-    
-    public Point(double roux, double touy, boolean polaire) {
-        if (polaire) {
-            rho = roux;
-            theta = touy;
-            cfromp();
-        } else {
-            x = roux;
-            y = touy;
-            pfromc();
-        }
-    }
+/* 
+Déclarer la classe "final" ne garantit pas son immuabilité, mais c'est 
+recommandé car on veut éviter qu'une classe immuable soit étendue en une classe
+mutable.
+ */
+@ToCheck("Vérifier les modificateurs de la classe Point")
+public final class Point {
 
+    /* 
+    Si tous les attributs de la classe sont de type simple, une bonne façon de
+    s'assurer qu'elle soit immuable est de tous les déclarer "final".
+     */
+    @ToCheck("Vérifier les attributs x et y")
+    public final double x, y;
+    @ToCheck("Vérifier les attributs rho et theta")
+    public final double rho, theta;
+
+    /*
+    Par conséquent, il n'y a pas de risque à ce qu'ils soient publics.
+    Mais attention, s'ils n'étaient pas "final", ils devraient être privés.
+     */
+    @ToCheck("Vérifier vos constructeurs")
     public Point(double x, double y) {
         this(x, y, false);
     }
-    
+
+    @ToCheck("Vérifier vos constructeurs")
     public Point() {
-        this(0, 0, false);
+        this(0, 0);
     }
 
-    public double getX() {
-        return x;
+    /*
+    Plus besoin des méthodes pfromc() et cfromp() car ces calculs ne sont 
+    réalisés qu'une seule fois à la construction.
+     */
+    public Point(double rhooux, double thetaouy, boolean polaire) {
+        if (polaire) {
+            if (rhooux < 0) {
+                rhooux = -rhooux;
+                thetaouy += PI;
+            }
+            thetaouy %= (2 * PI);
+            if (thetaouy < 0) {
+                thetaouy += 2 * PI;
+            }
+            rho = rhooux;
+            theta = thetaouy;
+            x = rho * cos(theta);
+            y = rho * sin(theta);
+        } else {
+            x = rhooux;
+            y = thetaouy;
+            double rho = sqrt(x * x + y * y);
+            double theta = atan2(y, x);
+            theta %= (2 * PI);
+            if (theta < 0) {
+                theta += 2 * PI;
+            }
+            this.rho = rho;
+            this.theta = theta;
+        }
     }
 
-    public void setX(double x) {
-        this.x = x;
-        pfromc();
+    /*
+    Il faut enlever tous les setters.
+     */
+
+ /*
+    Attention aux setters cachés. translation et rotation en sont.
+    Si l'on peut les conserver, ces méthodes doivent retourner une copie
+    du point translaté ou pivoté.
+     */
+    @ToCheck("Vérifier la méthode translation")
+    public Point translation(double dx, double dy) {
+        return new Point(x + dx, y + dy);
     }
 
-    public double getY() {
-        return y;
+    @ToCheck("Vérifier la méthode rotation")
+    public Point rotation(double dtheta) {
+        return new Point(rho, (theta + dtheta) % (2 * PI), true);
     }
 
-    public void setY(double y) {
-        this.y = y;
-        pfromc();
-    }
-
-    public double getRho() {
-        return rho;
-    }
-
-    public void setRho(double rho) {
-        this.rho = rho;
-        cfromp();
-    }
-
-    public double getTheta() {
-        return theta;
-    }
-
-    public void setTheta(double theta) {
-        this.theta = theta;
-        cfromp();
-    }
-    
-    public void translation(double dx, double dy) {
-        x += dx;
-        y += dy;
-        pfromc();
-    }
-    
-    public void rotation(double dtheta) {
-        theta += dtheta;
-        cfromp();
-    }
-    
+    @ToCheck
     public void afficher(boolean polaire) {
         if (polaire) {
             System.out.print("[" + rho + ":" + theta + "]");
@@ -143,13 +104,9 @@ public class Point {
             System.out.print("(" + x + ", " + y + ")");
         }
     }
-    
+
+    @ToCheck
     public void afficher() {
         afficher(false);
-    }
-    
-    @Override
-    public String toString() {
-        return "("+x+", "+y+")";
     }
 }

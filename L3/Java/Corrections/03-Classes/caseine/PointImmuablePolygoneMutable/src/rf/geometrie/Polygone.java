@@ -9,7 +9,7 @@ Dans le paquetage pti_pgm, écrire une classe (mutable) Polygone dont les points
 sont immuables (contrairement au Polygone de l'exercice précédent)
 
  */
-package rf.pti_pgm.geometrie;
+package rf.geometrie;
 
 /**
  *

@@ -1,6 +1,6 @@
-package checker;
+package checkerold;
 
-import caseinedev.IntrospectionUtilities;
+import caseinedevold.IntrospectionUtilities;
 import cf.pti_pgm.geometrie.Point;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static caseinedev.IntrospectionUtilities.*;
+import static caseinedevold.IntrospectionUtilities.*;
 import java.awt.Color;
 
 /**

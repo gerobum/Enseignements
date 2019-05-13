@@ -1,7 +1,11 @@
-package _01_tout_immuable.fractions;
+package caseine.cf.fractions;
 
 import exceptions.*;
-
+import tags.ToCheck;
+/*
+Reprendre la classe immuable Fraction de l’exercice du cours sur
+les exceptions et redéfinir comme il se doit les méthodes de Object
+*/
 public final class Fraction {
 
     public final int numérateur;
@@ -12,6 +16,7 @@ public final class Fraction {
     
     // #### Redéfinition de toString()
     @Override
+    @ToCheck(priority = 1)
     public String toString() {
         if (numérateur == 0 || dénominateur == 1) {
             return "" + numérateur;
@@ -22,6 +27,7 @@ public final class Fraction {
     
     // #### redéfinition de hashCode()
     @Override
+    @ToCheck(priority = 2)
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + this.numérateur;
@@ -31,6 +37,7 @@ public final class Fraction {
 
     // #### Redéfinition de equals
     @Override
+    @ToCheck(priority = 3)
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -43,7 +50,7 @@ public final class Fraction {
         return this.numérateur == other.numérateur && this.dénominateur == other.dénominateur;
     }
     
-    // #### Le ne faut pas redéfinir clone() car la classe est immuable
+    // #### Il ne faut pas redéfinir clone() car la classe est immuable
     
     
     

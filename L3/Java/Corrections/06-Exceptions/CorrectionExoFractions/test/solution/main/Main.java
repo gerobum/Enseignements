@@ -1,8 +1,11 @@
+/*
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
+ */
+package solution.main;
 
-package main;
-
-import exceptions.DénominateurNul;
-import fractions.Fraction;
+import checker.Checker;
+import solution.exceptions.DénominateurNul;
+import solution.fractions.Fraction;
 
 /**
  *
@@ -13,5 +16,8 @@ public class Main {
         Fraction a = new Fraction(13,8);
         Fraction b = new Fraction(-7,12);
         a.plus(b).affiche();
+        
+        Checker chk = new Checker(Fraction.class);
+        System.out.println(chk);
     }
 }

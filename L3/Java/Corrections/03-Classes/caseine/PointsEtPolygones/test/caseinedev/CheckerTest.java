@@ -3,8 +3,8 @@
  */
 package caseinedev;
 
-import static caseinedev.IntrospectionUtilities.isMutable;
-import checker.Checker;
+import static caseinedevold.IntrospectionUtilities.isMutable;
+import checkerold.Checker;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -3,13 +3,12 @@
  */
 
  /*
- Copier la classe Point mutable du paquetage ptm_pgm dans 
-le paquetage pti_pgm et la rendre immuable.
+ Copier la classe Point mutable de l'exercice précédent et la rendre immuable.
  */
 package cf.pti_pgm.geometrie;
 
-import checker.ToCheck;
 import static java.lang.Math.*;
+import tags.ToCheck;
 
 /**
  *

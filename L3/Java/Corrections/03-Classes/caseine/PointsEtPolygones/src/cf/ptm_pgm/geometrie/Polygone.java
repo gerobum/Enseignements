@@ -16,7 +16,8 @@
  */
 package cf.ptm_pgm.geometrie;
 
-import checker.ToCheck;
+import tags.ToCheck;
+
 
 /**
  *

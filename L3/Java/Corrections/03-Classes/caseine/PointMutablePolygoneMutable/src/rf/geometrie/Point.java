@@ -1,7 +1,7 @@
 /**
  * @author Yvan Maillot (yvan.maillot@uha.fr)
  */
-package rf.pti_pgm.geometrie;
+package rf.geometrie;
 
 import static java.lang.Math.*;
 
@@ -118,9 +118,11 @@ public class Point {
         // TODO afficher ce point sur la sortie standard 
         //      polaire => [<rho>:<theta>] 
         //      !polaire => (<x>, <y>) 
+        System.out.println(String.format("(%f, %f)", x, y));
     }
 
     public void afficher() {
         // TODO affichage par défaut est cartésien
+        System.out.println(String.format("(%f, %f)", x, y));
     }
 }

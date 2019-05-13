@@ -1,7 +1,11 @@
-package _01_tout_immuable.fractions;
+package caseine.rf.fractions;
 
 import exceptions.*;
 
+/*
+Reprendre la classe immuable Fraction de l’exercice du cours sur
+les exceptions et redéfinir comme il se doit les méthodes de Object
+*/
 public final class Fraction {
 
     public final int numérateur;
@@ -10,53 +14,17 @@ public final class Fraction {
     
     // #### Redéfinition des méthodes de Object
     
-    // #### Redéfinition de toString()
-    @Override
-    public String toString() {
-        if (numérateur == 0 || dénominateur == 1) {
-            return "" + numérateur;
-        } else {
-            return numérateur + "/" + dénominateur;
-        }
-    }
-    
-    // #### redéfinition de hashCode()
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.numérateur;
-        hash = 97 * hash + this.dénominateur;
-        return hash;
-    }
+    // #### TODO Redéfinition de toString()
 
-    // #### Redéfinition de equals
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Fraction other = (Fraction) obj;
-        
-        return this.numérateur == other.numérateur && this.dénominateur == other.dénominateur;
-    }
     
-    // #### Le ne faut pas redéfinir clone() car la classe est immuable
+    // #### TODO Redéfinition de hashCode()
+
+
+    // #### TODO Redéfinition de equals
+
     
-    
-    
-    /* ####  Plus besoin de cette méthode, toString est là pour ça
-    public void affiche() {
-        if (numérateur == 0 || dénominateur == 1) {
-            System.out.print("" + numérateur);
-        } else {
-            System.out.print(numérateur + "/" + dénominateur);
-        }
-    } */
-    
-    // #### Sinon, rien de nouveau 
+    // #### TODO Redéfinition éventuelle de clone
+ 
     
     private static int pgcd(int a, int b) {
         int r = a % b;

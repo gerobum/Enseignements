@@ -4,16 +4,20 @@
 package pti_pgm.geometrie;
 
 import caseinedev.IntrospectionUtilities;
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import rf.pti_pgm.geometrie.Point;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import static java.lang.Math.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Random;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -82,11 +86,17 @@ public class PointTest {
         }
     }
 
+    private static void thirdConstructorPresence() {
+        assertTrue("Vérifiez d'avoir un troisième constructeur capable de créer "
+                + "un point par ses coordonnées polaires.", Arrays.stream(Point.class.getDeclaredConstructors()).count() != 2);
+    }
+
     @Test
     public void t0200_checkConstructorsPresence() {
         System.out.println("Vérification de la présence des constructeurs");
         defaultConstructorPresence();
         xyConstructorPresence();
+        thirdConstructorPresence();
     }
 
     @Test
@@ -142,7 +152,7 @@ public class PointTest {
                 p = (Point) IntrospectionUtilities.getFromMethodTA(Point.class, p, "translation", double.class, dx, double.class, dy);
                 x += dx;
                 y += dy;
-                assertTrue(String.format("La translation s'est mal passée (%f, %f) <> (%f, %f)",x,y,get("x", p),get("y", p)),
+                assertTrue(String.format("La translation s'est mal passée (%f, %f) <> (%f, %f)", x, y, get("x", p), get("y", p)),
                         x == get("x", p) && y == get("y", p)
                 );
                 testCoherenceDonnees(p);
@@ -171,13 +181,58 @@ public class PointTest {
                 if (theta < 0) {
                     theta += 2 * PI;
                 }
-                assertTrue(String.format("La rotation s'est mal passée (%f) <> (%f)",theta,get("theta", p)),
+                assertTrue(String.format("La rotation s'est mal passée (%f) <> (%f)", theta, get("theta", p)),
                         theta == get("theta", p)
                 );
                 testCoherenceDonnees(p);
             }
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
             fail("La rotation s'est mal passée");
+        }
+    }
+
+    @Test
+    public void t0900_checkMethodafficherboolean() {
+        System.out.println("public void cf.pti_pgm.geometrie.Point.afficher(boolean)");
+        try {
+            Method c = Point.class.getDeclaredMethod("afficher",
+                    boolean.class);
+            assertTrue("Revoir public void cf.pti_pgm.geometrie.Point.afficher(boolean) (Modificateurs)", c.getModifiers() == 1);
+            assertTrue("Revoir public void cf.pti_pgm.geometrie.Point.afficher(boolean) (Retour)", c.getReturnType().equals(void.class));
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Revoir public void cf.pti_pgm.geometrie.Point.afficher(boolean)");
+        }
+    }
+
+    @Test
+    public void t0900_checkMethodafficher() {
+        System.out.println("public void cf.pti_pgm.geometrie.Point.afficher()");
+        try {
+            Method c = Point.class.getDeclaredMethod("afficher"
+            );
+            assertTrue("Revoir public void cf.pti_pgm.geometrie.Point.afficher() (Modificateurs)", c.getModifiers() == 1);
+            assertTrue("Revoir public void cf.pti_pgm.geometrie.Point.afficher() (Retour)", c.getReturnType().equals(void.class));
+        } catch (NoSuchMethodException | SecurityException ex) {
+            fail("Revoir public void cf.pti_pgm.geometrie.Point.afficher()");
+        }
+    }
+
+    @Test
+    public void t1000_testAfficher() throws FileNotFoundException, IOException {
+        System.out.println("Test de l'affichage");
+        // Idée géniale pour tester afficher
+        PrintStream out = System.out;
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            System.setOut(new PrintStream(bos));
+           
+            Point p = (Point) IntrospectionUtilities.randomValue(Point.class);
+            System.err.println(IntrospectionUtilities.getFromMethod(Point.class, p, "afficher"));
+            System.err.println(bos.toString());
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+            System.err.println(ex);
+        } finally {
+            System.setOut(out);
+
         }
     }
 

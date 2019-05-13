@@ -1,8 +1,6 @@
 /**
  * @author Yvan Maillot (yvan.maillot@uha.fr)
  */
-
-
 package ptm_pgm.geometrie;
 
 import static java.lang.Math.PI;
@@ -18,6 +16,10 @@ import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import cf.ptm_pgm.geometrie.Point;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.Arrays;
 
 /**
  *
@@ -27,6 +29,20 @@ public class PointTest {
 
     private static final Random R = new Random();
 
+    /**
+     * Test of rotation method, of class Point.
+     * @throws java.io.FileNotFoundException
+     */
+    @Test
+    public void testAfficher() throws FileNotFoundException {
+        // Idée géniale pour tester afficher
+        PrintStream out = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+        String toString = bos.toString();
+        System.setOut(out);
+    }
+
     @Test
     public void checkAttributPresence() {
         System.out.println("Vérification des attributs");
@@ -35,8 +51,7 @@ public class PointTest {
         attributPresence("rho");
         attributPresence("theta");
     }
-    
-    
+
     private static void defaultConstructorPresence() {
         try {
             Constructor c = Point.class.getConstructor();
@@ -60,11 +75,17 @@ public class PointTest {
         }
     }
 
+    private static void thirdConstructorPresence() {
+        assertTrue("Vérifiez d'avoir un troisième constructeur capable de créer "
+                + "un point par ses coordonnées polaires.", Arrays.stream(rf.pti_pgm.geometrie.Point.class.getDeclaredConstructors()).count() != 2);
+    }
+
     @Test
     public void checkConstructorsPresence() {
         System.out.println("Vérification de la présence des constructeurs");
         defaultConstructorPresence();
         xyConstructorPresence();
+        thirdConstructorPresence();
     }
 
     private static void getterPresence(String nom) {
@@ -121,7 +142,6 @@ public class PointTest {
         }
     }
 
-
     @Test
     public void checkGettersPresence() {
         System.out.println("Vérification de la présence des getters");
@@ -139,7 +159,6 @@ public class PointTest {
         setterPresence("rho");
         setterPresence("theta");
     }
-
 
     @Test
     public void testDefaultConstructor() {
@@ -359,8 +378,7 @@ public class PointTest {
             fail("La rotation s'est mal passée");
         }
     }
-    
-    
+
     private static double getRandomValue() {
         int n = 500 - R.nextInt(1001);
         return n * R.nextDouble();
@@ -390,4 +408,5 @@ public class PointTest {
         return (Point) c.newInstance(x, y);
 
     }
+
 }

@@ -1,7 +1,7 @@
 /*
  * @author : Yvan Maillot (yvan.maillot@uha.fr)
  */
-package caseinedev;
+package caseinedevold;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

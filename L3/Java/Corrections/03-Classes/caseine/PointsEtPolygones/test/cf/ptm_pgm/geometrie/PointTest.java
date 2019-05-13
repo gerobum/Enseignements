@@ -271,15 +271,15 @@ public class PointTest {
                 Method getRho = Point.class.getDeclaredMethod("getRho");
                 Method getTheta = Point.class.getDeclaredMethod("getTheta");
 
-                assertEquals(x, (double) getX.invoke(p), 0.0);
-                assertEquals(y, (double) getY.invoke(p), 0.0);
+                assertEquals(x, (double) getX.invoke(p), 1e-4);
+                assertEquals(y, (double) getY.invoke(p), 1e-4);
 
-                assertEquals(sqrt(x * x + y * y), (double) getRho.invoke(p), 0.0);
+                assertEquals(sqrt(x * x + y * y), (double) getRho.invoke(p), 1e-4);
                 double computedTheta = atan2(y, x);
                 if (computedTheta < 0) {
                     computedTheta += 2 * PI; // Pour l'avoir dans [0, 2*PI]
                 }
-                assertEquals(computedTheta, (double) getTheta.invoke(p), 0.0);
+                assertEquals(computedTheta, (double) getTheta.invoke(p), 1e-4);
             }
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             fail("Revoir vos getters");
@@ -305,17 +305,17 @@ public class PointTest {
 
                 double x = getRandomValue();
                 setX.invoke(p, x);
-                assertEquals(x, (double) getX.invoke(p), 0.0);
+                assertEquals(x, (double) getX.invoke(p), 1e-4);
                 testCoherenceDonnees(p);
 
                 double y = getRandomValue();
                 setY.invoke(p, y);
-                assertEquals(y, (double) getY.invoke(p), 0.0);
+                assertEquals(y, (double) getY.invoke(p), 1e-4);
                 testCoherenceDonnees(p);
 
                 double rho = getRandomValue();
                 setRho.invoke(p, rho);
-                assertEquals(abs(rho), (double) getRho.invoke(p), 0.0);
+                assertEquals(abs(rho), (double) getRho.invoke(p), 1e-4);
                 testCoherenceDonnees(p);
 
                 double theta = getRandomValue();
@@ -324,7 +324,7 @@ public class PointTest {
                 if (theta < 0) {
                     theta += 2 * PI;
                 }
-                assertEquals(theta, (double) getTheta.invoke(p), 0.0);
+                assertEquals(theta, (double) getTheta.invoke(p), 1e-4);
                 testCoherenceDonnees(p);
             }
         } catch (IllegalArgumentException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | InvocationTargetException ex) {
@@ -349,7 +349,7 @@ public class PointTest {
                 x += dx;
                 y += dy;
                 assertTrue("La translation s'est mal passée",
-                        x == get("x", p) && y == get("y", p)
+                        abs(x - get("x", p)) < 1e-4 && abs(y - get("y", p)) < 1e-4
                 );
                 testCoherenceDonnees(p);
             }
@@ -377,7 +377,7 @@ public class PointTest {
                     theta += 2 * PI;
                 }
                 assertTrue("La rotation s'est mal passée",
-                        theta == get("theta", p)
+                        abs(theta - get("theta", p)) < 1e-4
                 );
                 testCoherenceDonnees(p);
             }

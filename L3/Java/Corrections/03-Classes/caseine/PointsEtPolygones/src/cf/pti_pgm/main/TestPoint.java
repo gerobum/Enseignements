@@ -2,6 +2,7 @@
 package cf.pti_pgm.main;
 
 import cf.pti_pgm.geometrie.Point;
+import checker.Checker;
 import static java.lang.Math.*;
 
 /**
@@ -20,5 +21,7 @@ public class TestPoint {
             p11.afficher();
             p11.afficher(true);
         }
+        Checker chk = new Checker(Point.class);
+        System.out.println(chk);
     }
 }

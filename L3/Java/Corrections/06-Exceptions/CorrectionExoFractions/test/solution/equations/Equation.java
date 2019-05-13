@@ -1,13 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
  */
-package equations;
+package solution.equations;
 
-import exceptions.PasUneEquationDuPremierDegré;
-import exceptions.DivisionParUneFractionNulle;
-import fractions.Fraction;
+import solution.exceptions.PasUneEquationDuPremierDegré;
+import solution.exceptions.DivisionParUneFractionNulle;
+import solution.fractions.Fraction;
 
 /**
  * Permet de résoudre l'équation ax+b=c, où a, b, c et x sont des fractions.

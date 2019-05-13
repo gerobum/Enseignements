@@ -1,5 +1,7 @@
-
-package exceptions;
+/*
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
+ */
+package solution.exceptions;
 
 /**
  *

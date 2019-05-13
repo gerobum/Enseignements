@@ -32,10 +32,10 @@ TRES TRES IMPORTANT : les responsabilités de cette classe sont
    au point de coordonnées polaires [rho:(theta+PI)%2*PI]
 
 */
-package cf.ptm_pgm.geometrie;
+package cf.geometrie;
 
-import checker.ToCheck;
 import static java.lang.Math.*;
+import tags.ToCheck;
 
 /**
  * Classe Point pour modéliser des points du plan cartésien.
