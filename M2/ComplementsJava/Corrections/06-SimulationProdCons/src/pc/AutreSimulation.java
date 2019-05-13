@@ -5,13 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import types.Paquet;
 
 class Consommateurs {
 
-    private Set<Consommateur> consommateurs = new HashSet<>();
+    private final Set<Consommateur> consommateurs = new HashSet<>();
 
     public Consommateurs(BlockingQueue<Paquet> file, int n, int duree) {
         for (int i = 0; i < n; ++i) {
@@ -33,9 +31,9 @@ class Consommateurs {
     }
 
     private void stopAll() {
-        for(Consommateur c : consommateurs) {
+        consommateurs.forEach((c) -> {
             c.interrupt();
-        }
+        });
     }
 
 }
@@ -63,9 +61,9 @@ class Producteurs {
     }
 
     private void stopAll() {
-        for(Producteur p : producteurs) {
+        producteurs.forEach((p) -> {
             p.interrupt();
-        }
+        });
     }
 
 }
