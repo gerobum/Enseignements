@@ -4,13 +4,14 @@
 package jeu;
 
 import java.util.Random;
+
 /**
  * Classe de haut niveau pour manipuler le jeu 2048.
- * 
+ *
  * Permet d'afficher l'interface et d'interagir avec l'utilisateur
- * 
+ *
  * Des classes dédiées de plus bas niveaux sont présentes dans ce fichier.
- * 
+ *
  * @author yvan
  */
 public class Jeu2048 {
@@ -46,6 +47,7 @@ public class Jeu2048 {
 
     /**
      * Pour accéder à la grille
+     *
      * @return la grille
      */
     public int[][] getGrille() {
@@ -54,7 +56,8 @@ public class Jeu2048 {
 
     /**
      * Pour modifier la grille
-     * @param jeu 
+     *
+     * @param jeu
      */
     public void setGrille(int[][] jeu) {
         this.jeu = jeu;
@@ -62,6 +65,7 @@ public class Jeu2048 {
 
     /**
      * Déplacement à gauche
+     *
      * @return le score
      */
     public int gauche() {
@@ -74,6 +78,7 @@ public class Jeu2048 {
 
     /**
      * Déplacement à droite
+     *
      * @return le score
      */
     public int droite() {
@@ -86,6 +91,7 @@ public class Jeu2048 {
 
     /**
      * Déplacement vers le haut
+     *
      * @return le score
      */
     public int haut() {
@@ -98,6 +104,7 @@ public class Jeu2048 {
 
     /**
      * Déplacement vers le bas
+     *
      * @return le score
      */
     public int bas() {
@@ -107,10 +114,15 @@ public class Jeu2048 {
         }
         return score;
     }
+    
+    public void flashback() {
+        M.flashback();
+    }
 
     /**
      * Pour ajouter un nombre au hasard dans la grille
-     * @return 
+     *
+     * @return
      */
     private boolean ajouter() {
         return R.ajouter();
@@ -118,6 +130,7 @@ public class Jeu2048 {
 
     /**
      * Pour tester si c'est gagné
+     *
      * @return vrai si gagné faux sinon
      */
     public boolean gagne() {
@@ -126,6 +139,7 @@ public class Jeu2048 {
 
     /**
      * Pour tester si c'est perdu
+     *
      * @return vrai si perdu faux sinon
      */
     public boolean perdu() {
@@ -134,10 +148,9 @@ public class Jeu2048 {
 
 }
 
-
 /**
  * Classe utilisée pour extraire des informations de la grille.
- * 
+ *
  * @author maillot
  */
 class Info2048 {
@@ -150,6 +163,7 @@ class Info2048 {
 
     /**
      * Compte le nombre de zéros (dont de places libres)
+     *
      * @return le nombre de places libres
      */
     private int nbZeros() {
@@ -166,6 +180,7 @@ class Info2048 {
 
     /**
      * Remplit un tableau de toutes les positions libres
+     *
      * @return le tableau de toutes les positions libres
      */
     public Position[] getLibres() {
@@ -210,25 +225,25 @@ class Info2048 {
     private boolean memeVoisin(int l, int c) {
 
         try {
-            if (grille[l][c] == grille[l][c+1]) {
+            if (grille[l][c] == grille[l][c + 1]) {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
         }
         try {
-            if (grille[l][c] == grille[l][c-1]) {
+            if (grille[l][c] == grille[l][c - 1]) {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
         }
         try {
-            if (grille[l][c] == grille[l+1][c]) {
+            if (grille[l][c] == grille[l + 1][c]) {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
         }
         try {
-            if (grille[l][c] == grille[l-1][c]) {
+            if (grille[l][c] == grille[l - 1][c]) {
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -240,6 +255,7 @@ class Info2048 {
 class Manip2048 {
 
     private final int[][] grille;
+    private final int[][] before = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0},};
     private final Info2048 I;
     private boolean changement = false;
 
@@ -251,7 +267,7 @@ class Manip2048 {
         this.grille = grille;
         this.I = new Info2048(grille);
     }
-    
+
     public void demiTour() {
         for (int l = 0; l < 4; ++l) {
             swap(l, 0, 3);
@@ -344,6 +360,7 @@ class Manip2048 {
     }
 
     public int gauche() {
+        memorizeBefore();
         changement = false;
         int score = 0;
         for (int l = 0; l < 4; ++l) {
@@ -354,7 +371,40 @@ class Manip2048 {
         return score;
     }
 
+    private int[][] grilleClone() {
+        int[][] clone = new int[4][4];
+        for (int l = 0; l < 4; ++l) {
+            for (int c = 0; c < 4; ++c) {
+                clone[l][c] = grille[l][c];
+            }
+        }
+        return clone;
+    }
+
+    public void flashback() {
+        int[][] tmp = grilleClone();
+        for (int l = 0; l < 4; ++l) {
+            for (int c = 0; c < 4; ++c) {
+                grille[l][c] = before[l][c];
+            }
+        }
+        for (int l = 0; l < 4; ++l) {
+            for (int c = 0; c < 4; ++c) {
+                before[l][c] = tmp[l][c];
+            }
+        }
+    }
+
+    private void memorizeBefore() {
+        for (int l = 0; l < 4; ++l) {
+            for (int c = 0; c < 4; ++c) {
+                before[l][c] = grille[l][c];
+            }
+        }
+    }
+
     public int droite() {
+        memorizeBefore();
         demiTour();
         int score = gauche();
         demiTour();
@@ -362,6 +412,7 @@ class Manip2048 {
     }
 
     public int haut() {
+        memorizeBefore();
         rotationAntiHoraire();
         int score = gauche();
         rotationHoraire();
@@ -369,6 +420,7 @@ class Manip2048 {
     }
 
     public int bas() {
+        memorizeBefore();
         rotationHoraire();
         int score = gauche();
         rotationAntiHoraire();
@@ -378,6 +430,7 @@ class Manip2048 {
 
 /**
  * Classe utile à la génération des valeurs aléatoires dans la grille
+ *
  * @author maillot
  */
 class Random2048 {
@@ -402,7 +455,7 @@ class Random2048 {
             if (grille == null) {
                 System.err.println("null");
             } else {
-               
+
                 grille[p.l][p.c] = next();
             }
             return true;

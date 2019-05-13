@@ -34,6 +34,9 @@ public class Partie {
                 case 'D':
                     score += jeu.droite();
                     break;
+                case 'E':
+                    jeu.flashback();
+                    break;
             }
         }
         if (jeu.gagne()) {

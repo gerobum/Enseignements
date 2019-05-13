@@ -224,6 +224,11 @@ public class Frame extends JFrame {
                         rs = 'D';
                         typing();
                         break;
+                    case 27:
+                        removeKeyListener(keyListener);
+                        rs = 'E';
+                        typing();
+                        break;
                     default:
                         rs = 0;
 
