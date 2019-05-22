@@ -1,7 +1,7 @@
 #include "Fraction.h"
 
 // Avec l'amitié
-ostream& operator<<(ostream& os, const Fraction& f) {
+ostream& operator<<(ostream& os, const fraction& f) {
     // L’accès aux membres privés est permis
     // car operator<< est ami de Fraction
     os << f.d_n << '/' << f.d_d;
@@ -15,23 +15,23 @@ ostream& operator<<(ostream& os, const Fraction& f) {
     return os;
 }*/
 
-Fraction operator*(const Fraction& a, const Fraction& b) {
-    Fraction r(a.num() * b.num(), a.den() * b.den());
+fraction operator*(const fraction& a, const fraction& b) {
+    fraction r(a.num() * b.num(), a.den() * b.den());
     return r;
 }
 
-Fraction& Fraction::operator++() {
+fraction& fraction::operator++() {
     d_n += d_d;
     return *this;
 }
 
-const Fraction Fraction::operator++(int) {
-    const Fraction r = *this;
+const fraction& fraction::operator++(int) {
+    const fraction& r(*this);
     operator++();
     return r;
 }
 
-Fraction& Fraction::operator=(const Fraction& b) {
+fraction& fraction::operator=(const fraction& b) {
     if (this != &b) {
         d_n = b.d_n;
         d_d = b.d_d;
@@ -39,14 +39,14 @@ Fraction& Fraction::operator=(const Fraction& b) {
     return *this;
 }
 
-Fraction::operator double() {
+fraction::operator double() {
     return static_cast<double> (d_n) / d_d;
 }
 
-int Fraction::num() const {
+int fraction::num() const {
     return d_n;
 }
 
-int Fraction::den() const {
+int fraction::den() const {
     return d_d;
 }
