@@ -1,4 +1,4 @@
-package i18e;
+package i18n;
 
 /**
  *
