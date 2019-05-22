@@ -1,0 +1,104 @@
+% \documentclass[11pt,a4paper,twocolumn,oneside,landscape]{article}
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eurosym} 
+\usepackage{graphicx}
+
+\usepackage{wrapfig}
+%\usepackage[latin1]{inputenc}
+% D'après ce que j'ai lu, latin1 est pour Unix, tandis que ansinew est pour Window
+\usepackage[ansinew]{inputenc}
+\usepackage{textcomp}
+\usepackage[OT1, T1]{fontenc}
+% lmodern remplace fontenc, résultation vachement mieux, mais des
+% comportement bizarre avec \verb.
+\usepackage{lmodern}
+%\usepackage{kpfonts}
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage{helvet}
+%\usepackage{emerald}
+
+
+%\usepackage[francais]{babel}
+\usepackage[french]{babel}
+
+\usepackage[colorlinks=true, urlcolor=blue, pdfhighlight =/O]{hyperref}
+
+\usepackage[margin=1.8cm,columnsep=1cm,marginparwidth=1.5cm]{geometry}
+\usepackage{layout}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{fancyhdr} \pagestyle{fancy}
+\usepackage{lipsum, xcolor, lastpage}
+
+\usepackage{ifthen}
+\newboolean{var}
+\setboolean{var}{false}
+%\newcommand{\mv}[1]{\ifthenelse{\boolean{var}}{\Huge{#1}}{#1}}
+\newcommand{\mv}[2]{\ifthenelse{\boolean{var}}{#1}{#2}}
+
+
+\include{includes/pourColorerLeCode}
+\include{includes/pourDefinirLangageB}
+\include{includes/EnteteEtPiedDePage}
+
+
+% Pour écrire du code Java (fin) 
+       
+\author{Yvan Maillot}
+\title{TD UML et Design Pattern}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Le pattern Observateur}
+
+\noindent\begin{minipage}{0.5\linewidth}
+On aimerait développer une application pour convertir des devises donc voici un exemple d'interface. L'exemple montre l'état des devises européennes au moment de leur entrée dans l'euro en 2001. Il les présente sous la forme de glisseurs (JSlider) ou de champs de texte (JTextField). On peut lire que 100 euros valaient 655,957 francs français (FF), 4033,99 français et ainsi de suite.
+
+Cette interface propose les fonctionnalités suivantes
+
+\begin{itemize}
+ \item Il est possible d'ajouter une nouvelle devise, en cliquant sur le bouton dont le nom est suffisamment évocateur.
+ \item Il est possible de supprimer une devise, en cliquant sur sa croix correspondante à gauche.
+ \item Mais surtout, la modification d'une valeur entraîne l'ajustement de toutes les autres valeurs. Par exemple, pour savoir combien 100 FF en euros, il suffit de placer le glisseur des FF sur 100 pour voir toutes les autres valeurs s'ajuster en même temps.
+\end{itemize}
+ 
+\end{minipage}\begin{minipage}{0.03\linewidth}
+\hspace*{3mm}
+\end{minipage}\begin{minipage}{0.32\linewidth}
+\includegraphics[width=\linewidth]{images/europe}
+
+\vspace*{20mm}
+
+\includegraphics[width=\linewidth]{images/europe2}
+\end{minipage}
+
+\medskip
+
+Pour réaliser ce travail, il est préférable de mettre en \oe{}uvre le pattern Observer.
+
+\medskip
+
+Vous avez à votre disposition un projet Netbeans Java (\og PatronObservateurACompleter) qui fournit la trame. 
+
+
+
+
+
+
+
+
+
+\end{document}
+
+

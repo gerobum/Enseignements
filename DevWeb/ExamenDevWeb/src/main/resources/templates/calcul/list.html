@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div class="container">
+            <h1>Opération</h1>
+            <form th:object="${operations}" method="post">
+                <p>
+                <span th:if="${#fields.hasErrors('selectedOpId')}" th:errors="*{selectedOpId}" />
+                <select th:field="*{selectedOpId}" id="operation">
+                    <option th:value="-1" th:text="Vide">Vide</option>
+
+                    <option th:each="operation, itemStat : *{listOp}" th:value="${itemStat.index}" th:text="${operation.name}"></option>
+                </select>
+                <input id="name" type="text" th:field="*{operand}"/>
+                <span th:if="${#fields.hasErrors('operand')}" th:errors="*{operand}" />
+                <label th:if="*{result != null}" th:text="*{' = ' + result}"></label>
+                </p>
+                <button th:text="Valider" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="Fermer" th:href="@{/calcul}">Fermer</a>
+            </form> 
+            <!--<form th:object="${operations}" method="post">
+                <p>
+                <select th:field="*{selectedOp}" id="operation">
+                    <option th:value="null" th:text="#{Vide}">Vide</option>
+
+                    <option th:each="operation : *{listOp}" th:value="${operation}" th:text="${operation.name}"></option>
+                </select>
+                <input id="name" type="text" th:field="*{operand}"/>
+                </p>
+                <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="#{Fermer}" th:href="@{/calcul}">Fermer</a>
+            </form>-->   
+        </div>
+    </body>
+</html>
+
+    

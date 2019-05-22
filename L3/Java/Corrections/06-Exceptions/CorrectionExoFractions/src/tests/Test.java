@@ -202,7 +202,7 @@ public class Test {
         testMultiplication();
     }
 
-    public static void testEquations() {
+    public static void testEquations() throws DivisionParUneFractionNulle {
         System.out.println("Test equations");
         Fraction a, b, c;
         Fraction axplusb;
@@ -222,8 +222,9 @@ public class Test {
         }
     }
 
-    public static void main(String[] args) {
-        testFractions();
-        testEquations();
+    public static void main(String[] args) throws DivisionParUneFractionNulle {
+
+            testFractions();
+            testEquations();
     }
 }

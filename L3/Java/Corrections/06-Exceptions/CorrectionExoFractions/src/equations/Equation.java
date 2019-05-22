@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author : Yvan Maillot (yvan.maillot@uha.fr)
  */
 package equations;
 
@@ -31,17 +29,17 @@ public final class Equation {
      * @param c une fraction de type Fraction
      */
     public Equation(Fraction a, Fraction b, Fraction c) throws DivisionParUneFractionNulle /* throws PasUneEquationDuPremierDegré */ {
-        //try {
+        try {
             x = c.moins(b).diviséPar(a);
             nbSolutions = 1;
-        /*} catch (DivisionParUneFractionNulle ex) {
+        } catch (DivisionParUneFractionNulle ex) {
             if (b.numérateur == c.numérateur && b.dénominateur == c.dénominateur) {
                 nbSolutions = -1;
             } else {
                 nbSolutions = 0;
             }
             //throw new PasUneEquationDuPremierDegré();
-        }*/
+        }
     }
 
     public Fraction getX() {

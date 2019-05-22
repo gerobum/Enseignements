@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div class="container">
+            <h1>Ancien</h1>
+            <form th:object="${ancien}" method="post">
+                <p>
+                    <label for="nom">Nom</label>
+                    <input id="nom" type="text" th:field="*{nom}"/>
+                </p>
+                <p>
+                    <label for="prenom">Prénom</label>
+                    <input id="prenom" type="text" th:field="*{prenom}"/>
+                </p>
+                <p>
+                    <label for="promo">Promo</label>
+                    <input id="promo" type="text" th:field="*{promo}"/>
+                </p>
+                <button type="submit">Valider</button>
+                <a th:text="Fermer" th:href="@{/anciens}">Fermer</a>
+            </form>  
+        </div>
+    </body>
+</html>
+
+    
