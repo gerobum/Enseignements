@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import partie1.JLabelCalendar;
+import partie1.sans_timer.JLabelCalendar;
 
 /**
  * Extension : Par extension de la classe javax.swing.JPanel et composition avec

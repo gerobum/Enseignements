@@ -1,4 +1,4 @@
-package partie1;
+package partie1.sans_timer;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,8 +7,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
@@ -24,9 +22,9 @@ import javax.swing.JLabel;
  * Sujet : Par extension de la classe javax.swing.Jlabel et par implémentation
  * de l'interface java.lang.Runnable développer un composant graphique de type
  * montre calendrier. Ce composant devra avoir un aspect tel que celui montré
- * ci-dessous. * dimanche 4 octobre 2009 14:12:15
- *
- *
+ * ci-dessous. 
+ * 
+ * dimanche 4 octobre 2009 14:12:15 (rafraîchi toutes les secondes)
  *
  * Ecrire un client autonome, basé sur un javax.swing.Jframe qui permettra
  * d'afficher votre composant.
@@ -37,32 +35,14 @@ import javax.swing.JLabel;
  * javadoc des classes javax.swing.JLabel et java.awt.Font
  *
  *
- *
- *
- * Une instance de LocalizedCalendar local.PNG
- *
  * @author maillot
  */
-public class JLabelCalendar extends JLabel /* L'utilisation de Timer et de TimerTask évite implements Runnable */ {
+public class JLabelCalendar extends JLabel  implements Runnable {
 
     private static DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM);
-    private final Timer TIMER;
-    private final TimerTask TIMER_TASK;
 
     public JLabelCalendar() {
         super(dateFormat.format(new Date()), JLabel.CENTER);
-
-        // -----------------------------------------
-        // L'utilisation de Timer et de TimerTask permet d'éviter Thread.sleep(1000) dans une boucle.
-        TIMER = new Timer();
-        TIMER_TASK = new TimerTask() {
-            @Override
-            public void run() {
-                setText(dateFormat.format(new Date()));
-            }
-        };
-        TIMER.schedule(TIMER_TASK, 0, 1000);
-        // ---
         init();
     }
 
@@ -80,7 +60,7 @@ public class JLabelCalendar extends JLabel /* L'utilisation de Timer et de Timer
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Pour mettre à jour l'affichage...
-        // --- new Thread(this).start();
+        new Thread(this).start();
     }
 
     @Override
@@ -90,8 +70,6 @@ public class JLabelCalendar extends JLabel /* L'utilisation de Timer et de Timer
         setText(dateFormat.format(new Date()));
     }
 
-    /* -----------------------------------------
-    -- L'utilisation de Timer et de TimerTask permet d'éviter Thread.sleep(1000) dans une boucle.
     @Override
     public void run() {
         while (true) {
@@ -99,9 +77,7 @@ public class JLabelCalendar extends JLabel /* L'utilisation de Timer et de Timer
                 Thread.sleep(1000);
                 setText(dateFormat.format(new Date()));
             } catch (InterruptedException ex) {
-                Logger.getLogger(JLabelCalendar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    --- */
 }

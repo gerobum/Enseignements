@@ -1,4 +1,4 @@
-package partie1;
+package partie1.avec_timer;
 
 import javax.swing.JFrame;
 
