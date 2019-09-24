@@ -8,10 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author yvan
- */
 public class ModeleEquation implements Serializable {
 
     // Dans la vue les coefficients sont des chaines

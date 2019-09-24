@@ -165,7 +165,7 @@ public class Fourmi extends Thread {
 
         terrain.repaint(x * terrain.getTailleFourmiX(), y * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
         terrain.repaint(xa * terrain.getTailleFourmiX(), ya * terrain.getTailleFourmiY(), terrain.getTailleFourmiX(), terrain.getTailleFourmiY());
-        reveillerTousLesVoisins(x, y);
+        //reveillerTousLesVoisins(x, y);
         try {
             Thread.sleep(100);
         } catch (InterruptedException ex) {

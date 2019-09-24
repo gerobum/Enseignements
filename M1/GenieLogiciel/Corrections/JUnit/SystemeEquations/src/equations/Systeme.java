@@ -1,7 +1,7 @@
 package equations;
 
 public class Systeme {
-    private Equation[] systeme;
+    private final Equation[] systeme;
     //int nbInconnues;
     public Systeme(int nbe) {
         //this.nbInconnues = nbInconnues;
