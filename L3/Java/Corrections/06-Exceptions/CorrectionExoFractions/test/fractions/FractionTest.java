@@ -4,14 +4,12 @@
 package fractions;
 
 import caseinedev.IntrospectionUtilities;
-import java.io.IOException;
 import java.lang.reflect.*;
 import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
-import solution.exceptions.DivisionParUneFractionNulle;
 import solution.exceptions.DénominateurNul;
 import solution.exceptions.InversionFractionNulle;
 

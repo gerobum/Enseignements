@@ -20,7 +20,7 @@ public class Main {
         //a.plus(b).affiche();
         
         Checker chk = new Checker(Fraction.class);
-        //System.out.println(chk);
+        System.out.println(chk);
         System.out.println(Arrays.stream(Fraction.class.getDeclaredMethod("plus", Fraction.class).getExceptionTypes())
                 .filter(p -> IntrospectionUtilities.isCheckedException(p)).count());
         try {

@@ -156,7 +156,6 @@ public class PorteurTest {
             fail("FATA");
         }
     }
-
     @Test
     public void testFinal() {
         System.out.println("test final");
