@@ -3,7 +3,7 @@
     Created on : 2 janv. 2019, 23:34:49
     Author     : yvan
 --%>
-<%@page import="fr.miage.ModeleEquation"%>
+<%@page import="fr.miage.modele.ModeleEquation"%>
 <!-- (2) Récupération du modèle, même la première fois, dans une scriplet.-->
 <%
     ModeleEquation modele = (ModeleEquation) request.getAttribute("modele");
@@ -118,7 +118,7 @@
                             <%=String.format("%sx² + %sx + %s = 0", modele.getA(), modele.getB(), modele.getC())%>
                         </p>
                         <p> <!-- (2) -->
-                            <%= modele.getResultat()%>
+                            <%= modele.getMessage()%>
                         </p>
                     </div>
                 </div>
