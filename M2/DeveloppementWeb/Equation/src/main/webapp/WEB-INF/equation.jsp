@@ -118,7 +118,11 @@
                             <%=String.format("%sx² + %sx + %s = 0", modele.getA(), modele.getB(), modele.getC())%>
                         </p>
                         <p> <!-- (2) -->
-                            <%= modele.getMessage()%>
+                            <%
+                                for(String s : modele.getMessages()) {
+                                    out.print(s+"<br>");
+                                }
+                            %>
                         </p>
                     </div>
                 </div>

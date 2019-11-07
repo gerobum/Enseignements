@@ -19,8 +19,9 @@ public class ControleurEquation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {   
             request.setAttribute("modele", new ModeleEquation());
+            request.getRequestDispatcher("/WEB-INF/equation_sans_bootstrap.jsp").forward(request, response);
             //request.getRequestDispatcher("/WEB-INF/equation.jsp").forward(request, response); // #### (0)
-            request.getRequestDispatcher("/WEB-INF/equation_jstl_sans_bootstrap.jsp").forward(request, response); // #### (1)
+            //request.getRequestDispatcher("/WEB-INF/equation_jstl_sans_bootstrap.jsp").forward(request, response); // #### (1)
             //request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response); // #### (2)
     }
 
@@ -28,8 +29,9 @@ public class ControleurEquation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.setAttribute("modele", ModeleEquation.handle(request));
+            request.getRequestDispatcher("/WEB-INF/equation_sans_bootstrap.jsp").forward(request, response);
             //request.getRequestDispatcher("/WEB-INF/equation.jsp").forward(request, response);
-            request.getRequestDispatcher("/WEB-INF/equation_jstl_sans_bootstrap.jsp").forward(request, response);
+            //request.getRequestDispatcher("/WEB-INF/equation_jstl_sans_bootstrap.jsp").forward(request, response);
             //request.getRequestDispatcher("/WEB-INF/equation_jstl.jsp").forward(request, response);
     }
 }

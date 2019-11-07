@@ -125,7 +125,7 @@ public class ModeleEquation implements Serializable {
             sa = "-";
         else
             sa = a+"";
-        return String.format("%sx&#xB2;%s%s", sa, mb(), mc());
+        return String.format("%sx&#xB2;%s%s = 0", sa, mb(), mc());
     }
 
     public String getA() {
