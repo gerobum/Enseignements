@@ -1,0 +1,8 @@
+fr/miage/controleurs/Accueil.class
+fr/miage/metier/IEquation.class
+fr/miage/metier/CoefANul.class
+fr/miage/metier/impl/EquationImpl.class
+fr/miage/modele/ModeleEquation.class
+fr/miage/metier/livre/IAuthor.class
+fr/miage/metier/livre/IBook.class
+fr/miage/controleurs/ControleurEquation.class

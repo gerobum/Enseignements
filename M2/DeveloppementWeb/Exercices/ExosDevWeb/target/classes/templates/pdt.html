@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1 th:text="'Bonjour ' + ${model.name} + ' ' + ${model.age==null?'':'('+model.age+' ans)'}" />
+    <p th:text="'Nous sommes le ' + ${model.date} "/>
+    <p th:text="'Il est ' + ${model.time} "/>
+</body>
+</html>
