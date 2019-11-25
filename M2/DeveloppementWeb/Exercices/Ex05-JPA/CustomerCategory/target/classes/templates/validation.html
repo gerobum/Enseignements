@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Donner nom et âge pour s'inscrire</h1>
+    <form action="#" th:action="@{/validation}" th:object="${person}" method="post">
+    	<p>Nom : <input type="text" th:field="*{nom}" /></p>
+        <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</p>
+        <p>Age <input type="text" th:field="*{age}" /></p>
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>

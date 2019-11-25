@@ -1,0 +1,10 @@
+    
+  
+<!-- 
+spring-boot-starter-thymeleaf permet d'utiliser des templates pour
+générer de l'HTML.
+-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>

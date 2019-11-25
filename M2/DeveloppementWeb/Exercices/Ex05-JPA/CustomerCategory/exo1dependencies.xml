@@ -1,0 +1,19 @@
+
+<!-- spring-boot-starter-web suffit pour le premier exo 
+     Mais il faut dire qu'il importe un tas de dépendances
+     Certaines inutiles à mon avis (comme hibernate par exemple)
+-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>   
+<!-- 
+spring-boot-devtools n'est pas nécessaire, mais il est utile pour 
+permettre par exemple les rédémarrage à chaud.
+Pour faire du debugage également (il semblerait).
+-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
+</dependency>

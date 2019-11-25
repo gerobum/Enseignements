@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Liste</h1>
+       <ul th:each="person : ${persons}">
+           <li><span th:text="${person.toString()}"></span></li>
+        </ul>
+</body>
+</html>
