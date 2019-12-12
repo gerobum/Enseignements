@@ -2,6 +2,7 @@ Rallye/.idea/vcs.xml
 Rallye/app/app.iml
 log
 **/bin/
+**/target/
 **/.idea/
 **/.gradle/
 **/build
@@ -16,6 +17,11 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+# Fichiers jar et war
+*.jar
+*.war
+*.zip
 
 # Built application files
 *.apk
@@ -81,3 +87,5 @@ captures/
 /DevWeb/ExamenDevWeb/target/
 
 /M2/DeveloppementWeb/demo/UneApplicationWeb/target/
+/M2/DeveloppementWeb/Exercices/Ex01-Equations/DateAnniv/target/
+/M2/DeveloppementWeb/Exercices/Ex06-Session/Sessions/target/
