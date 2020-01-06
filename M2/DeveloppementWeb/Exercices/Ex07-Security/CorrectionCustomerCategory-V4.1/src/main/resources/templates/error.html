@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <!-- V3.2 Une page pour les erreurs non gérées  -->
+    <head th:include="fragments/common :: [//head]" />
+    <body>    
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text="#{ERREUR}"/>
+            <p th:text="#{QUELQUE CHOSE A PROVOQUE UNE ERREUR}">
+            <p th:text="${exception}">
+            <p th:if="${timestamp}" id='created'>
+                <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+            </p>
+
+            <p th:if="${status}">
+                <b>Response Status:</b> <span th:text="${status}">status-code</span> <span
+                    th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+            </p>
+            <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+            <!-- V0.3 -->
+            <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>
+        </div>
+    </body>
+</html>

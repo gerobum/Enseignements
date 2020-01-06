@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text=#{INSCRIPTION}/>
+
+
+            <!-- V4.1 -->
+            <form th:action="@{''}" method="post"> <!--   th:object="${XXX}"  -->       
+                <!-- <p><input type="hidden" th:field="*{id}"/></p> -->
+                <p>
+                    <label th:text="#{Nom}" for="name"/>              
+                    <input id="name" type="text" th:placeholder="#{Nom}"/><!-- th:field="*{name}"  --> 
+                </p>
+                <p>
+                    <label th:text="#{password}" for="password"/>              
+                    <input id="password" type="password" th:placeholder="#{password}"/><!-- th:field="*{name}"  --> 
+                </p>
+
+                <!-- 
+                <label th:text="#{Nom}" for="name">Nom</label>              
+                <input id="name" type="text" th:field="*{name}" th:placeholder="#{Nom}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+                
+                <label th:text="#{Mot de passe}" for="password">Nom</label>              
+                <input id="password" type="password" th:field="*{password}" th:placeholder="#{Mot de passe}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+                -->
+                <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="#{Fermer}" th:href="@{/}">Fermer</a>
+            </form>  
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>
