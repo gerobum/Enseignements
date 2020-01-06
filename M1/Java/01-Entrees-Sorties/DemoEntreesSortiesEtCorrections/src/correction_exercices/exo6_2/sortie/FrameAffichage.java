@@ -4,12 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Une fenêtre qui est associée à un flux de données (DataInputStream) défini à
+ * la construction.
+ *
+ * À chaque appui sur le bouton suivant, une donnée de type long est lue dans le
+ * flux de données et affichée dans un label en hexadécimal sur 16x4 bits.
+ *
+ * @author Yvan Maillot <yvan.maillot@uha.fr>
+ */
 public class FrameAffichage extends JFrame {
 
     private JLabel valeur;
@@ -45,7 +52,6 @@ public class FrameAffichage extends JFrame {
                 try {
                     valeur.setText(String.format("%016X", in.readLong()));
                 } catch (IOException ex) {
-                    Logger.getLogger(FrameAffichage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
