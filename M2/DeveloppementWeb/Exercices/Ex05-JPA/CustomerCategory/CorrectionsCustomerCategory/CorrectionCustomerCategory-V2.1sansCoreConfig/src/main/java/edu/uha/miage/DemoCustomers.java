@@ -1,11 +1,12 @@
-package fr.miage;
+package edu.uha.miage;
 
-import fr.miage.core.entity.Customer;
-import fr.miage.core.service.CustomerService;
+import edu.uha.miage.core.entity.Customer;
+import edu.uha.miage.core.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 // #### V1.1 d'exécution est nécessaire, il peut être indiqué par @Order
 @Component
 @Order(2)
+// #### V2.1 Le chargement au démarrage de quelques exemples de clients dans
+// #### V2.1 la BDD n'existe (heureusement) qu'en mode développement ("dev").
+// #### V2.1 Ce bean ne sera instancié qu'en mode (profil) dev.
+// #### V2.1 Remarque: on aurait pu écrire @Profile("!prod") pour dire que 
+// #### V2.1 Ce bean sera instancié si on n'est pas en mode prod.
+@Profile("dev")
 public class DemoCustomers implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoCustomers.class);
@@ -27,8 +34,10 @@ public class DemoCustomers implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
-        createCustomer("Client 1");
-        createCustomer("Client 2");
+        createCustomer("Albert");
+        createCustomer("Bertrant");
+        createCustomer("Camille");
+        createCustomer("Denis");
 
     }
 
