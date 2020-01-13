@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -30,7 +29,7 @@ public class ExoIntrospection {
 
         String nom;
 
-        System.out.println("Donnez le nom pleinement qualifié d'une classe");
+        System.out.print("Donnez le nom pleinement qualifié d'une classe : ");
         nom = IN.next();
         Class c = Class.forName(nom);        
 
@@ -39,9 +38,12 @@ public class ExoIntrospection {
         for (Method m : am) {
             System.out.println(i++ + ". " + m.toString());
         }
-        System.out.print("Choisir une méthode : ");
+        System.out.println("--------------------------------");
+        System.out.print(String.format("Choisir une méthode de la classe %s : ", c.getName()));
         int choix = IN.nextInt();
+        System.out.println("--------------------------------");
         execute(am.get(choix));
+        System.out.println("--------------------------------");
     }
 
     private static ArrayList<Constructor> getConstructors(Class<?> c) {
@@ -68,6 +70,21 @@ public class ExoIntrospection {
         }
         return Modifier.isStatic(m.getModifiers());
     }
+    
+    private static String toString(Method m, Object[] params, Object result) {
+        StringBuilder sb = new StringBuilder(m.getName());
+        
+        sb.append(('('));
+        if (params != null && params.length > 0) {
+            sb.append(params[0]);
+            for(int i = 1; i < params.length; ++i) {
+                sb.append(", ").append(params[i]);
+            }            
+        }
+        sb.append(") = ").append(result);
+        
+        return sb.toString();
+    }
 
     private static void execute(Method m) {
         Object[] params = new Object[m.getParameterCount()];
@@ -77,9 +94,7 @@ public class ExoIntrospection {
         }
         try {
             Object r = m.invoke(null, params);
-            if (r != null) {
-                System.out.println(r);
-            }
+            System.out.println(toString(m, params, r));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             System.err.println(ex);
         }
