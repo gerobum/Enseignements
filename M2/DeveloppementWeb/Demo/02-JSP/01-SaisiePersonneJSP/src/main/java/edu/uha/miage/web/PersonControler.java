@@ -1,8 +1,8 @@
 
 package edu.uha.miage.web;
 
-import edu.uha.miage.metier.Personne;
-import edu.uha.miage.modèle.ModèleFormulairePersonne;
+import edu.uha.miage.metier.Person;
+import edu.uha.miage.model.PersonFormModel;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(name = "SaisiePersonne", urlPatterns = {"/SaisiePersonne", "/sp"})
-public class SaisiePersonne extends HttpServlet {
+public class PersonControler extends HttpServlet {
 
-    private ModèleFormulairePersonne modèle = new ModèleFormulairePersonne();
+    private PersonFormModel model = new PersonFormModel();
 
     /*
     En réponse à une requête HTTP/GET, le modèle courant est ajouté à la requête
@@ -28,8 +28,8 @@ public class SaisiePersonne extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("modèle", modèle);
-        request.getRequestDispatcher("/WEB-INF/SaisiePersonne.jsp").forward(request, response);
+        request.setAttribute("model", model);
+        request.getRequestDispatcher("/WEB-INF/PersonForm.jsp").forward(request, response);
     }
 
     /*
@@ -41,9 +41,9 @@ public class SaisiePersonne extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        modèle = ModèleFormulairePersonne.handle(request);
-        request.setAttribute("modèle", modèle);
-        request.getRequestDispatcher("/WEB-INF/SaisiePersonne.jsp").forward(request, response);
+        model = PersonFormModel.handle(request);
+        request.setAttribute("model", model);
+        request.getRequestDispatcher("/WEB-INF/PersonForm.jsp").forward(request, response);
     }
 
     @Override
@@ -59,19 +59,19 @@ public class SaisiePersonne extends HttpServlet {
     }
 
     private void read() {
-        Personne personne;
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("personne.bin"))) {
-            personne = (Personne) in.readObject();
-            modèle.setPersonne(personne);
+        Person personne;
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("person.bin"))) {
+            personne = (Person) in.readObject();
+            model.setPerson(personne);
         } catch (FileNotFoundException ex) {
         } catch (IOException | ClassNotFoundException | ClassCastException ex) {
         }
     }
 
     private void write() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("personne.bin"))) {
-            if (modèle.isÂgeOk()) {
-                out.writeObject(modèle.getPersonne());
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("person.bin"))) {
+            if (model.isAgeOk()) {
+                out.writeObject(model.getPerson());
             }
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {
