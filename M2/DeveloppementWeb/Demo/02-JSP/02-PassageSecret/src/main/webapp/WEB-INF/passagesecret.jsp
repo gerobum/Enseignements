@@ -4,19 +4,6 @@
     Author     : yvan
 --%>
 
-<%-- Pour tenir compte du cookie pseudo
-<c:choose>
-    <c:when test="${!empty form.pseudo}">
-        <c:set var="thepseudo" value="${form.pseudo}"></c:set>
-    </c:when>
-    <c:when test="${!empty pseudo}">
-        <c:set var="thepseudo" value="${pseudo}"></c:set>
-    </c:when>
-    <c:otherwise>
-        <c:set var="thepseudo" value=""></c:set>
-    </c:otherwise>
-</c:choose> --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
