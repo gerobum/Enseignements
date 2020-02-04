@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ControleurEquation", urlPatterns = {"/2d"})
 public class ControleurEquation extends HttpServlet {
 
-    private static final String vueFileName = "equation_sans_bootstrap.jsp";
+    private static final String vueFileName = "equation.jsp";
     //private static String vueFileName = "equation.jsp";
 
     @Override
