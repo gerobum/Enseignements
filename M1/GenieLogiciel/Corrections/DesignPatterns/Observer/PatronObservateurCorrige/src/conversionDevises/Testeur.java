@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -105,7 +106,7 @@ public class Testeur extends JFrame {
 
     private void lireFichierDeDevises(String nomFichier) {
         try {
-            Scanner in = new Scanner(Testeur.class.getResourceAsStream(nomFichier));
+            Scanner in = new Scanner(new File("/home/yvan/Development/Enseignements/M1/GenieLogiciel/Corrections/DesignPatterns/Observer/PatronObservateurCorrige/src/conversionDevises/europe.devises")/*Testeur.class.getResourceAsStream(nomFichier)*/);
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 if (!line.trim().startsWith("#")) {

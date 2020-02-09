@@ -1,7 +1,7 @@
 package conversionDevises.patron;
 
 import conversionDevises.patron.Euro;
-import conversionDevises.patron.Observé;
+import conversionDevises.patron.Sujet;
 import conversionDevises.patron.Observateur;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -54,7 +54,7 @@ public class SliderObservateur extends JSlider implements Observateur {
     }
 
     @Override
-    public void setSujet(Observé sujet) {
+    public void setSujet(Sujet sujet) {
         this.sujet = (Euro) sujet;
     }
 

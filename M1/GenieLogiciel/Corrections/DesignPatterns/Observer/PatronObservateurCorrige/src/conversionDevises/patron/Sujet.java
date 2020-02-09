@@ -18,7 +18,7 @@ import java.util.Set;
  * @author Yvan
  * @param <T> Le type de l'objet observé
  */
-public abstract class Observé<T> {
+public abstract class Sujet<T> {
     
     private final Set<Observateur> observateur = new HashSet<>();
     

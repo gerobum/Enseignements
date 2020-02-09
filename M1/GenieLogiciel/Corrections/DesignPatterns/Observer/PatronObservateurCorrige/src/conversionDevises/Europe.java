@@ -11,7 +11,7 @@ public class Europe {
             PTE - Escudo portugais 	200.482 	GRD - Drachme grec 	340.750
      */
     public static void main(String[] args) {
-        new Testeur("europe.devises");
+        new Testeur("/home/yvan/Development/Enseignements/M1/GenieLogiciel/Corrections/DesignPatterns/Observer/PatronObservateurCorrige/src/conversionDevises/europe.devises");
     }
 
 }

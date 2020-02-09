@@ -118,9 +118,9 @@ public class Fichiers {
      */
     public static void afficherTousLesFichiersDifferentsDefMaisDeMemeTailleEtDeMemeNom(Path racine, File f) throws IOException {
         Files.walk(racine)
-                .filter(p -> p.toFile().isFile())
                 .filter(p -> p.toFile().length() == f.length())
                 .filter(p -> p.toFile().getName().equals(f.getName()))
+                .filter(p -> p.toFile().isFile())
                 .filter(p -> !p.toFile().equals(f))
                 .forEach(System.out::println);
     }

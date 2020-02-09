@@ -3,12 +3,13 @@ package conversionDevises;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author maillot
- */
 public class DialogueAjout extends JDialog {
     private final JButton ok = new JButton("Ok");
     private final JButton annuler = new JButton("Annuler");
@@ -18,6 +19,7 @@ public class DialogueAjout extends JDialog {
     private final JPanel centre = new JPanel();
     private final JPanel sud = new JPanel();
     private boolean reponse = false;
+    
     public DialogueAjout() {
         setModal(true);
         centre.setLayout(new GridLayout(3, 2));
@@ -37,7 +39,6 @@ public class DialogueAjout extends JDialog {
         
         ok.addActionListener(new ActionListener() {
 
-            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Double.parseDouble(prixPour1Euro.getText());
@@ -55,7 +56,6 @@ public class DialogueAjout extends JDialog {
         
         annuler.addActionListener(new ActionListener() {
 
-            @Override
             public void actionPerformed(ActionEvent e) {
                 reponse = false;
                 setVisible(false);

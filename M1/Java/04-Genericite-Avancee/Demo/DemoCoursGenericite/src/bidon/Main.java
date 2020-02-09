@@ -36,7 +36,7 @@ public class Main {
         Bidon b2 = new Bidon(2, "d'huile");
         Couple<Bidon> cb = new Couple<>(b1, b2);
 
-        // La ligne suivante ne peut pas être compilé
+        // La ligne suivante ne peut pas être compilée
         System.out.println(Main.maxNOk(cb));
         System.out.println(Main.maxOk(cb));
     }

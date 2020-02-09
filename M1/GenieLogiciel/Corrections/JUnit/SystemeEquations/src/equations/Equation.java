@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class Equation {
 
-    private final double[] X;
+    private final double[] X; 
 
     public Equation(int nbInconnues) {
         X = new double[nbInconnues + 1];
     }
-
+ 
     public void set(int c, double v) {
-        X[c] = v;
+        X[c] = v; 
     }
 
     public double get(int c) {

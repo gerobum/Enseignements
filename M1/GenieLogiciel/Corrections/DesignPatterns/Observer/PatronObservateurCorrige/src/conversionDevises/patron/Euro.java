@@ -5,7 +5,7 @@ package conversionDevises.patron;
  * que l'on affichera dans la devise choisie.
  * @author Yvan
  */
-public class Euro extends Observé<Double> {
+public class Euro extends Sujet<Double> {
     private Double valeurEn€;
 
     public Euro(Double valeur) {

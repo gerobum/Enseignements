@@ -8,5 +8,5 @@ package conversionDevises.patron;
  */
 public interface Observateur {
     void update();
-    void setSujet(Observé sujet);
+    void setSujet(Sujet sujet);
 }
