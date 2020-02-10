@@ -19,6 +19,7 @@ package edu.uha.miage.metier;
 import java.io.Serializable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -29,10 +30,10 @@ import javax.validation.constraints.Size;
 public class Person implements Serializable {
     
     @NotNull
-    @Size(min = 2)
+    @Pattern(regexp = "[A-Z][a-zA-z\\s-]+", message = "Un mot d\'au moins deux lettres commençant par une majuscule")
     private String nom;
     @NotNull
-    @Min(18)
+    @Min(value = 18, message = "Il faut avoir 18 ans ou plus pour s'inscrire")
     private Integer age;
 
     public Person(String nom, int age) {
@@ -68,7 +69,7 @@ public class Person implements Serializable {
     public String toString() {
         return String.format("%s %s", 
                 (nom==null || nom.isBlank()?"nobody" : nom), 
-                (age < 0 ? "" : (age > 2 ? String.format("(%d ans)", age) :  String.format("(%d an)", age))));
+                (age < 0 ? "" : (age > 1 ? String.format("(%d ans)", age) :  String.format("(%d an)", age))));
     }
     
 }
