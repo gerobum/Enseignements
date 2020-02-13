@@ -4,7 +4,7 @@ package i18n;
  *
  * @author yvan
  */
-public class Internationalisé {
+public class Internationalised {
     static public void main(String[] args) {
         System.out.println(java.util.ResourceBundle.getBundle("i18e/mots").getString("BONJOUR"));
         System.out.println(java.util.ResourceBundle.getBundle("i18e/mots").getString("COMMENT ALLEZ VOUS ?"));

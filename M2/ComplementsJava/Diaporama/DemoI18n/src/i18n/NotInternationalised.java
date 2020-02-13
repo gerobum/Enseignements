@@ -4,7 +4,7 @@ package i18n;
  *
  * @author yvan
  */
-public class PasInternationalisé {
+public class NotInternationalised {
     static public void main(String[] args) {
         System.out.println("Bonjour");
         System.out.println("Comment allez vous ?");
