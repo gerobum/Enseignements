@@ -43,20 +43,31 @@ public class Analyseur {
                 || "-,".equals(mot) || "+,".equals(mot)) {
             return false;
         }
-        Pattern p = Pattern.compile("[+-]?[0-9]*,?[0-9]*");
-        return p.matcher(mot).matches();
+        //Pattern p = Pattern.compile("[+-]?[0-9]*,?[0-9]*");
+        Pattern p = Pattern.compile("(.*),(.*)");
+        //return p.matcher(mot).matches();
+        Matcher matcher = p.matcher(mot);
+        if (matcher.matches()) {
+            return estUnRelatif(matcher.group(1).trim()) && estUnNaturel(matcher.group(2).trim());
+        }
+        return false;
+    }
+
+    public static boolean estUnNombre(String mot) {
+        return estUnNombreAVirgule(mot) || estUnRelatif(mot) || estUnNaturel(mot);
     }
 
     public static boolean estUneOperation(String mot) {
-        Pattern p1 = Pattern.compile("[+-]?(.*)");
+        /*Pattern p1 = Pattern.compile("[+-]?(.*)");
         Matcher m = p1.matcher(mot);
         if (m.matches() && estUnNombreAVirgule(m.group(1).trim())) {
             return true;
-        } else {
-            p1 = Pattern.compile("^[+-]?([^+/*-]*)[+/*-](.*)$");
-            m = p1.matcher(mot);
+        } else */{
+            //Pattern p1 = Pattern.compile("^[+-]?([^+/*-]*)[+/*-](.*)$");
+            Pattern p1 = Pattern.compile("[+-]?([^+*/-]*)[+*/-](.*)");
+            Matcher m = p1.matcher(mot);
             if (m.matches()) {
-                return estUnNombreAVirgule(m.group(1).trim()) && estUnNombreAVirgule(m.group(2).trim());
+                return estUnNombre(m.group(1).trim()) && estUnNombre(m.group(2).trim());
             } else {
                 return false;
             }
@@ -64,7 +75,7 @@ public class Analyseur {
     }
 
     public static boolean estUneExpressionSansParenthese(String mot) {
-        if (estUneOperation(mot)) {
+        if (estUneOperation(mot) || estUnNombre(mot)) {
             return true;
         }
 

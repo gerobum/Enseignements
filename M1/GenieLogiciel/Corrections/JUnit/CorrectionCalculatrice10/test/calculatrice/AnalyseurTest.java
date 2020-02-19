@@ -304,12 +304,46 @@ public class AnalyseurTest {
             assertFalse(i + ": " + s, Analyseur.estUnNombreAVirgule(s));
         }
     }
+    @Test
+    public void testEstUnNombre() {
+        System.out.println("estUnNombre");
+        assertFalse(Analyseur.estUnNombre(null));
+        assertFalse(Analyseur.estUnNombre(""));
+        assertFalse(Analyseur.estUnNombre("+"));
+        assertFalse(Analyseur.estUnNombre("-"));
+        assertFalse(Analyseur.estUnNombre("+,"));
+        assertFalse(Analyseur.estUnNombre("-,"));
+        assertTrue(Analyseur.estUnNombre(","));
+
+        for (int i = 0; i < 10; i++) {
+            assertTrue("" + ((char) ('0' + i)), Analyseur.estUnNombre("" + ((char) ('0' + i))));
+            assertTrue("+" + ((char) ('0' + i)), Analyseur.estUnNombre("" + ((char) ('0' + i))));
+            assertTrue("-" + ((char) ('0' + i)), Analyseur.estUnNombre("" + ((char) ('0' + i))));
+        }
+        for (int i = 0; i < 1000; i++) {
+            String s = genererUnNombreAVirguleValide(100);
+            assertTrue(i + ": " + s, Analyseur.estUnNombre(s));
+            s = genererUnNombreAVirguleInvalide(100);
+            assertFalse(i + ": " + s, Analyseur.estUnNombre(s));
+        }
+        
+        
+        for (int i = 0; i < 1000; i++) {
+            String s = genererUnNaturelValide(100);
+            assertTrue(i + ": " + s, Analyseur.estUnNombre(s));
+            assertTrue(i + ": +" + s, Analyseur.estUnNombre("+" + s));
+            assertTrue(i + ": -" + s, Analyseur.estUnNombre("-" + s));
+            s = genererUnNaturelInvalide(100);
+            assertFalse(i + ": " + s, Analyseur.estUnNombre(s));
+            assertFalse(i + ": +" + s, Analyseur.estUnNombre("+" + s));
+            assertFalse(i + ": -" + s, Analyseur.estUnNombre("-" + s));
+        }
+    }
 
     @Test
     public void testEstUneOperation() {
         System.out.println("estUneOperation");
         String ops[] = {
-            "0",
             "1+2",
             "1-2",
             "1*2",
@@ -352,11 +386,10 @@ public class AnalyseurTest {
             "11457,4578 -  +245487",
             "+45741,78781 * 78477,78782",
             "+78475547,788471 / +25457854,78854",
-            "++89",
-            "+-89748,784"
         };
 
         String noops[] = {
+            "0",
             "*0",
             "*1+2",
             "1-2-",
@@ -453,19 +486,19 @@ public class AnalyseurTest {
             "-45741,78781 * 78477,78782 / -478545",
             "- - - 11457,4578 -  -245487 + 7847552,4578",
             "-45741,78781 * - - - - 78477,78782 / + + + + -478545",
-            "++++89",
-            "+++-89748,784",
-            "- - + + - 457478554,785454"
         };
 
         String noops[] = {
+            "++++89",
+            "+++-89748,784",
+            "- - + + - 457478554,785454",
             "*0",
             "*1+2",
             "1-2-",
             "1*2+",
             "1//2",
             "-1**+2",
-            "-1-*-*2"
+            "-1-*-*2",
         };
         for (String op : ops) {
             assertTrue(op + " devrait être une expression sans parenthèse", Analyseur.estUneExpressionSansParenthese(op));
