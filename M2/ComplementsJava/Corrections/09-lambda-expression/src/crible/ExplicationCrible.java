@@ -51,7 +51,11 @@ public class ExplicationCrible {
         //affichageDe2a25sansLesMultiplesDe2sauf2();
         //affichageDe2a25sansLesMultiplesDe3();
         //affichageDe2a25sansLesMultiplesDe5();
+        
+        
+        
 
+        
         int n = 1;
         Chrono.premierJalon();
         while (n < 10_000_000) {

@@ -91,19 +91,21 @@ public class Crible {
             n *= 10;
             
             pnp = crible(n);
-            Chrono.affichageDureeDepuisDernierJalon("Le pré-filtrage a pris");
-            System.out.println("Il y a " + pnp.count() + " nombres premiers avant " + n);
-            Chrono.affichageDureeDepuisDernierJalon("Le décompte des nombres premiers a pris");
+            Chrono.affichageDureeDepuisDernierJalon("Vym0 : Le pré-filtrage a pris");
+            System.out.println("Vym0 : Il y a " + pnp.count() + " nombres premiers avant " + n);
+            Chrono.affichageDureeDepuisDernierJalon("Vym0 : Le décompte des nombres premiers a pris");
             System.out.println("-----------------------------------");
             
             pnp = cribleAdrienCouchotIteratif(n);
-            System.out.println("Il y a " + pnp.count() + " nombres premiers avant " + n);
-            Chrono.affichageDureeDepuisDernierJalon("Le décompte des nombres premiers a pris");
+            Chrono.affichageDureeDepuisDernierJalon("VacR : Le pré-filtrage a pris");
+            System.out.println("VacR : Il y a " + pnp.count() + " nombres premiers avant " + n);
+            Chrono.affichageDureeDepuisDernierJalon("VacR : Le décompte des nombres premiers a pris");
             System.out.println("-----------------------------------");
             
             pnp = cribleAdrienCouchot(n);
-            System.out.println("Il y a " + pnp.count() + " nombres premiers avant " + n);
-            Chrono.affichageDureeDepuisDernierJalon("Le décompte des nombres premiers a pris");
+            Chrono.affichageDureeDepuisDernierJalon("VacI : Le pré-filtrage a pris");
+            System.out.println("VacI : Il y a " + pnp.count() + " nombres premiers avant " + n);
+            Chrono.affichageDureeDepuisDernierJalon("VacI : Le décompte des nombres premiers a pris");
             System.out.println("-----------------------------------");
             
             System.out.println("===================================");

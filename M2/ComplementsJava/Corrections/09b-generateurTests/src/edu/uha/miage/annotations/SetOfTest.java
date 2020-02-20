@@ -30,5 +30,9 @@ import java.lang.annotation.Target;
 @Repeatable(SetsOfTest.class)
 public @interface SetOfTest {
     Class<?>[] types() default {};
+<<<<<<< HEAD
     ParamValues[] value();
+=======
+    String[] value();
+>>>>>>> 9cbb4fafef69031985d694228a49a5499749f347
 }

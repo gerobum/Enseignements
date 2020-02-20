@@ -5,7 +5,6 @@
  */
 package commande;
 
-import javax.swing.AbstractButton;
 import javax.swing.text.JTextComponent;
 
 /**

@@ -37,7 +37,7 @@ public class TextFieldObservateur extends JTextField implements Observateur {
         update();
     }
     @Override
-    public void setSujet(Observé sujet) {
+    public void setSujet(Sujet sujet) {
         this.sujet = (Euro) sujet;
     }
 

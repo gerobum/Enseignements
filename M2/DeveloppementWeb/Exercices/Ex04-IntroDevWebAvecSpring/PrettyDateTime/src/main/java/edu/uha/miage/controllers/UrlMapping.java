@@ -59,14 +59,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Il faut également ajouter le plugin spring-boot-maven-plugin
  * </p>
  * <p>
- * &lt;build&gt;<br>
- * &lt;plugins&gt;<br>
- * &lt;plugin&gt;<br>
- * &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>
- * &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;<br>
- * &lt;/plugin&gt;<br>
- * &lt;/plugins&gt;<br>
- * &lt;/build&gt;<br>
+ * <code>
+ * <build>
+ *     <plugins>
+ *      <plugin>
+ *          <group>org.springframework.boot</group>
+ *          <artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;<br>
+ *      </plugin>
+ *     </plugins>
+ * </build>
+ * </code>
+
  * </p>
  *
  *
@@ -93,10 +96,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <h3>Application</h3>
  *
  * Dans fr.miage.exosdevweb, créer la classe Application qui lance Spring.  * <pre>
-public class Application {
- * public static void main(String[] args) {
- * SpringApplication.run(Application.class, args);
- * }
+    public class Application {
+ *      public static void main(String[] args) {
+ *          SpringApplication.run(Application.class, args);
+ *      }
  * }
  * </pre>
  * <p>
@@ -183,7 +186,7 @@ public class Application {
  * <li>/datetime</li>
  * <li>/prettydatetime</li>
  * <li>/prettydatetime?name=Toto</li>
- * <li>/prettydatetime?name=Toto&amp;age=25</li>
+ * <li>/prettydatetime?name=Toto&age=25</li>
  * </ul>
  * <p>
  * doivent toujours fonctionnner.

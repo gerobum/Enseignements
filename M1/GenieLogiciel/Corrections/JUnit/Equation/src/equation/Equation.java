@@ -1,11 +1,7 @@
 package equation;
 
-import exceptions.NulCoefException;
 import static java.lang.Math.*;
 import static java.lang.Double.*;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
 
 /**
  *
