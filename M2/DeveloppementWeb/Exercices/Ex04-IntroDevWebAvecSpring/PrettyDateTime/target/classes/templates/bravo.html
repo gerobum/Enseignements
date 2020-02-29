@@ -15,8 +15,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<html>
-    <body>
-        Bravo ! Vous êtes inscrit.
-    </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1 th:text="'Bravo ' + ${model.prettyNameAge} + ' vous êtes inscrit !'" />
+</body>
 </html>
