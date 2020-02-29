@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text=#{Message}>Message</h1>
+            <form action="#" th:object="${message}" method="post" role="form">
+                <input type="hidden" th:field="*{id}"/>
+                <label th:text="#{Message}" for="message">Message</label>
+                <input id="message" type="text" th:field="*{msg}" th:placeholder="#{2a30}"/>
+                <span th:if="${#fields.hasErrors('msg')}" th:errors="*{msg}" />
+
+                <label th:text="#{Début}" for="debut">Début</label>
+                <input id="starting" type="datetime" th:field="*{starting}" th:placeholder="#{2a30}"/>
+                <span th:if="${#fields.hasErrors('starting')}" th:errors="*{starting}" />
+                
+                <label th:text="#{Fin}" for="fin">Fin</label>
+                <input id="ending" type="datetime" th:field="*{ending}" th:placeholder="#{2a30}"/>
+                <span th:if="${#fields.hasErrors('ending')}" th:errors="*{ending}" />
+                
+                
+                <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="#{Fermer}" th:href="@{/message}">Fermer</a>
+            </form>  
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>
