@@ -23,11 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ *
  * @author Yvan Maillot <yvan.maillot@uha.fr>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface SetOfTest {
-    Class<?>[] types() default {};
-    ParamValues[] value();
+@Repeatable(ParamsValues.class)
+public @interface ParamValues {
+    String[] value();
 }

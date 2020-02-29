@@ -16,7 +16,7 @@
  */
 package edu.uha.miage.totest;
 
-import edu.uha.miage.annotations.SetOfTest;
+import edu.uha.miage.annotations.*;
 
 /**
  *
@@ -24,34 +24,44 @@ import edu.uha.miage.annotations.SetOfTest;
  */
 public class Utils {
     
-    @SetOfTest({"6", "1", "2", "3"})
-    @SetOfTest({"0", "-1", "-2", "3"})
-    @SetOfTest({"9", "2", "3", "4"})
+
+    @ParamValues({"6", "1", "2", "3"})
+    @ParamValues({"0", "-1", "-2", "3"})
+    @ParamValues({"9", "2", "3", "4"})
     public static int sum(int a, int b, int c) {
-        return 0;
+        return a+b+c;
     }
-    
+
     @SetOfTest(
             types = {double.class, int.class, int.class, int.class},
-            value = {"2.0", "1", "2", "3"})
-    @SetOfTest(
-            types = {double.class, int.class, int.class, int.class},
-            value = {"0.0", "-1", "-2", "3"})
-    @SetOfTest(
-            types = {double.class, int.class, int.class, int.class},
-            value = {"3.0", "2", "3", "4"})
-    @SetOfTest(
-            types = {double.class, int.class, int.class, int.class},
-            value = {"2.666666666667", "2", "3", "3"})
+            value = {
+                @ParamValues({"2.5", "1", "2", "3"}),
+                @ParamValues({"0.0", "-1", "-2", "3"}),
+                @ParamValues({"2.666666666667", "2", "3", "3"}),}
+    )
     public static double average(int a, int b, int c) {
-        return 0.0;
+        return (a+b+c)/3.0;
     }
-    
+
+    @SetOfTest(
+            types = {String.class, int.class, int.class, int.class},
+            value = {
+                @ParamValues({"123", "1", "2", "3"}),
+                @ParamValues({"-1-2-3", "-1", "-2", "-3"}),
+                @ParamValues({"233", "2", "3", "3"}),}
+    )
     public static String conc(int a, int b, int c) {
-        return "";
+        return ""+a+b+c;
     }
-    
+
+    @SetOfTest(
+            types = {boolean.class, int.class, int.class, int.class, int.class, int.class, int.class},
+            value = {
+                @ParamValues({"true", "1", "2", "3", "4", "5", "6"}),
+                @ParamValues({"false", "6", "2", "3", "4", "5", "6"})
+            }
+    )
     public static boolean areSorted(int a, int b, int c, int d, int e, int f) {
-        return false;
+        return a <= b && b <= c && c <= d && d <= e && e <= f;
     }
 }

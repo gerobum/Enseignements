@@ -14,20 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.uha.miage.annotations;
+package edu.uha.miage;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import edu.uha.miage.tester.TestsGenerator;
+import edu.uha.miage.totest.Utils;
+
+
 
 /**
+ *
  * @author Yvan Maillot <yvan.maillot@uha.fr>
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface SetOfTest {
-    Class<?>[] types() default {};
-    ParamValues[] value();
+public class Main {
+    public static void main(String[] args) {
+        TestsGenerator generator = new TestsGenerator(Utils.class);
+        generator.testMethods();
+    }
 }
