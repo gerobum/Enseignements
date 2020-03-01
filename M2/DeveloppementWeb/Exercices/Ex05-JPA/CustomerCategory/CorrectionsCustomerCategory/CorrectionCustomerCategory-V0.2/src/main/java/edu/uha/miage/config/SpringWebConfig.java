@@ -1,6 +1,6 @@
 // #### V0.2 Pour visualiser le changement de localisation des "resolvers"
 // #### V0.2 sont ajoutés pour intercepter les changements.
-package fr.miage.config;
+package edu.uha.miage.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"fr.miage.web"})
+@ComponentScan(basePackages = {"edu.uha.miage.web"})
 @EnableWebMvc
 public class SpringWebConfig implements WebMvcConfigurer {
 

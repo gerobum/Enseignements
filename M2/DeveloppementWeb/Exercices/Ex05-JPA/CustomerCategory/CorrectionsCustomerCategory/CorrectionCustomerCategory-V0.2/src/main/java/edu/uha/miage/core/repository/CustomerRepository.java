@@ -1,6 +1,6 @@
-package fr.miage.core.repository;
+package edu.uha.miage.core.repository;
 
-import fr.miage.core.entity.Customer;
+import edu.uha.miage.core.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 // #### V0.0 Couche repository
         

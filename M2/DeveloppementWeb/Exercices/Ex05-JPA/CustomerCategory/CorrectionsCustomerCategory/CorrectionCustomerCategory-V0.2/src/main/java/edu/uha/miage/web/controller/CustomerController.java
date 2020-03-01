@@ -1,7 +1,7 @@
-package fr.miage.web.controller;
+package edu.uha.miage.web.controller;
 
-import fr.miage.core.entity.Customer;
-import fr.miage.core.service.CustomerService;
+import edu.uha.miage.core.entity.Customer;
+import edu.uha.miage.core.service.CustomerService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
