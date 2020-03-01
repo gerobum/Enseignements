@@ -1,4 +1,4 @@
-package fr.miage.core.entity;
+package edu.uha.miage.core.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 // #### V1.0 Pas grand changement par rapport avec Customer.
 @Entity
@@ -28,7 +28,10 @@ public class Category implements Serializable {
     @NotNull
     // #### V1.0 Mais, à la différence du nom des clients. Le nom d'une catégorie 
     // #### V1.0 ne possède qu'un et un seul caractère (A, e, $, ...)  
-    @Size(min = 1, max = 1)
+    // @Size(min = 1, max = 1)
+    // #### V1.0 Ou encore plus contraint si l'on veut que ce soit une lettre entre A et Z
+    @Pattern(regexp = "[A-Z]")
+    // @Column(unique = true) // Une autre solution pour définir que name doit être unique
     private String name;
 
     public Category(String name) {
