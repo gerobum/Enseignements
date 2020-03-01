@@ -1,6 +1,6 @@
-package fr.miage.core.service;
+package edu.uha.miage.core.service;
 
-import fr.miage.core.entity.Category;
+import edu.uha.miage.core.entity.Category;
 import java.util.List;
 import java.util.Optional;
 
