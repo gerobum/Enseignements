@@ -42,7 +42,7 @@
 // #### V1.4 Le formulaire de création et de modification de client offre maintenant
 // #### V1.4 la possibilité d'affecter une catégorie à une client ou de la changer.
 
-package fr.miage;
+package edu.uha.miage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -54,8 +54,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // #### V0.0 @ComponentScan
 // #### V0.0 @Configuration
 // #### V0.0 https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-using-springbootapplication-annotation.html
-@SpringBootApplication(scanBasePackages = "fr.miage")
-// #### V0.0 "fr.miage" précise à partir d'où commence le scan des beans.
+@SpringBootApplication(scanBasePackages = "edu.uha.miage")
+// #### V0.0 "edu.uha.miage" précise à partir d'où commence le scan des beans.
 public class Application extends SpringBootServletInitializer implements WebMvcConfigurer {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
