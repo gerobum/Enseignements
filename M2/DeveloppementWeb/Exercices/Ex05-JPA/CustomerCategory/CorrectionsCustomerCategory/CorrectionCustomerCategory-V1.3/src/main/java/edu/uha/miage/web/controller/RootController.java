@@ -1,5 +1,5 @@
 
-package fr.miage.web.controller;
+package edu.uha.miage.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
