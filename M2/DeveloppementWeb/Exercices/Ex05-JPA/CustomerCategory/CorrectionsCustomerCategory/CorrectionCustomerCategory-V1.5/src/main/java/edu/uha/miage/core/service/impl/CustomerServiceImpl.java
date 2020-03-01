@@ -1,8 +1,8 @@
-package fr.miage.core.service.impl;
+package edu.uha.miage.core.service.impl;
 
-import fr.miage.core.entity.Customer;
-import fr.miage.core.repository.CustomerRepository;
-import fr.miage.core.service.CustomerService;
+import edu.uha.miage.core.entity.Customer;
+import edu.uha.miage.core.repository.CustomerRepository;
+import edu.uha.miage.core.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

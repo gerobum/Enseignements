@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.core.repository;
+package edu.uha.miage.core.repository;
 
-import fr.miage.core.entity.Category;
+import edu.uha.miage.core.repository.CategoryRepository;
+import edu.uha.miage.core.entity.Category;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
