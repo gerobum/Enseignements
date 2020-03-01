@@ -1,9 +1,9 @@
-package fr.miage.web.controller;
+package edu.uha.miage.web.controller;
 
-import fr.miage.core.entity.Category;
-import fr.miage.core.entity.Customer;
-import fr.miage.core.service.CategoryService;
-import fr.miage.core.service.CustomerService;
+import edu.uha.miage.core.entity.Category;
+import edu.uha.miage.core.entity.Customer;
+import edu.uha.miage.core.service.CategoryService;
+import edu.uha.miage.core.service.CustomerService;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

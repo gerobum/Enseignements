@@ -1,8 +1,8 @@
-package fr.miage.core.service.impl;
+package edu.uha.miage.core.service.impl;
 
-import fr.miage.core.entity.Category;
-import fr.miage.core.repository.CategoryRepository;
-import fr.miage.core.service.CategoryService;
+import edu.uha.miage.core.entity.Category;
+import edu.uha.miage.core.repository.CategoryRepository;
+import edu.uha.miage.core.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

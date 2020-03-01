@@ -1,4 +1,4 @@
-package fr.miage.core.entity;
+package edu.uha.miage.core.entity;
 
 import java.io.Serializable;
 import java.util.List;
