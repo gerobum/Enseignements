@@ -17,24 +17,30 @@
 package edu.uha.miage.metier;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author Yvan Maillot <yvan.maillot@uha.fr>
  */
-
+@Entity
 public class Person implements Serializable {
-    
+
     @NotNull
     @Pattern(regexp = "[A-Z][a-zA-z\\s-]+", message = "Un mot d\'au moins deux lettres commençant par une majuscule")
     private String nom;
     @NotNull
     @Min(value = 18, message = "Il faut avoir 18 ans ou plus pour s'inscrire")
     private Integer age;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     public Person(String nom, int age) {
         this.nom = nom;
@@ -64,12 +70,20 @@ public class Person implements Serializable {
     public void setAge(int age) {
         this.age = age;
     }
-    
+
     @Override
     public String toString() {
-        return String.format("%s %s", 
-                (nom==null || nom.isBlank()?"nobody" : nom), 
-                (age < 0 ? "" : (age > 1 ? String.format("(%d ans)", age) :  String.format("(%d an)", age))));
+        return String.format("%s %s",
+                (nom == null || nom.isBlank() ? "nobody" : nom),
+                (age < 0 ? "" : (age > 1 ? String.format("(%d ans)", age) : String.format("(%d an)", age))));
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

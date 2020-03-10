@@ -53,25 +53,25 @@
                 -->
                 <input id="name" type="text" th:field="*{name}" th:placeholder="#{2a30}"/>
                 <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
-                
+
                 <!-- V1.4 Le formulaire affiche dans une boite à liste toutes
                 les catégories existantes. Si le client géré par le formulaire (voir th:object="${customer}")
                 appartient à une catégorie, elle sera selectionnée. -->
                 <p>
-                <label th:text="#{Categorie}" for="category">Nom</label>
-                <!-- La sélection d'une catégorie dans la liste affecte le champ 
-                category du client (parce que th:field="*{category}")
-                -->
-                <select th:field="*{category}" id="category">
-                    <option th:value="null" th:text="#{Vide}">Vide</option>
-                    <!-- V1.4 Pour chaque catégorie de categories (th:each="category : ${categories}"), 
-                              afficher une option
-                                - qui montre le nom d'une catégorie th:text="${category.name}
-                                - qui permet de modifier le champ category de customer  
-                                  (th:value="${category.id}") lorsqu'un option est sélectionnée.
+                    <label th:text="#{Categorie}" for="category">Nom</label>
+                    <!-- La sélection d'une catégorie dans la liste affecte le champ 
+                    category du client (parce que th:field="*{category}")
                     -->
-                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-                </select>
+                    <select th:field="*{category}" id="category">
+                        <option th:value="null" th:text="#{Vide}">Vide</option>
+                        <!-- V1.4 Pour chaque catégorie de categories (th:each="category : ${categories}"), 
+                                  afficher une option
+                                    - qui montre le nom d'une catégorie th:text="${category.name}
+                                    - qui permet de modifier le champ category de customer  
+                                      (th:value="${category.id}") lorsqu'un option est sélectionnée.
+                        -->
+                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                    </select>
                 </p>
                 <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
                 <a th:text="#{Fermer}" th:href="@{/customer}">Fermer</a>

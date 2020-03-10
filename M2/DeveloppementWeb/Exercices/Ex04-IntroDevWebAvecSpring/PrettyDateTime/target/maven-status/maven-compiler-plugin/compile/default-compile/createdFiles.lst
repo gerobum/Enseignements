@@ -1,3 +1,4 @@
+edu/uha/miage/jpa/PersonRepository.class
 edu/uha/miage/metier/Person.class
 edu/uha/miage/controllers/UrlMapping.class
 edu/uha/miage/models/PersonModel.class

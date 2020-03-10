@@ -1,5 +1,6 @@
 /home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/controllers/PartJPAControllers.java
 /home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/models/PrettyDateTimeModel.java
+/home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/jpa/PersonRepository.java
 /home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/models/PersonModel.java
 /home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/metier/Person.java
 /home/yvan/Development/Enseignements/M2/DeveloppementWeb/Exercices/Ex04-IntroDevWebAvecSpring/PrettyDateTime/src/main/java/edu/uha/miage/Application.java

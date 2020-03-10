@@ -378,7 +378,7 @@ public class UrlMapping {
     }
     
     @PostMapping({"/validation"})
-    public String inscritAvecValidation(@Valid Person person, BindingResult bindingResult) {
+    public String inscritAvecValidation(@Valid Person person, BindingResult bindingResult, Model model) {
         
         logger.info("Requête POST sur /validation");
         
@@ -386,7 +386,9 @@ public class UrlMapping {
             return "inscriptionAvecValidationView";
         }
         
-        logger.info("Inscription de la personne " + person);
+        logger.info("Inscription de la personne ");
+        
+        model.addAttribute("person", new PersonModel(person.getNom(), person.getAge()+""));
      
         return "bravo";
     }

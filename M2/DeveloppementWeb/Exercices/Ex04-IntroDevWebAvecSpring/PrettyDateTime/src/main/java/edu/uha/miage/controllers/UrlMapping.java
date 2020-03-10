@@ -16,6 +16,7 @@
  */
 package edu.uha.miage.controllers;
 
+import edu.uha.miage.jpa.PersonRepository;
 import edu.uha.miage.metier.Person;
 import edu.uha.miage.models.PersonModel;
 import edu.uha.miage.models.PrettyDateTimeModel;
@@ -25,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -302,6 +304,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UrlMapping {
+    
+    @Autowired
+    PersonRepository personRepo;
 
     Logger logger = LoggerFactory.getLogger(UrlMapping.class);
 
@@ -360,13 +365,11 @@ public class UrlMapping {
 
     @PostMapping({"/inscription"})
     // Aller voir https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-arguments
-    public String inscrit(/* @ModelAttribute */ PersonModel personModel, Model model) {
+    public String inscrit(/* @ModelAttribute */ PersonModel personModel) {
         
         logger.info("Requête POST sur /inscription");
         
         logger.info("Inscription de la personne " + personModel.getPerson());
-     
-        model.addAttribute("model", new PrettyDateTimeModel(personModel.getPerson().getNom(), personModel.getPerson().getAge()+""));
         return "pdtView";
     }
 
@@ -381,7 +384,7 @@ public class UrlMapping {
     }
     
     @PostMapping({"/validation"})
-    public String inscritAvecValidation(@Valid Person person, BindingResult bindingResult) {
+    public String inscritAvecValidation(@Valid Person person, BindingResult bindingResult, Model model) {
         
         logger.info("Requête POST sur /validation");
         
@@ -390,16 +393,27 @@ public class UrlMapping {
         }
         
         logger.info("Inscription de la personne " + person);
+        
+
      
+        model.addAttribute("model", new PrettyDateTimeModel(person.getNom(), person.getAge()+""));
         return "bravo";
+    }
+    
+    
+    @GetMapping("/list")
+    public String list(Model model) {
+        
+        model.addAttribute("persons", personRepo.findAll());
+        return "list";
     }
     
     
     @GetMapping("/")
     public String accueil() {
+        
+     
         return "accueil";
     }
-    
-    // La partie JPA
     
 }
