@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +34,7 @@ public class Testeur extends JFrame {
         this(null);
     }
 
-    public Testeur(String nomFichier) {
+    public Testeur(String fileName) {
 
         super("Ajouter ou supprimer des devises");
 
@@ -77,8 +78,8 @@ public class Testeur extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        if (nomFichier != null) {
-            lireFichierDeDevises(nomFichier);
+        if (fileName != null) {
+            lireFichierDeDevises(Testeur.class.getResourceAsStream(fileName));
 
             pack();
         }
@@ -104,9 +105,9 @@ public class Testeur extends JFrame {
         }
     }
 
-    private void lireFichierDeDevises(String nomFichier) {
+    private void lireFichierDeDevises(InputStream nomFichier) {
         try {
-            Scanner in = new Scanner(new File("/home/yvan/Development/Enseignements/M1/GenieLogiciel/Corrections/DesignPatterns/Observer/PatronObservateurCorrige/src/conversionDevises/europe.devises")/*Testeur.class.getResourceAsStream(nomFichier)*/);
+            Scanner in = new Scanner(nomFichier/*Testeur.class.getResourceAsStream(nomFichier)*/);
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 if (!line.trim().startsWith("#")) {

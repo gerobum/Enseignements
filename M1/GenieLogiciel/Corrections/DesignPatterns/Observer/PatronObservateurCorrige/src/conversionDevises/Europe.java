@@ -10,8 +10,9 @@ public class Europe {
             ESP - Peseta espagnole 	166.386 	IEP - Livre irlandaise 	0.787564
             PTE - Escudo portugais 	200.482 	GRD - Drachme grec 	340.750
      */
-    public static void main(String[] args) {
-        new Testeur("/home/yvan/Development/Enseignements/M1/GenieLogiciel/Corrections/DesignPatterns/Observer/PatronObservateurCorrige/src/conversionDevises/europe.devises");
+    public static void main(String[] args) {	
+      
+        new Testeur("europe.devises");
     }
 
 }

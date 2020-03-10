@@ -92,7 +92,7 @@ public class Testeur extends JFrame {
 
     private void lireFichierDeDevises(String nomFichier) {
         try {
-            Scanner in = new Scanner(conversionDevises.Testeur.class.getResourceAsStream(nomFichier));
+            Scanner in = new Scanner(Testeur.class.getResourceAsStream(nomFichier));
             while (in.hasNextLine()) {
                 String line = in.nextLine();
                 if (!line.trim().startsWith("#")) {

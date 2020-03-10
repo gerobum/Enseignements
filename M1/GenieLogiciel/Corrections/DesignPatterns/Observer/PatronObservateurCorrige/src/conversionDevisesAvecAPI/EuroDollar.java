@@ -1,4 +1,6 @@
-package conversionDevises;
+package conversionDevisesAvecAPI;
+
+import conversionDevises.*;
 
 public class EuroDollar {
 
