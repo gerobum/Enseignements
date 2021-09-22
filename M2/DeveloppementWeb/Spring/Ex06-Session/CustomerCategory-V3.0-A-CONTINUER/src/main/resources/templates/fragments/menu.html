@@ -1,0 +1,38 @@
+<div id="lang" class="container">
+    <div class="pull-right">
+         <div class="row">
+            <div class="col-sm">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a th:class="${#strings.equals(#locale.language,'en')} ? 'nav-link active' : 'nav-link'" th:href="@{?lang=en}">English</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="${#strings.equals(#locale.language,'fr')} ? 'nav-link active' : 'nav-link'" th:href="@{?lang=fr}">Français</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cus-cat" class="container">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <!-- V3.0 A link to go back home -->
+                <li class="nav-item">
+                    <a th:href="@{/}" th:text="#{HOME}" th:class="nav-link" />
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/customer}" th:text="#{Clients}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/customer')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/category}" th:text="#{Categories}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/category')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+                <!-- V3.0 A link to go the visited paths page -->
+                <li class="nav-item">
+                    <a th:href="@{/list}" th:text="#{LES PAGES VISITEES}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/list')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+            </ul>
+        </div>	
+    </div>
+</div>

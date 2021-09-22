@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head/>
+    <body>
+        <h1 th:text=#{Clients}>Clients</h1>
+        <form action="#" th:object="${customer}" method="post" role="form">
+            <input type="hidden" th:field="*{id}"/>
+            <label th:text="#{Nom}" for="name">Nom</label>    
+            <!-- # V0.1 Pour que thymeleaf tienne compte de l'internationalisation, 
+            il suffit d'utiliser th:text="#{<CLE>}", où <CLE> est une clé du fichier
+            "messages.properties", dans tout noeud html qui affiche du texte.
+            Le texte sera celui dans la langue locale associé à cette clé.
+            
+            Il est possible aussi d'utiliser th:placeholder="#{2a30}" comme ci-dessous.
+            -->
+            <input id="name" type="text" th:field="*{name}" th:placeholder="#{2a30}"/>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+            <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+            <a th:text="#{Fermer}" th:href="@{/customer}">Fermer</a>
+        </form>
+    </body>
+</html>

@@ -47,10 +47,18 @@ public class ExplicationCrible {
     }
 
     public static void main(String[] args) {
-        //affichageDe2a25();
+        ///affichageDe2a25();
         //affichageDe2a25sansLesMultiplesDe2sauf2();
         //affichageDe2a25sansLesMultiplesDe3();
         //affichageDe2a25sansLesMultiplesDe5();
+        //crible(1000).forEach(System.out::println);
+        
+        
+        
+        
+       
+        
+        
         
         
         

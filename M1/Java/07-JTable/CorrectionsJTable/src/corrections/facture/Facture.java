@@ -5,6 +5,7 @@
 
 package corrections.facture;    
 
+import corrections.facture.article.Articles;
 import javax.swing.JFrame;
 
 /**
@@ -14,7 +15,12 @@ import javax.swing.JFrame;
 public class Facture extends JFrame {
     public Facture() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        TestFacture newContentPane = new TestFacture();
+        JPanelFacture newContentPane = new JPanelFacture(Articles.baguette, 
+                Articles.croissant, 
+                Articles.meringue, 
+                Articles.painLong, 
+                Articles.petitPain, 
+                Articles.rien);
         newContentPane.setOpaque(false); //content panes must be opaque
         setContentPane(newContentPane);
         pack();

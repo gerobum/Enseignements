@@ -7,6 +7,20 @@ import types.Paquet;
 import static java.lang.Math.*;
 
 
+/**
+ * 1. Réalisez une classe Consommateur qui est un thread consommant n paquets (n < 0 ⇔
+n = ∞) dans une file de type BlockingQueue<Paquet> selon une cadence aléatoire comprise
+18
+entre mini ms et maxi ms. Un numéro d’ordre de création du consommateur est donné pour
+composer son nom. Le premier créé s’appelle C1, le deuxième C2 et ainsi de suite.
+2. Un consommateur doit dans son thread consommer des paquets en quantité définie par le
+paramètre n (ou infinie si n<0 ). Chaque paquet consommé dans la file doit voir ses dates de
+demande de consommation et de consommation mises à jour.
+3. Sa méthode toString() doit retourner "Cx" où x est le numéro du consommateur.
+4. Son thread doit pouvoir se terminer (proprement) en cas d’interruption ( interrupt() ).
+ * 
+ * @author Yvan Maillot <yvan.maillot@uha.fr>
+ */
 public class Consommateur extends Thread {
 
   private static final Random RANDOM = new Random();

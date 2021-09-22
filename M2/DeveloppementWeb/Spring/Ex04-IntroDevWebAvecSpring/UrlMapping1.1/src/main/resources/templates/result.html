@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Résultat de l'inscription</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Bonjour</h1>
+        <p>Nom : <span th:text="${person.nom}"></span></p>
+        <p>Âge : <span th:text="${person.age}"></span></p>
+        <p>Nous sommes le <span th:text="${date}"></span></p>
+        <p>Il est  <span th:text="${time}"/></p>
+        <a href='/pdt'>Au revoir</a>
+    </body>
+</html>

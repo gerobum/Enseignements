@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text=#{Categories}>Catégories</h1>
+            <form action="#" th:object="${category}" method="post" role="form">
+                <label th:text="#{Nom}" for="name">Nom</label>
+                <input id="name" type="text" th:field="*{name}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+                <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="#{Fermer}" th:href="@{/category}">Fermer</a>
+            </form>  
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>

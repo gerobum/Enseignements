@@ -1,12 +1,9 @@
 package demos.simpleTableAvecModele;
 
 import java.awt.Font;
-import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  * JTable avec le modèle par défaut

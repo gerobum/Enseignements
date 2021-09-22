@@ -1,0 +1,43 @@
+package edu.uha.miage.core.service.impl;
+
+import edu.uha.miage.core.entity.Category;
+import edu.uha.miage.core.repository.CategoryRepository;
+import edu.uha.miage.core.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+// #### V1.0 @Service est une annotation qui spécialise @Component.
+// #### V1.0 Elle indique une classe métier.
+// #### V1.0 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Service.html
+@Service
+public class CategoryServiceImpl implements CategoryService {
+
+// #### V1.0 @Autowired permet d'injecter automatiquement la bonne dépendance.
+// #### V1.0 Elle est fabriquée automatiquement par Spring (voir CategoryRepository)
+    @Autowired
+    CategoryRepository categoryRepository;
+
+// #### V1.0 Le reste s'écrit facilement.
+    @Override
+    public Category save(Category entity) {
+        return categoryRepository.save(entity);
+    }
+
+    @Override
+    public void delete(String id) {
+        categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> findAll() {
+        return (List<Category>) categoryRepository.findAll();
+    }
+
+    @Override
+    public Category findByName(String name) {
+        return categoryRepository.findByName(name);
+    }
+}

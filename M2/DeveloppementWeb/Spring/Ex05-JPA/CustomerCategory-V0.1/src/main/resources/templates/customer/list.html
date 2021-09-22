@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+    <head/>
+    <body>
+        <h1 th:text=#{Clients}>Clients</h1>
+        <ul>
+            <li th:each="customer : ${customers}">
+                <span th:text="${customer.name}"></span>
+                <a th:text="#{[Modifier]}" th:href="@{/customer/edit(id=${customer.id})}">[Modifier]</a>
+                <a th:text="#{[Supprimer]}" th:href="@{'/customer/delete/' + ${customer.id}}">[Supprimer]</a>
+            </li>
+        </ul>
+        <a th:href="@{/customer/create}" th:text="#{CREER UN NOUVEAU CLIENT}">Créer un nouveau client</a>
+    </body>
+</html>

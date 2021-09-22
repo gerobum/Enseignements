@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+ * Creative commons CC BY-NC-SA 2020 Yvan Maillot <yvan.maillot@uha.fr>
+ *
+ *     Share - You can copy and redistribute the material in any medium or format
+ * 
+ *     Adapt - You can remix, transform, and build upon the material 
+ * 
+ * Under the following terms :
+ * 
+ *     Attribution - You must give appropriate credit, provide a link to the license, 
+ *     and indicate if changes were made. You may do so in any reasonable manner, 
+ *     but not in any way that suggests the licensor endorses you or your use. 
+ * 
+ *     NonCommercial — You may not use the material for commercial purposes. 
+ * 
+ *     ShareAlike — If you remix, transform, or build upon the material, 
+ *     you must distribute your contributions under the same license as the original. 
+ * 
+ * Notices:    You do not have to comply with the license for elements of 
+ *             the material in the public domain or where your use is permitted 
+ *             by an applicable exception or limitation. 
+ * 
+ * No warranties are given. The license may not give you all of the permissions 
+ * necessary for your intended use. For example, other rights such as publicity, 
+ * privacy, or moral rights may limit how you use the material. 
+ * 
+ * See <https://creativecommons.org/licenses/by-nc-sa/4.0/>.
+-->
+<html>
+    <head>
+        <title>Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Un simple bonjour éventuellement personnalisé en présence du paramètre nom (de 3 manières)</h1>
+        <ul>
+            <li><a href="accueil">Tout est fait dans le contrôleur (c'est pas joli joli)</a></li>
+            <li><a href="accueilDispatch">Une page JSP est invoquée avec getRequestDispatch()</a></li>
+            <li><a href="accueilRedirection">Emploi d'une redirection (à éviter normalement)</a></li>
+        </ul>
+        <h1>Un petit exercice</h1>
+        <p>Encore une page qui affiche un bonjour personnalisé. Mais cette fois il y a quatre paramètres</p>
+        <ul>
+            <li>Le prénom</li>
+            <li>Le nom</li>
+            <li>Le genre (H ou F)</li>
+            <li>L'âge (un entier supérieur à 0)</li>
+        </ul>
+        Chacun d'eux peut-être absent ou erroné. L'affichage doit rester cohérent dans tous les cas.
+        <p>
+            <a href="exo?nom=Luke&prenom=Lucky&age=26&genre=H">Allez voir ici et changez ou enlevez quelques paramètres</a>
+        </p>
+        <h1>Juste pour montrer l'emploi du joker * dans une url</h1>
+        <p>
+            <a href="exo/n/importe/quelle/url/qui/se/termine/par/.php">*.php</a>
+        </p>
+    </body>
+</html>
+ 

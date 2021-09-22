@@ -30,35 +30,77 @@ public class EquationTest {
         int a = 0, b, c;
         int nbCasSansRacine = 0, nbCasRacineDouble = 0, nbCasDeuxRacines = 0, nbCasCoefNul = 0;
         // La probabilité d'avoir un discriminant nul est faible.
-        for (int i = 0; i < 1000000 || nbCasCoefNul < 10 || nbCasSansRacine < 10 || nbCasRacineDouble < 5 || nbCasDeuxRacines < 10; i++) {
+        // Donc je teste au moins un million de cas et davantage si les différentes situations n'ont pas été rencontrées suffisamment.
+        // Ce test prend environ 8 secondes. C'est relativement long mais acceptable.
+        // Probablement qu'il serait judicieux de faire une petite anayse numérique pour provoquer plus souvent les cas rares et éviter de
+        // dépasser le million de tentatives.
+        for (int i = 0; i < 1_000_000 || nbCasCoefNul < 10 || nbCasSansRacine < 10 || nbCasRacineDouble < 5 || nbCasDeuxRacines < 10; i++) {
             try {
-                a = getCoef(1000);
+                // Tirage au hasard de coefs entre -1000 et 1000
+                a = getCoef(1000); // a peut être nul
                 b = getCoef(1000);
                 c = getCoef(1000);
                 Equation e = new Equation(a, b, c);
-
-                assertNotEquals("a devrait être différent de 0", 0,  a);
+                // Si a est nul, on ne devrait pas arriver là : c'est ce que prévient l'assert qui suit.
+                assertNotEquals(String.format("Cas N°%d (Le coef a ne peut pas être nul) %s => x1 = %f ", i, e, e.getX1()), 0,  a);
+                
+                // Remarque importante pour tous les asserts. Le message doit être aussi complet que possible. Afin de pouvoir reproduire l'erreur
+                // pour le débogage.
 
                 // Les 3 cas peuvent survenir
-                switch (e.nbRacines) {
+                switch (e.getRootsCount()) {
                     case 1:
+                        // Cas d'une racine double
+                        
+                        // Elle est résolue dans x1.
+                        assertEquals(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.getX1()), 0.0, a * e.getX1() * e.getX1() + b * e.getX1() + c, EPSILON);
+                        
 
-                        assertEquals(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.x1), 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
+
+                        // Voici comment faire si l'on veut vérifier que x2 est bien égal à NaN (ce qui n'est pas explicitement demandé dans l'énoncé)
+                        assertTrue(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.getX1()), Double.isNaN(e.getX2()));                        
+                        // Attention, il est délicat de tester NaN car NaN est différent de toute valeur de type double MÊME DE LUI-MÊME.
+                        // Il faut donc utiliser Double.isNaN()
+                        
+                        // Un cas de racine double en plus (ils sont rares)
                         ++nbCasRacineDouble;
                         break;
+                        
                     case 2:
+                        // Cas de deux racines
+                        
+                        // Elles sont résolus dans x1 et x2.                        
+                        assertEquals(String.format("Cas N°%d (2 racines) %s => x1 = %f ", i, e, e.getX1()), 0, a * e.getX1() * e.getX1() + b * e.getX1() + c, EPSILON);
+                        assertEquals(String.format("Cas N°%d (2 racines) %s => x2 = %f ", i, e, e.getX2()), 0, a * e.getX2() * e.getX2() + b * e.getX2() + c, EPSILON);
 
-                        assertEquals(String.format("Cas N°%d (2 racines) %s => x1 = %f ", i, e, e.x1), 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
-                        assertEquals(String.format("Cas N°%d (2 racines) %s => x2 = %f ", i, e, e.x2), 0, a * e.x2 * e.x2 + b * e.x2 + c, EPSILON);
+                        // Attention dans ce cas, x1 et x2 doivent être différentes.
+                        assertNotEquals(e.getX1(), e.getX2());
+                        
+                        // Un cas de deux racines en plus.
                         ++nbCasDeuxRacines;
                         break;
                     default:
+                        // Cas sans racine
+                        
                         assertTrue(String.format("Cas N°%d (pas de racine) %s => Le discrimant devrait être négatif alors qu'il est égal à %d ", i, e, (b * b - 4 * a * c)), b * b - 4 * a * c < 0.0);
+
+                        // Voici comment faire si l'on veut vérifier que x2 est bien égal à NaN (ce qui n'est pas explicitement demandé dans l'énoncé)
+                        assertTrue(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.getX1()), Double.isNaN(e.getX2()));                        
+                        // Attention, il est délicat de tester NaN car NaN est différent de toute valeur de type double MÊME DE LUI-MÊME.
+                        // Il faut donc utiliser Double.isNaN()
+
+
+                        // Un cas sans racine en plus.
                         ++nbCasSansRacine;
                         break;
                 }
             } catch (NulCoefException ex) {
+                // Si on arrive ici, c'est qu'il y a eu une exception NulCoefException (évidemment).
+                // Encore faut-il que ce soit pour une bonne raison. Je vérifie.
                 assertEquals(String.format("Cas N°%d (Coef a nul) => L'exception  NulCoefException a été lancée : a devrait être null", i), 0, a);
+                
+                        
+                // Un cas de coef A nul en plus.
                 ++nbCasCoefNul;
             }
         }
@@ -85,14 +127,15 @@ public class EquationTest {
 
                 assertNotEquals("a devrait être différent de 0", 0, a);
 
-                switch (e.nbRacines) {
+                switch (e.getRootsCount()) {
                     case 1:
-                        assertEquals(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.x1), 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
+                        assertEquals(String.format("Cas N°%d (racine double) %s => x1 = %f ", i, e, e.getX1()), 0, a * e.getX1() * e.getX1() + b * e.getX1() + c, EPSILON);
                         ++nbCasRacineDouble;
                         break;
                     case 2:
-                        assertEquals(String.format("Cas N°%d (2 racines) %s => x1 = %f ", i, e, e.x1), 0, a * e.x1 * e.x1 + b * e.x1 + c, EPSILON);
-                        assertEquals(String.format("Cas N°%d (2 racines) %s => x2 = %f ", i, e, e.x2), 0, a * e.x2 * e.x2 + b * e.x2 + c, EPSILON);
+                        assertNotEquals(e.getX1(), e.getX2());
+                        assertEquals(String.format("Cas N°%d (2 racines) %s => x1 = %f ", i, e, e.getX1()), 0, a * e.getX1() * e.getX1() + b * e.getX1() + c, EPSILON);
+                        assertEquals(String.format("Cas N°%d (2 racines) %s => x2 = %f ", i, e, e.getX2()), 0, a * e.getX2() * e.getX2() + b * e.getX2() + c, EPSILON);
                         ++nbCasDeuxRacines;
                         break;
                     default:

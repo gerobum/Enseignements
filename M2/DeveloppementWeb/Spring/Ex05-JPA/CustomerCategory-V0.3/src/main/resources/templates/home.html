@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+    <head th:include="fragments/common :: [//head]" />
+    <body>    
+        <!-- V0.3 -->
+        <div class="container">
+            <h1 th:text="#{BIENVENUE !}">Bienvenue !</h1>
+            <p ><span th:text="#{CLIQUEZ}">Cliquez</span><a th:href="@{/customer}" th:text="#{ICI}">ici</a><span th:text="#{POUR VOIR LES CLIENTS}"> pour voir les clients</span></p>
+            <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+            <!-- V0.3 -->
+            <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>
+        </div>
+    </body>
+</html>

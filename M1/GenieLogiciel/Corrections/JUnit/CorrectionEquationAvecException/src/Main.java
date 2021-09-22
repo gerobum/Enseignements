@@ -20,13 +20,13 @@ public class Main {
             int b = sc.nextInt();
             int c = sc.nextInt();
             Equation equation = new Equation(a, b, c);
-            if (equation.nbRacines  == 0) {
+            if (equation.getRootsCount()  == 0) {
                 System.out.println("Pas de solution");
-            } else if (equation.nbRacines  == 1) {
-                System.out.println("Une seule racine : " + equation.x1);
+            } else if (equation.getRootsCount()  == 1) {
+                System.out.println("Une seule racine : " + equation.getX1());
             } else {
-                System.out.println("Deux racines : " + equation.x1 + " et "
-                        + equation.x2);
+                System.out.println("Deux racines : " + equation.getX1() + " et "
+                        + equation.getX2());
             }
         } catch (NulCoefException ex) {
             System.out.println("Le coef a ne peut pas être nul.");

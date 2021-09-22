@@ -1,2 +1,0 @@
-fr.miage.introiocavecspring.interfaces.impl.A
-fr.miage.introiocavecspring.interfaces.impl.B2
