@@ -7,14 +7,12 @@
         <title>Phrase Magique</title>
     </head>
     <body>
-        <!-- #### Pour gérer les sessions -->
-    <c:if test="${!sessionScope.pm.connected}">
+    <c:if test="${!pm.connected}">
         <h1>Donne ton nom et dis la phrase magique pour entrer dans un monde merveilleux</h1>
         <form method="post">
             <p>
                 <label for="name">Nom : </label>
-        <!-- #### Pour gérer les sessions -->
-                <input type="text" id="name" name="name" value="${sessionScope.pm.name}"/>
+                <input type="text" id="name" name="name" value="${pm.name}"/>
             </p>
             <p>
                 <label for="password">Phrase magique : </label>
@@ -23,18 +21,17 @@
             <button type="submit">Valide ta phrase magique</button>
         </form>   
     </c:if>
-        <!-- #### Pour gérer les sessions -->
-    <c:forEach items="${sessionScope.pm.msgs}" var="msg" begin="0" end="0">
+    <c:forEach items="${pm.msgs}" var="msg" begin="0" end="0">
         <h1>${msg}</h1>
     </c:forEach>
+    
+    <c:if test="${pm.connected}">
+        <p><img src="images/java.png" width="15%" height="15%"/></p>
+    </c:if>
     <p>
-        <!-- #### Pour gérer les sessions -->
-        <c:forEach items="${sessionScope.pm.msgs}" var="msg" begin="1">
+        <c:forEach items="${pm.msgs}" var="msg" begin="1">
             ${msg}<br>
         </c:forEach>
     </p> 
-    <c:if test="${pm.connected}">
-        <p><img src="images/java.png"/></p>
-    </c:if>
 </body>
 </html>

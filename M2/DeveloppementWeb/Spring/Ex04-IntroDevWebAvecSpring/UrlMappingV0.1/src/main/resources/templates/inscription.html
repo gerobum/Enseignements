@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Donner nom et page pour s'inscrire</h1>
+        <form action="#" th:object="${personModel}" method="post">
+            <p>Nom : <input type="text" th:field="*{nom}" />
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</span>
+            </p>
+            <p>Age : <input type="text" th:field="*{age}" />
+                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</span>
+            </p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </body>
+</html>
