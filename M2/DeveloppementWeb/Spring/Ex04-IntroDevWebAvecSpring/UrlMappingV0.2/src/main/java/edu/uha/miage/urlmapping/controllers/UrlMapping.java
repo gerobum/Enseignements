@@ -33,7 +33,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,23 +46,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class UrlMapping {
-    @Autowired
-    private PersonRepository repo;
+    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+    private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
     @GetMapping("/datetime")
     @ResponseBody
     public String datetime() {
         return "<h1>Bonjour</h1>"
-                + "<p>Nous sommes le " + LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")) + "</p>"
-                + "<p>Il est " + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")) + "</p>";
+                + "<p>Nous sommes le " + LocalDate.now().format(dateFormat) + "</p>"
+                + "<p>Il est " + LocalTime.now().format(timeFormat) + "</p>";
     }
 
     @GetMapping({"/prettydatetime", "/pdt"})
     public String pdt(Model model, String nom, String age) {
         model.addAttribute("nom", nom == null ?"" : nom);
         model.addAttribute("age", age == null ?"" : "("+age+" ans)");
-        model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")));
-        model.addAttribute("time", LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
+        model.addAttribute("date", LocalDate.now().format(dateFormat));
+        model.addAttribute("time", LocalTime.now().format(timeFormat));
         return "pdt";
     }
     
@@ -73,27 +72,13 @@ public class UrlMapping {
         return "inscription";
     }
     
-    /*@PostMapping({"/inscription"})
-    public String inscriptionpost(Model model, PersonModel personModel) {
-        model.addAttribute("person", personModel.getPerson());
-        model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")));
-        model.addAttribute("time", LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
-        return "result";
-    }*/
-    
     @PostMapping({"/inscription"})
     public String inscriptionpost(Model model, @Valid PersonModel personModel, BindingResult br) {
         if (br.hasErrors())
             return "inscription";
         model.addAttribute("person", personModel.getPerson());
-        repo.save(personModel.getPerson());
-        //return "redirect:pdt?nom="+personModel.getPerson().getNom()+"&age="+personModel.getPerson().getAge();
-        return "redirect:list";
-    }
-    
-    @GetMapping({"/list"})
-    public String list(Model model) {
-        model.addAttribute("persons", repo.findAll());
-        return "list";
+        model.addAttribute("date", LocalDate.now().format(dateFormat));
+        model.addAttribute("time", LocalTime.now().format(timeFormat));
+        return "result";
     }
 }

@@ -28,7 +28,7 @@
  */
 package edu.uha.miage.urlmapping;
 
-import edu.uha.miage.urlmapping.controllers.PersonRepository;
+
 import edu.uha.miage.urlmapping.service.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,32 +48,4 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
-    
-    
-
-  @Bean
-  public CommandLineRunner demo(PersonRepository repository) {
-    return (args) -> {
-      // save a few customers
-      repository.save(new Person("Joe", 30));
-      repository.save(new Person("Jack", 29));
-      repository.save(new Person("William", 28));
-      repository.save(new Person("Averell", 27));
-
-      // fetch all customers
-      log.info("Person found with findAll():");
-      log.info("-------------------------------");
-      for (Person person : repository.findAll()) {
-        log.info(person.toString());
-      }
-      log.info("");
-
-      // fetch an individual customer by ID
-      Person person = repository.findByNom("Joe");
-      log.info("Customer found with findByNom(\"Joe\"):");
-      log.info("--------------------------------");
-      log.info(person.toString());
-      log.info("");
-    };
-  }
 }

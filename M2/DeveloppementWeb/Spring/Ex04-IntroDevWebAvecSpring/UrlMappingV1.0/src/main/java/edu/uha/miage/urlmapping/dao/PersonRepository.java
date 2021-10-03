@@ -27,7 +27,7 @@
  * See <https://creativecommons.org/licenses/by-nc-sa/4.0/>.
  */
 
-package edu.uha.miage.urlmapping.controllers;
+package edu.uha.miage.urlmapping.dao;
 
 import edu.uha.miage.urlmapping.service.Person;
 import org.springframework.data.repository.CrudRepository;

@@ -30,22 +30,16 @@
 package edu.uha.miage.urlmapping.service;
 
 import java.io.Serializable;
-import javax.management.MXBean;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Yvan Maillot <yvan.maillot@uha.fr>
  */
-@Entity
+
 public class Person implements Serializable{
-    @Id
-    @NotNull
+
     private String nom;
-    @Min(18)
+
     private int age;
 
     public Person(String nom, int age) {
@@ -73,6 +67,7 @@ public class Person implements Serializable{
         this.age = age;
     }
     
+    @Override
     public String toString() {
         return nom + " (" + age + " ans)";
     }

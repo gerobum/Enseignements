@@ -31,9 +31,6 @@ package edu.uha.miage.urlmapping.controllers;
 
 import edu.uha.miage.urlmapping.dao.PersonRepository;
 import edu.uha.miage.urlmapping.models.PersonModel;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

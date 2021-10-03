@@ -28,7 +28,7 @@
  */
 package edu.uha.miage.urlmapping;
 
-import edu.uha.miage.urlmapping.controllers.PersonRepository;
+import edu.uha.miage.urlmapping.dao.PersonRepository;
 import edu.uha.miage.urlmapping.service.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

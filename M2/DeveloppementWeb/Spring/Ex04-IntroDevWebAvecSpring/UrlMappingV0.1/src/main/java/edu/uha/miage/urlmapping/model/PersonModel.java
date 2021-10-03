@@ -30,9 +30,6 @@ package edu.uha.miage.urlmapping.model;
 
 import edu.uha.miage.urlmapping.service.Person;
 import java.io.Serializable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -40,11 +37,8 @@ import javax.validation.constraints.Size;
  */
 public class PersonModel implements Serializable {
 
-    @NotNull
-    @Size(min = 2, max = 30, message = "Au moins deux lettres et au plus trente lettres")
     private String nom;
-    @NotNull
-    @Pattern(regexp = "18|19|[2-9][0-9]", message = "L'âge doit être entre 18 et 99 ans")
+
     private String age;
     private Person person;
 

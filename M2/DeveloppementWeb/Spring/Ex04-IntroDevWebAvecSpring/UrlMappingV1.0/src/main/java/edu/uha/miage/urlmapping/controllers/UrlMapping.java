@@ -28,6 +28,7 @@
  */
 package edu.uha.miage.urlmapping.controllers;
 
+import edu.uha.miage.urlmapping.dao.PersonRepository;
 import edu.uha.miage.urlmapping.model.PersonModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -73,21 +74,12 @@ public class UrlMapping {
         return "inscription";
     }
     
-    /*@PostMapping({"/inscription"})
-    public String inscriptionpost(Model model, PersonModel personModel) {
-        model.addAttribute("person", personModel.getPerson());
-        model.addAttribute("date", LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE d MMMM uuuu")));
-        model.addAttribute("time", LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")));
-        return "result";
-    }*/
-    
     @PostMapping({"/inscription"})
     public String inscriptionpost(Model model, @Valid PersonModel personModel, BindingResult br) {
         if (br.hasErrors())
             return "inscription";
         model.addAttribute("person", personModel.getPerson());
         repo.save(personModel.getPerson());
-        //return "redirect:pdt?nom="+personModel.getPerson().getNom()+"&age="+personModel.getPerson().getAge();
         return "redirect:list";
     }
     
