@@ -47,6 +47,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UrlMapping {
 
+    @GetMapping("/")
+    public String accueil() {
+        return "accueil";
+    }
+
     @GetMapping("/datetime")
     @ResponseBody
     public String datetime() {
