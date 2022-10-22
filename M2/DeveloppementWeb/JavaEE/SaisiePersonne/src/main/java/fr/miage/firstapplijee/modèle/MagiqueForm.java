@@ -66,7 +66,7 @@ public class MagiqueForm implements Serializable {
         if (pseudo == null || pseudo.isEmpty()) {
             connecte = false;
             message = "T'as bien un pseudo !";
-        } else if ("Vive Java".equals(phrase)) {
+        } else if ("Vive Java!".equals(phrase)) {
             try {
                 connecte = true;
                 message = "Bienvenue " + pseudo + " !";

@@ -28,13 +28,7 @@
  */
 package edu.uha.miage.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.io.Serializable;
-import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.Cookie;
@@ -62,6 +56,7 @@ public class ModelPM implements Serializable {
         this.msgs = new LinkedList<>();
         this.name = name;
         this.connected = connected;
+        // ####
         if (connected) {
             this.msgs.add("Heureux de te revoir " + name);
         }

@@ -102,14 +102,13 @@ public class Personne implements Serializable {
     }
 
     // Sans ces deux méthodes, l'âge et la population ne sont pas restitués
-    private void writeObject(ObjectOutputStream out) throws IOException {
+    /*private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        out.writeInt(population);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         calculerAge();
         population++;
-    }
+    }*/
 }

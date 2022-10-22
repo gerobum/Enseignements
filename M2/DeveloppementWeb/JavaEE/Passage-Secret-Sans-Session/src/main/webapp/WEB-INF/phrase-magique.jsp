@@ -13,10 +13,16 @@
             <p>
                 <label for="name">Nom : </label>
                 <input type="text" id="name" name="name" value="${pm.name}"/>
+                <c:if test="${!pm.nameOk}">
+                    <span><b>Au moins une lettre</b></span>
+                </c:if>
             </p>
             <p>
                 <label for="password">Phrase magique : </label>
                 <input type="password" id="password" name="password"/>
+                <c:if test="${!pm.passwordOk}">
+                    <span><b>Mot de passe incorrect</b></span>
+                </c:if>
             </p>
             <button type="submit">Valide ta phrase magique</button>
         </form>   

@@ -41,6 +41,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ModelPM implements Serializable {
 
     private boolean connected = false;
+    private boolean nameOk = true;
+    private boolean passwordOk = true;
     private String name = "";
     private static final String PASSWORD = "Vive Java !";
     private List<String> msgs = new LinkedList<>();
@@ -78,26 +80,44 @@ public class ModelPM implements Serializable {
         msgs.add(msg);
     }
 
+    public boolean isNameOk() {
+        return nameOk;
+    }
+
+    public boolean isPasswordOk() {
+        return passwordOk;
+    }
+    
+    
+
     public static void handle(HttpServletRequest request, HttpServletResponse response) {
         boolean connected;
         String name;
         String password;
         String msg;
+        boolean nameOk = true;
+        boolean passwordOk = true;
 
         name = request.getParameter("name");
         password = request.getParameter("password");
         if (name != null && name.trim().isEmpty()) {
             connected = false;
+            nameOk = false;
+            passwordOk = true;
             msg = "Tu as bien un nom ?";
         } else if (!PASSWORD.equals(password)) {
             msg = "Ce n'est pas la phrase magique " + name + ". Reformule !";
             connected = false;
+            nameOk = true;
+            passwordOk = false;
         } else {
             connected = true;
             msg = "Bienvenue dans le monde merveilleux de Java, " + name;
         }
         ModelPM pm = new ModelPM(name, connected);
         pm.addMsg(msg);
+        pm.nameOk = nameOk;
+        pm.passwordOk = passwordOk;
         if (connected) {
             pm.addMsg("");
             pm.addMsg("Mais si tu essayes à nouveau de lancer l'URL /passage-secret/magic");

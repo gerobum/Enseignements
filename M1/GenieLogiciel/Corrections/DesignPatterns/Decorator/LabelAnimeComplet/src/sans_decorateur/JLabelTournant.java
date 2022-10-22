@@ -5,10 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Yvan
- */
 public class JLabelTournant extends JLabel {
 
     public JLabelTournant(String string) {

@@ -2,6 +2,9 @@ package fourmiPorteuse;
 
 
 import java.awt.Color;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
     
@@ -152,8 +155,18 @@ public class Fourmi extends Thread implements CaseDuTerrain {
     }
 
     private void trouverUnePlace(int xa, int ya) {
-        for(int i = -1; i <= 1; i++)
-            for(int j = -1; j <= 1; j++) {
+        List<Integer> li = new LinkedList<>();
+        li.add(-1);
+        li.add(0);
+        li.add(1);
+        Collections.shuffle(li);
+        List<Integer> lj = new LinkedList<>();
+        lj.add(-1);
+        lj.add(0);
+        lj.add(1);
+        Collections.shuffle(lj);
+        for(int i : li)
+            for(int j : lj) {
                 x = xa+i;
                 y = ya+j;
                 if (x < 0) 

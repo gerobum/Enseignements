@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<!-- V3.0 Les urls visitées -->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    
+    <body>    
+        <div th:replace="fragments/menu"></div>
+        <div class="container">
+
+            <!-- V3.0 Il faut récupérer la list dans la session (session.list) pour avoir une liste personnalisée. -->
+            <h1 th:text="#{LesPagesVisitees}"/>
+            <ol><li th:each="v : ${session.list}" th:text="${v}"/></ol>
+         
+            <a th:href="@{/list/erase}" th:text="#{VIDER LA LISTE}" class="btn btn-danger"/> 
+                                  
+            <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+            <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>
+        </div>
+    </body>
+</html>

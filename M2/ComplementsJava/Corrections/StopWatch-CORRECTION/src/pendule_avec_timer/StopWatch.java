@@ -127,7 +127,7 @@ public class StopWatch extends JFrame implements Localizable /*Runnable*/ {
                             print();
                         }
                     };
-                    timer.schedule(ttask, 1000, 1000);
+                    timer.schedule(ttask, 1000, 500);
                 }
             }
         });

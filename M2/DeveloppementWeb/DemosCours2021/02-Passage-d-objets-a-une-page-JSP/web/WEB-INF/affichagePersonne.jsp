@@ -15,18 +15,18 @@
     </head>
     <body>
         <h1>Bonjour
-   
+   <%-- p
             <%=personne.monsieur ? "M." : "Mme"%>
-            <%-- personne.prenom est accessible parce que public (final) --%>
+            ersonne.prenom est accessible parce que public (final) --%><%--
             <%=personne.prenom%>
-            <%--  tout comme personne.nom). Mais s'il ne l'était pas, on aurait du écrire ceci : --%>
+              tout comme personne.nom). Mais s'il ne l'était pas, on aurait du écrire ceci : --%><%--
             <%=personne.getNom()%>,
             <%=personne.age%> ans
-            <%--
+            
              De plus, si toString() est redéfinie, on peut l'utiliser : 
 
-            <%=personne.toString()%> 
             --%>
+            <%=personne.toString()%> 
         </h1>
     </body>
 </html>

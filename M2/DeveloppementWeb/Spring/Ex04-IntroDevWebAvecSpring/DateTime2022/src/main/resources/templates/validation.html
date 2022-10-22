@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bonjour</title>
+</head>
+<body>
+<h1>Form</h1>
+<form th:object="${validationModel}" method="post">
+    <p>
+        Nom : <input type="text" th:field="*{name}"/>
+        <!-- Affichage de l'éventuel erreur -->
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+    </p>
+
+    <!-- Un champ de saisie avec un attribut thymeleaf (th:object) signifiant qu'il travaille le champ age de l'objet inscriptionModel -->
+    <!-- en fait inscriptionModel.getAge() et setAge() seront invoqués -->
+    <p>
+        Age: <input type="text" th:field="*{age}"/>
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name Error</span>
+    </p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+
+<div th:replace="fragments/retour"></div>
+</body>
+</html>

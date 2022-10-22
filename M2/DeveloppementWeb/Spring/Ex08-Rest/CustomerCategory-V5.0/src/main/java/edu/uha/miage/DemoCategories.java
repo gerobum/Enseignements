@@ -11,16 +11,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-// #### V1.1 Demo est une implémentation de CommandLineRunner qui indique que
-// #### V1.1 c'est un Bean qui doit être exécuté à son lancement.
-// #### V1.1 Plusieurs CommandLineRunner peuvent coexister. Si un ordre 
-// #### V1.1 d'exécution est nécessaire, il peut être indiqué par @Order
 @Order(1)
 @Component
 @Profile("dev")
 public class DemoCategories implements CommandLineRunner {
-    // #### V1.1 Utilisation de slf4j pour faire du log
-    // #### V1.1 https://www.slf4j.org/manual.html
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoCategories.class);
 
     @Autowired
@@ -40,12 +34,9 @@ public class DemoCategories implements CommandLineRunner {
         if (c == null) {
             c = new Category(name);
             categoryService.save(c);
-            // #### V1.1 Log pour indiquer que la catégorie a été créée
             LOGGER.info("BDD DEMO - Création de la catégorie {}", name);
         } else {
             LOGGER.info("BDD DEMO - La catégorie {} existait déjà", name);
-            // #### V1.1 Remarque : {} est remplacé par name dans la chaîne.
-            // #### V1.1 C'est une façon de formater.
         }
     }
 }

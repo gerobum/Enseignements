@@ -21,10 +21,10 @@ public class BoutonClignotant extends JButton {
                try {
                     if (getBackground() == on) {
                         setBackground(off);
-                        Thread.sleep(50);
+                        Thread.sleep(500);
                     } else {
                         setBackground(on);
-                        Thread.sleep(70);
+                        Thread.sleep(700);
                     }
                 } catch (InterruptedException ex) {
                 }

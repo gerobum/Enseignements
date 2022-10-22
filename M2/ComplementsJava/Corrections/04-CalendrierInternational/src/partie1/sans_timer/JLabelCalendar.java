@@ -37,7 +37,7 @@ import javax.swing.JLabel;
  *
  * @author maillot
  */
-public class JLabelCalendar extends JLabel  implements Runnable {
+public class JLabelCalendar extends JLabel implements Runnable {
 
     private static DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM);
 

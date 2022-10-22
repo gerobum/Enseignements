@@ -41,7 +41,7 @@ import javax.validation.constraints.Size;
 public class PersonModel implements Serializable {
 
     @NotNull
-    @Size(min = 2, max = 30, message = "Le nom doit contenir de 2 à 30 lettres")
+    @Size(min = 2, max = 30/*, message = "Le nom doit contenir de 2 à 30 lettres"*/)
     private String nom;
     @NotNull
     @Pattern(regexp = "18|19|[2-9][0-9]", message = "L'âge doit être compris entre 18 et 99 ans")

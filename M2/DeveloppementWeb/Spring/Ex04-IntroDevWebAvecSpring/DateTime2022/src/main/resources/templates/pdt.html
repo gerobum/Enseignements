@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="fragments/common :: [//head]">
+    <meta charset="UTF-8">
+    <title>Bonjour</title>
+</head>
+
+<body>
+    <h1 th:text="'Bonjour ' + ${name} + ' (' + ${age} + ' ans)'">Bonjour</h1>
+    <p th:text="'Nous sommes le ' + ${date}">Nous sommes le </p>
+    <p th:text="'Il est ' + ${time}">Nous sommes le </p>
+    <div th:replace="fragments/retour"></div>
+</body>
+</html>

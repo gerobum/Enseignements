@@ -17,6 +17,8 @@ public class WebSecurityConfigProd extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
+    
+  
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -28,6 +30,10 @@ public class WebSecurityConfigProd extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username,authority from authorities where username = ?");
         // #### V4.0 Injected dataSource must have users and authorities tables
         // #### V4.0 (https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#user-schema)
+        auth
+                .inMemoryAuthentication()
+                .withUser("me").password("{noop}me").roles("USER")
+                .and().withUser("you").password("{noop}you").roles("USER", "ADMIN");
     }
 
     @Override

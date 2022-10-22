@@ -46,6 +46,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UrlMapping {
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    
+    
+    @GetMapping("/")
+    public String accueil() {
+        return "accueil";
+    }
 
     @GetMapping("/datetime")
     @ResponseBody
@@ -81,20 +87,4 @@ public class UrlMapping {
         /*return "redirect:pdt?nom="+personModel.getPerson().getNom()+
                 "&age="+personModel.getPerson().getAge();*/
     }
-    
-    /*@PostMapping({"/inscription"})
-    public String inscriptionpost(Model model, @Valid PersonModel personModel, BindingResult br) {
-        if (br.hasErrors())
-            return "inscription";
-        model.addAttribute("person", personModel.getPerson());
-
-        //return "redirect:pdt?nom="+personModel.getPerson().getNom()+"&age="+personModel.getPerson().getAge();
-        return "redirect:list";
-    }
-    
-    @GetMapping({"/list"})
-    public String list(Model model) {
-        model.addAttribute("persons", repo.findAll());
-        return "list";
-    }*/
 }

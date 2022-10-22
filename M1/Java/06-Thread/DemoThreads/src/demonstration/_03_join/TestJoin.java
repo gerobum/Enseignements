@@ -1,60 +1,55 @@
-
 package demonstration._03_join;
 
 /**
- * Illustre la m�thode de synchronisation join(). Le programme principal attend 
- * la fin du thread t avant de continuer.
- * 
- * @author maillot
+ * Un thread qui attend que passent les secondes dont le nombre est donné à la
+ * construction.
+ *
+ * Il égrène les secondes restantes. C'est-à-dire que toutes les secondes, il
+ * affiche le nombre de secondes restantes.
+ */
+class Egrenage extends Thread {
+
+    private final int duree;
+
+    public Egrenage(int duree) {
+        this.duree = duree;
+    }
+
+    @Override
+    public void run() {
+        int dureeRestante = duree;
+        while (dureeRestante > 0) {
+            System.out.println("Il reste " + dureeRestante + " secondes");
+            dureeRestante--;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+            }
+        }
+    }
+
+}
+
+/**
+ * Illustre la méthode de synchronisation join(). Le programme principal attend
+ * la fin du thread egrenage avant de continuer.
+ *
  */
 public class TestJoin {
-    /**
-     * Cr�er un thread dont la dur�e de vie est donn�e en seconces dans le param�tre.
-     * Il affiche � chaque seconde le nombre de secondes restantes.
-     * @param duree Nombre de secondes restantes.
-     * @return le thread
-     */
-    public static Thread creation(final int duree) {
-        return new Thread() {
 
-            @Override
-            /**
-             * 
-             */
-            public void run() {
-                try {
-                    Thread t = new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            int dureeRestante = duree;
-                            while(dureeRestante > 0) {
-                                System.out.println("Duree de vie restante " + dureeRestante + " secondes");
-                                dureeRestante--;
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException ex) {}
-                            }
-                        }
-                    });
-                    
-                    
-                    t.start();
-                    t.join(); // Attend la fin de t pour terminer
-
-                    System.out.println("Aargh !");
-                } catch (InterruptedException ex) {}
-            }
-            
-        };
-    }
-    
     public static void main(String[] args) throws InterruptedException {
-        Thread t = creation(10);
-        t.start();
-        // Attendre la fin de thread
-        t.join();
-        System.out.println("R.I.P ");       
+
+        // Ce thread va égréner les secondes restantes
+        Thread egrenage = new Egrenage(10);
+        
+        System.out.println("Début de l'égrénage");
+        
+        egrenage.start();
+        
+        // Attendre la fin de l'égrénage
+        egrenage.join();
+        
+        System.out.println("Fin de l'égrénage");
     }
-    
+
 }

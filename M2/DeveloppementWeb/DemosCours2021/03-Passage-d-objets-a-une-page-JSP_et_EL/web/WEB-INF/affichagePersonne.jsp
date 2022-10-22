@@ -21,17 +21,18 @@
     </head>
     <body>
         <h1>Bonjour 
+        <%-- 
             ${personne.monsieur ? "M." : "Mme "}
             ${personne.prenom}            
             ${personne.nom}
             (${personne.age} ${personne.age > 1 ? "ans" : "an"})
-        <%-- 
 
         De plus, si toString() est redéfinie, on peut l'utiliser : 
+        --%>
 
         ${personne}
         
-        --%>
+   
         </h1>
     </body>
 </html>

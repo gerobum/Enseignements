@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Validation</title>
+    </head>
+    <body>
+        <h1>Entrer son nom et son âge avant de s'inscrire</h1>
+        <form action="#" th:object="${filterModel}" method="post">
+            
+            <table>
+                    <tr>
+                        <td>Nom</td>
+                        <td><input type="text" th:field="*{nom}" /></td>
+                        <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</td>
+                    </tr>
+                    <tr>
+                        <td>Age mini :</td>
+                        <td><input type="text" th:field="*{ageMini}" /></td>
+                        <td th:if="${#fields.hasErrors('ageMini')}" th:errors="*{ageMini}">Age Error</td>
+                    </tr>
+                    <tr>
+                        <td>Age maxi:</td>
+                        <td><input type="text" th:field="*{ageMaxi}" /></td>
+                        <td th:if="${#fields.hasErrors('ageMaxi')}" th:errors="*{ageMaxi}">Age Error</td>
+                    </tr>
+                <tr>
+                    <td><button type="submit">Ok</button></td><td><button type="reset">Annuler</button></td>
+                </tr>
+            </table>
+    </body>
+</html>

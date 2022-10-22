@@ -13,7 +13,6 @@ public interface CustomerService {
     Optional<Customer> findById(Long id);
     Customer findByName(String name);
     Customer getOne(Long id); 
-    // #### V2.0
     List<Customer> findByCategoryOrderByName(Category category);
     List<Customer> findByCategoryOrderByName(String categoryName);
 }

@@ -35,8 +35,8 @@ public class EchoService {
         String message = new String(tampon);
 
         // Pour enlever les éventuels caractères zéro.
-        int pos0 = message.indexOf(0);
-        message = message.substring(0, pos0 >= 0 ? pos0 : tampon.length);
+        //int pos0 = message.indexOf(0);
+        //message = message.substring(0, pos0 >= 0 ? pos0 : tampon.length);
             
         // Envoi
         // on construit le paquet a envoyer

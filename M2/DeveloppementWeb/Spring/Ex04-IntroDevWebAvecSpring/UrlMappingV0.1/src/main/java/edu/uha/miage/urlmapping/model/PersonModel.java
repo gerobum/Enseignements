@@ -40,6 +40,7 @@ public class PersonModel implements Serializable {
     private String nom;
 
     private String age;
+    
     private Person person;
 
     public PersonModel(String nom, String age, Person person) {

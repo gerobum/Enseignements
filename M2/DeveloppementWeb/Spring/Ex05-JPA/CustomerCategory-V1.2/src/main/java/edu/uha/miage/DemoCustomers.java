@@ -29,8 +29,10 @@ public class DemoCustomers implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
-        createCustomer("Client 1");
-        createCustomer("Client 2");
+        createCustomer("Capitaine Haddock");
+        createCustomer("Tintin");
+        createCustomer("Milou");
+        createCustomer("Professeur Tournesol");
 
     }
 

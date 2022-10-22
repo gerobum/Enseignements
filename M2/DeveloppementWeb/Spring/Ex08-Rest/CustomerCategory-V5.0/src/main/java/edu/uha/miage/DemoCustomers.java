@@ -13,10 +13,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-// #### V1.1 Demo est une implémentation de CommandLineRunner qui indique que
-// #### V1.1 c'est un Bean qui doit être exécuté à son lancement.
-// #### V1.1 Plusieurs CommandLineRunner peuvent coexister. Si un ordre 
-// #### V1.1 d'exécution est nécessaire, il peut être indiqué par @Order
 @Component
 @Order(2)
 @Profile("dev")
@@ -32,8 +28,10 @@ public class DemoCustomers implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
-        createCustomer("Client 1", null);
-        createCustomer("Client 2", "B");
+        createCustomer("Séraphin Lampion", null);
+        createCustomer("Tintin", "A");
+        createCustomer("Capitaine Haddock", "A");
+        createCustomer("Bianca Castafiore", "C");
 
     }
 

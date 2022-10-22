@@ -56,7 +56,7 @@ public class PhraseMagique extends HttpServlet {
             throws ServletException, IOException {
         // #### getSession()
         if (request.getSession().getAttribute("pm") == null) {
-            request.setAttribute("pm", new ModelPM());
+            request.getSession().setAttribute("pm", new ModelPM());
         }
         request.getRequestDispatcher("WEB-INF/phrase-magique.jsp").forward(request, response);
     }

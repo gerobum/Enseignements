@@ -35,7 +35,7 @@ public class SpringWebConfig implements WebMvcConfigurer {
         return result;
     }
     // #### V0.3 Le dossier src/main/resources/static est déclarée ici comme
-    // #### V0.3 un conteneur de ressources pour y mettre par exemple du js et Bootstrap
+    // ####      un conteneur de ressources pour y mettre par exemple du js et Bootstrap
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

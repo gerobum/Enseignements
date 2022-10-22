@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+
+        <div th:replace="fragments/menu"></div>
+
+        <div class="container">
+            <!-- V1.6 Affichage éventuelle de la catégorie de cette liste de client-->
+
+            <div th:switch="${status.state}">
+                <!-- V1.6 Pas très joli joli. Mais je n'ai pas trouvé mieux pour gérer les enum -->
+                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).ALL}" th:text=#{Clients}>Clients</h1>
+                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).NONE}" th:text="#{CategorieInexistante(${status.categoryName})}">Clients</h1>
+                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).OK}" th:text="#{ClientsDeCategory(${status.categoryName})}">Clients</h1>
+                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).WITHOUT}" th:text="#{ClientsSansCategorie}">Clients</h1>
+            
+            </div>
+
+
+            <ul>
+                <li th:each="customer : ${status.customers}">
+
+                    <span th:text="${customer}"></span>               
+                    <a th:href="@{/customer/edit(id=${customer.id})}"><i class="fa fa-pencil"></i></a>        
+                    <a  th:href="@{'/customer/delete/' + ${customer.id}}"><i class="fa fa-remove"></i></a>
+                </li>
+            </ul>
+            <a th:href="@{/customer/create}" th:text="#{CREER UN NOUVEAU CLIENT}" class="btn btn-success">Créer un nouveau client</a>        
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>
+

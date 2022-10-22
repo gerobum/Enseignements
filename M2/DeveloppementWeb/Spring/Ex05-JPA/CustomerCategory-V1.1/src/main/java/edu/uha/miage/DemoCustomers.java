@@ -1,8 +1,6 @@
 package edu.uha.miage;
 
-import edu.uha.miage.core.entity.Category;
 import edu.uha.miage.core.entity.Customer;
-import edu.uha.miage.core.service.CategoryService;
 import edu.uha.miage.core.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +27,10 @@ public class DemoCustomers implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
-        createCustomer("Client 1");
-        createCustomer("Client 2");
+        createCustomer("Capitaine Haddock");
+        createCustomer("Tintin");
+        createCustomer("Milou");
+        createCustomer("Professeur Tournesol");
 
     }
 

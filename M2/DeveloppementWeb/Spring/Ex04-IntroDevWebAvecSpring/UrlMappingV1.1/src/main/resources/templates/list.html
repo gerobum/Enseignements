@@ -19,7 +19,8 @@ and open the template in the editor.
     <body>
         <h1  class="p-3 mb-2 bg-success text-white">Tous les inscrits</h1>
         <ol class="list-group">
-            <li class="list-group-item list-group-item-primary" th:each="person: ${persons}" th:text="${person}"/>
+            <li th:each="person : ${persons}" th:text="${person}" />
         </ol>
+        <a href='/'>Sortir</a>
     </body>
 </html>

@@ -94,7 +94,7 @@ public class StopWatch extends JFrame implements Runnable, Localizable {
                     }
 
             } #### (1)*/
-            /* #### (2) */state.sync(this);/* #### (2) */
+            /* #### (2) */ state.sync(this); /* #### (2) */
         }
     }
 

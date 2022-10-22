@@ -6,6 +6,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Serveur ECHO qui admet les multiples connexions simultannées.
@@ -56,6 +58,12 @@ public class EchoServiceMultiple {
                 stop = stop || mot.equals("Sésame ! Ferme toi.");
                 
             } catch (IOException ex) {
+            } finally {
+                try {
+                    client.close();
+                } catch (IOException ex) {
+
+                }
             }
         }
     }

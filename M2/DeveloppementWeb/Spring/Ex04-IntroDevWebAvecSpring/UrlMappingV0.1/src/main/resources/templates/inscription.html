@@ -14,7 +14,7 @@ and open the template in the editor.
         <h1>Donner nom et page pour s'inscrire</h1>
         <form action="#" th:object="${personModel}" method="post">
             <p>Nom : <input type="text" th:field="*{nom}" />
-                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</span>
+                <!--<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Name Error</span>-->
             </p>
             <p>Age : <input type="text" th:field="*{age}" />
                 <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</span>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- #### 02 -->
+        <h1>Bonjour <span th:text="${nom}"/> <span th:if="${age != null && nom != null}" th:text="${'('+age+' ans)'}"/></h1>
+        <p>Nous sommes le <span th:text="${date}"></span></p>
+        <p>Il est  <span th:text="${time}"/></p>
+    </body>
+</html>

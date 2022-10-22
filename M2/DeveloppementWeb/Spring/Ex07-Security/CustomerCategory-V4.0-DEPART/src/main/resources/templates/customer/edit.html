@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text=#{Clients}>Clients</h1>
+            <form th:action="@{''}"  th:object="${customer}" method="post" role="form">
+                <input type="hidden" th:field="*{id}"/>
+                <label th:text="#{Nom}" for="name">Nom</label>
+                <input id="name" type="text" th:field="*{name}" th:placeholder="#{2a30}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+                <p>
+                <label th:text="#{Categorie}" for="category">Nom</label>
+                <select th:field="*{category}" id="category">
+                    <option th:value="null" th:text="#{Vide}">Vide</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                </select>
+                </p>
+                <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+                <a th:text="#{Fermer}" th:href="@{/customer}">Fermer</a>
+            </form>  
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>

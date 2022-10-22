@@ -9,6 +9,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findByName(String name);  
     List<Customer> findAllByOrderByName(); 
-    // #### V2.0
     List<Customer> findByCategoryOrderByName(Category category);
 }

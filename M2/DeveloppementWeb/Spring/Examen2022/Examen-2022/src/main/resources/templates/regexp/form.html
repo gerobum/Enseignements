@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <div th:replace="fragments/menu"></div>
+            <h1 th:text="'Tester des expressions régulières'">Tester des expression régulières</h1>
+            <form th:action="@{''}" th:object="${testregexp}" method="post" role="form">
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <th><label th:text="'Reg Expr'" for="regexp">Reg Expr</label></th>
+                            <th><input id="regexp" type="text" th:field="*{regexp}" th:placeholder="'.*'"/></th>
+                        </tr>
+                        <tr>
+                            <th><label th:text="'Chaîne'" for="str">Chaîne</label></th>
+                            <th><input id="str" type="text" th:field="*{str}" th:placeholder="'Une chaîne'"/></th>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <th colspan="2">
+                                <span th:if="*{tested}">
+                                    <strong><span th:if="*{match}" style="color: green; text-align: center;" th:text="      MATCH     "></span></strong> 
+                                    <strong><span th:if="*{!match}" style="color: red; text-align: center;" th:text="'NOT MATCH'"></span></strong> 
+                                </span>  
+                            </th>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <hr>
+                <p>
+
+
+                    <button th:text="#{Valider}" type="submit" class="btn btn-success">Valider</button>
+
+                    <a th:text="Fermer" th:href="@{/regexp}">Fermer</a>
+
+                </p>
+
+            </form>  
+        </div>
+        <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+    </body>
+</html>

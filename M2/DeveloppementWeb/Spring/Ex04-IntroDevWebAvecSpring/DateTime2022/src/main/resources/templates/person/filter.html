@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription</title>
+</head>
+<body>
+<h1>Inscription</h1>
+<form th:object="${filterModel}" method="post">
+  <p>Nom : <input type="text" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+  </p>
+  <p>Age Mini: <input type="text" th:field="*{ageMini}" />
+    <span th:if="${#fields.hasErrors('ageMini')}" th:errors="*{ageMini}">Age Mini Error</span>
+  </p>
+  <p>Age Maxi: <input type="text" th:field="*{ageMaxi}" />
+    <span th:if="${#fields.hasErrors('ageMaxi')}" th:errors="*{ageMaxi}">Age Maxi Error</span>
+  </p>
+  <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

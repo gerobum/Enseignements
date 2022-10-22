@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste</title>
+</head>
+<body>
+  <h1>Liste des clients</h1>
+  <ul th:each="person : ${persons}">
+    <li th:text="${person}"></li>
+  </ul>
+<a href="/person">Retour</a>
+</body>
+</html>

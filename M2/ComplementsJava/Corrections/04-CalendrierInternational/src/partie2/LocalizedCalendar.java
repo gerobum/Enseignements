@@ -20,7 +20,7 @@ import partie1.sans_timer.JLabelCalendar;
  */
 public class LocalizedCalendar extends JPanel {
     private final JLabelCalendar pc = new JLabelCalendar();
-    private final JComboBox liste = new JComboBox(DateFormat.getAvailableLocales());
+    private final JComboBox<Locale> liste = new JComboBox(DateFormat.getAvailableLocales());
  
     public LocalizedCalendar() {
         init();

@@ -1,5 +1,6 @@
 package edu.uha.miage.web.controller;
 
+import edu.uha.miage.core.models.CustomerListStatus;
 import edu.uha.miage.core.entity.Customer;
 import edu.uha.miage.core.service.CategoryService;
 import edu.uha.miage.core.service.CustomerService;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -25,9 +25,10 @@ public class CustomerController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping(method = RequestMethod.GET, path = {"", "/{X}"})
-    public String findAll(Model model, @PathVariable(name = "X", required = false)String categoryName) {
-        model.addAttribute("customers", customerService.findByCategoryOrderByName(categoryName));
+
+    @GetMapping({"", "/{X}"})
+    public String findByCategory(Model model, @PathVariable(name = "X", required = false) String categoryName) {
+        model.addAttribute("status", new CustomerListStatus(customerService, categoryService, categoryName));
         return "customer/list";
     }
 
@@ -61,7 +62,7 @@ public class CustomerController {
 
     @PostMapping("/edit")
     public String edited(@Valid Customer customer, BindingResult br, Model model) {
-        
+
         if (br.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "customer/edit";
@@ -72,7 +73,7 @@ public class CustomerController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
-        
+
         customerService.delete(id);
         return "redirect:/customer";
     }
