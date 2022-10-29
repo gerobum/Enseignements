@@ -1,3 +1,6 @@
+// # V0.2 Ajoute la possibilité de basculer entre l'anglais et le français
+// ###### à l'aide d'un paramètre dans l'url (?lang=en ou ?lang=fr)
+// ###### Mais également à l'aide d'un menu.
 package edu.uha.miage;
 
 import org.springframework.boot.SpringApplication;

@@ -12,11 +12,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.*;
-
+// #### V0.2 Indicates that a class declares one or more @Bean methods and may be processed
+// ######### by the Spring container to generate bean definitions and service requests for
+// ######### those beans at runtime, for example:
 @Configuration
-@EnableAutoConfiguration
-@ComponentScan(basePackages = {"edu.uha.miage.web"})
-@EnableWebMvc
 public class SpringWebConfig implements WebMvcConfigurer {
 
     // #### V0.2 Demande à Spring d'intercepter les urls 
@@ -27,8 +26,8 @@ public class SpringWebConfig implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor);
     }
 
-    // #### V0.2 Afin de rendre la localisation possible, il faut ajouter un 
-    // ####      bean "LocaleResolver"
+    // # V0.2 Afin de rendre la localisation possible, il faut ajouter un
+    // ###### bean "LocaleResolver"
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver result = new SessionLocaleResolver();
@@ -37,8 +36,8 @@ public class SpringWebConfig implements WebMvcConfigurer {
         //result.setDefaultLocale(Locale.FRENCH);
         return result;
     }
-    // #### V0.2 Des implémentations de LocaleResolver permettre de connaître 
-    // ####      la localisation par défaut à partir de la session, de cookies...
+    // # V0.2 Des implémentations de LocaleResolver permettre de connaître
+    // ###### la localisation par défaut à partir de la session, de cookies...
 
-    // #### V0.2 Dans notre cas, la localisation par défaut est associé à la session.
+    // # V0.2 Dans notre cas, la localisation par défaut est associée à la session.
 }
