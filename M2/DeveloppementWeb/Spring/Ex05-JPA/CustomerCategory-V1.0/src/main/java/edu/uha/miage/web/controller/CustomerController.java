@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/customer")
 public class CustomerController {
 
-
     @Autowired
     CustomerService customerService;
 
@@ -56,12 +55,12 @@ public class CustomerController {
         if (br.hasErrors()) {
             return "customer/edit";
         }
-
         customerService.save(customer);
         return "redirect:/customer";
     }
-
+    
     @GetMapping("/delete/{id}")
+    
     public String delete(@PathVariable("id") Long id) {
         customerService.delete(id);
         return "redirect:/customer";
