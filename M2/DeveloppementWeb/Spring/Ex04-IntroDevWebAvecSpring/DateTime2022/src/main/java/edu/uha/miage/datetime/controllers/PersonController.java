@@ -85,4 +85,10 @@ public class PersonController {
         model.addAttribute("persons", personService.findByNameLikeAndAgeBetween(filterModel.getPattern(), filterModel.ageMiniAsInt(), filterModel.ageMaxiAsInt()));
         return "person/list";
     }
+
+    @GetMapping("/delete")
+    public String delete(Long id) {
+        personService.delete(id);
+        return "person/list";
+    }
 }

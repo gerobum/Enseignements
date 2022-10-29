@@ -5,10 +5,13 @@
     <title>Liste</title>
 </head>
 <body>
-  <h1>Liste des clients</h1>
-  <ul th:each="person : ${persons}">
-    <li th:text="${person}"></li>
-  </ul>
+<h1>Liste des clients</h1>
+<ul>
+    <li th:each="person : ${persons}">
+        <span th:text="${person}"></span>
+        <a th:href="@{/person/delete(id=${person.id})}" th:text="[X]">[x]</a>
+    </li>
+</ul>
 <a href="/person">Retour</a>
 </body>
 </html>
