@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping()
 public class RootController {
     @RequestMapping(method = RequestMethod.GET)
-// #### V0.0 Une requête HTTP/GET sur / utilise le template src/main/resources/templates/home.html
+    // #### V0.0 Une requête HTTP/GET sur / utilise le template src/main/resources/templates/home.html
     public String home() {       
         return "home";
     }

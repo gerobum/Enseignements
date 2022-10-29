@@ -4,7 +4,7 @@
     <body>
         <h1>Clients</h1>
         <!-- V0.0 
-        th:action="... précise l'url vers laquelle renvoit l'appui du 
+        action="... précise l'url vers laquelle renvoie l'appui du
         bouton "submit". Comme ce fichier sert à la fois 
         1. à la création (/customer/create) et 
         2. à l'édition (/customer/edit)
@@ -25,9 +25,9 @@
             Puisqu'il est nul et sera calculé automatiquement au moment de
             l'enregistrement du client dans la BDD.
             Mais pour l'édition, le champ id est déterminé à partir du nom
-            choisi dans le formulaire. Or, (bizarrement), s'il est pas 
+            choisi dans le formulaire. Or, (bizarrement), s'il n'est pas
             traité par le formulaire, il sera renvoyé nul au "submit". 
-            Il faut donc y faire référence mais sans le montrer, d'où le
+            Il faut donc y faire référence, mais sans le montrer, d'où le
             champ caché suivant.
             -->
             <input type="hidden" th:field="*{id}"/>
@@ -38,6 +38,7 @@
             <input id="name" type="text" th:field="*{name}" placeholder="(de 2 à 30 caractères) "/>
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
             <button type="submit" class="btn btn-success">Valider</button>
+            <button type="reset" class="btn btn-success">Mise à zéro</button>
             <a th:href="@{/customer}">Fermer</a>
         </form>
     </body>
