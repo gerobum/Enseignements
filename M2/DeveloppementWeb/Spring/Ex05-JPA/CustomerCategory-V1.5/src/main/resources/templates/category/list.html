@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-    <!-- V1.0 Il n'y a pratiquement rien de nouveau. Categorie devient Category  -->
     <head th:include="fragments/common :: [//head]" />
     <body>
         <div th:replace="fragments/menu"></div>
@@ -14,8 +13,7 @@
                     <a  th:href="@{'/category/delete/' + ${category.id}}"><i class="fa fa-remove"></i></a>
                 </li>
             </ul>
-            <!-- V1.0 Un bouton pour ouvrir la page de création de catégories -->
-            <a th:href="@{/category/create}" th:text="#{CREER UNE NOUVELLE CATEGORIE}" class="btn btn-success">Créer une nouvelle catégorie</a>        
+            <a th:href="@{/category/create}" th:text="#{CREER UNE NOUVELLE CATEGORIE}" class="btn btn-success">Créer une nouvelle catégorie</a>
         </div>
         <div th:replace="fragments/common :: [//div[@class='footer']]"></div>        
         <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
