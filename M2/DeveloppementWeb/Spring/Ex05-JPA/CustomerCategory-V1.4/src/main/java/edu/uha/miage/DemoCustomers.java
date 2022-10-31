@@ -12,11 +12,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-// #### V1.1 Demo est une implémentation de CommandLineRunner qui indique que
-// #### V1.1 c'est un Bean qui doit être exécuté à son lancement.
-// #### V1.1 Plusieurs CommandLineRunner peuvent coexister. Si un ordre 
-// #### V1.1 d'exécution est nécessaire, il peut être indiqué par @Order
 @Component
+// #### V1.4 Jusqu'à présent l'ordre n'avait pas d'importance, et on
+// ######### aurait pu s'en passer. Mais maintenant qu'on a besoin des 
+// ######### catégories ici, l'ordre devient nécessaire.
 @Order(2)
 public class DemoCustomers implements CommandLineRunner {
 
@@ -24,13 +23,17 @@ public class DemoCustomers implements CommandLineRunner {
 
     @Autowired
     private CustomerService customerService;
+    // #### V1.4 On a besoin des catégories si, comme demandé dans l'énoncé,
+    // ######### il faut qu'au démarrage un client soit associé à une catégorie.
     @Autowired
     private CategoryService categoryService;
 
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
+    	// #### V1.4 Séraphin n'a pas de catégorie
         createCustomer("Séraphin Lampion", null);
+    	// #### V1.4 Les autres oui 
         createCustomer("Tintin", "A");
         createCustomer("Capitaine Haddock", "A");
         createCustomer("Bianca Castafiore", "C");
