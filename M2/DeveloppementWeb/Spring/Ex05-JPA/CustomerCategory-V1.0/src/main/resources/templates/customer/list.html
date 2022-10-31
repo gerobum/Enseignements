@@ -8,11 +8,9 @@
             <h1 th:text=#{Clients}>Clients</h1>
             <ul>
                 <li th:each="customer : ${customers}">
-                    <span th:text="${customer.name}"></span>       
-                    <!-- V0.3 Remplacement de th:text="#{[Modifier]}" par <i class="fa fa-pencil"></i>-->              
-                    <a th:href="@{/customer/edit(id=${customer.id})}"><i class="fa fa-pencil"><!-- V0.3 --></i></a>    
-                    <!-- V0.3 Remplacement de th:text="#{[Supprimer]}" par <i class="fa fa-remove"></i>-->             
-                    <a  th:href="@{'/customer/delete/' + ${customer.id}}"><i class="fa fa-remove"><!-- V0.3 --></i></a>
+                    <span th:text="${customer.name}"></span>
+                    <a th:href="@{/customer/edit(id=${customer.id})}"><i class="fa fa-pencil"></i></a>
+                    <a  th:href="@{'/customer/delete/' + ${customer.id}}"><i class="fa fa-remove"></i></a>
                 </li>
             </ul>
             <a th:href="@{/customer/create}" th:text="#{CREER UN NOUVEAU CLIENT}" class="btn btn-success">Créer un nouveau client</a>        

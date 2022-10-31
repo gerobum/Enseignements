@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 // #### V1.1 Demo est une implémentation de CommandLineRunner qui indique que
-// #### V1.1 c'est un Bean qui doit être exécuté à son lancement.
-// #### V1.1 Plusieurs CommandLineRunner peuvent coexister. Si un ordre 
-// #### V1.1 d'exécution est nécessaire, il peut être indiqué par @Order
+// ######### c'est un Bean qui doit être exécuté à son lancement.
+// ######### Plusieurs CommandLineRunner peuvent coexister. Si un ordre 
+// ######### d'exécution est nécessaire, il peut être indiqué par @Order
 @Component
-@Order(2)
-public class DemoCustomers implements CommandLineRunner {
+//@Order(2)
+public class  DemoCustomers implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoCustomers.class);
 

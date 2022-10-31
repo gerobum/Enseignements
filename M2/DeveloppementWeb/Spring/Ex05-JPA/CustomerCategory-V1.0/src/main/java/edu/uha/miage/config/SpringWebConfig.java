@@ -36,7 +36,6 @@ public class SpringWebConfig implements WebMvcConfigurer {
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/", "/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 }
