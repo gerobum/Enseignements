@@ -13,7 +13,7 @@
                     <a  th:href="@{'/category/delete/' + ${category.id}}"><i class="fa fa-remove"></i></a>
                 </li>
             </ul>
-            <a th:href="@{/category/create}" th:text="#{CREER UNE NOUVELLE CATEGORIE}" class="btn btn-success">Créer une nouvelle catégorie</a>        
+            <a th:href="@{/category/create}" th:text="#{CREER UNE NOUVELLE CATEGORIE}" class="btn btn-success">Créer une nouvelle catégorie</a>
         </div>
         <div th:replace="fragments/common :: [//div[@class='footer']]"></div>        
         <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	

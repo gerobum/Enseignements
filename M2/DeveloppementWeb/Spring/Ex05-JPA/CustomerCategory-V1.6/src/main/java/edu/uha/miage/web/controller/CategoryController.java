@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -42,16 +41,17 @@ public class CategoryController {
         LOGGER.info("TEMPLATE - category/edit.html");
         return "category/edit";
     }
-    
+
     @PostMapping("/create")
     public String created(@Valid Category category, BindingResult br) {
         if (br.hasErrors()) {
             return "category/edit";
         }
         categoryService.save(category);
+
         return "redirect:/category";
     }
-    
+
     @GetMapping("/edit")
     public String edit(@RequestParam(name = "id") Long id, Model model) {
         model.addAttribute("category", categoryService.findById(id).get());
@@ -66,6 +66,7 @@ public class CategoryController {
         categoryService.save(category);
         return "redirect:/category";
     }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         categoryService.delete(id);

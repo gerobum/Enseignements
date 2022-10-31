@@ -21,7 +21,7 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
-
+    
     @Autowired
     CategoryService categoryService;
 
@@ -45,12 +45,12 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String created(@Valid Customer customer, BindingResult br, Model model) {
-
-        if (br.hasErrors()) {
+       if (br.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "customer/edit";
         }
         customerService.save(customer);
+
         return "redirect:/customer";
     }
 
@@ -73,7 +73,7 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    @GetMapping("/delete/{id}")
+   @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
 
         customerService.delete(id);

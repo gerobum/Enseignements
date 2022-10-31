@@ -2,18 +2,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.uha.miage</groupId>
     <artifactId>CC-V1.6</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.4</version>
+        <version>2.7.5</version>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jaxb.version>2.3.0</jaxb.version>
+        <java.version>17</java.version>
         <project.name>CC-V1.6</project.name>
     </properties>
 
@@ -81,7 +81,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- Les 3 dépendances suivantes ont été rajoutées pour les tests unitaires -->
+        <!-- La dépendances suivante a été rajoutée pour les tests unitaires -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

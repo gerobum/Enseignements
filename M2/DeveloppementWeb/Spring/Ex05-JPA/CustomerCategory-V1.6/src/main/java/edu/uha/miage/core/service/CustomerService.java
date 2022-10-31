@@ -12,7 +12,6 @@ public interface CustomerService {
     List<Customer> findAll();
     Optional<Customer> findById(Long id);
     Customer findByName(String name);
-    Customer getOne(Long id); 
     // #### V1.6
     List<Customer> findByCategoryOrderByName(Category category);
     List<Customer> findByCategoryOrderByName(String categoryName);
