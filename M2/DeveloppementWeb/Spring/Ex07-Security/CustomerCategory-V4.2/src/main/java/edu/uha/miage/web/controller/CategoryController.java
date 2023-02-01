@@ -45,10 +45,10 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.GET)
     public String findAll(Model model, /* #### V3.0 #### */HttpSession session) {
 
-        // #### V3.0
         //SessionHandler.addPathToList(session, "/category");
         model.addAttribute("categories", categoryService.findAll());
-
+        LOGGER.info("HTTP/GET - /category");
+        LOGGER.info("TEMPLATE - category/list.html");
         return "category/list";
     }
 
@@ -56,7 +56,6 @@ public class CategoryController {
     public String create(Model model,  /* #### V3.0 #### */HttpSession session,  /* #### V3.0 #### */HttpServletRequest request) {
         Category category = new Category();
         model.addAttribute("category", category);
-        // #### V3.0
         //SessionHandler.addPathToList(session, request.getRequestURI());
         return "category/edit";
     }
@@ -67,16 +66,15 @@ public class CategoryController {
         if (br.hasErrors()) {
             return "category/edit";
         }
-        if (!CategoryModel.tryToSave(categoryService, category, lang, br, messageSource)) {
+        /*if (!CategoryModel.tryToSave(categoryService, category, lang, br, messageSource)) {
           return "category/edit";
-        }
+        }*/
         categoryService.save(category);
         return "redirect:/category";
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id, Model model) {
-        
+    public String edit(@RequestParam(name = "id") Long id, Model model) {  
         model.addAttribute("category", categoryService.findById(id).get());
         return "category/edit";
     }

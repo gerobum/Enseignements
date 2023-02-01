@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>
+        <div class="container">
+            <h1 th:text="${'Ajouter un enseignant'}">Catégories</h1>
+            <form th:action="@{''}" th:object="${enseignant}" method="post" role="form">
+                <input type="hidden" th:field="*{id}"/>
+                <p>
+                    <select th:field="*{miss}">
+                        <option th:text="Madame" th:value="true"/>
+                        <option th:text="Monsieur" th:value="false"/>
+                    </select>
+                </p>
+                <p>
+                    <label th:text="Prénom" for="firstname"/>
+                    <input id="firstname" type="text" th:field="*{firstname}"/>
+                    <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" />
+                </p>
+                <p>
+                    <label th:text="Nom" for="lastname"/>
+                    <input id="lastname" type="text" th:field="*{lastname}"/>
+                    <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" />
+                </p>
+                <p>
+                    <button th:text="Valider" type="submit" class="btn btn-success">Valider</button>
+                    <button th:text="Annuler" type="reset" class="btn btn-success">Annuler</button>
+                </p>
+            </form>  
+        </div>
+    </body>
+</html>

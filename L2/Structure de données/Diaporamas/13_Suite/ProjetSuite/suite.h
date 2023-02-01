@@ -15,6 +15,7 @@ using namespace std;
 
 class suite {
 public:
+
   suite();
   suite(const suite& orig);
   ~suite();

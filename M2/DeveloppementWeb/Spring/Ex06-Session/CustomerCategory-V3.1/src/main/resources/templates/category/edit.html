@@ -4,8 +4,8 @@
     <body>
         <div class="container">
             <div th:replace="fragments/menu"></div>
-            <form action="#" th:object="${category}" method="post" role="form">
             <h1 th:text=#{Categories}>Catégories</h1>
+            <form action="#" th:object="${category}" method="post" role="form">
                 <input type="hidden" th:field="*{id}"/>
                 <label th:text="#{Nom}" for="name">Nom</label>
                 <input id="name" type="text" th:field="*{name}" th:placeholder="#{1a1}"/>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-// #### V3.0 Un contrôleur pour la liste des pages visitées
 @Controller
 @RequestMapping("/list")
 // #### V3.1 Indique que "stringList" est une variable de session de type liste

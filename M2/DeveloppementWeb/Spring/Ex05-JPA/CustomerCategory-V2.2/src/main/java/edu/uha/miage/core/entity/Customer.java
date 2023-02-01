@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"name"})})
 public class Customer implements Serializable {
@@ -20,8 +19,8 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-  
-    @NotNull  
+
+    @NotNull
     @Size(min = 2, max = 30)
     private String name;
 

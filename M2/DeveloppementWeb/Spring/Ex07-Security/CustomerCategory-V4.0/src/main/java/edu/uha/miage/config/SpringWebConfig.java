@@ -78,7 +78,6 @@ public class SpringWebConfig implements WebMvcConfigurer {
         return result;
     }
 
-    // #### V0.2 Dans notre cas, la localisation par défaut est associé à la session.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

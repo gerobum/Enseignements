@@ -10,11 +10,6 @@ import org.springframework.validation.BindingResult;
  *
  * @author Yvan Maillot <yvan.maillot@uha.fr>
  */
-
-// On peut utiliser ce genre de modèle (CategoryModel) pour gérer les exceptions
-// de la BDD. C'est une solution.
-//
-// Il y en a d'autres (préférables parce qu'intégres) à l'aide du tag 
 // @ExceptionHandler comme c'est montré aussi dans le contrôleur de customer.
 public class CategoryModel {
 
@@ -23,26 +18,35 @@ public class CategoryModel {
             categoryService.save(category);
             return true;
         } catch (Exception ex) {
-            if (categoryService.findByName(category.getName()) != null) {
-                Locale locale;
-                if (lang == null) {
-                    locale = Locale.FRENCH;
-                } else {
-                    locale = new Locale(lang);
-                }
-                br.rejectValue("name", "alreadythere", messageSource.getMessage("EXISTANT", null, locale));
+            Locale locale;
+            if (lang == null) {
+                locale = Locale.FRENCH;
             } else {
-                br.rejectValue("name", "error", "Erreur");
+                locale = new Locale(lang);
+            }
+            if (categoryService.findByName(category.getName()) != null) {
+                br.rejectValue("name", "error", messageSource.getMessage("EXISTANT", null, locale));
+            } else {
+                br.rejectValue("name", "error", messageSource.getMessage("AJOUT IMPOSSIBLE", null, locale));
+                
             }
             return false;
         }
     }
 
-    public static boolean tryToDelete(CategoryService categoryService, Long id, String lang, MessageSource messageSource) {
+    public static boolean tryToDelete(CategoryService categoryService, Long id, String lang, BindingResult br, MessageSource messageSource) {
         try {
             categoryService.delete(id);
             return true;
         } catch (Exception ex) {
+            Locale locale;
+            if (lang == null) {
+                locale = Locale.FRENCH;
+            } else {
+                locale = new Locale(lang);
+            }
+                br.rejectValue("name", "error", messageSource.getMessage("EXISTANT", null, locale));
+    
             return false;
         }
     }

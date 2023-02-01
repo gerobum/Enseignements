@@ -4,8 +4,8 @@
     <body>    
         <div class="container">
             <h1 th:text="#{BIENVENUE !}">Bienvenue !</h1>
-            <p ><span th:text="#{CLIQUEZ}">Cliquez</span><a th:href="@{/customer}" th:text="#{ICI}">ici</a><span th:text="#{POUR VOIR LES CLIENTS}"> pour voir les clients</span></p>          
-            <p ><span th:text="#{CLIQUEZ}">Cliquez</span><a th:href="@{/category}" th:text="#{ICI}">ici</a><span th:text="#{POUR VOIR LES CATEGORIES}"> pour voir les catégories</span></p>
+            <p><span th:text="#{CLIQUEZ}">Cliquez</span><a th:href="@{/customer}" th:text="#{ICI}">ici</a><span th:text="#{POUR VOIR LES CLIENTS}"> pour voir les clients</span></p>
+            <p><span th:text="#{CLIQUEZ}">Cliquez</span><a th:href="@{/category}" th:text="#{ICI}">ici</a><span th:text="#{POUR VOIR LES CATEGORIES}"> pour voir les catégories</span></p>
             <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
             <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>
         </div>

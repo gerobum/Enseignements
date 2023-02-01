@@ -23,13 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
     
- 
-    // #### V1.1 LOGGER Pour faire du Log (qui s'applique à cette classe) 
     private final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
@@ -42,17 +39,18 @@ public class CategoryController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String findAll(Model model) {
-
-
         model.addAttribute("categories", categoryService.findAll());
-
+        LOGGER.info("HTTP/GET - /category");
+        LOGGER.info("TEMPLATE - category/list.html");
         return "category/list";
     }
-
+    
     @GetMapping("/create")
     public String create(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
+        LOGGER.info("HTTP/GET - /category/create");
+        LOGGER.info("TEMPLATE - category/edit.html");
         return "category/edit";
     }
 
@@ -75,8 +73,7 @@ public class CategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id, Model model) {
-        
+    public String edit(@RequestParam(name = "id") Long id, Model model) {  
         model.addAttribute("category", categoryService.findById(id).get());
         return "category/edit";
     }

@@ -11,8 +11,7 @@ public interface CustomerService {
     void delete(Long id);
     List<Customer> findAll();
     Optional<Customer> findById(Long id);
-    Customer findByName(String name);
-    Customer getOne(Long id); 
+    Customer findByName(String name); 
     List<Customer> findByCategoryOrderByName(Category category);
     List<Customer> findByCategoryOrderByName(String categoryName);
 }

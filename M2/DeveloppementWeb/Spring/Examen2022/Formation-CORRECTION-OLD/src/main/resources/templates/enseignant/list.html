@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/common :: [//head]"/>
+<body>
+<h1>Enseignants</h1>
+<ul th:each="enseignant : ${enseignants}">
+     <li th:text="${enseignant}"/>
+</ul>
+</body>
+</html>
+

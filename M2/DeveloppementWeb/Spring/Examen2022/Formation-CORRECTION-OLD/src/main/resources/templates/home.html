@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/common :: [//head]" />
+    <body>    
+        <div class="container">
+            <!--<div th:replace="fragments/menu"></div>-->
+            <h1 th:text="Formation"/>
+            <ul th:each="entry : ${urlName}">
+                <li><a th:text="${entry.value}" th:href="${entry.key}":/></li>
+            </ul>
+            <div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+            <div th:replace="fragments/common :: [//div[@id='scripts']]"></div>
+        </div>
+    </body>
+</html>

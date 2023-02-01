@@ -1,4 +1,3 @@
-
 package edu.uha.miage.core.repository;
 
 import edu.uha.miage.core.entity.Category;
@@ -15,18 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-/**
- *
- * @author yvan
- */
-/*@DataJpaTest
+
+@DataJpaTest
 @ExtendWith(SpringExtension.class)
 public class CategoryRepositoryTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryRepositoryTest.class);
 
     @Autowired
     CategoryRepository categoryRepository;
- 
+
     @BeforeEach
     public void setUp() {
         saveCategory("A");
@@ -40,7 +36,7 @@ public class CategoryRepositoryTest {
             categoryRepository.save(category);
         }
     }
-    
+
     @Test
     public void testFindByName() {
         LOGGER.info("Test findByName");
@@ -50,7 +46,7 @@ public class CategoryRepositoryTest {
         saveCategory("W");
         assertNotNull(categoryRepository.findByName("W"));
     }
-    
+
     @Test
     public void testCount() {
         LOGGER.info("Test Count");
@@ -59,7 +55,7 @@ public class CategoryRepositoryTest {
         saveCategory("W");
         assertEquals(4, categoryRepository.count());
     }
-    
+
     @Test
     public void testDelete() {
         LOGGER.info("Test Count");
@@ -72,4 +68,4 @@ public class CategoryRepositoryTest {
         assertEquals(0, categoryRepository.count());
     }
 
-}*/
+}

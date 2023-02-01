@@ -49,12 +49,12 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String created(@Valid Customer customer, BindingResult br, Model model) {
-
-        if (br.hasErrors()) {
+       if (br.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "customer/edit";
         }
         customerService.save(customer);
+
         return "redirect:/customer";
     }
 

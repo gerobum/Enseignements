@@ -29,13 +29,17 @@
 package edu.uha.miage.config.security;
 
 import javax.sql.DataSource;
+
+import edu.uha.miage.web.security.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  *
@@ -45,15 +49,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @Profile("prod")
 // #### V4.4
+public class WebSecurityConfigProd extends  WebSecurityConfigurerAdapter {
 
-
-
-
-
-public class WebSecurityConfigProd extends
-        WebSecurityConfigurerAdapter {
-    
-    
     @Autowired
     DataSource dataSource;
 
@@ -69,10 +66,11 @@ public class WebSecurityConfigProd extends
         // #### V4.0 (https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#user-schema)
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin();
+        http.formLogin().defaultSuccessUrl("/")
+                .and().exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
+                .and().logout().logoutSuccessUrl("/");
         
         http.authorizeRequests(authorize -> authorize
                 .mvcMatchers("/customer/edit/**").hasAnyRole("ADMIN")
@@ -85,9 +83,8 @@ public class WebSecurityConfigProd extends
                 .mvcMatchers("/category").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/resources/**", "/**").permitAll()
                 .mvcMatchers("/login").permitAll()
+                .mvcMatchers("/access-denied").permitAll()
                 .anyRequest().denyAll()
-                
-                
         );
     }
 }

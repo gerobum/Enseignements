@@ -32,7 +32,7 @@ public class SpringWebConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         registry.addInterceptor(localeChangeInterceptor);
 
-        // #### V3.0
+        // #### V3.0 Un intercepteur
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
@@ -56,7 +56,6 @@ public class SpringWebConfig implements WebMvcConfigurer {
         return result;
     }
 
-    // #### V0.2 Dans notre cas, la localisation par défaut est associé à la session.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

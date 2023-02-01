@@ -11,7 +11,8 @@
                 <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).ALL}" th:text=#{Clients}>Clients</h1>
                 <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).NONE}" th:text="#{CategorieInexistante(${status.categoryName})}">Clients</h1>
                 <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).OK}" th:text="#{ClientsDeCategory(${status.categoryName})}">Clients</h1>
-                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).WITHOUT}" th:text="#{ClientsSansCategorie}">Clients</h1>          
+                <h1 th:case="${T(edu.uha.miage.core.models.CustomerListStatus.State).WITHOUT}" th:text="#{ClientsSansCategorie}">Clients</h1>
+            
             </div>
 
 

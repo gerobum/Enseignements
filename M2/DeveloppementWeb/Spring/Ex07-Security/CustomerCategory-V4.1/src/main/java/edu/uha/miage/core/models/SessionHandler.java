@@ -1,4 +1,4 @@
-// #### V3.0 A model in order to manage a list according to the session
+
 package edu.uha.miage.core.models;
 
 import java.util.LinkedList;

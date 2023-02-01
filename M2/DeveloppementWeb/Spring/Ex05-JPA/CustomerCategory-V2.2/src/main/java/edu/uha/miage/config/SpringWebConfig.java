@@ -9,8 +9,6 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
-import org.springframework.context.MessageSource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -36,9 +34,6 @@ public class SpringWebConfig implements WebMvcConfigurer {
         result.setDefaultLocale(Locale.FRENCH);
         return result;
     }
-
-    // #### V0.2 Dans notre cas, la localisation par défaut est associé à la session.
-
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

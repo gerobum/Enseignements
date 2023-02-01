@@ -1,0 +1,38 @@
+
+<div id="lang" class="container">
+    <div class="pull-right">
+         <div class="row">
+            <div class="col-sm">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a th:class="${#strings.equals(#locale.language,'en')} ? 'nav-link active' : 'nav-link'" th:href="@{?lang=en}">English</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:class="${#strings.equals(#locale.language,'fr')} ? 'nav-link active' : 'nav-link'" th:href="@{?lang=fr}">Français</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cus-cat" class="container">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a th:href="@{/}" th:text="#{Accueil}" th:class="${#strings.equals(#httpServletRequest.requestURI, '/')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/customer}" th:text="#{Clients}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/customer')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/category}" th:text="#{Categories}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/category')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/list}" th:text="#{LesPagesVisitees}" th:class="${#strings.startsWith(#httpServletRequest.requestURI, '/list')} ? 'nav-link active' : 'nav-link'" />
+                </li>
+            </ul>
+        </div>	
+    </div>
+</div>

@@ -5,7 +5,7 @@
  * Created on 26 mars 2014, 11:05
  */
 
-#include <cstdlib>
+
 #include <iostream>
 #include "suite.h"
 
@@ -15,7 +15,7 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-  suite s;
+  /*suite s;
   //cout << s.taille() << endl;
   cout << s << endl;
   s.inserer("trois", s.premier());
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
   cout << s[0] << " " << s[1] << endl;
   s.inserer("deux", 1);
   cout << s[0] << " " << s[1] << " " << s[2] << endl;
-  cout << s[0] << " " << s[1] << " " << s[2] << endl;*/
+  cout << s[0] << " " << s[1] << " " << s[2] << endl;
   s.inserer("quatre", s.premier());
   cout << s << endl;
   s.inserer("six", s.premier());
@@ -91,8 +91,32 @@ int main(int argc, char** argv) {
     i = s.premier(); s.retirer(++++i); cout << s << endl;
     while (!s.vide()) s.retirer();
     cout << s << endl;
-  }
-
+  }*/
+    suite s; suite::iterateur i = s.premier();
+    s.inserer("1", i); s.inserer("2", ++i);
+    s.inserer("3", ++i);
+    cout << s << endl; // [1, 2, 3]
+    for (suite::iterateur i = s.premier(); !i.fin(); ++i)
+        cout << "---> " << *i << endl;
+    i = s.premier(); s.inserer("0.5", i); // [0.5, 1, 2, 3]
+    s.inserer("1.5", ++++i);
+    cout << s << endl; // [0.5, 1, 1.5, 2, 3]
+    for (; !i.fin(); ++i)
+        cout << "--->" << *i << endl;
+    s.inserer("100", i); cout << s << endl;
+    cout << s << endl; // [0.5, 1, 1.5, 2, 3, 100]
+    suite t; t.inserer("trois");
+    t.inserer("deux"); t.inserer("un");
+    cout << t << endl; // [un, deux, trois]
+    i = t.premier(); *i = "one";
+    ++i; *i = "two"; ++i; *i = "three";
+    cout << t << endl; // [one, two, three]
+    t = s; cout << t << endl; // [0.5, 1, 1.5, 2, 3, 100]
+    s.retirer(); cout << s << endl; // [1, 1.5, 2, 3, 100]
+    i = s.premier(); s.retirer(++++i); cout << s << endl;
+// [1, 1.5, 3, 100]
+    while (!s.vide()) s.retirer();
+    cout << s << endl; // []
   return 0;
 }
 

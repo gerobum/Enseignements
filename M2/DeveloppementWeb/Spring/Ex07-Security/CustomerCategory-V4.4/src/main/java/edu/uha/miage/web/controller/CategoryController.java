@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
-    
-    private final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     CategoryService categoryService;
@@ -43,21 +41,15 @@ public class CategoryController {
     MessageSource messageSource;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String findAll(Model model, /* #### V3.0 #### */HttpSession session) {
-
-        // #### V3.0
-        //SessionHandler.addPathToList(session, "/category");
+    public String findAll(Model model) {
         model.addAttribute("categories", categoryService.findAll());
-
         return "category/list";
     }
 
     @GetMapping("/create")
-    public String create(Model model,  /* #### V3.0 #### */HttpSession session,  /* #### V3.0 #### */HttpServletRequest request) {
+    public String create(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
-        // #### V3.0
-        //SessionHandler.addPathToList(session, request.getRequestURI());
         return "category/edit";
     }
 
@@ -70,13 +62,11 @@ public class CategoryController {
         if (!CategoryModel.tryToSave(categoryService, category, lang, br, messageSource)) {
           return "category/edit";
         }
-        categoryService.save(category);
         return "redirect:/category";
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id, Model model) {
-        
+    public String edit(@RequestParam(name = "id") Long id, Model model) {  
         model.addAttribute("category", categoryService.findById(id).get());
         return "category/edit";
     }
@@ -90,8 +80,6 @@ public class CategoryController {
         if (!CategoryModel.tryToSave(categoryService, category, lang, br, messageSource)) {
             return "category/edit";
          }
-
-        categoryService.save(category);
         return "redirect:/category";
     }
 

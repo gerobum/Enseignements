@@ -3,9 +3,9 @@
 // d'une certaine categorie.
 // 
 // Il faut autoriser les urls /customer/{x}, où {x} est un nom de catégorie, 
-// comme A par exemple.
+// comme A, par exemple.
 //  
-//  Le template list.html est utiliser dans tous les cas.
+//  Le template list.html est utilisé dans tous les cas.
 //
 //  Quelques exemples
 //

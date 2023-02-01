@@ -1,4 +1,5 @@
-// #### V3.1 Utilisation des sessions SpringSession
+// #### V4.0 Ajout de Spring Security
+// ######### Correction des erreurs dans edit.html (th:action=...)
 package edu.uha.miage;
 
 import org.springframework.boot.SpringApplication;

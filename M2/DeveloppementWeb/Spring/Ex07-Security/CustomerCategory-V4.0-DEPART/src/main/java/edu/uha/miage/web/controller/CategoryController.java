@@ -44,10 +44,7 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.GET)
     public String findAll(Model model, /* #### V3.0 #### */HttpSession session) {
 
-        // #### V3.0
-        //SessionHandler.addPathToList(session, "/category");
         model.addAttribute("categories", categoryService.findAll());
-
         return "category/list";
     }
 
@@ -74,8 +71,7 @@ public class CategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id, Model model) {
-        
+    public String edit(@RequestParam(name = "id") Long id, Model model) {  
         model.addAttribute("category", categoryService.findById(id).get());
         return "category/edit";
     }

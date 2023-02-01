@@ -10,6 +10,7 @@
                 <label th:text="#{Nom}" for="name">Nom</label>
                 <input id="name" type="text" th:field="*{name}" th:placeholder="#{2a30}"/>
                 <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+
                 <p>
                 <label th:text="#{Categorie}" for="category">Nom</label>
                 <select th:field="*{category}" id="category">

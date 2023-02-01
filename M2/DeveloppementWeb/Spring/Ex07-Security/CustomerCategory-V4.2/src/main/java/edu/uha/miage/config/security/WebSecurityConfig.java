@@ -50,10 +50,11 @@ public class WebSecurityConfig extends
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin();
+        http.formLogin().defaultSuccessUrl("/").and().logout().logoutSuccessUrl("/");
+
+
         http.authorizeRequests(authorize -> authorize
-                .mvcMatchers("/customer/**").authenticated()
-                .mvcMatchers("/category/**").authenticated()
+                .mvcMatchers("/customer/**", "/category/**").authenticated()
                 .mvcMatchers("/resources/**", "/**").permitAll()
                 .mvcMatchers("/login").permitAll()
                 .anyRequest().denyAll()
@@ -65,6 +66,7 @@ public class WebSecurityConfig extends
     public UserDetailsService users() {
         // The builder will ensure the passwords are encoded before saving in memory
         UserBuilder users = User.withDefaultPasswordEncoder();
+
         UserDetails user = users
                 .username("user")
                 .password("user")
@@ -77,4 +79,5 @@ public class WebSecurityConfig extends
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
+
 }

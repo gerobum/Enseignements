@@ -45,10 +45,11 @@ public class WebSecurityConfig extends
     // #### V4.1
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin();
+        http.formLogin().defaultSuccessUrl("/").and().logout().logoutSuccessUrl("/");
+
+
         http.authorizeRequests(authorize -> authorize
-                .mvcMatchers("/customer/**").authenticated()
-                .mvcMatchers("/category/**").authenticated()
+                .mvcMatchers("/customer/**", "/category/**").authenticated()
                 .mvcMatchers("/resources/**", "/**").permitAll()
                 .mvcMatchers("/login").permitAll()
                 .anyRequest().denyAll()

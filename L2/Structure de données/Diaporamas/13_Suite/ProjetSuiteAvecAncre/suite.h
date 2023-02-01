@@ -57,11 +57,11 @@ public: // Classe interne
   private:
     // L'itérateur encapsule l'élément "courant"
     const element* d_crt;
-    // et un pointeursur l'ancre (pour reconnaître la fin)
+    // et un pointeur sur l'ancre (pour reconnaître la fin)
     const element* d_ancre;
     // ainsi que son constructeur.
 
-    iterateur_constant(const element* crt) : d_ancre(crt), d_crt(crt) {
+    iterateur_constant(const element* ancre) : d_ancre(ancre), d_crt(ancre) {
     }
   };
   iterateur_constant premier_constant() const;

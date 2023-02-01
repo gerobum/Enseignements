@@ -23,7 +23,7 @@ public class DemoCategories implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... arg0) throws Exception {
-
+        LOGGER.info("********************* Lancement *********************");
         createCategory("A");
         createCategory("B");
         createCategory("Z");

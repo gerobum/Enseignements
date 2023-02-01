@@ -1,0 +1,10 @@
+# ninja log v5
+0	276	1672232833186128014	CMakeFiles/main.cpp.dir/suite.cpp.o	8281d6dce7b8d3e5
+0	284	1672232833194127992	CMakeFiles/main.cpp.dir/main.cpp.o	beae91c1948f57de
+284	338	1672232833250127836	main.cpp	4fc967fb68aee794
+1	266	1672245489447033490	CMakeFiles/main.cpp.dir/suite.cpp.o	8281d6dce7b8d3e5
+1	279	1672245489459033514	CMakeFiles/main.cpp.dir/main.cpp.o	beae91c1948f57de
+279	335	1672245489515033627	main.cpp	4fc967fb68aee794
+1	293	1672277314840035772	CMakeFiles/main.cpp.dir/main.cpp.o	beae91c1948f57de
+1	297	1672277314844035807	CMakeFiles/main.cpp.dir/suite.cpp.o	8281d6dce7b8d3e5
+297	353	1672277314900036302	main.cpp	4fc967fb68aee794

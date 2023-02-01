@@ -11,8 +11,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
-    @Autowired
+   @Autowired
     CategoryRepository categoryRepository;
 
     @Override
@@ -37,10 +36,5 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
-    }
-
-    @Override
-    public Category getOne(Long id) {
-        return categoryRepository.getOne(id);
     }
 }

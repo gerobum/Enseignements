@@ -50,7 +50,8 @@ public class CategoryController {
         // #### V3.0
         //SessionHandler.addPathToList(session, "/category");
         model.addAttribute("categories", categoryService.findAll());
-
+        LOGGER.info("HTTP/GET - /category");
+        LOGGER.info("TEMPLATE - category/list.html");
         return "category/list";
     }
 
@@ -77,8 +78,7 @@ public class CategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(name = "id") Long id, Model model) {
-        
+    public String edit(@RequestParam(name = "id") Long id, Model model) {  
         model.addAttribute("category", categoryService.findById(id).get());
         return "category/edit";
     }

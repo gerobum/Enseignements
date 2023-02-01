@@ -24,9 +24,6 @@ suite::suite(const suite& orig) : d_ancre("@") {
   crt->d_suivant = &d_ancre;
 }
 
-// détruire la tête détruit récursivement toute la liste
-// grâve au destructeur d'élément qui détruit son suivant.
-
 suite::~suite() {
   while(!vide())
     retirer();
@@ -98,7 +95,7 @@ void suite::retirer() {
 }
 
 suite::iterateur_constant suite::premier_constant() const {
-  return suite::iterateur_constant(&d_ancre);
+  return suite::iterateur_constant{&d_ancre};
 }
 
 bool suite::iterateur_constant::fin() const {

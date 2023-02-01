@@ -34,11 +34,6 @@ import edu.uha.miage.core.service.CategoryService;
 import edu.uha.miage.core.service.CustomerService;
 import java.util.List;
 
-/**
- *
- * @author yvan
- */
-
 // Une sorte de modèle pour l'affichage d'une liste de clients, par catégorie ou non.
 /**
  * L'état d'une liste de clients (pour la vue customer/list.html)
@@ -51,7 +46,7 @@ import java.util.List;
  *
  * 2. NONE => Cela signifie que cette catégorie n'existe pas.
  *
- * 3. OK => La catégorie existe, categoryName est pertinent. Et il s'agit de la
+ * 3. OK => La catégorie existe, categoryName est pertinent et il s'agit de la
  * liste des clients de catégorie <categoryName>
  * 
  * 4. WITHOUT => Il s'agit des clients sans catégorie.

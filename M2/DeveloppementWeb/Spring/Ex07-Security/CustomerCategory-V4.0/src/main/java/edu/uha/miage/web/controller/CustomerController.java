@@ -5,6 +5,7 @@ import edu.uha.miage.core.entity.Customer;
 import edu.uha.miage.core.service.CategoryService;
 import edu.uha.miage.core.service.CustomerService;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("/customer")
@@ -48,12 +50,12 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String created(@Valid Customer customer, BindingResult br, Model model) {
-
-        if (br.hasErrors()) {
+       if (br.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "customer/edit";
         }
         customerService.save(customer);
+
         return "redirect:/customer";
     }
 
