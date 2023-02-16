@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
     cout << s << endl; // [A, B, C]
     i << "X" << "Y" << "Z";
     suite copy{s};
+
     cout << s << endl; // [A, B, C, X, Y, Z]
     ------i; // Décrémentation trois fois
     i << "D" << "E" << "F";

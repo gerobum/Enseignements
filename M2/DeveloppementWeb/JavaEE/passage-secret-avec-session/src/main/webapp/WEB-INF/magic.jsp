@@ -12,6 +12,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Passage Secret</title>
+        
+        <style>
+            body {
+                margin: 8%; /* ajoute une marge de 20px autour de tous les côtés */
+            }
+        </style>
     </head>
     <body>
         <c:if test="${!sessionScope.model.connected}">

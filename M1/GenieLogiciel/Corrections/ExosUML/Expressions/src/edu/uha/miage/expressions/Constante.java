@@ -28,19 +28,22 @@
  */
 package edu.uha.miage.expressions;
 
-/**
- *
- * @author yvan
- */
-public class Divsion extends Operation {
 
-    public Divsion(Expression left, Expression right) {
-        super(left, right);
+public class Constante implements Expression {
+
+    private double value;
+
+
+    public Constante(double value) {
+        this.value = value;
     }
 
     @Override
     public double evaluate() {
-        return left.evaluate() / right.evaluate();
+        return this.value;
     }
-    
+
+    public String toString() {
+        return "" + value;
+    }
 }

@@ -32,7 +32,7 @@ package edu.uha.miage.expressions;
  *
  * @author yvan
  */
-public class Variable extends Expression {
+public class Variable implements Expression {
 
     private double value;
 
@@ -49,6 +49,10 @@ public class Variable extends Expression {
     @Override
     public double evaluate() {
         return this.value;
+    }
+
+    public String toString() {
+        return "" + value;
     }
     
 }

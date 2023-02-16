@@ -32,7 +32,7 @@ package edu.uha.miage.expressions;
  *
  * @author yvan
  */
-public abstract class Operation extends Expression {
+public abstract class Operation implements Expression {
     
     protected Expression left;
     protected Expression right;
@@ -45,10 +45,5 @@ public abstract class Operation extends Expression {
     public Operation(Expression left) {
         this(left, null);
     }
-    
-    
 
-    @Override
-    public abstract double evaluate();
-    
 }

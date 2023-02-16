@@ -49,8 +49,7 @@ public class SecretModel implements Serializable {
     private boolean magicOk;
     private boolean connected;
     private static final String PASSWORD = "Vive Java !";
-    private List<String> finalMsgs = new LinkedList<>();
-    // #### 
+    private final List<String> finalMsgs = new LinkedList<>();
     private static final String COOKIE_KEY = "connectedOnPassageSecret";
 
     public SecretModel(String title, String name, String magic, String footer, boolean nameOk, boolean magicOk, boolean connected) {
@@ -61,18 +60,6 @@ public class SecretModel implements Serializable {
         this.nameOk = nameOk;
         this.magicOk = magicOk;
         this.connected = connected;
-    }
-    
-    
-
-    private SecretModel(String name, boolean connected) {
-        this.finalMsgs = new LinkedList<>();
-        this.name = name;
-        this.connected = connected;
-        // ####
-        if (connected) {
-            this.finalMsgs.add("Heureux de te revoir " + name);
-        }
     }
 
     public SecretModel() {
@@ -85,6 +72,14 @@ public class SecretModel implements Serializable {
                 true,
                 false
         );
+    }
+
+    private SecretModel(String name, boolean connected) {
+        this.name = name;
+        this.connected = connected;
+        if (connected) {
+            this.finalMsgs.add("Heureux de te revoir " + name);
+        }
     }
 
     public List<String> getFinalMsgs() {
@@ -172,8 +167,7 @@ public class SecretModel implements Serializable {
             model.name = name;
             model.connected = true;
             generateFinalMsg(model);
-            
-            // #### 
+	    // ####
             Cookie cookie = new Cookie(COOKIE_KEY, name);
             cookie.setMaxAge(5 * 60);
             // #### dans response
@@ -182,7 +176,20 @@ public class SecretModel implements Serializable {
 
         return model;
     }
-    // #### 
+
+    // #### Init
+    public static void init(HttpServletRequest request) {
+        if (request.getSession().getAttribute("model") == null) {
+            Cookie cookie = getConnected(request);
+            if (cookie == null) {
+                request.getSession().setAttribute("model", new SecretModel());
+            } else {
+                request.getSession().setAttribute("model", new SecretModel(cookie.getValue(), true));
+            }
+        }
+    }
+
+    // #### Logout
     public static void logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
         Cookie cookie = new Cookie(COOKIE_KEY, "NONAME");
@@ -203,17 +210,6 @@ public class SecretModel implements Serializable {
         }
         return null;
         
-    }
-
-    public static void init(HttpServletRequest request) {
-        if (request.getSession().getAttribute("model") == null) {
-            Cookie cookie = getConnected(request);
-            if (cookie == null) {
-                request.getSession().setAttribute("model", new SecretModel());
-            } else {
-                request.getSession().setAttribute("model", new SecretModel(cookie.getValue(), true));
-            }
-        }
     }
 
 }

@@ -32,6 +32,6 @@ package edu.uha.miage.expressions;
  *
  * @author yvan
  */
-public abstract class Expression {
+public interface Expression {
     public abstract double evaluate();
 }

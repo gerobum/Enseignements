@@ -47,7 +47,7 @@ public class SecretModel implements Serializable {
     private boolean magicOk;
     private boolean connected;
     private static final String PASSWORD = "Vive Java !";
-    private List<String> finalMsgs = new LinkedList<>();
+    private final List<String> finalMsgs = new LinkedList<>();
 
     public SecretModel(String title, String name, String magic, String footer, boolean nameOk, boolean magicOk, boolean connected) {
         this.title = title;

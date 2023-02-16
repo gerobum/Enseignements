@@ -28,16 +28,43 @@
  */
 package edu.uha.miage;
 
-import edu.uha.miage.expressions.Variable;
+import edu.uha.miage.expressions.*;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 
 /**
  *
  * @author yvan
  */
 public class Main {
+
     public static void main(String[] args) {
+
+
         Variable x = new Variable(1);
         Variable y = new Variable(3);
+        Constante _2 = new Constante(2);
+        Constante _3 = new Constante(3);
+        Expression e = new Division(
+                new Addition(
+                        new Multiplication(
+                                _2,
+                                x
+                        ),
+                        _3
+                ),
+                new Multiplication(
+                        new Negation(x),
+                        new Substraction(y, _2)
+                )
+        );
+
+        System.out.println(e + " = " + e.evaluate());
+
+        x.setValue(2);
+        System.out.println(e + " = " + e.evaluate());
      
     }
 }

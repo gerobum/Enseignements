@@ -32,18 +32,18 @@ package edu.uha.miage.expressions;
  *
  * @author yvan
  */
-public class Number extends Expression {
+public class Division extends Operation {
 
-    private double value;
-
-
-    public Number(double value) {
-        this.value = value;
+    public Division(Expression left, Expression right) {
+        super(left, right);
     }
 
     @Override
     public double evaluate() {
-        return this.value;
+        return left.evaluate() / right.evaluate();
     }
-    
+
+    public String toString() {
+        return "(" + left + " / " + right + ")";
+    }
 }

@@ -30,7 +30,7 @@
                 </p>
                 <p>
                     <label for="magic">Phrase magique : </label>
-                    <input type="password" name="magic" value="${model.magic}" style="${model.magicOk?'':'background-color:#FFDDDD;'}"/>
+                    <input type="password" id="magic" name="magic" value="${model.magic}" style="${model.magicOk?'':'background-color:#FFDDDD;'}"/>
                 </p>
                 <button type="submit">Valider</button>
             </form>

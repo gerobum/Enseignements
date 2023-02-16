@@ -30,17 +30,12 @@ package edu.uha.miage.controlers;
 
 import edu.uha.miage.models.SecretModel;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author yvan
- */
 @WebServlet(name = "Logout", urlPatterns = {"/Logout", "/logout"})
 public class Logout extends HttpServlet {
 
@@ -50,7 +45,7 @@ public class Logout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SecretModel.logout(request, response);
-        response.sendRedirect("/passage-secret-avec-session");
+        response.sendRedirect("/passage-secret-avec-cookie");
     }
 
 }

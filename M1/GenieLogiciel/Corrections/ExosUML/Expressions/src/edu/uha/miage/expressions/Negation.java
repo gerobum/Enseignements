@@ -42,5 +42,8 @@ public class Negation extends Operation {
     public double evaluate() {
         return -left.evaluate();
     }
-    
+
+    public String toString() {
+        return "( - " + left + ")";
+    }
 }
