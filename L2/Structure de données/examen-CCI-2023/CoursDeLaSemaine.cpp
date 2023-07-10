@@ -31,3 +31,106 @@
 //
 
 #include "CoursDeLaSemaine.h"
+/**
+ * Constructeur CoursDeLaSemaine::CoursDeLaSemaine() qui crée une liste vide.
+ *
+ */
+CoursDeLaSemaine::CoursDeLaSemaine() : d_tete{nullptr} {
+}
+
+
+CoursDeLaSemaine::~CoursDeLaSemaine() {
+    while (d_tete != nullptr) {
+        UnCours *courant = d_tete;
+        d_tete = d_tete->d_suiv;
+        delete courant;
+    }
+}
+
+int CoursDeLaSemaine::dureeTotale() const {
+    int duree = 0;
+    UnCours *courant = d_tete;
+    while (courant != nullptr) {
+        duree += courant->d_fin - courant->d_deb;
+        courant = courant->d_suiv;
+    }
+    return duree;
+}
+
+bool CoursDeLaSemaine::toutesLesMatieres() const {
+    UnCours *courant = d_tete;
+    bool math = false;
+    bool hist = false;
+    bool bio = false;
+    bool fran = false;
+    bool toutesLesMatieres = false;
+    while (!toutesLesMatieres && courant != nullptr) {
+        math = math || courant->d_mat == 'M';
+        hist = hist || courant->d_mat == 'H';
+        bio = bio || courant->d_mat == 'B';
+        fran = fran || courant->d_mat == 'F';
+        toutesLesMatieres = math && hist && bio && fran;
+        courant = courant->d_suiv;
+    }
+}
+
+int CoursDeLaSemaine::nbJoursLibres() const {
+    if (d_tete == nullptr) {
+        return 5;
+    } else {
+        int nbJoursLibres = 0;
+        UnCours *courant = d_tete;
+        UnCours *suivant = courant->d_suiv;
+        while (suivant != nullptr && suivant->d_jour != 5) {
+            if (suivant->d_jour - courant->d_jour > 1) {
+                nbJoursLibres+= suivant->d_jour - courant->d_jour + 1;
+            }
+            courant = suivant;
+            suivant = suivant->d_suiv;
+        }
+        return nbJoursLibres;
+    }
+}
+
+bool CoursDeLaSemaine::horaireLibre(int debut, int fin, int jour) const {
+    if (d_tete == nullptr)
+        return true;
+
+    UnCours *courant = d_tete;
+    while (courant != nullptr && courant->d_jour <= jour) {
+        courant = courant->d_suiv;
+    }
+    if (courant != nullptr && courant->d_jour == jour) {
+        return courant->d_deb >= fin || courant->d_fin <= debut;
+    }
+    return false;
+}
+
+void CoursDeLaSemaine::ajout(int debut, int fin, int jour, char matiere) {
+    UnCours *courant = d_tete;
+    UnCours *precedent = nullptr;
+    while (courant != nullptr && courant->d_jour < jour) {
+        precedent = courant;
+        courant = courant->d_suiv;
+    }
+    if (courant != nullptr && courant->d_jour == jour) {
+        if (courant->d_deb > debut) {
+            UnCours *nouveau = new UnCours{debut, fin, jour, matiere};
+            if (precedent == nullptr) {
+                d_tete = nouveau;
+            } else {
+                precedent->d_suiv = nouveau;
+            }
+        } else {
+            UnCours *nouveau = new UnCours{debut, fin, jour, matiere};
+            courant->d_suiv = nouveau;
+        }
+    } else {
+        UnCours *nouveau = new UnCours{debut, fin, jour, matiere};
+        if (precedent == nullptr) {
+            d_tete = nouveau;
+        } else {
+            precedent->d_suiv = nouveau;
+        }
+    }
+}

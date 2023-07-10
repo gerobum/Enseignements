@@ -33,10 +33,18 @@
 #ifndef EXAMEN_CCI_2023_UNCOURS_H
 #define EXAMEN_CCI_2023_UNCOURS_H
 
-
 class UnCours {
-
+private:
+    int d_deb; 	      			// Heure de début du cours
+    int d_fin; 	      			// Heure de fin du cours
+    int d_jour;	      			// Jour de la semaine du cours
+    char d_mat;	      			// Matière enseignée
+    UnCours* d_prec; 	  	      	// Le cours précédent
+    UnCours* d_suiv; 	  	      	// Le cours suivant
+    friend class CoursDeLaSemaine;
+    UnCours(int deb,int fin, int jour, char mat); // Constructeur
 };
+
 
 
 #endif //EXAMEN_CCI_2023_UNCOURS_H

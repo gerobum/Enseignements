@@ -33,10 +33,21 @@
 #ifndef EXAMEN_CCI_2023_COURSDELASEMAINE_H
 #define EXAMEN_CCI_2023_COURSDELASEMAINE_H
 
+#include "UnCours.h"
 
 class CoursDeLaSemaine {
-
+private:
+    UnCours *d_tete;        // Pointeur sur le premier cours
+public:
+    CoursDeLaSemaine();        // Constructeur
+    ~CoursDeLaSemaine();       // Destructeur
+    int dureeTotale() const;   // Durée totale des cours
+    bool toutesLesMatieres() const; // Vrai si toutes les matières sont présentes
+    int nbJoursLibres() const; // Nombre de jours sans cours
+    bool horaireLibre(int debut, int fin, int jour) const; // Vrai si l'horaire est libre
+    void ajout(int debut, int fin, int jour, char matiere); // Ajout d'un cours
 };
+
 
 
 #endif //EXAMEN_CCI_2023_COURSDELASEMAINE_H

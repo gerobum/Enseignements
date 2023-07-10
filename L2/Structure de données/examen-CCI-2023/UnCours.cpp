@@ -31,3 +31,28 @@
 //
 
 #include "UnCours.h"
+
+/* Constructeur UnCours::UnCours(int deb,int fin, int jour,char mat) qui crée un nouveau chainon pour un cours, sans suivant ni précédent. deb, fin, jour et mat sont respectivement l’heure de début, l’heure de fin, le jour et la matière correspondant au cours.
+    *
+    * UnCours::UnCours(int deb,int fin, int jour,char mat) {
+    * 	d_deb = deb;
+    * 	d_fin = fin;
+    * 	d_jour = jour;
+    * 	d_mat = mat;
+    * 	d_prec = nullptr;
+    * 	d_suiv = nullptr;
+    * }
+    *
+    *
+    *
+    *
+    *   UnCours(int deb,int fin, int jour, char mat); // Constructeur   */
+UnCours::UnCours(int deb, int fin, int jour, char mat) :
+        d_deb(deb),
+        d_fin(fin),
+        d_jour(jour),
+        d_mat(mat),
+        d_prec(nullptr),
+        d_suiv(nullptr) {
+}
+
